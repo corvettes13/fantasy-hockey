@@ -1,20 +1,3 @@
-create table newdcps (
-nesdis_id       char(8) not null,
-location        varchar(100),
-latitude_d      float(6),
-longitude_d     float(8),
-state_code       char(2),
-owner_code       varchar(20),
-xmit_intv       integer,
-pe_codes       varchar(50),
-last_update       DATE 
-); 
-
-
-https://www.nwd-wc.usace.army.mil/dd/nwdp/project_hourly/webexec/rep?r=chj&ago=0
-CE365410, CE7A5882
-CHJW1 
-
 [
   {
     "key": "t.1",
