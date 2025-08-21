@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="../css/champions.css" />
 </head>
 <body>
+  <header class="site-header"></header>
+  <script>
+    fetch('/components/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
+  </script>
+
   <div class="container">
     <h1>League Champions History</h1>
     <table id="champions-table">
