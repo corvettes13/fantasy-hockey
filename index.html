@@ -7,24 +7,27 @@
   <link rel="stylesheet" href="css/standings.css" />
 </head>
 <body>
-  <h1>Fantasy Hockey Standings</h1>
-  <table id="standings-table">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Team</th>
-        <th>Wins</th>
-        <th>Losses</th>
-        <th>Win %</th>
-        <th>Points For</th>
-        <th>Points Against</th>
-        <th>Diff</th>
-        <th>High Score</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
+  <div class="standings-container">
+    <h1>Fantasy Hockey Standings</h1>
+    <table class="standings-table">
+      <thead>
+        <tr>
+          <th><button data-sort="rank">Rank</button></th>
+          <th class="left-align">Team</th>
+          <th><button data-sort="wins">W</button></th>
+          <th><button data-sort="losses">L</button></th>
+          <th><button data-sort="Win Percentage">Win %</button></th>
+          <th><button data-sort="Points For">PF</button></th>
+          <th><button data-sort="Points Against">PA</button></th>
+          <th><button data-sort="difference">Diff</button></th>
+          <th><button data-sort="Weekly High Score">High</button></th>
+        </tr>
+      </thead>
+      <tbody id="standings-body">
+        <!-- Rows injected by JS -->
+      </tbody>
+    </table>
+  </div>
   <script src="scripts/standings.js"></script>
 </body>
 </html>
