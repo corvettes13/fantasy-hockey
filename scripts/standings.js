@@ -24,15 +24,31 @@ function renderTable(data) {
   });
 }
 
+let currentSortKey = null;
+let sortDirection = 1;
+
 function sortBy(key) {
+  // Default to ascending for 'rank', descending for others
+  if (currentSortKey === key) {
+    sortDirection *= -1; // toggle direction
+  } else {
+    sortDirection = key === 'rank' ? 1 : -1;
+    currentSortKey = key;
+  }
+
   standingsData.sort((a, b) => {
-    if (typeof a[key] === 'string') {
-      return a[key].localeCompare(b[key]);
+    const valA = a[key];
+    const valB = b[key];
+
+    if (typeof valA === 'string') {
+      return valA.localeCompare(valB) * sortDirection;
     }
-    return b[key] - a[key];
+    return (valA - valB) * sortDirection;
   });
+
   renderTable(standingsData);
 }
+
 
 document.querySelectorAll('th button').forEach(button => {
   button.addEventListener('click', () => {
