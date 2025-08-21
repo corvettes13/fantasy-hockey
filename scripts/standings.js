@@ -16,7 +16,7 @@ function renderTable(data) {
     row.innerHTML = `
       <td>${team.rank}</td>
       <td class="left-align">
-        <a href="team/team.html?team=${teamNum}">${team.team}</a>
+        <a href="teams/team.html?team=${teamNum}">${team.team}</a>
       </td>
       <td>${team.wins}</td>
       <td>${team.losses}</td>
