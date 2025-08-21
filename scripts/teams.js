@@ -31,6 +31,8 @@ Promise.all([
       <td>${player.Age}</td>
       <td>$${player.cost}</td>
       <td>${player["Contract Year"]}</td>
+      <td>${player.Points.toFixed(1)}</td>
+      <td>${player["P/G"].toFixed(2)}</td>
       <td>${player.GP}</td>
       <td>${player.G}</td>
       <td>${player.A}</td>
@@ -43,8 +45,6 @@ Promise.all([
       <td>${player.BLK}</td>
       <td>${player.HIT}</td>
       <td>${player.ATOI}</td>
-      <td>${player.Points.toFixed(1)}</td>
-      <td>${player["P/G"].toFixed(2)}</td>
     `;
     tbody.appendChild(row);
   });
