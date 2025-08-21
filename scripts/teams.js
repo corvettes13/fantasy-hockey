@@ -2,7 +2,7 @@ const teamKey = location.pathname.split('/').pop().replace('.html', '').replace(
 
 Promise.all([
   fetch(`../data/teams/${teamKey}.json`).then(res => res.json()),
-  fetch(`../data/teams.json`).then(res => res.json())
+  fetch(`../data/teams/teams.json`).then(res => res.json())
 ]).then(([players, teams]) => {
   const teamInfo = teams.find(t => t.key === teamKey);
 
