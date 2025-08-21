@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="css/standings.css" />
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav-bar">
-      <a href="index.html">Home</a>
-      <a href="teams/teams.html">Teams</a>
-      <a href="history/champions.html">History</a>
-    </nav>
-  </header>
-
+  <header class="site-header"></header>
+  <script>
+    fetch('/components/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
+  </script>
+  
   <div class="standings-container">
     <h1>Broom Ballers and Shot Callers Standings</h1>
     <table class="standings-table">
