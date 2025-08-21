@@ -1,4 +1,4 @@
-const jsonUrl = 'data/teams/t.1.json'; // Update path as needed
+const jsonUrl = '../data/teams/t.1.json'; // Update path as needed
 
 fetch(jsonUrl)
   .then(res => res.json())
