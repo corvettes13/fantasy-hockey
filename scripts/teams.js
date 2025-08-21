@@ -1,4 +1,6 @@
-const teamKey = location.pathname.split('/').pop().replace('.html', '').replace('team', 't.');
+const params = new URLSearchParams(window.location.search);
+const teamNum = params.get('team');
+const teamKey = `t.${teamNum}`;
 
 Promise.all([
   fetch(`../data/teams/${teamKey}.json`).then(res => res.json()),
