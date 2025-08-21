@@ -7,12 +7,19 @@ body {
 }
 
 .standings-container {
-  max-width: 900px;
+  max-width: 960px;
   margin: 0 auto;
   background: white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   border-radius: 6px;
+  padding: 1rem;
   overflow-x: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #0055a5;
 }
 
 .standings-table {
@@ -43,4 +50,12 @@ body {
 
 .standings-table tbody tr:hover {
   background-color: #eef6ff;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
 }
