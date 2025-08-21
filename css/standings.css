@@ -59,3 +59,15 @@ h1 {
 .negative {
   color: red;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0055a5;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
