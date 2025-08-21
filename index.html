@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fantasy Hockey Standings</title>
   <link rel="stylesheet" href="css/standings.css" />
-</head>
-<body>
-  <header class="site-header"></header>
-  <script>
+  <link rel="stylesheet" href="css/header.css" />
+
+ </head>
+ <body>
+ <header class="site-header"></header>
+   <script>
     fetch('shared/header.html')
       .then(res => res.text())
       .then(html => {
         document.querySelector('.site-header').innerHTML = html;
       });
-  </script>
+   </script>
   
-  <div class="standings-container">
+   <div class="standings-container">
     <h1>Broom Ballers and Shot Callers Standings</h1>
     <table class="standings-table">
       <thead>
