@@ -8,10 +8,16 @@ function renderTable(data) {
 
   data.forEach(team => {
     const diffClass = team.difference > 0 ? 'positive' : team.difference < 0 ? 'negative' : '';
+
+    // Derive team number from teamKey or add your own mapping logic
+    const teamNum = team.teamKey ? team.teamKey.split('.')[1] : team.teamNum || '';
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${team.rank}</td>
-      <td class="left-align">${team.team}</td>
+      <td class="left-align">
+        <a href="team.html?team=${teamNum}">${team.team}</a>
+      </td>
       <td>${team.wins}</td>
       <td>${team.losses}</td>
       <td>${team["Win Percentage"].toFixed(3)}</td>
