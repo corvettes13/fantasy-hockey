@@ -1,24 +1,26 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 2rem;
+  padding: 1rem;
   background: #f4f4f4;
   color: #333;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  font-size: 0.85rem;
 }
 
 th, td {
-  padding: 0.75rem;
+  padding: 0.4rem 0.6rem;
   text-align: center;
   border-bottom: 1px solid #ccc;
 }
@@ -27,8 +29,15 @@ th {
   background: #0077cc;
   color: white;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 tr:hover {
   background: #eef;
+}
+
+/* Left-align the second column (team names) */
+td:nth-child(2), th:nth-child(2) {
+  text-align: left;
+  padding-left: 1rem; /* Optional: adds breathing room */
 }
