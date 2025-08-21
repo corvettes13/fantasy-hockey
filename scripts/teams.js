@@ -16,7 +16,7 @@ Promise.all([
       <img class="team-menu_logo-img" src="${teamInfo.logo}" alt="${teamInfo.abbreviation} logo">
       <div class="team-details">
         <h2 class="team-name">${teamInfo.name}</h2>
-        <p class="team-manager">Managed by ${teamInfo.manager}</p>
+        <p class="team-manager">${teamInfo.manager}</p>
       </div>
     </div>
   `;
