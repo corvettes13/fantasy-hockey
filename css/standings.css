@@ -1,45 +1,46 @@
 body {
-  font-family: Arial, sans-serif;
-  padding: 1rem;
-  background: #f4f4f4;
-  color: #333;
+  background-color: #f5f7fa;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  color: #222;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 0.5rem;
-  font-size: 1.5rem;
-}
-
-table {
-  width: 100%;
-  max-width: 500px;
+.standings-container {
+  max-width: 900px;
   margin: 0 auto;
-  border-collapse: collapse;
   background: white;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-  font-size: 0.85rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  overflow-x: auto;
 }
 
-th, td {
-  padding: 0.4rem 0.6rem;
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 0.6rem 0.8rem;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
 }
 
-th {
-  background: #0077cc;
-  color: white;
+.standings-table th button {
+  background: none;
+  border: none;
+  font-weight: bold;
   cursor: pointer;
-  white-space: nowrap;
+  color: #0055a5;
 }
 
-tr:hover {
-  background: #eef;
-}
-
-/* Left-align the second column (team names) */
-td:nth-child(2), th:nth-child(2) {
+.standings-table th.left-align,
+.standings-table td.left-align {
   text-align: left;
-  padding-left: 1rem; /* Optional: adds breathing room */
+}
+
+.standings-table tbody tr:hover {
+  background-color: #eef6ff;
 }
