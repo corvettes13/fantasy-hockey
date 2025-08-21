@@ -13,8 +13,8 @@ fetch('../data/champions.json')
         <td>${season.runnerUp?.manager ?? ''}</td>
         <td>${season.runnerUp?.team ?? ''}</td>
         <td>${season.champion?.score ?? ''}</td>
-        <td>${season.regularSeasonChampion?.team ?? ''}</td>
         <td>${season.regularSeasonChampion?.manager ?? ''}</td>
+        <td>${season.regularSeasonChampion?.team ?? ''}</td>
         <td>${season.regularSeasonChampion?.record ?? ''}</td>
       `;
 
