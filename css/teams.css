@@ -69,3 +69,17 @@ tbody tr:hover {
   color: #666;
   margin-top: 0.25rem;
 }
+
+/* Left-align headers */
+#team-table th:nth-child(1),
+#team-table th:nth-child(2),
+#team-table th:nth-child(3) {
+  text-align: left;
+}
+
+/* Left-align data cells */
+#team-table td:nth-child(1),
+#team-table td:nth-child(2),
+#team-table td:nth-child(3) {
+  text-align: left;
+}
