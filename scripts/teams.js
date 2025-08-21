@@ -9,6 +9,18 @@ Promise.all([
   document.title = `${teamInfo.name} Roster`;
   document.querySelector('h1').textContent = `${teamInfo.name} (${teamInfo.abbreviation})`;
 
+  const teamHeader = document.getElementById('team-header'); // Add this container to your HTML
+
+  teamHeader.innerHTML = `
+    <div class="team-profile">
+      <img class="team-menu_logo-img" src="${teamInfo.logo}" alt="${teamInfo.abbreviation} logo">
+      <div class="team-details">
+        <h2 class="team-name">${teamInfo.name}</h2>
+        <p class="team-manager">Managed by ${teamInfo.manager}</p>
+      </div>
+    </div>
+  `;
+  
   const tbody = document.getElementById('team-body');
   players.forEach(player => {
     const row = document.createElement('tr');
