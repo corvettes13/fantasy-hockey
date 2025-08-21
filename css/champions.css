@@ -40,3 +40,9 @@ th {
 tbody tr:hover {
   background-color: #f0f8ff;
 }
+
+/* Slightly widen the Season column */
+#champions-table th:nth-child(1),
+#champions-table td:nth-child(1) {
+  min-width: 6rem; /* or try width: 7rem for fixed width */
+}
