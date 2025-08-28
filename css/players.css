@@ -1,0 +1,83 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+  padding: 2rem;
+  color: #222;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #0055a5;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+th, td {
+  padding: 0.2rem 0.4rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #eaf0f6;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+tbody tr {
+  line-height: 1.2;
+}
+
+tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+.player-cell {
+  display: flex;
+  align-items: center; /* ✅ vertically center content */
+  justify-content: flex-start;
+  gap: 0.3rem;
+  padding: 0; /* ✅ remove vertical padding */
+  line-height: 1; /* optional: tighten spacing even more */
+}
+
+.player-cell img {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0; /* prevents logo from shrinking */
+}
+
+.player-cell .team-abbr {
+  font-size: 0.6rem;
+  color: #888;
+  margin-left: 0.2rem;
+}
+
+.player-cell a {
+  color: #0055a5; /* or leave default blue */
+  text-decoration: none; /* removes underline */
+  font-weight: 500;
+}
+
+.player-cell a:hover {
+  text-decoration: underline; /* optional: add underline on hover */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9fbfd;
+}

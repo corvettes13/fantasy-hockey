@@ -49,9 +49,19 @@ tbody tr:hover {
 
 .team-profile {
   display: flex;
-  align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+  align-items: flex-start; /* Align children to top */
+  position: relative;
+}
+
+.team-menu_logo-img {
+  width: 6.4rem;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  top: 0;
+  flex-shrink: 0; /* Prevent logo from shrinking */
 }
 
 .team-details {
@@ -82,4 +92,23 @@ tbody tr:hover {
 #team-table td:nth-child(2),
 #team-table td:nth-child(3) {
   text-align: left;
+}
+
+.team-meta {
+  font-size: 0.95rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+.team-meta strong {
+  color: #0055a5;
+}
+
+.champion-badge {
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+.champion-badge img {
+  width: 4rem;
+  height: auto;
 }
