@@ -27,6 +27,11 @@ table {
   font-size: 0.8rem;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
 th, td {
   padding: 0.2rem 0.4rem;
   text-align: center;
