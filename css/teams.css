@@ -112,3 +112,8 @@ tbody tr:hover {
   width: 4rem;
   height: auto;
 }
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
