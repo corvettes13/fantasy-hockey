@@ -125,7 +125,16 @@ Promise.all([
 
         return matchesName && (matchesPosition || excludeGoalieByDefault);
       });
-
+      
+      currentSortKey = 'FP'; //default sort by fantasy points
+      sortDirection = -1;
+      
+      players.sort((a, b) => {
+        const aFP = statsMap[a.player_id]?.FP ?? 0;
+        const bFP = statsMap[b.player_id]?.FP ?? 0;
+        return (aFP - bFP) * sortDirection;
+      });
+      
       renderTable(filtered);
     }
 
