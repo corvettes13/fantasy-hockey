@@ -26,37 +26,39 @@
       <option value="RW">Right Wing</option>
       <option value="D">Defense</option>
     </select>
-    <table id="players-table">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th data-sort="name">Player</th>
-          <th>Pos</th>
-          <th data-sort="owner">Owner</th>
-          <th data-sort="GP">GP</th>
-          <th data-sort="G">G</th>
-          <th data-sort="A">A</th>
-          <th data-sort="PTS">PTS</th>
-          <th data-sort="PlusMinus">+/-</th>
-          <th data-sort="PIM">PIM</th>
-          <th data-sort="PPG">PPG</th>
-          <th data-sort="PPA">PPA</th>
-          <th data-sort="SHG">SHG</th>
-          <th data-sort="SHA">SHA</th>
-          <th data-sort="GWG">GWG</th>
-          <th data-sort="SOG">SOG</th>
-          <th data-sort="SPCT">S%</th>
-          <th data-sort="HIT">HIT</th>
-          <th data-sort="BLK">BLK</th>
-          <th data-sort="FP">FP</th>
-          <th data-sort="FPG">FP/G</th>
-          <th data-sort="ATOI">ATOI</th>
-        </tr>
-      </thead>
-      <tbody id="players-body">
-        <!-- Rows injected by JS -->
-      </tbody>
-    </table>
+    <div class="table-wrapper">
+      <table id="players-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th data-sort="name">Player</th>
+            <th>Pos</th>
+            <th data-sort="owner">Owner</th>
+            <th data-sort="GP">GP</th>
+            <th data-sort="G">G</th>
+            <th data-sort="A">A</th>
+            <th data-sort="PTS">PTS</th>
+            <th data-sort="PlusMinus">+/-</th>
+            <th data-sort="PIM">PIM</th>
+            <th data-sort="PPG">PPG</th>
+            <th data-sort="PPA">PPA</th>
+            <th data-sort="SHG">SHG</th>
+            <th data-sort="SHA">SHA</th>
+            <th data-sort="GWG">GWG</th>
+            <th data-sort="SOG">SOG</th>
+            <th data-sort="SPCT">S%</th>
+            <th data-sort="HIT">HIT</th>
+            <th data-sort="BLK">BLK</th>
+            <th data-sort="FP">FP</th>
+            <th data-sort="FPG">FP/G</th>
+            <th data-sort="ATOI">ATOI</th>
+          </tr>
+        </thead>
+        <tbody id="players-body">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
   </div>
   <script src="/fantasy-hockey/scripts/players.js"></script>
 </body>
