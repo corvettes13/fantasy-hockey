@@ -39,10 +39,10 @@ Promise.all([
   players.forEach(player => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${player.position}</td>
-      <td>${player.Team}</td>
       <td>${player.Player}</td>
+      <td>${player.Team}</td>
       <td>${player.Age}</td>
+      <td>${player.position}</td>
       <td>$${player.cost}</td>
       <td>${player["Contract Year"]}</td>
       <td>${player.Points.toFixed(1)}</td>
