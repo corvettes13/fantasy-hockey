@@ -1,7 +1,8 @@
 .site-header {
-  background-color: #f0f4f8;
-  padding: 0.5rem 1rem;
+  background-color: #fff;
   border-bottom: 1px solid #ccc;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .nav-bar {
@@ -15,7 +16,7 @@
 
 .nav-bar a,
 .dropbtn {
-  color: #333;
+  color: #000; /* Start with black */
   text-decoration: none;
   font-weight: 500;
   background: none;
@@ -27,18 +28,35 @@
   line-height: 1.2;
   display: flex;
   align-items: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 4px 4px 0 0;
+  transition: background-color 0.2s ease, color 0.2s ease, border-bottom 0.2s ease;
+  position: relative;
 }
 
-.nav-bar a:hover,
-.dropbtn:hover {
-  background-color: #eaf0f6;
-  color: #0055a5;
+.nav-bar:hover a:hover,
+.nav-bar:hover .dropbtn:hover {
+  color: #000;
+}
+
+.nav-bar a:hover::after,
+.dropbtn:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #c00; /* ESPN red */
+  border-radius: 2px 2px 0 0;
+}
+
+.nav-bar:hover a,
+.nav-bar:hover .dropbtn {
+  color: #666; /* Fade others to gray */
 }
 
 .nav-bar a[aria-selected="true"] {
-  background-color: #0055a5;
+  background-color: #c00;
   color: white;
   font-weight: 600;
 }
@@ -61,7 +79,7 @@
   background-color: #fff;
   min-width: 160px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1;
+  z-index: 100;
   border-radius: 4px;
 }
 
@@ -80,4 +98,8 @@
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+* {
+  box-sizing: border-box;
 }

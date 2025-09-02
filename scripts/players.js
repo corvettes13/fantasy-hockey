@@ -1,10 +1,11 @@
 Promise.all([
   fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
   fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json()),
-  fetch('/fantasy-hockey/data/2024_season_stats.json').then(res => res.json())
+  fetch('/fantasy-hockey/data/2024_skater_stats.json').then(res => res.json())
 ]).then(([playersData, teamsData, statsData]) => {
   const allPlayers = playersData.players;
-  let players = allPlayers; // default view
+  let players = allPlayers.filter(p => !p.position.includes('G'));
+  const gpInput = document.getElementById('gp-filter');
   const teamMap = Object.fromEntries(teamsData.map(t => [t.team_abbreviation, t.logo_url]));
   
   const statIdMap = {
@@ -116,29 +117,33 @@ Promise.all([
       const nameQuery = nameInput.value.toLowerCase();
       const positionQuery = positionSelect.value;
 
+
       const filtered = allPlayers.filter(p => {
+        const stats = statsMap[p.player_id] || {};
+        const gp = parseFloat(stats.GP) || 0;
+
         const matchesName = p.full_name.toLowerCase().includes(nameQuery);
         const matchesPosition =
           positionQuery === '' || p.position.replace(/\s+/g, '').split(',').includes(positionQuery);
         const isGoalie = p.position.includes('G');
-        const excludeGoalieByDefault = positionQuery === '' && !isGoalie;
+        const includeGoalie = positionQuery === 'G';
+        const minGP = parseInt(gpInput.value, 10) || 0;
 
-        return matchesName && (matchesPosition || excludeGoalieByDefault);
+        return matchesName && (matchesPosition || includeGoalie) && gp >= minGP;
       });
-      
-      currentSortKey = 'FP'; //default sort by fantasy points
-      sortDirection = -1;
-      
-      players.sort((a, b) => {
+
+      filtered.sort((a, b) => {
         const aFP = statsMap[a.player_id]?.FP ?? 0;
         const bFP = statsMap[b.player_id]?.FP ?? 0;
-        return (aFP - bFP) * sortDirection;
+        return (aFP - bFP) * -1;
       });
-      
-      renderTable(filtered);
+
+      players = filtered;
+      renderTable(players);
     }
 
     nameInput.addEventListener('input', applyFilters);
+    applyFilters(); // ✅ Run filters immediately on load
     positionSelect.addEventListener('change', applyFilters);
 
   function sortBy(key) {
@@ -170,6 +175,8 @@ Promise.all([
     renderTable(players);
   }
 
+  gpInput.addEventListener('input', applyFilters);
+  
   document.querySelectorAll('th[data-sort]').forEach(th => {
     th.addEventListener('click', () => {
       const key = th.getAttribute('data-sort');
@@ -186,3 +193,4 @@ function atoiToSeconds(timeStr) {
   return (min || 0) * 60 + (sec || 0);
 
 }
+
