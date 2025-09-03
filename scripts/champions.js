@@ -25,3 +25,28 @@ fetch('../data/champions.json')
     console.error('Error loading champions data:', err);
     document.getElementById('champions-body').innerHTML = `<tr><td colspan="9">Failed to load data.</td></tr>`;
   });
+
+fetch('../data/playoff_pool.json')
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.getElementById('playoff-body');
+
+    data.forEach(entry => {
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>${entry.Year}</td>
+        <td>${entry.Manager}</td>
+        <td>${entry.Points}</td>
+        <td>${entry.Margin}</td>
+        <td>${entry["Cup Winner"]}</td>
+        <td>${entry["Stanley Cup Winner"]}</td>
+      `;
+
+      tbody.appendChild(row);
+    });
+  })
+  .catch(err => {
+    console.error('Error loading playoff pool data:', err);
+    document.getElementById('playoff-body').innerHTML = `<tr><td colspan="6">Failed to load data.</td></tr>`;
+  });
