@@ -23,13 +23,15 @@ h1 {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
 th, td {
-  padding: 0.5rem;
+  padding: 0.2rem 0.3rem; /* tighter spacing */
   border-bottom: 1px solid #ddd;
-  text-align: center;
+  text-align: left; /* left-align all columns */
+  vertical-align: top;
 }
 
 th {
