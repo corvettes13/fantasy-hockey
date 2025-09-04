@@ -108,8 +108,18 @@ tbody tr:hover {
   align-self: flex-start;
 }
 
+.trophy-badge {
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+.trophy-badge img {
+  width: 5rem;
+  height: auto;
+}
+
 .champion-badge img {
-  width: 4rem;
+  width: 5rem;
   height: auto;
 }
 
