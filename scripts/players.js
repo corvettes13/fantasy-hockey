@@ -7,7 +7,7 @@ let allPlayers = [];
 let teamMap = {};
 let players = [];
 let positionSelect, nameInput, gpInput;
-let currentSortKey = null;
+let currentSortKey = "FP";
 let sortDirection = -1;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,7 +48,6 @@ const skaterStatIdMap = {
   6: 'PPG', 7: 'PPA', 9: 'SHG', 10: 'SHA', 12: 'GWG', 14: 'SOG',
   15: 'SPCT', 31: 'HIT', 32: 'BLK', 34: 'ATOI'
 };
-
 const goalieStatIdMap = {
   0: 'GP', 18: 'GS', 19: 'W', 20: 'L', 22: 'GA', 23: 'GAA',
   24: 'SA', 25: 'SV', 26: 'SV%', 27: 'SHO', 28: 'Min'
@@ -81,19 +80,17 @@ function applyFilters() {
   });
 
   filtered.sort((a, b) => {
-    const aKey = `453.p.${a.player_id}`;
-    const bKey = `453.p.${b.player_id}`;
-    const aFP = statsMap[aKey]?.FP ?? 0;
-    const bFP = statsMap[bKey]?.FP ?? 0;
+    const aFP = statsMap[a.player_id]?.FP ?? 0;
+    const bFP = statsMap[b.player_id]?.FP ?? 0;
+
     return bFP - aFP;
   });
 
   players = filtered;
   renderTableHeader();
   bindHeaderSortEvents();
-  renderTable(filtered, statsMap); // ✅ pass correct map
+  renderTable(filtered, statsMap);
 }
-
 
 function buildStatsMap(statsArray, type = "skater") {
 
@@ -260,23 +257,31 @@ function sortBy(key) {
   }
 
   players.sort((a, b) => {
-    const aStat = statsMap[a.player_id]?.[key] ?? '';
-    const bStat = statsMap[b.player_id]?.[key] ?? '';
+    const aStat = statsMap[a.player_id]?.[currentSortKey];
+    const bStat = statsMap[b.player_id]?.[currentSortKey];
 
-    if (key === 'ATOI') {
-      return (atoiToSeconds(aStat) - atoiToSeconds(bStat)) * sortDirection;
+    // Primary sort
+    let result;
+    if (currentSortKey === 'ATOI') {
+      result = atoiToSeconds(aStat) - atoiToSeconds(bStat);
+    } else if (typeof aStat === 'string') {
+      result = aStat.localeCompare(bStat);
+    } else {
+      result = (aStat ?? 0) - (bStat ?? 0);
     }
 
-    if (typeof aStat === 'string') {
-      return aStat.localeCompare(bStat) * sortDirection;
+    // If primary sort is equal, fallback to FP
+    if (result === 0) {
+      const aFP = statsMap[a.player_id]?.FP ?? 0;
+      const bFP = statsMap[b.player_id]?.FP ?? 0;
+      result = aFP - bFP; // always descending for FP
     }
 
-    return (aStat - bStat) * sortDirection;
+    return result * sortDirection;
   });
 
   renderTable(players, statsMap);
 }
-
 
 function fantasyPoints(statsMap, players, type) {
   players.forEach(p => {
