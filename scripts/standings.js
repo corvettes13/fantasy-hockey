@@ -1,15 +1,15 @@
-const standingsUrl = 'data/standings.json'; // Update path if needed
+const standingsUrl = 'data/2024_standings.json';
 
 let standingsData = [];
+let currentSortKey = null;
+let sortDirection = 1;
 
-function renderTable(data) {
-  const tbody = document.getElementById('standings-body');
+function renderTable(data, tbodyId) {
+  const tbody = document.getElementById(tbodyId);
   tbody.innerHTML = '';
 
   data.forEach(team => {
     const diffClass = team.difference > 0 ? 'positive' : team.difference < 0 ? 'negative' : '';
-
-    // Derive team number from teamKey or add your own mapping logic
     const teamNum = team.teamKey ? team.teamKey.split('.')[1] : team.teamNum || '';
 
     const row = document.createElement('tr');
@@ -24,49 +24,64 @@ function renderTable(data) {
       <td>${team["Points For"].toFixed(1)}</td>
       <td>${team["Points Against"].toFixed(1)}</td>
       <td class="${diffClass}">${team.difference.toFixed(1)}</td>
+      <td>$${team.faab_balance}</td>
+      <td>${team.number_of_moves}</td>
       <td>${team["Weekly High Score"]}</td>
     `;
     tbody.appendChild(row);
   });
 }
 
-let currentSortKey = null;
-let sortDirection = 1;
+function sortDivision(data, key, direction) {
+  return [...data].sort((a, b) => {
+    let valA = a[key];
+    let valB = b[key];
 
-function sortBy(key) {
-  // Default to ascending for 'rank', descending for others
-  if (currentSortKey === key) {
-    sortDirection *= -1; // toggle direction
-  } else {
-    sortDirection = key === 'rank' ? 1 : -1;
-    currentSortKey = key;
-  }
-
-  standingsData.sort((a, b) => {
-    const valA = a[key];
-    const valB = b[key];
+    // Ensure numeric sorting for currency fields
+    if (key === 'faab_balance') {
+      valA = Number(valA);
+      valB = Number(valB);
+    }
 
     if (typeof valA === 'string') {
-      return valA.localeCompare(valB) * sortDirection;
+      return valA.localeCompare(valB) * direction;
     }
-    return (valA - valB) * sortDirection;
-  });
 
-  renderTable(standingsData);
+    return (valA - valB) * direction;
+  });
 }
 
 
 document.querySelectorAll('th button').forEach(button => {
   button.addEventListener('click', () => {
     const key = button.getAttribute('data-sort');
-    sortBy(key);
+
+    if (currentSortKey === key) {
+      sortDirection *= -1;
+    } else {
+      sortDirection = key === 'rank' ? 1 : -1;
+      currentSortKey = key;
+    }
+
+    const bruhsSorted = sortDivision(standingsData.filter(t => t.division_id === 1), key, sortDirection);
+    const brosSorted = sortDivision(standingsData.filter(t => t.division_id === 2), key, sortDirection);
+
+    renderTable(bruhsSorted, 'bruhs-body');
+    renderTable(brosSorted, 'bros-body');
   });
 });
+
 
 fetch(standingsUrl)
   .then(res => res.json())
   .then(data => {
-    standingsData = data;
-    renderTable(standingsData);
+    standingsData = data; // ✅ use raw array directly
+
+    const bruhs = standingsData.filter(t => t.division_id === 1);
+    const bros = standingsData.filter(t => t.division_id === 2);
+
+    renderTable(bruhs, 'bruhs-body');
+    renderTable(bros, 'bros-body');
   })
   .catch(err => console.error('Error loading standings:', err));
+
