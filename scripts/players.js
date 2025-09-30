@@ -10,38 +10,36 @@ let positionSelect, nameInput, gpInput;
 let currentSortKey = "FP";
 let sortDirection = -1;
 
+let seasonSelect;
+let skaterStatsMap = {};
+let goalieStatsMap = {};
+
+
 document.addEventListener('DOMContentLoaded', () => {
   positionSelect = document.getElementById('position-filter');
   nameInput = document.getElementById('name-filter');
   gpInput = document.getElementById('gp-filter');
+  seasonSelect = document.getElementById('season-select');
 
   positionSelect.addEventListener('change', applyFilters);
   nameInput.addEventListener('input', applyFilters);
   gpInput.addEventListener('input', applyFilters);
+  seasonSelect.addEventListener('change', () => {
+    loadSeasonStats(seasonSelect.value);
+  });
 
   Promise.all([
     fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
-    fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json()),
-    fetch('/fantasy-hockey/data/2024_skater_stats.json').then(res => res.json()),
-    fetch('/fantasy-hockey/data/2024_goalie_stats.json').then(res => res.json())
+    fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json())
   ])
-  .then(([players, teams, skaterStatsRaw, goalieStatsRaw]) => {
+  .then(([players, teams]) => {
     playersData = players;
     teamsData = teams;
-
-    skaterStatsData = skaterStatsRaw.players;
-    goalieStatsData = goalieStatsRaw.players;
-
-    skaterStatsMap = buildStatsMap(skaterStatsData, "skater");
-    goalieStatsMap = buildStatsMap(goalieStatsData, "goalie");
-
-    fantasyPoints(skaterStatsMap, playersData.players, "skater");
-    fantasyPoints(goalieStatsMap, playersData.players, "goalie");
-
-    init(playersData, teamsData); // just sets up allPlayers and teamMap
-    applyFilters(); // now safe to run
+    init(playersData, teamsData);
+    loadSeasonStats(seasonSelect.value); // initial load
   });
 });
+
 
 const skaterStatIdMap = {
   0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
@@ -316,4 +314,37 @@ function fantasyPoints(statsMap, players, type) {
     statObj.FP = parseFloat(fp.toFixed(1));
     statObj.FPG = gp ? (fp / gp).toFixed(2) : "0.00";
   });
+}
+
+function loadSeasonStats(seasonKey) {
+  const fileMap = {
+    "2024_stats": {
+      skater: "/fantasy-hockey/data/2024_skater_stats.json",
+      goalie: "/fantasy-hockey/data/2024_goalie_stats.json"
+    },
+    "2025_projections": {
+      skater: "/fantasy-hockey/data/2025_skater_stats.json",
+      goalie: "/fantasy-hockey/data/2025_goalie_stats.json"
+    }
+  };
+
+  const { skater, goalie } = fileMap[seasonKey];
+
+  Promise.all([
+    fetch(skater).then(res => res.json()),
+    fetch(goalie).then(res => res.json())
+  ])
+  .then(([skaterStatsRaw, goalieStatsRaw]) => {
+    skaterStatsData = skaterStatsRaw.players;
+    goalieStatsData = goalieStatsRaw.players;
+
+    skaterStatsMap = buildStatsMap(skaterStatsData, "skater");
+    goalieStatsMap = buildStatsMap(goalieStatsData, "goalie");
+
+    fantasyPoints(skaterStatsMap, playersData.players, "skater");
+    fantasyPoints(goalieStatsMap, playersData.players, "goalie");
+
+    applyFilters(); // refresh view
+  })
+  .catch(err => console.error("Failed to load season stats:", err));
 }
