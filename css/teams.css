@@ -81,16 +81,12 @@ tbody tr:hover {
 }
 
 /* Left-align headers */
-#team-table th:nth-child(1),
-#team-table th:nth-child(2),
-#team-table th:nth-child(3) {
-  text-align: left;
-}
-
-/* Left-align data cells */
-#team-table td:nth-child(1),
-#team-table td:nth-child(2),
-#team-table td:nth-child(3) {
+.left-align th:nth-child(1),
+.left-align th:nth-child(2),
+.left-align th:nth-child(3),
+.left-align td:nth-child(1),
+.left-align td:nth-child(2),
+.left-align td:nth-child(3) {
   text-align: left;
 }
 

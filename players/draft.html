@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draft Results</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+</head>
+<body>
+  <header class="site-header"></header>
+  <script>
+    fetch('/fantasy-hockey/shared/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
+  </script>
+    <div class="container">
+      <h1>2025 Draft Results</h1>
+      <div class="filters">
+      <label for="team-filter">Filter by Team:</label>
+      <select id="team-filter">
+        <option value="">All Teams</option>
+      </select>
+    </div>
+    <div class="table-wrapper">
+      <table id="draft-table">
+        <thead>
+          <tr>
+            <th data-sort="team">Team</th>
+            <th data-sort="player">Player</th>
+            <th data-sort="pos">Position</th>
+            <th data-sort="cost">Cost</th>
+            <th data-sort="kept">Kept</th>
+          </tr>
+        </thead>
+        <tbody id="draft-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/fantasy-hockey/scripts/draft.js" defer></script>
+</body>
+</html>
