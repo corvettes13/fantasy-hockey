@@ -14,6 +14,7 @@ let seasonSelect;
 let skaterStatsMap = {};
 let goalieStatsMap = {};
 
+
 document.addEventListener('DOMContentLoaded', () => {
   positionSelect = document.getElementById('position-filter');
   nameInput = document.getElementById('name-filter');
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSeasonStats(seasonSelect.value); // initial load
   });
 });
+
 
 const skaterStatIdMap = {
   0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',

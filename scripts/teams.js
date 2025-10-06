@@ -109,6 +109,7 @@ function renderSkaterTable(players) {
       <td>${p.player_name}</td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
+      <td>$${p.cost}</td>
       <td>${p.FP.toFixed(1)}</td>
       <td>${p.PG.toFixed(2)}</td>
       <td>${p.GP}</td>
@@ -137,6 +138,7 @@ function renderGoalieTable(players) {
       <td>${p.player_name}</td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
+      <td>$${p.cost}</td>
       <td>${p.FP.toFixed(1)}</td>
       <td>${p.PG.toFixed(2)}</td>
       <td>${p.GP}</td>
@@ -167,22 +169,30 @@ function bindSortEvents(tableId, players, statsMap) {
       }
 
       const sorted = [...players].sort((a, b) => {
-        const aStat = statsMap[a.player_key]?.[key];
-        const bStat = statsMap[b.player_key]?.[key];
+        let aStat, bStat;
+
+        if (key === 'ATOI') {
+          aStat = atoiToSeconds(a.ATOI);
+          bStat = atoiToSeconds(b.ATOI);
+        } else if (key === 'cost') {
+          aStat = parseFloat(a.cost ?? 0);
+          bStat = parseFloat(b.cost ?? 0);
+        } else {
+          aStat = statsMap[a.player_key]?.[key];
+          bStat = statsMap[b.player_key]?.[key];
+        }
 
         let result;
-        if (key === 'ATOI') {
-          result = atoiToSeconds(aStat) - atoiToSeconds(bStat);
-        } else if (typeof aStat === 'string') {
+        if (typeof aStat === 'string') {
           result = aStat.localeCompare(bStat);
         } else {
           result = (aStat ?? 0) - (bStat ?? 0);
         }
 
-        // ✅ Secondary sort by FP descending
+        // Secondary sort by FP descending
         if (result === 0) {
-          const aFP = statsMap[a.player_key]?.FP ?? 0;
-          const bFP = statsMap[b.player_key]?.FP ?? 0;
+          const aFP = a.FP ?? 0;
+          const bFP = b.FP ?? 0;
           result = aFP - bFP;
         }
 
