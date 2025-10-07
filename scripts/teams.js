@@ -145,9 +145,9 @@ function renderGoalieTable(players) {
       <td>${p.W}</td>
       <td>${p.L}</td>
       <td>${p.GA}</td>
-      <td>${p.SV.toFixed(3)}</td>
+      <td>${p.SV}</td>
       <td>${p.GAA.toFixed(2)}</td>
-      <td>${p.SVP}</td>
+      <td>${p.SVP.toFixed(3)}</td>
       <td>${p.SO}</td>
       <td>${p.MIN}</td>
     `;

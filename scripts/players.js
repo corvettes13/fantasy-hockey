@@ -9,6 +9,7 @@ let players = [];
 let positionSelect, nameInput, gpInput;
 let currentSortKey = "FP";
 let sortDirection = -1;
+let teamSelect;
 
 let seasonSelect;
 let skaterStatsMap = {};
@@ -27,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
   seasonSelect.addEventListener('change', () => {
     loadSeasonStats(seasonSelect.value);
   });
+  
+  teamSelect = document.getElementById('team-filter');
+  teamSelect.addEventListener('change', applyFilters);
 
   Promise.all([
     fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
@@ -36,6 +40,21 @@ document.addEventListener('DOMContentLoaded', () => {
     playersData = players;
     teamsData = teams;
     init(playersData, teamsData);
+    
+    const teamKeys = new Set();
+    playersData.players.forEach(p => {
+      if (p.owner_team_key && p.owner_team_name) {
+        teamKeys.add(p.owner_team_key + '|' + p.owner_team_name);
+      }
+    });
+
+    [...teamKeys].sort().forEach(entry => {
+      const [key, name] = entry.split('|');
+      const option = document.createElement('option');
+      option.value = key;
+      option.textContent = name;
+      teamSelect.appendChild(option);
+    });
     loadSeasonStats(seasonSelect.value); // initial load
   });
 });
@@ -59,6 +78,7 @@ function init(playersData, teamsData) {
 function applyFilters() {
   const positionQuery = positionSelect.value;
   const nameQuery = nameInput.value.toLowerCase();
+  const selectedTeam = teamSelect.value;
   const minGP = parseInt(gpInput.value, 10) || 0;
 
   statsMap = positionQuery === 'G' ? goalieStatsMap : skaterStatsMap;
@@ -67,6 +87,9 @@ function applyFilters() {
     if (!p.position || typeof p.position !== 'string') return false;
 
     const stats = statsMap[p.player_id];
+    const matchesTeam = selectedTeam === 'Free Agent'
+      ? !p.owner_team_key || p.owner_team_key === 'free_agent'
+      : p.owner_team_key === selectedTeam;
 
     if (!stats) return false;
 
@@ -74,8 +97,9 @@ function applyFilters() {
     const matchesName = p.full_name.toLowerCase().includes(nameQuery);
     const matchesPosition =
       positionQuery === '' || p.position.replace(/\s+/g, '').split(',').includes(positionQuery);
-    return matchesName && matchesPosition && gp >= minGP;
+    return matchesName && matchesPosition && matchesTeam && gp >= minGP;
   });
+
 
   filtered.sort((a, b) => {
     const aFP = statsMap[a.player_id]?.FP ?? 0;
@@ -107,7 +131,6 @@ function buildStatsMap(statsArray, type = "skater") {
     }
 
     const statObj = {};
-    //const statMap = key.startsWith('453.p.') ? skaterStatIdMap : goalieStatIdMap;
       const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
 
     stat.stats.forEach(s => {
@@ -178,8 +201,14 @@ function renderTable(data, statsMap) {
     const stats = statsMap[player.player_id];
 
     const logo = teamMap[player.team_abbr] || '';
-    const owner = player.player_owner || 'Free Agent';
-
+    const owner = player.owner_team_name || 'Free Agent';
+    let team_url = '';
+    if (owner !== 'Free Agent') {
+      const parts = player.owner_team_key.split('.');
+      const team_num = parts[parts.length - 1];
+      team_url = "/fantasy-hockey/teams/team.html?team=" + team_num;
+    }
+    
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${index + 1}</td>
@@ -188,8 +217,12 @@ function renderTable(data, statsMap) {
         <a href="${player.url}" target="_blank">${player.full_name}</a>
         <span class="team-abbr">${player.team_abbr}</span>
       </td>
-      <td>${player.position}</td>
-      <td>${owner}</td>
+      <td class="position-cell">${player.position}</td>
+      <td class="owner-cell">
+        ${team_url
+          ? `<a href="${team_url}" target="_blank">${owner}</a>`
+          : `${owner}`}
+      </td>
       <td>${stats.GP ?? '0'}</td>
       ${isGoalieView ? `
         <td>${stats.GS ?? '0'}</td>

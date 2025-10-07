@@ -126,3 +126,17 @@ td.draft-cell-left {
   text-align: left !important;
   padding-left: 0.4rem;
 }
+
+td.position-cell,
+td.owner-cell {
+  text-align: left !important;
+  padding-left: 0.4rem;
+}
+
+.owner-cell a {
+  text-decoration: none;
+}
+
+.owner-cell a:hover {
+  text-decoration: underline; /* or keep it none */
+}
