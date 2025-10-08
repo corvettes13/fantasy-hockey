@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    [...teamKeys].sort().forEach(entry => {
+    [...teamKeys].sort().reverse().forEach(entry => {
       const [key, name] = entry.split('|');
       const option = document.createElement('option');
       option.value = key;
