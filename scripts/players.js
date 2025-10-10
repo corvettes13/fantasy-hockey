@@ -136,7 +136,7 @@ function buildStatsMap(statsArray, type = "skater") {
     }
 
     const statObj = {};
-      const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
+    const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
 
     stat.stats.forEach(s => {
       const statId = s._extracted_data?.stat_id ?? s.stat_id;
@@ -144,7 +144,9 @@ function buildStatsMap(statsArray, type = "skater") {
       let value = s._extracted_data?.value ?? s.value;
 
       if (value === '-' || value === '–' || value === undefined || value === null) value = 0;
-      if (statKey) statObj[statKey] = parseFloat(value);
+      if (statKey) {
+        statObj[statKey] = statKey === 'ATOI' ? value : parseFloat(value);
+      }
     });
 
     map[id] = statObj;
