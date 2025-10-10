@@ -112,24 +112,3 @@ function sortDivision(data, key, direction) {
     return (valA - valB) * direction;
   });
 }
-
-
-document.querySelectorAll('th button').forEach(button => {
-  button.addEventListener('click', () => {
-    const key = button.getAttribute('data-sort');
-
-    if (currentSortKey === key) {
-      sortDirection *= -1;
-    } else {
-      sortDirection = key === 'rank' ? 1 : -1;
-      currentSortKey = key;
-    }
-
-    const bruhsSorted = sortDivision(standingsData.filter(t => t.division_id === 1), key, sortDirection);
-    const brosSorted = sortDivision(standingsData.filter(t => t.division_id === 2), key, sortDirection);
-
-    renderTable(bruhsSorted, 'bruhs-body');
-    renderTable(brosSorted, 'bros-body');
-  });
-});
-
