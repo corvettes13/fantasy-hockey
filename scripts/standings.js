@@ -63,11 +63,21 @@ function renderTable(data, tbodyId) {
     const diffClass = PFminusPA > 0 ? 'positive' : PFminusPA < 0 ? 'negative' : '';
     const teamNum = teams.team_key ? teams.team_key.split('.').pop() : teams.team_id || '';
 
+    // Badge HTML
+    const badges = `
+      ${teams.currentChampion ? `<img src="images/champion_2025.png" alt="Champion" class="inline-badge">` : ''}
+      ${teams.presidentTrophy ? `<img src="images/presidentstrophy_2025.png" alt="Presidents' Trophy" class="inline-badge">` : ''}
+    `;
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${teams.rank}</td>
-      <td class="left-align">
-        <a href="teams/team.html?team=${teamNum}">${teams.name}</a>
+      <td class="left-align team-name-cell">
+        <div class="team-name-wrapper">
+          <a href="teams/team.html?team=${teamNum}">${teams.name}</a>
+          ${teams.currentChampion ? `<img src="images/champion_2025.png" alt="Champion" class="floating-badge">` : ''}
+          ${teams.presidentTrophy ? `<img src="images/presidentstrophy_2025.png" alt="Presidents' Trophy" class="floating-badge">` : ''}
+        </div>
       </td>
       <td>${teams.wins}</td>
       <td>${teams.losses}</td>
@@ -82,6 +92,7 @@ function renderTable(data, tbodyId) {
     tbody.appendChild(row);
   });
 }
+
 
 function sortDivision(data, key, direction) {
   return [...data].sort((a, b) => {

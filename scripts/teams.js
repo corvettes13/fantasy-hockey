@@ -2,15 +2,74 @@ const params = new URLSearchParams(window.location.search);
 const teamNum = params.get('team');
 const teamKey = `465.l.13153.t.${teamNum}`; // Match Yahoo format
 
+document.addEventListener('DOMContentLoaded', () => {
+  const seasonSelect = document.getElementById('season-select');
+  if (!seasonSelect) return;
+
+  loadSeasonStats(seasonSelect.value);
+
+  seasonSelect.addEventListener('change', () => {
+    loadSeasonStats(seasonSelect.value);
+  });
+});
+
 let currentSortKey = null;
 let sortDirection = -1;
 
-Promise.all([
-  fetch('../data/league_teams.json').then(res => res.json()),
-  fetch('../data/2025_standings.json').then(res => res.json()),
-  fetch('../data/2025_skater_proj.json').then(res => res.json()),
-  fetch('../data/2025_goalie_proj.json').then(res => res.json())
-]).then(([teams, standings, skaterProj, goalieProj]) => {
+function loadSeasonStats(seasonKey) {
+  let skaterFile = '';
+  let goalieFile = '';
+
+  switch (seasonKey) {
+    case '2025_stats':
+      skaterFile = '../data/2025_skater_stats.json';
+      goalieFile = '../data/2025_goalie_stats.json';
+      break;
+    case '2024_stats':
+      skaterFile = '../data/2024_skater_stats.json';
+      goalieFile = '../data/2024_goalie_stats.json';
+      break;
+    case '2025_projections':
+      skaterFile = '../data/2025_skater_proj.json';
+      goalieFile = '../data/2025_goalie_proj.json';
+      break;
+    default:
+      console.error(`Unknown season key: ${seasonKey}`);
+      return;
+  }
+
+  Promise.all([
+    fetch('../data/league_teams.json').then(res => res.json()),
+    fetch('../data/2025_standings.json').then(res => res.json()),
+    fetch(skaterFile).then(res => res.json()),
+    fetch(goalieFile).then(res => res.json())
+  ])
+    .then(([teams, standings, skaterStats, goalieStats]) => {
+      const skaterMap = buildStatMap(skaterStats.players);
+      const goalieMap = buildStatMap(goalieStats.players);
+      renderTeamPage(teams, standings, skaterMap, goalieMap);
+    })
+    .catch(err => console.error('Error loading season stats:', err));
+}
+
+function buildStatMap(players) {
+  const map = {};
+  players.forEach(p => {
+    const id = p.player_key.split('.').pop(); // extract player_id
+    const statMap = {};
+    p.stats.forEach(s => {
+      const statId = s.stat_id ?? s._extracted_data?.stat_id;
+      const value = s.value ?? s._extracted_data?.value;
+      if (statId !== undefined && value !== undefined) {
+        statMap[statId] = value;
+      }
+    });
+    map[id] = { ...p, statMap };
+  });
+  return map;
+}
+
+function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   const teamData = teams.find(t => t.team_info.team_key === teamKey);
   const standingsInfo = standings.teams.find(s => s.team_key === teamKey);
 
@@ -46,34 +105,34 @@ Promise.all([
     </div>
   `;
 
-
   const skaters = [];
   const goalies = [];
   const skaterStatsMap = {};
   const goalieStatsMap = {};
 
   roster.forEach(player => {
-    const projStats = (player.primary_position === 'G'
-      ? goalieProj.players
-      : skaterProj.players
-    ).find(p => p.player_key === player.player_key);
+    const playerId = player.player_key.split('.').pop();
+    const source = player.primary_position === 'G' ? goalieMap[playerId] : skaterMap[playerId];
+    const statMap = source?.statMap ?? {};
 
-    const statMap = {};
-    if (projStats?.stats) {
-      projStats.stats.forEach(s => statMap[s.stat_id] = s.value);
-    }
+    const FP = player.primary_position === 'G'
+      ? calculateGoalieFP(statMap)
+      : calculateSkaterFP(statMap);
+
+    const GP = statMap[0] ?? 0;
+    const PG = GP > 0 ? FP / GP : 0.0;
 
     const enriched = {
       ...player,
-      FP: statMap[98] ?? 0,
-      PG: statMap[99] ?? 0,
-      GP: statMap[0] ?? 0,
+      FP,
+      PG,
+      GP,
       G: statMap[1] ?? 0,
       A: statMap[2] ?? 0,
       PTS: statMap[3] ?? 0,
       PIM: statMap[5] ?? 0,
       SOG: statMap[14] ?? 0,
-      SPCT: statMap[15] ?? 0,
+      SPCT: `${((statMap[15] ?? 0) * 100).toFixed(1)}`,
       SHG: statMap[9] ?? 0,
       GWG: statMap[12] ?? 0,
       BLK: statMap[32] ?? 0,
@@ -91,10 +150,10 @@ Promise.all([
 
     if (player.primary_position === 'G') {
       goalies.push(enriched);
-      goalieStatsMap[player.player_key] = enriched;
+      goalieStatsMap[player.player_id] = enriched;
     } else {
       skaters.push(enriched);
-      skaterStatsMap[player.player_key] = enriched;
+      skaterStatsMap[player.player_id] = enriched;
     }
   });
 
@@ -102,7 +161,7 @@ Promise.all([
   renderGoalieTable(goalies);
   bindSortEvents('team-table', skaters, skaterStatsMap);
   bindSortEvents('goalie-table', goalies, goalieStatsMap);
-});
+}
 
 function atoiToSeconds(atoi) {
   if (!atoi || typeof atoi !== 'string') return 0;
@@ -216,4 +275,32 @@ function bindSortEvents(tableId, players, statsMap) {
       }
     });
   });
+}
+
+function getPlayerId(playerKey) {
+  return playerKey.split('.').pop(); // "6743"
+}
+
+function calculateSkaterFP(stats) {
+  return (
+    (stats[1] ?? 0) * 3 +     // Goals
+    (stats[2] ?? 0) * 2 +     // Assists
+    (stats[5] ?? 0) * 0.2 +   // PIM
+    (stats[14] ?? 0) * 0.2 +  // SOG
+    (stats[31] ?? 0) * 0.1 +  // Hits
+    (stats[32] ?? 0) * 0.3 +  // Blocks
+    (stats[12] ?? 0) * 0.5 +  // GWG
+    (stats[9] ?? 0) * 2       // SHG
+  );
+}
+
+function calculateGoalieFP(stats) {
+  return (
+    (stats[18] ?? 0) +         // GS
+    (stats[19] ?? 0) * 3 +     // Wins
+    (stats[20] ?? 0) * -1 +    // Loss
+    (stats[27] ?? 0) * 5 +     // Shutouts
+    (stats[25] ?? 0) * 0.2 +   // Saves
+    (stats[22] ?? 0) * -1      // Goals Against
+  );
 }
