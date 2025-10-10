@@ -128,8 +128,25 @@ tbody tr:hover {
 .champion-badge img {
   width: 5rem;
   height: auto;
+}
 
 .table-wrapper {
   overflow-x: auto;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 800px; /* or whatever width fits your columns */
+    display: block;
+  }
+
+  th, td {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
 }

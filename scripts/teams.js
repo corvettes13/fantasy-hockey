@@ -59,10 +59,12 @@ function buildStatMap(players) {
     const statMap = {};
     p.stats.forEach(s => {
       const statId = s.stat_id ?? s._extracted_data?.stat_id;
-      const value = s.value ?? s._extracted_data?.value;
-      if (statId !== undefined && value !== undefined) {
-        statMap[statId] = value;
+      let value = s._extracted_data?.value ?? s.value;
+
+      if (value === '-' || value === '–' || value === undefined || value === null) {
+        value = statId === 34 ? '00:00' : 0;
       }
+      statMap[statId] = statId === 34 ? value : parseFloat(value);
     });
     map[id] = { ...p, statMap };
   });
@@ -247,8 +249,8 @@ function bindSortEvents(tableId, players, statsMap) {
           aStat = parseFloat(a.cost ?? 0);
           bStat = parseFloat(b.cost ?? 0);
         } else {
-          aStat = statsMap[a.player_key]?.[key];
-          bStat = statsMap[b.player_key]?.[key];
+          aStat = a[key];
+          bStat = b[key];
         }
 
         let result;
