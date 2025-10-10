@@ -93,8 +93,19 @@ tbody tr:hover {
 .team-meta {
   font-size: 0.95rem;
   color: #444;
+  margin: 0;
+  flex-grow: 1;
+  display: inline-block;
+}
+
+.team-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Optional: allows wrapping on smaller screens */
   margin-top: 0.5rem;
 }
+
 .team-meta strong {
   color: #0055a5;
 }
@@ -117,7 +128,6 @@ tbody tr:hover {
 .champion-badge img {
   width: 5rem;
   height: auto;
-}
 
 .table-wrapper {
   overflow-x: auto;

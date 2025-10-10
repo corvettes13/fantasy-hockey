@@ -7,7 +7,7 @@ let sortDirection = -1;
 
 Promise.all([
   fetch('../data/league_teams.json').then(res => res.json()),
-  fetch('../data/standings.json').then(res => res.json()),
+  fetch('../data/2025_standings.json').then(res => res.json()),
   fetch('../data/2025_skater_proj.json').then(res => res.json()),
   fetch('../data/2025_goalie_proj.json').then(res => res.json())
 ]).then(([teams, standings, skaterProj, goalieProj]) => {
@@ -29,13 +29,23 @@ Promise.all([
         <p class="team-manager">Managed by ${teamInfo.manager}</p>
         <p class="team-meta">
           <strong>Rank:</strong> ${standingsInfo?.rank ?? 'N/A'} |
-          <strong>Record:</strong> ${standingsInfo?.wins ?? '-'}-${standingsInfo?.losses ?? '-'}-${standingsInfo?.ties ?? '-'} |
-          <strong>Points:</strong> ${standingsInfo?.points?.toFixed(1) ?? 'N/A'} |
-          <strong>High Score:</strong> ${standingsInfo?.weekly_high_score ?? 'N/A'}
+          <strong>Record:</strong> ${standingsInfo?.wins ?? '-'}-${standingsInfo?.losses ?? '-'} |
+          <strong>Points For:</strong> ${standingsInfo?.["points for"]?.toFixed(1) ?? 'N/A'}
         </p>
       </div>
+      ${standingsInfo?.currentChampion ? `
+        <div class="champion-badge">
+          <img src="../images/champion_2025.png" alt="League Champion" />
+        </div>
+      ` : ''}
+      ${standingsInfo?.presidentTrophy ? `
+        <div class="trophy-badge">
+          <img src="../images/presidentstrophy_2025.png" alt="Presidents' Trophy Winner" />
+        </div>
+      ` : ''}
     </div>
   `;
+
 
   const skaters = [];
   const goalies = [];
