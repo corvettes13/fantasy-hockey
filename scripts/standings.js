@@ -4,29 +4,80 @@ let standingsData = [];
 let currentSortKey = null;
 let sortDirection = 1;
 
+const select = document.getElementById('standings-select');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const select = document.getElementById('standings-select');
+  let standingsData = [];
+
+  function loadStandings(file) {
+    fetch(`data/${file}`)
+      .then(res => res.json())
+      .then(data => {
+        standingsData = data.teams;
+
+        const bruhs = standingsData.filter(t => t.division_id === 1);
+        const bros = standingsData.filter(t => t.division_id === 2);
+
+        renderTable(bruhs, 'bruhs-body');
+        renderTable(bros, 'bros-body');
+      })
+      .catch(err => console.error('Error loading standings:', err));
+  }
+
+  // Initial load
+  loadStandings(select.value);
+
+  // Reload when dropdown changes
+  select.addEventListener('change', () => {
+    loadStandings(select.value);
+  });
+
+  // Sorting logic
+  document.querySelectorAll('th button').forEach(button => {
+    button.addEventListener('click', () => {
+      const key = button.getAttribute('data-sort');
+
+      if (currentSortKey === key) {
+        sortDirection *= -1;
+      } else {
+        sortDirection = key === 'rank' ? 1 : -1;
+        currentSortKey = key;
+      }
+
+      const bruhsSorted = sortDivision(standingsData.filter(t => t.division_id === 1), key, sortDirection);
+      const brosSorted = sortDivision(standingsData.filter(t => t.division_id === 2), key, sortDirection);
+
+      renderTable(bruhsSorted, 'bruhs-body');
+      renderTable(brosSorted, 'bros-body');
+    });
+  });
+});
+
 function renderTable(data, tbodyId) {
   const tbody = document.getElementById(tbodyId);
   tbody.innerHTML = '';
 
-  data.forEach(team => {
-    const diffClass = team.difference > 0 ? 'positive' : team.difference < 0 ? 'negative' : '';
-    const teamNum = team.teamKey ? team.teamKey.split('.')[1] : team.teamNum || '';
+  data.forEach(teams => {
+    const PFminusPA = teams["points for"] - teams["points against"];
+    const diffClass = PFminusPA > 0 ? 'positive' : PFminusPA < 0 ? 'negative' : '';
+    const teamNum = teams.team_key ? teams.team_key.split('.').pop() : teams.team_id || '';
 
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${team.rank}</td>
+      <td>${teams.rank}</td>
       <td class="left-align">
-        <a href="teams/team.html?team=${teamNum}">${team.team}</a>
+        <a href="teams/team.html?team=${teamNum}">${teams.name}</a>
       </td>
-      <td>${team.wins}</td>
-      <td>${team.losses}</td>
-      <td>${team["Win Percentage"].toFixed(3)}</td>
-      <td>${team["Points For"].toFixed(1)}</td>
-      <td>${team["Points Against"].toFixed(1)}</td>
-      <td class="${diffClass}">${team.difference.toFixed(1)}</td>
-      <td>$${team.faab_balance}</td>
-      <td>${team.number_of_moves}</td>
-      <td>${team["Weekly High Score"]}</td>
+      <td>${teams.wins}</td>
+      <td>${teams.losses}</td>
+      <td>${teams.percentage.toFixed(3)}</td>
+      <td>${teams["points for"].toFixed(1)}</td>
+      <td>${teams["points against"].toFixed(1)}</td>
+      <td class="${diffClass}">${PFminusPA.toFixed(1)}</td>
+      <td>$${teams.faab_balance}</td>
+      <td>${teams.number_of_moves}</td>
+      <td>${teams.weekly_high_score}</td>
     `;
     tbody.appendChild(row);
   });
@@ -70,18 +121,4 @@ document.querySelectorAll('th button').forEach(button => {
     renderTable(brosSorted, 'bros-body');
   });
 });
-
-
-fetch(standingsUrl)
-  .then(res => res.json())
-  .then(data => {
-    standingsData = data; // ✅ use raw array directly
-
-    const bruhs = standingsData.filter(t => t.division_id === 1);
-    const bros = standingsData.filter(t => t.division_id === 2);
-
-    renderTable(bruhs, 'bruhs-body');
-    renderTable(bros, 'bros-body');
-  })
-  .catch(err => console.error('Error loading standings:', err));
 

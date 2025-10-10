@@ -101,9 +101,9 @@
         "cost": 11
       },
       {
-        "player_key": "465.p.3637",
-        "player_name": "Alex Ovechkin",
-        "team_abbr": "WSH",
+        "player_key": "465.p.6751",
+        "player_name": "Timo Meier",
+        "team_abbr": "NJ",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -111,7 +111,7 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 14
+        "cost": 15
       },
       {
         "player_key": "465.p.8644",
@@ -136,18 +136,6 @@
         ],
         "selected_position": "RW",
         "cost": 3
-      },
-      {
-        "player_key": "465.p.7908",
-        "player_name": "Evan Bouchard",
-        "team_abbr": "EDM",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 12
       },
       {
         "player_key": "465.p.7899",
@@ -180,11 +168,22 @@
         "primary_position": "D",
         "positions": [
           "D",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "D",
         "cost": 1
+      },
+      {
+        "player_key": "465.p.33423",
+        "player_name": "Matthew Schaefer",
+        "team_abbr": "NYI",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 2
       },
       {
         "player_key": "465.p.8654",
@@ -200,9 +199,9 @@
         "cost": 5
       },
       {
-        "player_key": "465.p.6751",
-        "player_name": "Timo Meier",
-        "team_abbr": "NJ",
+        "player_key": "465.p.3637",
+        "player_name": "Alex Ovechkin",
+        "team_abbr": "WSH",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -210,7 +209,19 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 15
+        "cost": 14
+      },
+      {
+        "player_key": "465.p.7908",
+        "player_name": "Evan Bouchard",
+        "team_abbr": "EDM",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 12
       },
       {
         "player_key": "465.p.30545",
@@ -235,18 +246,6 @@
         ],
         "selected_position": "BN",
         "cost": 8
-      },
-      {
-        "player_key": "465.p.33423",
-        "player_name": "Matthew Schaefer",
-        "team_abbr": "NYI",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 2
       },
       {
         "player_key": "465.p.6941",
@@ -565,6 +564,17 @@
         "cost": 1
       },
       {
+        "player_key": "465.p.7084",
+        "player_name": "Charlie Lindgren",
+        "team_abbr": "WSH",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 0
+      },
+      {
         "player_key": "465.p.5820",
         "player_name": "Connor Hellebuyck",
         "team_abbr": "WPG",
@@ -572,7 +582,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 32
       },
       {
@@ -585,17 +595,6 @@
         ],
         "selected_position": "BN",
         "cost": 9
-      },
-      {
-        "player_key": "465.p.7084",
-        "player_name": "Charlie Lindgren",
-        "team_abbr": "WSH",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 0
       },
       {
         "player_key": "465.p.7636",
@@ -691,6 +690,18 @@
         "cost": 3
       },
       {
+        "player_key": "465.p.6448",
+        "player_name": "Brayden Point",
+        "team_abbr": "TB",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 28
+      },
+      {
         "player_key": "465.p.7267",
         "player_name": "Jesper Bratt",
         "team_abbr": "NJ",
@@ -730,17 +741,16 @@
         "cost": 39
       },
       {
-        "player_key": "465.p.8369",
-        "player_name": "Aliaksei Protas",
-        "team_abbr": "WSH",
-        "primary_position": "LW",
+        "player_key": "465.p.5425",
+        "player_name": "Nikita Kucherov",
+        "team_abbr": "TB",
+        "primary_position": "RW",
         "positions": [
-          "LW",
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 4
+        "cost": 43
       },
       {
         "player_key": "465.p.31751",
@@ -791,28 +801,29 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.6448",
-        "player_name": "Brayden Point",
-        "team_abbr": "TB",
+        "player_key": "465.p.33420",
+        "player_name": "Michael Misa",
+        "team_abbr": "SJ",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 28
+        "cost": 1
       },
       {
-        "player_key": "465.p.5425",
-        "player_name": "Nikita Kucherov",
-        "team_abbr": "TB",
-        "primary_position": "RW",
+        "player_key": "465.p.8369",
+        "player_name": "Aliaksei Protas",
+        "team_abbr": "WSH",
+        "primary_position": "LW",
         "positions": [
+          "LW",
           "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 43
+        "cost": 4
       },
       {
         "player_key": "465.p.4969",
@@ -842,18 +853,6 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.33420",
-        "player_name": "Michael Misa",
-        "team_abbr": "SJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1
-      },
-      {
         "player_key": "465.p.8670",
         "player_name": "Mavrik Bourque",
         "team_abbr": "DAL",
@@ -867,15 +866,15 @@
         "cost": 0
       },
       {
-        "player_key": "465.p.8489",
-        "player_name": "Dustin Wolf",
-        "team_abbr": "CGY",
+        "player_key": "465.p.8033",
+        "player_name": "Akira Schmid",
+        "team_abbr": "VGK",
         "primary_position": "G",
         "positions": [
           "G"
         ],
         "selected_position": "G",
-        "cost": 4
+        "cost": 0
       },
       {
         "player_key": "465.p.6818",
@@ -889,15 +888,15 @@
         "cost": 14
       },
       {
-        "player_key": "465.p.8033",
-        "player_name": "Akira Schmid",
-        "team_abbr": "VGK",
+        "player_key": "465.p.8489",
+        "player_name": "Dustin Wolf",
+        "team_abbr": "CGY",
         "primary_position": "G",
         "positions": [
           "G"
         ],
         "selected_position": "BN",
-        "cost": 0
+        "cost": 4
       },
       {
         "player_key": "465.p.5053",
@@ -947,12 +946,12 @@
       "division_id": "2",
       "waiver_priority": 10,
       "faab_balance": "100",
-      "number_of_moves": 2,
+      "number_of_moves": 3,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 1,
-        "value": "0"
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -993,18 +992,6 @@
         "cost": 3
       },
       {
-        "player_key": "465.p.30546",
-        "player_name": "Adam Fantilli",
-        "team_abbr": "CBJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 3
-      },
-      {
         "player_key": "465.p.8652",
         "player_name": "Anton Lundell",
         "team_abbr": "FLA",
@@ -1017,9 +1004,21 @@
         "cost": 5
       },
       {
-        "player_key": "465.p.9268",
-        "player_name": "Andrei Kuzmenko",
-        "team_abbr": "LA",
+        "player_key": "465.p.5988",
+        "player_name": "Bo Horvat",
+        "team_abbr": "NYI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 9
+      },
+      {
+        "player_key": "465.p.6766",
+        "player_name": "Travis Konecny",
+        "team_abbr": "PHI",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -1027,19 +1026,20 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 0
+        "cost": 16
       },
       {
-        "player_key": "465.p.8303",
-        "player_name": "Connor McMichael",
-        "team_abbr": "WSH",
-        "primary_position": "LW",
+        "player_key": "465.p.7520",
+        "player_name": "Elias Pettersson",
+        "team_abbr": "VAN",
+        "primary_position": "C",
         "positions": [
+          "C",
           "LW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 4
+        "cost": 23
       },
       {
         "player_key": "465.p.6746",
@@ -1114,31 +1114,6 @@
         "cost": 13
       },
       {
-        "player_key": "465.p.30227",
-        "player_name": "Matthew Knies",
-        "team_abbr": "TOR",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 7
-      },
-      {
-        "player_key": "465.p.6766",
-        "player_name": "Travis Konecny",
-        "team_abbr": "PHI",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 16
-      },
-      {
         "player_key": "465.p.7535",
         "player_name": "Robert Thomas",
         "team_abbr": "STL",
@@ -1147,32 +1122,66 @@
           "C",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 12
       },
       {
-        "player_key": "465.p.7520",
-        "player_name": "Elias Pettersson",
-        "team_abbr": "VAN",
+        "player_key": "465.p.30546",
+        "player_name": "Adam Fantilli",
+        "team_abbr": "CBJ",
         "primary_position": "C",
         "positions": [
           "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3
+      },
+      {
+        "player_key": "465.p.30227",
+        "player_name": "Matthew Knies",
+        "team_abbr": "TOR",
+        "primary_position": "LW",
+        "positions": [
           "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 23
+        "cost": 7
       },
       {
-        "player_key": "465.p.5988",
-        "player_name": "Bo Horvat",
-        "team_abbr": "NYI",
-        "primary_position": "C",
+        "player_key": "465.p.8303",
+        "player_name": "Connor McMichael",
+        "team_abbr": "WSH",
+        "primary_position": "LW",
         "positions": [
-          "C",
+          "LW",
           "Util"
         ],
         "selected_position": "BN",
+        "cost": 4
+      },
+      {
+        "player_key": "465.p.30550",
+        "player_name": "Ryan Leonard",
+        "team_abbr": "WSH",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0
+      },
+      {
+        "player_key": "465.p.6447",
+        "player_name": "Ilya Sorokin",
+        "team_abbr": "NYI",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
         "cost": 9
       },
       {
@@ -1183,19 +1192,8 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
-        "cost": 4
-      },
-      {
-        "player_key": "465.p.6447",
-        "player_name": "Ilya Sorokin",
-        "team_abbr": "NYI",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
         "selected_position": "BN",
-        "cost": 9
+        "cost": 4
       },
       {
         "player_key": "465.p.6887",
@@ -1289,19 +1287,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.8642",
-        "player_name": "Quinton Byfield",
-        "team_abbr": "LA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 6
-      },
-      {
         "player_key": "465.p.3737",
         "player_name": "Sidney Crosby",
         "team_abbr": "PIT",
@@ -1314,22 +1299,46 @@
         "cost": 29
       },
       {
-        "player_key": "465.p.5367",
-        "player_name": "Mika Zibanejad",
-        "team_abbr": "NYR",
+        "player_key": "465.p.30832",
+        "player_name": "Logan Cooley",
+        "team_abbr": "UTA",
         "primary_position": "C",
         "positions": [
           "C",
-          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 6
+      },
+      {
+        "player_key": "465.p.8878",
+        "player_name": "Matty Beniers",
+        "team_abbr": "SEA",
+        "primary_position": "C",
+        "positions": [
+          "C",
           "Util"
         ],
         "selected_position": "C",
         "cost": 3
       },
       {
-        "player_key": "465.p.6055",
-        "player_name": "Pavel Buchnevich",
-        "team_abbr": "STL",
+        "player_key": "465.p.8279",
+        "player_name": "Jack Hughes",
+        "team_abbr": "NJ",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 15
+      },
+      {
+        "player_key": "465.p.8881",
+        "player_name": "Kent Johnson",
+        "team_abbr": "CBJ",
         "primary_position": "C",
         "positions": [
           "C",
@@ -1338,31 +1347,6 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 3
-      },
-      {
-        "player_key": "465.p.7224",
-        "player_name": "Ross Colton",
-        "team_abbr": "COL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 1
-      },
-      {
-        "player_key": "465.p.5696",
-        "player_name": "Tom Wilson",
-        "team_abbr": "WSH",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
         "cost": 5
       },
       {
@@ -1376,6 +1360,19 @@
         ],
         "selected_position": "RW",
         "cost": 14
+      },
+      {
+        "player_key": "465.p.5367",
+        "player_name": "Mika Zibanejad",
+        "team_abbr": "NYR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 3
       },
       {
         "player_key": "465.p.5685",
@@ -1414,41 +1411,18 @@
         "cost": 6
       },
       {
-        "player_key": "465.p.8659",
-        "player_name": "Braden Schneider",
-        "team_abbr": "NYR",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 0
-      },
-      {
-        "player_key": "465.p.6377",
-        "player_name": "Kevin Fiala",
-        "team_abbr": "LA",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 12
-      },
-      {
-        "player_key": "465.p.8279",
-        "player_name": "Jack Hughes",
-        "team_abbr": "NJ",
+        "player_key": "465.p.6055",
+        "player_name": "Pavel Buchnevich",
+        "team_abbr": "STL",
         "primary_position": "C",
         "positions": [
           "C",
           "LW",
+          "RW",
           "Util"
         ],
-        "selected_position": "BN",
-        "cost": 15
+        "selected_position": "Util",
+        "cost": 3
       },
       {
         "player_key": "465.p.6890",
@@ -1463,25 +1437,49 @@
         "cost": 7
       },
       {
-        "player_key": "465.p.8878",
-        "player_name": "Matty Beniers",
-        "team_abbr": "SEA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3
-      },
-      {
-        "player_key": "465.p.8881",
-        "player_name": "Kent Johnson",
-        "team_abbr": "CBJ",
+        "player_key": "465.p.7224",
+        "player_name": "Ross Colton",
+        "team_abbr": "COL",
         "primary_position": "C",
         "positions": [
           "C",
           "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1
+      },
+      {
+        "player_key": "465.p.8642",
+        "player_name": "Quinton Byfield",
+        "team_abbr": "LA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 6
+      },
+      {
+        "player_key": "465.p.6377",
+        "player_name": "Kevin Fiala",
+        "team_abbr": "LA",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 12
+      },
+      {
+        "player_key": "465.p.5696",
+        "player_name": "Tom Wilson",
+        "team_abbr": "WSH",
+        "primary_position": "RW",
+        "positions": [
           "RW",
           "Util"
         ],
@@ -1520,18 +1518,6 @@
         ],
         "selected_position": "BN",
         "cost": 0
-      },
-      {
-        "player_key": "465.p.30832",
-        "player_name": "Logan Cooley",
-        "team_abbr": "UTA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "IR+",
-        "cost": 6
       },
       {
         "player_key": "465.p.7114",
@@ -1602,31 +1588,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.7109",
-        "player_name": "Auston Matthews",
-        "team_abbr": "TOR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 43
-      },
-      {
-        "player_key": "465.p.6374",
-        "player_name": "William Nylander",
-        "team_abbr": "TOR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 20
-      },
-      {
         "player_key": "465.p.7582",
         "player_name": "Morgan Geekie",
         "team_abbr": "BOS",
@@ -1639,6 +1600,32 @@
         ],
         "selected_position": "C",
         "cost": 3
+      },
+      {
+        "player_key": "465.p.4962",
+        "player_name": "Tyler Seguin",
+        "team_abbr": "DAL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 1
+      },
+      {
+        "player_key": "465.p.6758",
+        "player_name": "Mathew Barzal",
+        "team_abbr": "NYI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 4
       },
       {
         "player_key": "465.p.8293",
@@ -1740,32 +1727,6 @@
         "cost": 0
       },
       {
-        "player_key": "465.p.6758",
-        "player_name": "Mathew Barzal",
-        "team_abbr": "NYI",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 4
-      },
-      {
-        "player_key": "465.p.4682",
-        "player_name": "Victor Hedman",
-        "team_abbr": "TB",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "BN",
-        "cost": 22
-      },
-      {
         "player_key": "465.p.8699",
         "player_name": "Will Cuylle",
         "team_abbr": "NYR",
@@ -1775,21 +1736,8 @@
           "RW",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 2
-      },
-      {
-        "player_key": "465.p.4962",
-        "player_name": "Tyler Seguin",
-        "team_abbr": "DAL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1
       },
       {
         "player_key": "465.p.6390",
@@ -1806,6 +1754,55 @@
         "cost": 2
       },
       {
+        "player_key": "465.p.7109",
+        "player_name": "Auston Matthews",
+        "team_abbr": "TOR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 43
+      },
+      {
+        "player_key": "465.p.6374",
+        "player_name": "William Nylander",
+        "team_abbr": "TOR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 20
+      },
+      {
+        "player_key": "465.p.4682",
+        "player_name": "Victor Hedman",
+        "team_abbr": "TB",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "BN",
+        "cost": 22
+      },
+      {
+        "player_key": "465.p.5407",
+        "player_name": "John Gibson",
+        "team_abbr": "DET",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 1
+      },
+      {
         "player_key": "465.p.6486",
         "player_name": "Igor Shesterkin",
         "team_abbr": "NYR",
@@ -1813,7 +1810,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 27
       },
       {
@@ -1826,17 +1823,6 @@
         ],
         "selected_position": "BN",
         "cost": 4
-      },
-      {
-        "player_key": "465.p.5407",
-        "player_name": "John Gibson",
-        "team_abbr": "DET",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 1
       },
       {
         "player_key": "465.p.8650",
@@ -1908,19 +1894,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.6369",
-        "player_name": "Leon Draisaitl",
-        "team_abbr": "EDM",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 47
-      },
-      {
         "player_key": "465.p.3638",
         "player_name": "Evgeni Malkin",
         "team_abbr": "PIT",
@@ -1934,16 +1907,30 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.6743",
-        "player_name": "Connor McDavid",
-        "team_abbr": "EDM",
+        "player_key": "465.p.7902",
+        "player_name": "Brady Tkachuk",
+        "team_abbr": "OTT",
         "primary_position": "C",
         "positions": [
           "C",
+          "LW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 46
+        "cost": 45
+      },
+      {
+        "player_key": "465.p.5405",
+        "player_name": "Boone Jenner",
+        "team_abbr": "CBJ",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 1
       },
       {
         "player_key": "465.p.5691",
@@ -1971,18 +1958,6 @@
         "cost": 4
       },
       {
-        "player_key": "465.p.30155",
-        "player_name": "Jackson Blake",
-        "team_abbr": "CAR",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 1
-      },
-      {
         "player_key": "465.p.5441",
         "player_name": "Blake Coleman",
         "team_abbr": "CGY",
@@ -1990,6 +1965,18 @@
         "positions": [
           "C",
           "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 1
+      },
+      {
+        "player_key": "465.p.4240",
+        "player_name": "Patrick Kane",
+        "team_abbr": "DET",
+        "primary_position": "RW",
+        "positions": [
           "RW",
           "Util"
         ],
@@ -2045,34 +2032,21 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.31759",
-        "player_name": "Cutter Gauthier",
-        "team_abbr": "ANA",
+        "player_key": "465.p.5928",
+        "player_name": "Anders Lee",
+        "team_abbr": "NYI",
         "primary_position": "LW",
         "positions": [
           "LW",
           "Util"
         ],
         "selected_position": "Util",
-        "cost": 1
+        "cost": 0
       },
       {
-        "player_key": "465.p.7902",
-        "player_name": "Brady Tkachuk",
-        "team_abbr": "OTT",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 45
-      },
-      {
-        "player_key": "465.p.4240",
-        "player_name": "Patrick Kane",
-        "team_abbr": "DET",
+        "player_key": "465.p.30155",
+        "player_name": "Jackson Blake",
+        "team_abbr": "CAR",
         "primary_position": "RW",
         "positions": [
           "RW",
@@ -2082,12 +2056,11 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.5405",
-        "player_name": "Boone Jenner",
-        "team_abbr": "CBJ",
-        "primary_position": "C",
+        "player_key": "465.p.31759",
+        "player_name": "Cutter Gauthier",
+        "team_abbr": "ANA",
+        "primary_position": "LW",
         "positions": [
-          "C",
           "LW",
           "Util"
         ],
@@ -2095,21 +2068,34 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.5928",
-        "player_name": "Anders Lee",
-        "team_abbr": "NYI",
-        "primary_position": "LW",
+        "player_key": "465.p.6369",
+        "player_name": "Leon Draisaitl",
+        "team_abbr": "EDM",
+        "primary_position": "C",
         "positions": [
+          "C",
           "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 0
+        "cost": 47
       },
       {
-        "player_key": "465.p.7593",
-        "player_name": "Stuart Skinner",
+        "player_key": "465.p.6743",
+        "player_name": "Connor McDavid",
         "team_abbr": "EDM",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 46
+      },
+      {
+        "player_key": "465.p.7163",
+        "player_name": "Filip Gustavsson",
+        "team_abbr": "MIN",
         "primary_position": "G",
         "positions": [
           "G"
@@ -2118,9 +2104,9 @@
         "cost": 9
       },
       {
-        "player_key": "465.p.7163",
-        "player_name": "Filip Gustavsson",
-        "team_abbr": "MIN",
+        "player_key": "465.p.7593",
+        "player_name": "Stuart Skinner",
+        "team_abbr": "EDM",
         "primary_position": "G",
         "positions": [
           "G"
@@ -2270,28 +2256,29 @@
         "cost": 5
       },
       {
-        "player_key": "465.p.5363",
-        "player_name": "Gabriel Landeskog",
-        "team_abbr": "COL",
+        "player_key": "465.p.6375",
+        "player_name": "Nikolaj Ehlers",
+        "team_abbr": "CAR",
         "primary_position": "LW",
         "positions": [
           "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 3
+        "cost": 10
       },
       {
-        "player_key": "465.p.6395",
-        "player_name": "Adrian Kempe",
-        "team_abbr": "LA",
+        "player_key": "465.p.30849",
+        "player_name": "Jimmy Snuggerud",
+        "team_abbr": "STL",
         "primary_position": "RW",
         "positions": [
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 13
+        "cost": 5
       },
       {
         "player_key": "465.p.30548",
@@ -2330,18 +2317,6 @@
         "cost": 3
       },
       {
-        "player_key": "465.p.30075",
-        "player_name": "Brock Faber",
-        "team_abbr": "MIN",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 4
-      },
-      {
         "player_key": "465.p.7950",
         "player_name": "Sean Durzi",
         "team_abbr": "UTA",
@@ -2352,6 +2327,18 @@
         ],
         "selected_position": "D",
         "cost": 2
+      },
+      {
+        "player_key": "465.p.6795",
+        "player_name": "Rasmus Andersson",
+        "team_abbr": "CGY",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 1
       },
       {
         "player_key": "465.p.8285",
@@ -2366,9 +2353,21 @@
         "cost": 7
       },
       {
-        "player_key": "465.p.6375",
-        "player_name": "Nikolaj Ehlers",
-        "team_abbr": "CAR",
+        "player_key": "465.p.5363",
+        "player_name": "Gabriel Landeskog",
+        "team_abbr": "COL",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3
+      },
+      {
+        "player_key": "465.p.8357",
+        "player_name": "Pavel Dorofeyev",
+        "team_abbr": "VGK",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2376,7 +2375,19 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 10
+        "cost": 4
+      },
+      {
+        "player_key": "465.p.6395",
+        "player_name": "Adrian Kempe",
+        "team_abbr": "LA",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 13
       },
       {
         "player_key": "465.p.8287",
@@ -2391,28 +2402,15 @@
         "cost": 5
       },
       {
-        "player_key": "465.p.30849",
-        "player_name": "Jimmy Snuggerud",
-        "team_abbr": "STL",
-        "primary_position": "RW",
+        "player_key": "465.p.7541",
+        "player_name": "Jake Oettinger",
+        "team_abbr": "DAL",
+        "primary_position": "G",
         "positions": [
-          "RW",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 5
-      },
-      {
-        "player_key": "465.p.6795",
-        "player_name": "Rasmus Andersson",
-        "team_abbr": "CGY",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1
+        "selected_position": "G",
+        "cost": 15
       },
       {
         "player_key": "465.p.8291",
@@ -2422,19 +2420,8 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
-        "cost": 8
-      },
-      {
-        "player_key": "465.p.7541",
-        "player_name": "Jake Oettinger",
-        "team_abbr": "DAL",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
         "selected_position": "BN",
-        "cost": 15
+        "cost": 8
       },
       {
         "player_key": "465.p.6405",
@@ -2446,20 +2433,6 @@
         ],
         "selected_position": "BN",
         "cost": 19
-      },
-      {
-        "player_key": "465.p.8357",
-        "player_name": "Pavel Dorofeyev",
-        "team_abbr": "VGK",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "IR+",
-        "cost": 4
       }
     ]
   },
@@ -2482,12 +2455,12 @@
       "division_id": "1",
       "waiver_priority": 6,
       "faab_balance": "100",
-      "number_of_moves": 2,
+      "number_of_moves": 3,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 1,
-        "value": "0"
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2529,30 +2502,28 @@
         "cost": 31
       },
       {
-        "player_key": "465.p.6425",
-        "player_name": "Ryan Donato",
-        "team_abbr": "CHI",
+        "player_key": "465.p.32763",
+        "player_name": "Macklin Celebrini",
+        "team_abbr": "SJ",
         "primary_position": "C",
         "positions": [
           "C",
-          "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 2
+        "cost": 24
       },
       {
-        "player_key": "465.p.4990",
-        "player_name": "Brock Nelson",
-        "team_abbr": "COL",
+        "player_key": "465.p.8649",
+        "player_name": "Marco Rossi",
+        "team_abbr": "MIN",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 3
+        "cost": 6
       },
       {
         "player_key": "465.p.6877",
@@ -2567,17 +2538,16 @@
         "cost": 47
       },
       {
-        "player_key": "465.p.6436",
-        "player_name": "Warren Foegele",
-        "team_abbr": "LA",
+        "player_key": "465.p.6057",
+        "player_name": "Jake Guentzel",
+        "team_abbr": "TB",
         "primary_position": "LW",
         "positions": [
           "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 0
+        "cost": 26
       },
       {
         "player_key": "465.p.32790",
@@ -2586,8 +2556,7 @@
         "primary_position": "RW",
         "positions": [
           "RW",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "RW",
         "cost": 3
@@ -2666,40 +2635,43 @@
         "cost": 3
       },
       {
-        "player_key": "465.p.6057",
-        "player_name": "Jake Guentzel",
-        "team_abbr": "TB",
+        "player_key": "465.p.4990",
+        "player_name": "Brock Nelson",
+        "team_abbr": "COL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3
+      },
+      {
+        "player_key": "465.p.6425",
+        "player_name": "Ryan Donato",
+        "team_abbr": "CHI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 2
+      },
+      {
+        "player_key": "465.p.6436",
+        "player_name": "Warren Foegele",
+        "team_abbr": "LA",
         "primary_position": "LW",
         "positions": [
           "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 26
-      },
-      {
-        "player_key": "465.p.32763",
-        "player_name": "Macklin Celebrini",
-        "team_abbr": "SJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 24
-      },
-      {
-        "player_key": "465.p.8649",
-        "player_name": "Marco Rossi",
-        "team_abbr": "MIN",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 6
+        "cost": 0
       },
       {
         "player_key": "465.p.7526",
@@ -2728,9 +2700,9 @@
         "cost": 4
       },
       {
-        "player_key": "465.p.5553",
-        "player_name": "Anton Forsberg",
-        "team_abbr": "LA",
+        "player_key": "465.p.5057",
+        "player_name": "Scott Wedgewood",
+        "team_abbr": "COL",
         "primary_position": "G",
         "positions": [
           "G"
@@ -2852,21 +2824,9 @@
         "cost": 13
       },
       {
-        "player_key": "465.p.30024",
-        "player_name": "Frank Nazar",
-        "team_abbr": "CHI",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 1
-      },
-      {
-        "player_key": "465.p.7111",
-        "player_name": "Pierre-Luc Dubois",
-        "team_abbr": "WSH",
+        "player_key": "465.p.8643",
+        "player_name": "Tim Stutzle",
+        "team_abbr": "OTT",
         "primary_position": "C",
         "positions": [
           "C",
@@ -2874,7 +2834,20 @@
           "Util"
         ],
         "selected_position": "C",
-        "cost": 4
+        "cost": 15
+      },
+      {
+        "player_key": "465.p.8898",
+        "player_name": "Wyatt Johnston",
+        "team_abbr": "DAL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 9
       },
       {
         "player_key": "465.p.6759",
@@ -2901,9 +2874,9 @@
         "cost": 30
       },
       {
-        "player_key": "465.p.8898",
-        "player_name": "Wyatt Johnston",
-        "team_abbr": "DAL",
+        "player_key": "465.p.7134",
+        "player_name": "Tage Thompson",
+        "team_abbr": "BUF",
         "primary_position": "C",
         "positions": [
           "C",
@@ -2911,19 +2884,20 @@
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 9
+        "cost": 14
       },
       {
-        "player_key": "465.p.30145",
-        "player_name": "Matt Coronato",
-        "team_abbr": "CGY",
-        "primary_position": "RW",
+        "player_key": "465.p.7554",
+        "player_name": "Jason Robertson",
+        "team_abbr": "DAL",
+        "primary_position": "LW",
         "positions": [
+          "LW",
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 1
+        "cost": 19
       },
       {
         "player_key": "465.p.6750",
@@ -2974,58 +2948,6 @@
         "cost": 2
       },
       {
-        "player_key": "465.p.9269",
-        "player_name": "Juraj Slafkovsk\u00fd",
-        "team_abbr": "MTL",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 4
-      },
-      {
-        "player_key": "465.p.7134",
-        "player_name": "Tage Thompson",
-        "team_abbr": "BUF",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 14
-      },
-      {
-        "player_key": "465.p.7554",
-        "player_name": "Jason Robertson",
-        "team_abbr": "DAL",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 19
-      },
-      {
-        "player_key": "465.p.8643",
-        "player_name": "Tim Stutzle",
-        "team_abbr": "OTT",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 15
-      },
-      {
         "player_key": "465.p.8290",
         "player_name": "Matt Boldy",
         "team_abbr": "MIN",
@@ -3035,19 +2957,58 @@
           "RW",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 13
       },
       {
-        "player_key": "465.p.8155",
-        "player_name": "Logan Thompson",
-        "team_abbr": "WSH",
-        "primary_position": "G",
+        "player_key": "465.p.9269",
+        "player_name": "Juraj Slafkovsk\u00fd",
+        "team_abbr": "MTL",
+        "primary_position": "LW",
         "positions": [
-          "G"
+          "LW",
+          "RW",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 6
+        "selected_position": "BN",
+        "cost": 4
+      },
+      {
+        "player_key": "465.p.30024",
+        "player_name": "Frank Nazar",
+        "team_abbr": "CHI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1
+      },
+      {
+        "player_key": "465.p.7111",
+        "player_name": "Pierre-Luc Dubois",
+        "team_abbr": "WSH",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 4
+      },
+      {
+        "player_key": "465.p.30145",
+        "player_name": "Matt Coronato",
+        "team_abbr": "CGY",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1
       },
       {
         "player_key": "465.p.5699",
@@ -3057,8 +3018,19 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 22
+      },
+      {
+        "player_key": "465.p.8155",
+        "player_name": "Logan Thompson",
+        "team_abbr": "WSH",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 6
       },
       {
         "player_key": "465.p.9118",
@@ -3104,12 +3076,12 @@
       "division_id": "1",
       "waiver_priority": 1,
       "faab_balance": "99",
-      "number_of_moves": 1,
+      "number_of_moves": 2,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 1,
-        "value": "1"
+        "value": "2"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -3148,28 +3120,28 @@
         "cost": 18
       },
       {
-        "player_key": "465.p.3788",
-        "player_name": "Anze Kopitar",
-        "team_abbr": "LA",
+        "player_key": "465.p.5368",
+        "player_name": "Mark Scheifele",
+        "team_abbr": "WPG",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 12
+        "cost": 16
       },
       {
-        "player_key": "465.p.4681",
-        "player_name": "John Tavares",
-        "team_abbr": "TOR",
+        "player_key": "465.p.6814",
+        "player_name": "Anthony Cirelli",
+        "team_abbr": "TB",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 10
+        "cost": 3
       },
       {
         "player_key": "465.p.4351",
@@ -3194,7 +3166,7 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 1
+        "cost": 0
       },
       {
         "player_key": "465.p.6756",
@@ -3283,16 +3255,28 @@
         "cost": 47
       },
       {
-        "player_key": "465.p.5368",
-        "player_name": "Mark Scheifele",
-        "team_abbr": "WPG",
+        "player_key": "465.p.3788",
+        "player_name": "Anze Kopitar",
+        "team_abbr": "LA",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 16
+        "cost": 12
+      },
+      {
+        "player_key": "465.p.4681",
+        "player_name": "John Tavares",
+        "team_abbr": "TOR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 10
       },
       {
         "player_key": "465.p.9276",
@@ -3321,18 +3305,6 @@
         "cost": 4
       },
       {
-        "player_key": "465.p.6814",
-        "player_name": "Anthony Cirelli",
-        "team_abbr": "TB",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3
-      },
-      {
         "player_key": "465.p.8883",
         "player_name": "William Eklund",
         "team_abbr": "SJ",
@@ -3354,6 +3326,17 @@
         ],
         "selected_position": "G",
         "cost": 6
+      },
+      {
+        "player_key": "465.p.7089",
+        "player_name": "Alex Lyon",
+        "team_abbr": "BUF",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 0
       },
       {
         "player_key": "465.p.6424",
@@ -3447,18 +3430,6 @@
         "cost": 30
       },
       {
-        "player_key": "465.p.6745",
-        "player_name": "Dylan Strome",
-        "team_abbr": "WSH",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 7
-      },
-      {
         "player_key": "465.p.4687",
         "player_name": "Nazem Kadri",
         "team_abbr": "CGY",
@@ -3469,6 +3440,18 @@
         ],
         "selected_position": "C",
         "cost": 7
+      },
+      {
+        "player_key": "465.p.5984",
+        "player_name": "Elias Lindholm",
+        "team_abbr": "BOS",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 2
       },
       {
         "player_key": "465.p.7900",
@@ -3584,6 +3567,18 @@
         "cost": 6
       },
       {
+        "player_key": "465.p.6745",
+        "player_name": "Dylan Strome",
+        "team_abbr": "WSH",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 7
+      },
+      {
         "player_key": "465.p.6370",
         "player_name": "Sam Bennett",
         "team_abbr": "FLA",
@@ -3594,18 +3589,6 @@
         ],
         "selected_position": "BN",
         "cost": 6
-      },
-      {
-        "player_key": "465.p.5984",
-        "player_name": "Elias Lindholm",
-        "team_abbr": "BOS",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 2
       },
       {
         "player_key": "465.p.5362",
@@ -3633,9 +3616,9 @@
         "cost": 1
       },
       {
-        "player_key": "465.p.7626",
-        "player_name": "Jeremy Swayman",
-        "team_abbr": "BOS",
+        "player_key": "465.p.5454",
+        "player_name": "Jordan Binnington",
+        "team_abbr": "STL",
         "primary_position": "G",
         "positions": [
           "G"
@@ -3644,9 +3627,9 @@
         "cost": 8
       },
       {
-        "player_key": "465.p.5454",
-        "player_name": "Jordan Binnington",
-        "team_abbr": "STL",
+        "player_key": "465.p.7626",
+        "player_name": "Jeremy Swayman",
+        "team_abbr": "BOS",
         "primary_position": "G",
         "positions": [
           "G"
@@ -3660,7 +3643,8 @@
         "team_abbr": "CAR",
         "primary_position": "G",
         "positions": [
-          "G"
+          "G",
+          "IR+"
         ],
         "selected_position": "BN",
         "cost": 3

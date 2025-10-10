@@ -87,9 +87,12 @@ function applyFilters() {
     if (!p.position || typeof p.position !== 'string') return false;
 
     const stats = statsMap[p.player_id];
-    const matchesTeam = selectedTeam === 'Free Agent'
-      ? !p.owner_team_key || p.owner_team_key === 'free_agent'
-      : p.owner_team_key === selectedTeam;
+    const matchesTeam =
+      selectedTeam === '' // All Teams
+        ? true
+        : selectedTeam === 'Free Agent'
+          ? !p.owner_team_key || p.owner_team_key.toLowerCase() === 'free_agent'
+          : p.owner_team_key === selectedTeam;
 
     if (!stats) return false;
 

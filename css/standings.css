@@ -73,3 +73,11 @@ a:hover {
   text-decoration: underline;
   font-weight: 500;
 }
+
+.standings-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
