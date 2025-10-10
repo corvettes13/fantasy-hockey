@@ -8,7 +8,6 @@ const select = document.getElementById('standings-select');
 
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('standings-select');
-  let standingsData = [];
 
   function loadStandings(file) {
     fetch(`data/${file}`)
