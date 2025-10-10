@@ -87,11 +87,13 @@ function applyFilters() {
     if (!p.position || typeof p.position !== 'string') return false;
 
     const stats = statsMap[p.player_id];
+    const ownerKey = p.owner_team_key?.toLowerCase() ?? '';
+
     const matchesTeam =
       selectedTeam === '' // All Teams
         ? true
         : selectedTeam === 'Free Agent'
-          ? !p.owner_team_key || p.owner_team_key.toLowerCase() === 'free_agent'
+          ? ownerKey === 'free_agent'
           : p.owner_team_key === selectedTeam;
 
     if (!stats) return false;
