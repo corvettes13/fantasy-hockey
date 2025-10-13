@@ -1,0 +1,246 @@
+/* === Global Styles === */
+body {
+  background-color: #f5f7fa;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 1rem;
+  color: #222;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0055a5;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #0055a5;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+/* === Shared Layout === */
+.index-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+}
+
+.section-divider {
+  margin: 3rem 0;
+  border: none;
+  border-top: 2px solid #ccc;
+}
+
+/* === Standings Table === */
+.standings-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 0.3rem 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.standings-table th button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  color: #0055a5;
+  font-size: 0.8rem;
+}
+
+.standings-table th.left-align,
+.standings-table td.left-align {
+  text-align: left;
+}
+
+.standings-table tbody tr:hover {
+  background-color: #eef6ff;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+/* === Fantasy Leaders Table === */
+.fantasy-leaders-container .table-wrapper {
+  margin-top: 1rem;
+}
+
+.fantasy-leaders-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.fantasy-leaders-container th,
+.fantasy-leaders-container td {
+  padding: 0.2rem 0.4rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.fantasy-leaders-container th {
+  background-color: #eaf0f6;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fantasy-leaders-container tbody tr {
+  line-height: 1.2;
+}
+
+.fantasy-leaders-container tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+.fantasy-leaders-container tbody tr:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+.player-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.3rem;
+  text-align: left;
+  padding: 0.2rem 0.4rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+}
+
+.player-cell img {
+  width: 46px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.player-cell .team-abbr {
+  font-size: 0.6rem;
+  color: #888;
+  margin-left: 0.2rem;
+}
+
+.player-cell a {
+  color: #0055a5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.player-cell a:hover {
+  text-decoration: underline;
+}
+
+td.player-cell,
+td.position-cell,
+td.owner-cell,
+td.stats-cell,
+td.draft-cell-left {
+  text-align: left !important;
+  padding-left: 0.4rem;
+}
+
+.owner-cell a {
+  text-decoration: none;
+}
+
+.owner-cell a:hover {
+  text-decoration: underline;
+}
+
+/* === Badges and Logos === */
+.inline-badge {
+  width: 1.4rem;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+.team-name-cell {
+  position: relative;
+}
+
+.team-name-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.floating-badge {
+  position: absolute;
+  top: 0;
+  right: -1.4rem;
+  width: 1rem;
+  height: auto;
+  pointer-events: none;
+}
+
+/* === Filters (if used) === */
+#gp-filter {
+  width: 45px;
+  padding: 0.2rem;
+  font-size: 0.8rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  .player-cell {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

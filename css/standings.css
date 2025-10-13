@@ -6,13 +6,13 @@ body {
   color: #222;
 }
 
-.standings-container {
-  max-width: 1000px; /* tighter width */
+.card-container {
+  max-width: 1000px;
   margin: 0 auto;
   background: white;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.08); /* softer shadow */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   border-radius: 4px;
-  padding: 0.5rem 1rem; /* reduced vertical padding */
+  padding: 0.5rem 1rem;
   overflow-x: auto;
 }
 
@@ -104,4 +104,24 @@ a:hover {
   width: 1rem;
   height: auto;
   pointer-events: none;
+}
+
+.index-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.section-divider {
+  margin: 3rem 0;
+  border: none;
+  border-top: 2px solid #ccc;
+}
+
+.fantasy-leaders-container h2 {
+  margin-bottom: 1rem;
+}
+
+.fantasy-leaders-container .table-wrapper {
+  margin-top: 1rem;
 }

@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fantasy Hockey Standings</title>
-  <link rel="stylesheet" href="css/standings.css" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/leaders.css" />
 </head>
 <body>
   <header class="site-header"></header>
@@ -17,63 +18,86 @@
       });
   </script>
 
-  <div class="standings-container">
-    <h1>Broom Ballers and Shot Callers Standings</h1>
-    <div class="standings-controls">
-      <select id="standings-select">
-        <option value="2025_standings.json">Current Standings</option>
-        <option value="2024_standings.json">2024–25 Standings</option>
-        <option value="2023_standings.json">2023–24 Standings</option>
-      </select>
+  <div class="index-container">
+    <!-- Standings Section -->
+    <div class="standings-container card-container">
+      <h1>Broom Ballers and Shot Callers Standings</h1>
+      <div class="standings-controls">
+        <select id="standings-select">
+          <option value="2025_standings.json">Current Standings</option>
+          <option value="2024_standings.json">2024–25 Standings</option>
+          <option value="2023_standings.json">2023–24 Standings</option>
+        </select>
+      </div>
+
+      <!-- Bruhs Division -->
+      <section class="division-section">
+        <h3>Bruhs</h3>
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th><button data-sort="rank">Rank</button></th>
+              <th class="left-align">Team</th>
+              <th><button data-sort="wins">W</button></th>
+              <th><button data-sort="losses">L</button></th>
+              <th><button data-sort="Win Percentage">Win %</button></th>
+              <th><button data-sort="points for">PF</button></th>
+              <th><button data-sort="points against">PA</button></th>
+              <th><button data-sort="difference">Diff</button></th>
+              <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
+              <th><button data-sort="number_of_moves">Moves</button></th>
+              <th><button data-sort="weekly_high_score">High</button></th>
+            </tr>
+          </thead>
+          <tbody id="bruhs-body"></tbody>
+        </table>
+      </section>
+
+      <!-- Bros Division -->
+      <section class="division-section">
+        <h3>Bros</h3>
+        <table class="standings-table">
+          <thead>
+            <tr>
+              <th><button data-sort="rank">Rank</button></th>
+              <th class="left-align">Team</th>
+              <th><button data-sort="wins">W</button></th>
+              <th><button data-sort="losses">L</button></th>
+              <th><button data-sort="Win Percentage">Win %</button></th>
+              <th><button data-sort="points for">PF</button></th>
+              <th><button data-sort="points against">PA</button></th>
+              <th><button data-sort="difference">Diff</button></th>
+              <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
+              <th><button data-sort="number_of_moves">Moves</button></th>
+              <th><button data-sort="weekly_high_score">High</button></th>
+            </tr>
+          </thead>
+          <tbody id="bros-body"></tbody>
+        </table>
+      </section>
     </div>
 
-    <!-- Bruhs Division -->
-    <section class="division-section">
-      <h3>Bruhs</h3>
-      <table class="standings-table">
+    <br>
+    <!-- Fantasy Leaders Section -->
+    <div class="table-wrapper card-container">
+      <h1>Top Fantasy Performers (Previous Day)</h2>
+      <table id="embedded-players-table">
         <thead>
           <tr>
-            <th><button data-sort="rank">Rank</button></th>
-            <th class="left-align">Team</th>
-            <th><button data-sort="wins">W</button></th>
-            <th><button data-sort="losses">L</button></th>
-            <th><button data-sort="Win Percentage">Win %</button></th>
-            <th><button data-sort="points for">PF</button></th>
-            <th><button data-sort="points against">PA</button></th>
-            <th><button data-sort="difference">Diff</button></th>
-            <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
-            <th><button data-sort="number_of_moves">Moves</button></th>
-            <th><button data-sort="weekly_high_score">High</button></th>
+            <th>Player</th>
+            <th>Owner</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Fantasy Points</th>
+            <th>Stats</th>
           </tr>
         </thead>
-        <tbody id="bruhs-body"></tbody>
+        <tbody></tbody>
       </table>
-    </section>
-
-    <!-- Bros Division -->
-    <section class="division-section">
-      <h3>Bros</h3>
-      <table class="standings-table">
-        <thead>
-          <tr>
-            <th><button data-sort="rank">Rank</button></th>
-            <th class="left-align">Team</th>
-            <th><button data-sort="wins">W</button></th>
-            <th><button data-sort="losses">L</button></th>
-            <th><button data-sort="Win Percentage">Win %</button></th>
-            <th><button data-sort="points for">PF</button></th>
-            <th><button data-sort="points against">PA</button></th>
-            <th><button data-sort="difference">Diff</button></th>
-            <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
-            <th><button data-sort="number_of_moves">Moves</button></th>            
-            <th><button data-sort="weekly_high_score">High</button></th>
-          </tr>
-        </thead>
-        <tbody id="bros-body"></tbody>
-      </table>
-    </section>
+    </div>
   </div>
 
   <script src="scripts/standings.js"></script>
+  <script src="scripts/fantasy_leaders_embed.js"></script>
 </body>
 </html>
