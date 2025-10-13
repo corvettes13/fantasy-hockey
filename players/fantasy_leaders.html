@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Fantasy Performers</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/leaders.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+</head>
+<body>
+  <header class="site-header"></header>
+  <script>
+    fetch('/fantasy-hockey/shared/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
+  </script>
+
+  <div class="container">
+      <h1>Top Fantasy Performers</h1>
+      <label for="date-select">Select Date:</label>
+      <select id="date-select"></select>
+      <hr>
+      <div class="table-wrapper">
+        <table id="players-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Owner</th>
+              <th>Position</th>
+              <th>Team</th>
+              <th>Fantasy Points</th>
+              <th>Stats</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+  </div>
+
+  <script src="/fantasy-hockey/scripts/fantasy_leaders.js"></script>
+</body>
+</html>

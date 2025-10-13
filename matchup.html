@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player List</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/matchup.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+</head>
+<body>
+ <header class="site-header"></header>
+   <script>
+    fetch('/fantasy-hockey/shared/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
+   </script>
+<body>
+  <header>
+    <h1>Fantasy Matchups – Week <span id="week-label"></span></h1>
+  </header>
+
+  <main>
+    <div id="matchup-container"></div>
+  </main>
+
+  <script src="/fantasy-hockey/scripts/matchup.js"></script>
+</body>
+</html>
