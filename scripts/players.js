@@ -342,7 +342,7 @@ function fantasyPoints(statsMap, players, type) {
       fp = (
         (parseFloat(statObj.G) || 0) * 3 +
         (parseFloat(statObj.A) || 0) * 2 +
-        (parseFloat(statObj.PIM) || 0) * 0.5 +
+        (parseFloat(statObj.PIM) || 0) * 0.2 +
         (parseFloat(statObj.SHG) || 0) * 2 +
         (parseFloat(statObj.GWG) || 0) * 0.5 +
         (parseFloat(statObj.SOG) || 0) * .2 +
