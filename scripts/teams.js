@@ -122,12 +122,12 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
       : calculateSkaterFP(statMap);
 
     const GP = statMap[0] ?? 0;
-    const PG = GP > 0 ? FP / GP : 0.0;
+    const FPG = GP > 0 ? FP / GP : 0.0;
 
     const enriched = {
       ...player,
       FP,
-      PG,
+      FPG,
       GP,
       G: statMap[1] ?? 0,
       A: statMap[2] ?? 0,
@@ -181,8 +181,9 @@ function renderSkaterTable(players) {
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
+      <td class="${p.contract_year === 3 ? 'contract-red' : ''}">${p.contract_year}</td>
       <td>${p.FP.toFixed(1)}</td>
-      <td>${p.PG.toFixed(2)}</td>
+      <td>${p.FPG.toFixed(2)}</td>
       <td>${p.GP}</td>
       <td>${p.G}</td>
       <td>${p.A}</td>
@@ -196,6 +197,7 @@ function renderSkaterTable(players) {
       <td>${p.HIT}</td>
       <td>${p.ATOI}</td>
     `;
+
     tbody.appendChild(row);
   });
 }
@@ -210,8 +212,9 @@ function renderGoalieTable(players) {
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
+      <td class="${p.contract_year === 3 ? 'contract-red' : ''}">${p.contract_year}</td>
       <td>${p.FP.toFixed(1)}</td>
-      <td>${p.PG.toFixed(2)}</td>
+      <td>${p.FPG.toFixed(2)}</td>
       <td>${p.GP}</td>
       <td>${p.W}</td>
       <td>${p.L}</td>

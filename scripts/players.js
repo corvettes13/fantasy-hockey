@@ -300,19 +300,19 @@ function sortBy(key) {
 
     // Primary sort
     let result;
-    if (currentSortKey === 'ATOI') {
-      result = atoiToSeconds(aStat) - atoiToSeconds(bStat);
-    } else if (typeof aStat === 'string') {
-      result = aStat.localeCompare(bStat);
+    if (key === 'ATOI') {
+      aStat = atoiToSeconds(a.ATOI);
+      bStat = atoiToSeconds(b.ATOI);
     } else {
-      result = (aStat ?? 0) - (bStat ?? 0);
-    }
+      aStat = a[key];
+      bStat = b[key];
 
-    // If primary sort is equal, fallback to FP
-    if (result === 0) {
-      const aFP = statsMap[a.player_id]?.FP ?? 0;
-      const bFP = statsMap[b.player_id]?.FP ?? 0;
-      result = aFP - bFP; // always descending for FP
+      // Default to numeric comparison unless both are strings
+      const bothStrings = typeof aStat === 'string' && typeof bStat === 'string';
+      if (!bothStrings) {
+        aStat = parseFloat(aStat ?? 0);
+        bStat = parseFloat(bStat ?? 0);
+      }
     }
 
     return result * sortDirection;
