@@ -295,17 +295,15 @@ function sortBy(key) {
   }
 
   players.sort((a, b) => {
-    const aStat = statsMap[a.player_id]?.[currentSortKey];
-    const bStat = statsMap[b.player_id]?.[currentSortKey];
+    let aStat, bStat;
 
-    // Primary sort
-    let result;
     if (key === 'ATOI') {
-      aStat = atoiToSeconds(a.ATOI);
-      bStat = atoiToSeconds(b.ATOI);
+      aStat = atoiToSeconds(statsMap[a.player_id]?.ATOI ?? '00:00');
+      bStat = atoiToSeconds(statsMap[b.player_id]?.ATOI ?? '00:00');
     } else {
-      aStat = a[key];
-      bStat = b[key];
+      // Try statsMap first, fallback to player object
+      aStat = statsMap[a.player_id]?.[key] ?? a[key];
+      bStat = statsMap[b.player_id]?.[key] ?? b[key];
 
       // Default to numeric comparison unless both are strings
       const bothStrings = typeof aStat === 'string' && typeof bStat === 'string';
@@ -315,11 +313,21 @@ function sortBy(key) {
       }
     }
 
+    let result = aStat - bStat;
+
+    // Fallback sort by FP descending
+    if (result === 0) {
+      const aFP = statsMap[a.player_id]?.FP ?? 0;
+      const bFP = statsMap[b.player_id]?.FP ?? 0;
+      result = bFP - aFP;
+    }
+
     return result * sortDirection;
   });
 
   renderTable(players, statsMap);
 }
+
 
 function fantasyPoints(statsMap, players, type) {
   players.forEach(p => {
