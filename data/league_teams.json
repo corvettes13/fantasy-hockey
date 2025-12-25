@@ -17,13 +17,13 @@
       "previous_season_team_rank": 2,
       "division_id": "1",
       "waiver_priority": 7,
-      "faab_balance": "55",
-      "number_of_moves": 30,
+      "faab_balance": "52",
+      "number_of_moves": 31,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 12,
-        "value": "1"
+        "value": "2"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -227,20 +227,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8288",
-        "player_name": "Vasily Podkolzin",
-        "team_abbr": "EDM",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 5,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.7947",
         "player_name": "Kirill Marchenko",
         "team_abbr": "CBJ",
@@ -265,6 +251,19 @@
         ],
         "selected_position": "BN",
         "cost": 2,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7066",
+        "player_name": "Mason Marchment",
+        "team_abbr": "CBJ",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3,
         "contract_year": 0
       },
       {
@@ -1022,12 +1021,12 @@
       "division_id": "2",
       "waiver_priority": 8,
       "faab_balance": "56",
-      "number_of_moves": 44,
-      "number_of_trades": 0,
+      "number_of_moves": 45,
+      "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 12,
-        "value": "3"
+        "value": "4"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -1216,19 +1215,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5992",
-        "player_name": "Josh Morrissey",
-        "team_abbr": "WPG",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 10,
-        "contract_year": 3
-      },
-      {
         "player_key": "465.p.30546",
         "player_name": "Adam Fantilli",
         "team_abbr": "CBJ",
@@ -1240,19 +1226,6 @@
         "selected_position": "BN",
         "cost": 3,
         "contract_year": 1
-      },
-      {
-        "player_key": "465.p.7535",
-        "player_name": "Robert Thomas",
-        "team_abbr": "STL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 12,
-        "contract_year": 3
       },
       {
         "player_key": "465.p.7264",
@@ -1283,6 +1256,20 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.8310",
+        "player_name": "Shane Pinto",
+        "team_abbr": "OTT",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.30201",
         "player_name": "Jacob Fowler",
         "team_abbr": "MTL",
@@ -1306,6 +1293,18 @@
         "selected_position": "BN",
         "cost": 9,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.5699",
+        "player_name": "Andrei Vasilevskiy",
+        "team_abbr": "TB",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7520",
@@ -2997,7 +2996,7 @@
       "waiver_priority": 1,
       "faab_balance": "60",
       "number_of_moves": 10,
-      "number_of_trades": 0,
+      "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 12,
@@ -3177,16 +3176,16 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.32773",
-        "player_name": "Zayne Parekh",
-        "team_abbr": "CGY",
+        "player_key": "465.p.5992",
+        "player_name": "Josh Morrissey",
+        "team_abbr": "WPG",
         "primary_position": "D",
         "positions": [
           "D",
           "Util"
         ],
         "selected_position": "D",
-        "cost": 2,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -3201,6 +3200,19 @@
         "selected_position": "Util",
         "cost": 13,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.32773",
+        "player_name": "Zayne Parekh",
+        "team_abbr": "CGY",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 2,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6759",
@@ -3245,16 +3257,16 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.30145",
-        "player_name": "Matt Coronato",
-        "team_abbr": "CGY",
-        "primary_position": "RW",
+        "player_key": "465.p.7535",
+        "player_name": "Robert Thomas",
+        "team_abbr": "STL",
+        "primary_position": "C",
         "positions": [
-          "RW",
+          "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 1,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -3268,18 +3280,6 @@
         "selected_position": "G",
         "cost": 6,
         "contract_year": 1
-      },
-      {
-        "player_key": "465.p.5699",
-        "player_name": "Andrei Vasilevskiy",
-        "team_abbr": "TB",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 22,
-        "contract_year": 2
       },
       {
         "player_key": "465.p.9118",
