@@ -2673,12 +2673,12 @@
       "division_id": "1",
       "waiver_priority": 9,
       "faab_balance": "51",
-      "number_of_moves": 40,
+      "number_of_moves": 42,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 12,
-        "value": "2"
+        "value": "4"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2827,20 +2827,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6383",
-        "player_name": "Travis Sanheim",
-        "team_abbr": "PHI",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "D",
-        "cost": 1,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.6035",
         "player_name": "Artturi Lehkonen",
         "team_abbr": "COL",
@@ -2923,6 +2909,20 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.6038",
+        "player_name": "Tyler Bertuzzi",
+        "team_abbr": "CHI",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.5057",
         "player_name": "Scott Wedgewood",
         "team_abbr": "COL",
@@ -2945,6 +2945,18 @@
         "selected_position": "BN",
         "cost": 3,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.4854",
+        "player_name": "Cam Talbot",
+        "team_abbr": "DET",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.30544",
