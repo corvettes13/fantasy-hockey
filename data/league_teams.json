@@ -16,14 +16,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/d2213f3dc182289c0a925bc1f4ebb1ff54d54b3d85813401410be1f990489c3a.jpg",
       "previous_season_team_rank": 2,
       "division_id": "1",
-      "waiver_priority": 7,
+      "waiver_priority": 6,
       "faab_balance": "52",
       "number_of_moves": 31,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "2"
+        "coverage_value": 13,
+        "value": "0"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -79,17 +79,17 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.7528",
-        "player_name": "Nick Suzuki",
-        "team_abbr": "MTL",
+        "player_key": "465.p.6762",
+        "player_name": "Joel Eriksson Ek",
+        "team_abbr": "MIN",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 15,
-        "contract_year": 2
+        "cost": 7,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7066",
@@ -105,9 +105,9 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8683",
-        "player_name": "Emil Heineman",
-        "team_abbr": "NYI",
+        "player_key": "465.p.3637",
+        "player_name": "Alex Ovechkin",
+        "team_abbr": "WSH",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -115,21 +115,8 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 2,
+        "cost": 14,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8644",
-        "player_name": "Lucas Raymond",
-        "team_abbr": "DET",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 13,
-        "contract_year": 3
       },
       {
         "player_key": "465.p.7947",
@@ -143,6 +130,21 @@
         "selected_position": "RW",
         "cost": 3,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.5441",
+        "player_name": "Blake Coleman",
+        "team_abbr": "CGY",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 1,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7908",
@@ -172,19 +174,6 @@
         "contract_year": 3
       },
       {
-        "player_key": "465.p.33423",
-        "player_name": "Matthew Schaefer",
-        "team_abbr": "NYI",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.7910",
         "player_name": "Noah Dobson",
         "team_abbr": "MTL",
@@ -198,9 +187,22 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.3637",
-        "player_name": "Alex Ovechkin",
-        "team_abbr": "WSH",
+        "player_key": "465.p.7122",
+        "player_name": "Charlie McAvoy",
+        "team_abbr": "BOS",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8683",
+        "player_name": "Emil Heineman",
+        "team_abbr": "NYI",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -208,8 +210,47 @@
           "Util"
         ],
         "selected_position": "Util",
-        "cost": 14,
+        "cost": 2,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.33423",
+        "player_name": "Matthew Schaefer",
+        "team_abbr": "NYI",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 2,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7528",
+        "player_name": "Nick Suzuki",
+        "team_abbr": "MTL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 15,
+        "contract_year": 2
+      },
+      {
+        "player_key": "465.p.8644",
+        "player_name": "Lucas Raymond",
+        "team_abbr": "DET",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 13,
+        "contract_year": 3
       },
       {
         "player_key": "465.p.6751",
@@ -226,44 +267,15 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7122",
-        "player_name": "Charlie McAvoy",
-        "team_abbr": "BOS",
-        "primary_position": "D",
+        "player_key": "465.p.9238",
+        "player_name": "Brandon Bussi",
+        "team_abbr": "CAR",
+        "primary_position": "G",
         "positions": [
-          "D",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6762",
-        "player_name": "Joel Eriksson Ek",
-        "team_abbr": "MIN",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 7,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.5441",
-        "player_name": "Blake Coleman",
-        "team_abbr": "CGY",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
+        "selected_position": "G",
+        "cost": 4,
         "contract_year": 0
       },
       {
@@ -274,20 +286,8 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
-        "cost": 5,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.9238",
-        "player_name": "Brandon Bussi",
-        "team_abbr": "CAR",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
         "selected_position": "BN",
-        "cost": 4,
+        "cost": 5,
         "contract_year": 0
       },
       {
@@ -337,14 +337,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/62d1d0f2c8088fa3df088714726720d42285750e7f24a3a2f0374fb70a3a22da.jpg",
       "previous_season_team_rank": 8,
       "division_id": "2",
-      "waiver_priority": 10,
+      "waiver_priority": 9,
       "faab_balance": "59",
-      "number_of_moves": 40,
+      "number_of_moves": 41,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "3"
+        "coverage_value": 13,
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -374,33 +374,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.8658",
-        "player_name": "Dawson Mercer",
-        "team_abbr": "NJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6791",
-        "player_name": "Roope Hintz",
-        "team_abbr": "DAL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 22,
-        "contract_year": 1
-      },
-      {
         "player_key": "465.p.6370",
         "player_name": "Sam Bennett",
         "team_abbr": "FLA",
@@ -411,6 +384,35 @@
         ],
         "selected_position": "C",
         "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6368",
+        "player_name": "Sam Reinhart",
+        "team_abbr": "FLA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 19,
+        "contract_year": 2
+      },
+      {
+        "player_key": "465.p.5376",
+        "player_name": "J.T. Miller",
+        "team_abbr": "NYR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "C",
+        "cost": 19,
         "contract_year": 0
       },
       {
@@ -455,16 +457,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5785",
-        "player_name": "Josh Anderson",
-        "team_abbr": "MTL",
+        "player_key": "465.p.6890",
+        "player_name": "Troy Terry",
+        "team_abbr": "ANA",
         "primary_position": "RW",
         "positions": [
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 0,
+        "cost": 3,
         "contract_year": 0
       },
       {
@@ -533,9 +535,22 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6368",
-        "player_name": "Sam Reinhart",
-        "team_abbr": "FLA",
+        "player_key": "465.p.6791",
+        "player_name": "Roope Hintz",
+        "team_abbr": "DAL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 22,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.8658",
+        "player_name": "Dawson Mercer",
+        "team_abbr": "NJ",
         "primary_position": "C",
         "positions": [
           "C",
@@ -543,35 +558,20 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 19,
-        "contract_year": 2
+        "cost": 0,
+        "contract_year": 0
       },
       {
-        "player_key": "465.p.6890",
-        "player_name": "Troy Terry",
-        "team_abbr": "ANA",
+        "player_key": "465.p.5785",
+        "player_name": "Josh Anderson",
+        "team_abbr": "MTL",
         "primary_position": "RW",
         "positions": [
           "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.5376",
-        "player_name": "J.T. Miller",
-        "team_abbr": "NYR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "BN",
-        "cost": 19,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -591,6 +591,18 @@
         "contract_year": 2
       },
       {
+        "player_key": "465.p.6078",
+        "player_name": "Juuse Saros",
+        "team_abbr": "NSH",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 9,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.5820",
         "player_name": "Connor Hellebuyck",
         "team_abbr": "WPG",
@@ -603,27 +615,15 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.6078",
-        "player_name": "Juuse Saros",
-        "team_abbr": "NSH",
+        "player_key": "465.p.7886",
+        "player_name": "Kevin Lankinen",
+        "team_abbr": "VAN",
         "primary_position": "G",
         "positions": [
           "G"
         ],
         "selected_position": "BN",
-        "cost": 9,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6430",
-        "player_name": "Jonas Johansson",
-        "team_abbr": "TB",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -672,13 +672,13 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/cd5fe5bbcf8efc31a97bb769ab8872821700e3f5b32bcc80140d38ccc0eea70b.png",
       "previous_season_team_rank": 3,
       "division_id": "1",
-      "waiver_priority": 11,
+      "waiver_priority": 10,
       "faab_balance": "52",
-      "number_of_moves": 40,
+      "number_of_moves": 41,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
+        "coverage_value": 13,
         "value": "1"
       },
       "league_scoring_type": "headpoint",
@@ -734,16 +734,17 @@
         "contract_year": 2
       },
       {
-        "player_key": "465.p.6814",
-        "player_name": "Anthony Cirelli",
-        "team_abbr": "TB",
+        "player_key": "465.p.6386",
+        "player_name": "Nick Schmaltz",
+        "team_abbr": "UTA",
         "primary_position": "C",
         "positions": [
           "C",
+          "RW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 0,
+        "cost": 1,
         "contract_year": 0
       },
       {
@@ -775,30 +776,29 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5053",
-        "player_name": "Bryan Rust",
-        "team_abbr": "PIT",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 4,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.4240",
         "player_name": "Patrick Kane",
         "team_abbr": "DET",
         "primary_position": "RW",
         "positions": [
           "RW",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "RW",
         "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.32779",
+        "player_name": "Beckett Sennecke",
+        "team_abbr": "ANA",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 1,
         "contract_year": 0
       },
       {
@@ -812,19 +812,6 @@
         ],
         "selected_position": "D",
         "cost": 2,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.4686",
-        "player_name": "Oliver Ekman-Larsson",
-        "team_abbr": "TOR",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 3,
         "contract_year": 0
       },
       {
@@ -854,6 +841,19 @@
         "contract_year": 1
       },
       {
+        "player_key": "465.p.4930",
+        "player_name": "Roman Josi",
+        "team_abbr": "NSH",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 15,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.5425",
         "player_name": "Nikita Kucherov",
         "team_abbr": "TB",
@@ -865,6 +865,32 @@
         "selected_position": "Util",
         "cost": 43,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.6814",
+        "player_name": "Anthony Cirelli",
+        "team_abbr": "TB",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.5053",
+        "player_name": "Bryan Rust",
+        "team_abbr": "PIT",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6752",
@@ -881,43 +907,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.4930",
-        "player_name": "Roman Josi",
-        "team_abbr": "NSH",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 15,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.32779",
-        "player_name": "Beckett Sennecke",
-        "team_abbr": "ANA",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6386",
-        "player_name": "Nick Schmaltz",
-        "team_abbr": "UTA",
+        "player_key": "465.p.5993",
+        "player_name": "Alexander Wennberg",
+        "team_abbr": "SJ",
         "primary_position": "C",
         "positions": [
           "C",
-          "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 1,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -1003,14 +1002,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/22a402ad27449786441e05e7379ca5deb516db0d12fbd59bce218e407607bb25.jpg",
       "previous_season_team_rank": 5,
       "division_id": "2",
-      "waiver_priority": 8,
+      "waiver_priority": 7,
       "faab_balance": "56",
       "number_of_moves": 46,
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "5"
+        "coverage_value": 13,
+        "value": "0"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -1052,19 +1051,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5988",
-        "player_name": "Bo Horvat",
-        "team_abbr": "NYI",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 9,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.30546",
         "player_name": "Adam Fantilli",
         "team_abbr": "CBJ",
@@ -1078,22 +1064,36 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.30227",
-        "player_name": "Matthew Knies",
-        "team_abbr": "TOR",
-        "primary_position": "LW",
+        "player_key": "465.p.7534",
+        "player_name": "Josh Norris",
+        "team_abbr": "BUF",
+        "primary_position": "C",
         "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 3,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7520",
+        "player_name": "Elias Pettersson",
+        "team_abbr": "VAN",
+        "primary_position": "C",
+        "positions": [
+          "C",
           "LW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 7,
-        "contract_year": 1
+        "cost": 23,
+        "contract_year": 0
       },
       {
-        "player_key": "465.p.6766",
-        "player_name": "Travis Konecny",
-        "team_abbr": "PHI",
+        "player_key": "465.p.6746",
+        "player_name": "Mitch Marner",
+        "team_abbr": "VGK",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -1101,8 +1101,8 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 16,
-        "contract_year": 2
+        "cost": 39,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.30550",
@@ -1118,31 +1118,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7264",
-        "player_name": "Brandon Hagel",
-        "team_abbr": "TB",
-        "primary_position": "LW",
+        "player_key": "465.p.7527",
+        "player_name": "Martin Necas",
+        "team_abbr": "COL",
+        "primary_position": "RW",
         "positions": [
-          "LW",
           "RW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "RW",
-        "cost": 10,
-        "contract_year": 3
-      },
-      {
-        "player_key": "465.p.30221",
-        "player_name": "Luke Hughes",
-        "team_abbr": "NJ",
-        "primary_position": "D",
-        "positions": [
-          "D",
           "Util"
         ],
-        "selected_position": "D",
-        "cost": 3,
+        "selected_position": "RW",
+        "cost": 15,
         "contract_year": 1
       },
       {
@@ -1172,6 +1157,33 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.9280",
+        "player_name": "Denton Mateychuk",
+        "team_abbr": "CBJ",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7174",
+        "player_name": "Adam Fox",
+        "team_abbr": "NYR",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "D",
+        "cost": 13,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.30155",
         "player_name": "Jackson Blake",
         "team_abbr": "CAR",
@@ -1185,35 +1197,9 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7527",
-        "player_name": "Martin Necas",
-        "team_abbr": "COL",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 15,
-        "contract_year": 1
-      },
-      {
-        "player_key": "465.p.7534",
-        "player_name": "Josh Norris",
-        "team_abbr": "BUF",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6746",
-        "player_name": "Mitch Marner",
-        "team_abbr": "VGK",
+        "player_key": "465.p.6766",
+        "player_name": "Travis Konecny",
+        "team_abbr": "PHI",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -1221,34 +1207,59 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 39,
-        "contract_year": 1
+        "cost": 16,
+        "contract_year": 2
       },
       {
-        "player_key": "465.p.7520",
-        "player_name": "Elias Pettersson",
-        "team_abbr": "VAN",
-        "primary_position": "C",
+        "player_key": "465.p.30227",
+        "player_name": "Matthew Knies",
+        "team_abbr": "TOR",
+        "primary_position": "LW",
         "positions": [
-          "C",
           "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 23,
-        "contract_year": 0
+        "cost": 7,
+        "contract_year": 1
       },
       {
-        "player_key": "465.p.9280",
-        "player_name": "Denton Mateychuk",
-        "team_abbr": "CBJ",
+        "player_key": "465.p.30221",
+        "player_name": "Luke Hughes",
+        "team_abbr": "NJ",
         "primary_position": "D",
         "positions": [
           "D",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 0,
+        "cost": 3,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.5988",
+        "player_name": "Bo Horvat",
+        "team_abbr": "NYI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 9,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6887",
+        "player_name": "Karel Vejmelka",
+        "team_abbr": "UTA",
+        "primary_position": "G",
+        "positions": [
+          "G",
+          "IR+"
+        ],
+        "selected_position": "G",
+        "cost": 4,
         "contract_year": 0
       },
       {
@@ -1259,7 +1270,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 1,
         "contract_year": 0
       },
@@ -1276,6 +1287,20 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.7264",
+        "player_name": "Brandon Hagel",
+        "team_abbr": "TB",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "IR+",
+        "cost": 10,
+        "contract_year": 3
+      },
+      {
         "player_key": "465.p.6447",
         "player_name": "Ilya Sorokin",
         "team_abbr": "NYI",
@@ -1284,36 +1309,9 @@
           "G",
           "IR+"
         ],
-        "selected_position": "BN",
+        "selected_position": "IR+",
         "cost": 9,
         "contract_year": 1
-      },
-      {
-        "player_key": "465.p.6887",
-        "player_name": "Karel Vejmelka",
-        "team_abbr": "UTA",
-        "primary_position": "G",
-        "positions": [
-          "G",
-          "IR+"
-        ],
-        "selected_position": "IR+",
-        "cost": 4,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7174",
-        "player_name": "Adam Fox",
-        "team_abbr": "NYR",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "IR+",
-        "cost": 13,
-        "contract_year": 0
       }
     ]
   },
@@ -1334,13 +1332,13 @@
       "logo_url": "https://s.yimg.com/cv/apiv2/default/nhl/nhl_6.png",
       "previous_season_team_rank": 11,
       "division_id": "1",
-      "waiver_priority": 5,
+      "waiver_priority": 4,
       "faab_balance": "93",
       "number_of_moves": 19,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
+        "coverage_value": 13,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -1382,36 +1380,9 @@
     },
     "roster": [
       {
-        "player_key": "465.p.8922",
-        "player_name": "Logan Stankoven",
-        "team_abbr": "CAR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.3737",
-        "player_name": "Sidney Crosby",
-        "team_abbr": "PIT",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 29,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8881",
-        "player_name": "Kent Johnson",
-        "team_abbr": "CBJ",
+        "player_key": "465.p.6055",
+        "player_name": "Pavel Buchnevich",
+        "team_abbr": "STL",
         "primary_position": "C",
         "positions": [
           "C",
@@ -1420,8 +1391,35 @@
           "Util"
         ],
         "selected_position": "C",
-        "cost": 5,
+        "cost": 3,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.4990",
+        "player_name": "Brock Nelson",
+        "team_abbr": "COL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 4,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.5367",
+        "player_name": "Mika Zibanejad",
+        "team_abbr": "NYR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 3,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6377",
@@ -1464,18 +1462,17 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.5367",
-        "player_name": "Mika Zibanejad",
-        "team_abbr": "NYR",
-        "primary_position": "C",
+        "player_key": "465.p.7143",
+        "player_name": "Jordan Kyrou",
+        "team_abbr": "STL",
+        "primary_position": "RW",
         "positions": [
-          "C",
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 3,
-        "contract_year": 1
+        "cost": 14,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.4503",
@@ -1544,6 +1541,48 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.8922",
+        "player_name": "Logan Stankoven",
+        "team_abbr": "CAR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.3737",
+        "player_name": "Sidney Crosby",
+        "team_abbr": "PIT",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 29,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8881",
+        "player_name": "Kent Johnson",
+        "team_abbr": "CBJ",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 5,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.8279",
         "player_name": "Jack Hughes",
         "team_abbr": "NJ",
@@ -1558,19 +1597,6 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.4990",
-        "player_name": "Brock Nelson",
-        "team_abbr": "COL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 4,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.8641",
         "player_name": "Alexis Lafreniere",
         "team_abbr": "NYR",
@@ -1583,34 +1609,6 @@
         "selected_position": "BN",
         "cost": 0,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7143",
-        "player_name": "Jordan Kyrou",
-        "team_abbr": "STL",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 14,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6055",
-        "player_name": "Pavel Buchnevich",
-        "team_abbr": "STL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 1
       },
       {
         "player_key": "465.p.4901",
@@ -1690,7 +1688,7 @@
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
+        "coverage_value": 13,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -1936,8 +1934,7 @@
         "positions": [
           "C",
           "LW",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "BN",
         "cost": 2,
@@ -2027,14 +2024,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/87391dcde4363ccaaec4fd843d2a32d931f612b0dbf3deadd79e53c42ce004c3.png",
       "previous_season_team_rank": 4,
       "division_id": "1",
-      "waiver_priority": 6,
+      "waiver_priority": 5,
       "faab_balance": "73",
       "number_of_moves": 30,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "2"
+        "coverage_value": 13,
+        "value": "0"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2063,20 +2060,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.6369",
-        "player_name": "Leon Draisaitl",
-        "team_abbr": "EDM",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 47,
-        "contract_year": 1
-      },
-      {
         "player_key": "465.p.6743",
         "player_name": "Connor McDavid",
         "team_abbr": "EDM",
@@ -2104,12 +2087,39 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.5928",
-        "player_name": "Anders Lee",
-        "team_abbr": "NYI",
+        "player_key": "465.p.8878",
+        "player_name": "Matty Beniers",
+        "team_abbr": "SEA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 2,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.31759",
+        "player_name": "Cutter Gauthier",
+        "team_abbr": "ANA",
         "primary_position": "LW",
         "positions": [
           "LW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 1,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8369",
+        "player_name": "Aliaksei Protas",
+        "team_abbr": "WSH",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "LW",
@@ -2210,57 +2220,16 @@
         "contract_year": 2
       },
       {
-        "player_key": "465.p.31759",
-        "player_name": "Cutter Gauthier",
-        "team_abbr": "ANA",
+        "player_key": "465.p.5928",
+        "player_name": "Anders Lee",
+        "team_abbr": "NYI",
         "primary_position": "LW",
         "positions": [
           "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7854",
-        "player_name": "Kiefer Sherwood",
-        "team_abbr": "VAN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "BN",
         "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8369",
-        "player_name": "Aliaksei Protas",
-        "team_abbr": "WSH",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8878",
-        "player_name": "Matty Beniers",
-        "team_abbr": "SEA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 2,
         "contract_year": 0
       },
       {
@@ -2278,16 +2247,32 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7593",
-        "player_name": "Stuart Skinner",
-        "team_abbr": "PIT",
-        "primary_position": "G",
+        "player_key": "465.p.6369",
+        "player_name": "Leon Draisaitl",
+        "team_abbr": "EDM",
+        "primary_position": "C",
         "positions": [
-          "G"
+          "C",
+          "LW",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 9,
+        "selected_position": "BN",
+        "cost": 47,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.7854",
+        "player_name": "Kiefer Sherwood",
+        "team_abbr": "VAN",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7163",
@@ -2297,9 +2282,21 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 9,
         "contract_year": 3
+      },
+      {
+        "player_key": "465.p.7593",
+        "player_name": "Stuart Skinner",
+        "team_abbr": "PIT",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 9,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.8890",
@@ -2347,14 +2344,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/b9fa8703a2072a2e0ba6dbf949e50231624d2f1b5b34f38ab3b0ca5c74480c57.jpg",
       "previous_season_team_rank": 9,
       "division_id": "2",
-      "waiver_priority": 4,
+      "waiver_priority": 12,
       "faab_balance": "68",
-      "number_of_moves": 54,
+      "number_of_moves": 56,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "3"
+        "coverage_value": 13,
+        "value": "2"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2409,18 +2406,17 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8287",
-        "player_name": "Trevor Zegras",
-        "team_abbr": "PHI",
+        "player_key": "465.p.5697",
+        "player_name": "Tomas Hertl",
+        "team_abbr": "VGK",
         "primary_position": "C",
         "positions": [
           "C",
           "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 5,
+        "cost": 9,
         "contract_year": 0
       },
       {
@@ -2437,9 +2433,9 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.30548",
-        "player_name": "Matvei Michkov",
-        "team_abbr": "PHI",
+        "player_key": "465.p.8674",
+        "player_name": "JJ Peterka",
+        "team_abbr": "UTA",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2447,8 +2443,8 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 28,
-        "contract_year": 1
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6395",
@@ -2504,31 +2500,18 @@
         "contract_year": 2
       },
       {
-        "player_key": "465.p.4921",
-        "player_name": "Mats Zuccarello",
-        "team_abbr": "MIN",
-        "primary_position": "RW",
+        "player_key": "465.p.8357",
+        "player_name": "Pavel Dorofeyev",
+        "team_abbr": "VGK",
+        "primary_position": "LW",
         "positions": [
+          "LW",
           "RW",
           "Util"
         ],
         "selected_position": "Util",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.5697",
-        "player_name": "Tomas Hertl",
-        "team_abbr": "VGK",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 9,
-        "contract_year": 0
+        "cost": 4,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6402",
@@ -2544,12 +2527,11 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.8674",
-        "player_name": "JJ Peterka",
-        "team_abbr": "UTA",
-        "primary_position": "LW",
+        "player_key": "465.p.4921",
+        "player_name": "Mats Zuccarello",
+        "team_abbr": "MIN",
+        "primary_position": "RW",
         "positions": [
-          "LW",
           "RW",
           "Util"
         ],
@@ -2558,9 +2540,24 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8357",
-        "player_name": "Pavel Dorofeyev",
-        "team_abbr": "VGK",
+        "player_key": "465.p.8287",
+        "player_name": "Trevor Zegras",
+        "team_abbr": "PHI",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 5,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.30548",
+        "player_name": "Matvei Michkov",
+        "team_abbr": "PHI",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2568,26 +2565,13 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 4,
+        "cost": 28,
         "contract_year": 1
       },
       {
-        "player_key": "465.p.9251",
-        "player_name": "Bobby McMann",
-        "team_abbr": "TOR",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8935",
-        "player_name": "J.J. Moser",
-        "team_abbr": "TB",
+        "player_key": "465.p.30905",
+        "player_name": "Alexander Nikishin",
+        "team_abbr": "CAR",
         "primary_position": "D",
         "positions": [
           "D",
@@ -2598,16 +2582,17 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8291",
-        "player_name": "Spencer Knight",
-        "team_abbr": "CHI",
-        "primary_position": "G",
+        "player_key": "465.p.7498",
+        "player_name": "Neal Pionk",
+        "team_abbr": "WPG",
+        "primary_position": "D",
         "positions": [
-          "G"
+          "D",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 8,
-        "contract_year": 1
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6405",
@@ -2617,9 +2602,21 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 19,
         "contract_year": 2
+      },
+      {
+        "player_key": "465.p.8291",
+        "player_name": "Spencer Knight",
+        "team_abbr": "CHI",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 8,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.7541",
@@ -2652,14 +2649,14 @@
       "logo_url": "https://s.yimg.com/ba/images/c38af1b72fd2ed31643b55b0f9bc066fc71460149c7dd0b3bbdf9858f784e7e5.png",
       "previous_season_team_rank": 6,
       "division_id": "1",
-      "waiver_priority": 9,
+      "waiver_priority": 8,
       "faab_balance": "51",
-      "number_of_moves": 42,
+      "number_of_moves": 43,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "4"
+        "coverage_value": 13,
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2715,31 +2712,16 @@
         "contract_year": 2
       },
       {
-        "player_key": "465.p.5391",
-        "player_name": "Rickard Rakell",
-        "team_abbr": "PIT",
+        "player_key": "465.p.8649",
+        "player_name": "Marco Rossi",
+        "team_abbr": "VAN",
         "primary_position": "C",
         "positions": [
           "C",
-          "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6057",
-        "player_name": "Jake Guentzel",
-        "team_abbr": "TB",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 26,
+        "cost": 6,
         "contract_year": 2
       },
       {
@@ -2756,16 +2738,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.32790",
-        "player_name": "Ivan Demidov",
-        "team_abbr": "MTL",
-        "primary_position": "RW",
+        "player_key": "465.p.6877",
+        "player_name": "Kirill Kaprizov",
+        "team_abbr": "MIN",
+        "primary_position": "LW",
         "positions": [
-          "RW",
+          "LW",
           "Util"
         ],
-        "selected_position": "RW",
-        "cost": 3,
+        "selected_position": "LW",
+        "cost": 47,
         "contract_year": 1
       },
       {
@@ -2781,6 +2763,20 @@
         "selected_position": "RW",
         "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6035",
+        "player_name": "Artturi Lehkonen",
+        "team_abbr": "COL",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 13,
+        "contract_year": 2
       },
       {
         "player_key": "465.p.5983",
@@ -2822,46 +2818,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6038",
-        "player_name": "Tyler Bertuzzi",
-        "team_abbr": "CHI",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6877",
-        "player_name": "Kirill Kaprizov",
-        "team_abbr": "MIN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 47,
-        "contract_year": 1
-      },
-      {
-        "player_key": "465.p.8649",
-        "player_name": "Marco Rossi",
-        "team_abbr": "VAN",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 6,
-        "contract_year": 2
-      },
-      {
         "player_key": "465.p.4969",
         "player_name": "Mikael Granlund",
         "team_abbr": "ANA",
@@ -2872,14 +2828,14 @@
           "RW",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 0,
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6035",
-        "player_name": "Artturi Lehkonen",
-        "team_abbr": "COL",
+        "player_key": "465.p.6038",
+        "player_name": "Tyler Bertuzzi",
+        "team_abbr": "CHI",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2887,8 +2843,49 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 13,
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.32790",
+        "player_name": "Ivan Demidov",
+        "team_abbr": "MTL",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.6057",
+        "player_name": "Jake Guentzel",
+        "team_abbr": "TB",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 26,
         "contract_year": 2
+      },
+      {
+        "player_key": "465.p.5391",
+        "player_name": "Rickard Rakell",
+        "team_abbr": "PIT",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.30549",
@@ -2904,14 +2901,15 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.4854",
-        "player_name": "Cam Talbot",
-        "team_abbr": "DET",
-        "primary_position": "G",
+        "player_key": "465.p.6798",
+        "player_name": "Vince Dunn",
+        "team_abbr": "SEA",
+        "primary_position": "D",
         "positions": [
-          "G"
+          "D",
+          "Util"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 0,
         "contract_year": 0
       },
@@ -2992,7 +2990,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
+        "coverage_value": 13,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -3176,7 +3174,8 @@
         "primary_position": "D",
         "positions": [
           "D",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "D",
         "cost": 0,
@@ -3333,14 +3332,14 @@
       "logo_url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/a7edf4974df23648fca5b4663043cf416ae70264d6482492d59b50f7ba543691.jpg",
       "previous_season_team_rank": 10,
       "division_id": "1",
-      "waiver_priority": 12,
+      "waiver_priority": 11,
       "faab_balance": "59",
       "number_of_moves": 25,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "3"
+        "coverage_value": 13,
+        "value": "0"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -3369,32 +3368,6 @@
     },
     "roster": [
       {
-        "player_key": "465.p.4681",
-        "player_name": "John Tavares",
-        "team_abbr": "TOR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 10,
-        "contract_year": 1
-      },
-      {
-        "player_key": "465.p.6381",
-        "player_name": "Dylan Larkin",
-        "team_abbr": "DET",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 18,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.5768",
         "player_name": "Chandler Stephenson",
         "team_abbr": "SEA",
@@ -3406,6 +3379,32 @@
         "selected_position": "C",
         "cost": 2,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.3788",
+        "player_name": "Anze Kopitar",
+        "team_abbr": "LA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 12,
+        "contract_year": 2
+      },
+      {
+        "player_key": "465.p.5368",
+        "player_name": "Mark Scheifele",
+        "team_abbr": "WPG",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 16,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6748",
@@ -3476,19 +3475,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8882",
-        "player_name": "Simon Edvinsson",
-        "team_abbr": "DET",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.7518",
         "player_name": "Miro Heiskanen",
         "team_abbr": "DAL",
@@ -3515,6 +3501,19 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.5329",
+        "player_name": "Mattias Ekholm",
+        "team_abbr": "EDM",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.8883",
         "player_name": "William Eklund",
         "team_abbr": "SJ",
@@ -3529,30 +3528,43 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.3788",
-        "player_name": "Anze Kopitar",
-        "team_abbr": "LA",
+        "player_key": "465.p.4681",
+        "player_name": "John Tavares",
+        "team_abbr": "TOR",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 12,
-        "contract_year": 2
+        "cost": 10,
+        "contract_year": 1
       },
       {
-        "player_key": "465.p.5368",
-        "player_name": "Mark Scheifele",
-        "team_abbr": "WPG",
+        "player_key": "465.p.6381",
+        "player_name": "Dylan Larkin",
+        "team_abbr": "DET",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 16,
-        "contract_year": 1
+        "cost": 18,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8882",
+        "player_name": "Simon Edvinsson",
+        "team_abbr": "DET",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7578",
@@ -3562,19 +3574,6 @@
         "positions": [
           "LW",
           "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.5329",
-        "player_name": "Mattias Ekholm",
-        "team_abbr": "EDM",
-        "primary_position": "D",
-        "positions": [
-          "D",
           "Util"
         ],
         "selected_position": "BN",
@@ -3666,12 +3665,12 @@
       "division_id": "2",
       "waiver_priority": 2,
       "faab_balance": "66",
-      "number_of_moves": 47,
+      "number_of_moves": 48,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 12,
-        "value": "3"
+        "coverage_value": 13,
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -3766,21 +3765,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.4519",
-        "player_name": "Jamie Benn",
-        "team_abbr": "DAL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.7900",
         "player_name": "Andrei Svechnikov",
         "team_abbr": "CAR",
@@ -3792,6 +3776,20 @@
         ],
         "selected_position": "RW",
         "cost": 1,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7115",
+        "player_name": "Clayton Keller",
+        "team_abbr": "UTA",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 29,
         "contract_year": 0
       },
       {
@@ -3860,17 +3858,18 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7115",
-        "player_name": "Clayton Keller",
-        "team_abbr": "UTA",
-        "primary_position": "LW",
+        "player_key": "465.p.4519",
+        "player_name": "Jamie Benn",
+        "team_abbr": "DAL",
+        "primary_position": "C",
         "positions": [
+          "C",
           "LW",
           "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 29,
+        "cost": 2,
         "contract_year": 0
       },
       {
@@ -3901,16 +3900,28 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.4684",
-        "player_name": "Evander Kane",
-        "team_abbr": "VAN",
-        "primary_position": "LW",
+        "player_key": "465.p.7930",
+        "player_name": "Mattias Samuelsson",
+        "team_abbr": "BUF",
+        "primary_position": "D",
         "positions": [
-          "LW",
+          "D",
           "Util"
         ],
         "selected_position": "BN",
         "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6941",
+        "player_name": "Joey Daccord",
+        "team_abbr": "SEA",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 1,
         "contract_year": 0
       },
       {
@@ -3921,7 +3932,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 1,
         "contract_year": 0
       },
@@ -3935,18 +3946,6 @@
         ],
         "selected_position": "BN",
         "cost": 8,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6941",
-        "player_name": "Joey Daccord",
-        "team_abbr": "SEA",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
         "contract_year": 0
       },
       {
