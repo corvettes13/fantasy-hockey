@@ -6,6 +6,14 @@ body {
   color: #222;
 }
 
+.page-shell {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
 .container {
   max-width: 1000px;
   margin: auto;

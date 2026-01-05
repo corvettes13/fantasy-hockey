@@ -1,4 +1,33 @@
 /* === Global Styles === */
+.layout-shell {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Team page gets a wider shell */
+.team-page .layout-shell {
+  max-width: 1200px;   /* or 1300px, 1400px — whatever feels right */
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f5f7fa;
   font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -34,22 +63,6 @@ h2 {
 }
 
 /* === Shared Layout === */
-.index-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.card-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  background: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  overflow-x: auto;
-}
-
 .section-divider {
   margin: 3rem 0;
   border: none;

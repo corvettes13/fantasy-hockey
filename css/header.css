@@ -1,8 +1,13 @@
 .site-header {
-  background-color: #fff;
+  background: #fff;
   border-bottom: 1px solid #ccc;
-  max-width: 1000px;
-  margin: auto;
+  width: 100%;
+}
+
+.header-inner {
+  width: 100%;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
 }
 
 .nav-bar {

@@ -7,115 +7,124 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/header.css" />
   <link rel="stylesheet" href="css/leaders.css" />
+  <link rel="stylesheet" href="css/matchups.css" />
 </head>
 <body>
-  <header class="site-header"></header>
-  <script>
-    fetch('shared/header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.querySelector('.site-header').innerHTML = html;
-      });
-  </script>
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+    <br>
+    <script>
+      fetch('shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
+        });
+    </script>
+    
+    <main class="page-content">
+      <!-- Matchups Table -->
+      <div class="card">
+        <div class="week-selector">
+          <span class="week-label">Matchups</span>
+          <div class="week-controls">
+            <button id="week-prev" class="week-arrow">←</button>
+            <select id="week-select"></select>
+            <button id="week-next" class="week-arrow">→</button>
+          </div>
+        </div>
 
-  <div class="index-container">
-    <!-- Standings Section -->
-    <div class="standings-container card-container">
-      <h1>Broom Ballers and Shot Callers Standings</h1>
-      <div class="standings-controls">
-        <select id="standings-select">
-          <option value="2025_standings.json">Current Standings</option>
-          <option value="2024_standings.json">2024–25 Standings</option>
-          <option value="2023_standings.json">2023–24 Standings</option>
-        </select>
+        <h1 id="week-title">Week Matchups</h1>
+        <div id="matchups-body"></div>
+      </div>
+      
+      <br>
+      
+      <!-- Standings Section -->
+      <div class="card">
+        <h1>Broom Ballers and Shot Callers Standings</h1>
+        <div class="standings-controls">
+          <select id="standings-select">
+            <option value="2025_standings.json">Current Standings</option>
+            <option value="2024_standings.json">2024–25 Standings</option>
+            <option value="2023_standings.json">2023–24 Standings</option>
+          </select>
+        </div>
+
+        <!-- Bruhs Division -->
+        <section class="division-section">
+          <h3>Bruhs</h3>
+          <div class="table-wrapper">
+            <table class="standings-table">
+              <thead>
+                <tr>
+                  <th><button data-sort="rank">Rank</button></th>
+                  <th class="left-align">Team</th>
+                  <th><button data-sort="wins">W</button></th>
+                  <th><button data-sort="losses">L</button></th>
+                  <th><button data-sort="Win Percentage">Win %</button></th>
+                  <th><button data-sort="points for">PF</button></th>
+                  <th><button data-sort="points against">PA</button></th>
+                  <th><button data-sort="difference">Diff</button></th>
+                  <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
+                  <th><button data-sort="number_of_moves">Moves</button></th>
+                  <th><button data-sort="weekly_high_score">High</button></th>
+                </tr>
+              </thead>
+              <tbody id="bruhs-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Bros Division -->
+        <section class="card">
+          <h3>Bros</h3>
+          <div class="table-wrapper">
+            <table class="standings-table">
+              <thead>
+                <tr>
+                  <th><button data-sort="rank">Rank</button></th>
+                  <th class="left-align">Team</th>
+                  <th><button data-sort="wins">W</button></th>
+                  <th><button data-sort="losses">L</button></th>
+                  <th><button data-sort="Win Percentage">Win %</button></th>
+                  <th><button data-sort="points for">PF</button></th>
+                  <th><button data-sort="points against">PA</button></th>
+                  <th><button data-sort="difference">Diff</button></th>
+                  <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
+                  <th><button data-sort="number_of_moves">Moves</button></th>
+                  <th><button data-sort="weekly_high_score">High</button></th>
+                </tr>
+              </thead>
+              <tbody id="bros-body"></tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
-      <!-- Bruhs Division -->
-      <section class="division-section">
-        <h3>Bruhs</h3>
-        <table class="standings-table">
+      <!-- Fantasy Leaders Section -->
+      <div class="card">
+        <h1>Top Fantasy Performers (Previous Day)</h1>
+        <table id="embedded-players-table">
           <thead>
             <tr>
-              <th><button data-sort="rank">Rank</button></th>
-              <th class="left-align">Team</th>
-              <th><button data-sort="wins">W</button></th>
-              <th><button data-sort="losses">L</button></th>
-              <th><button data-sort="Win Percentage">Win %</button></th>
-              <th><button data-sort="points for">PF</button></th>
-              <th><button data-sort="points against">PA</button></th>
-              <th><button data-sort="difference">Diff</button></th>
-              <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
-              <th><button data-sort="number_of_moves">Moves</button></th>
-              <th><button data-sort="weekly_high_score">High</button></th>
+              <th>Player</th>
+              <th>Owner</th>
+              <th>Position</th>
+              <th>Team</th>
+              <th>Fantasy Points</th>
+              <th>Stats</th>
             </tr>
           </thead>
-          <tbody id="bruhs-body"></tbody>
+          <tbody></tbody>
         </table>
-      </section>
+      </div>
+    </main> <!-- end .index-container -->
 
-      <!-- Bros Division -->
-      <section class="division-section">
-        <h3>Bros</h3>
-        <table class="standings-table">
-          <thead>
-            <tr>
-              <th><button data-sort="rank">Rank</button></th>
-              <th class="left-align">Team</th>
-              <th><button data-sort="wins">W</button></th>
-              <th><button data-sort="losses">L</button></th>
-              <th><button data-sort="Win Percentage">Win %</button></th>
-              <th><button data-sort="points for">PF</button></th>
-              <th><button data-sort="points against">PA</button></th>
-              <th><button data-sort="difference">Diff</button></th>
-              <th><button data-sort="faab_balance">Waiver Bdgt</button></th>
-              <th><button data-sort="number_of_moves">Moves</button></th>
-              <th><button data-sort="weekly_high_score">High</button></th>
-            </tr>
-          </thead>
-          <tbody id="bros-body"></tbody>
-        </table>
-      </section>
-    </div>
-
-    <br>
-    <!-- Fantasy Leaders Section -->
-    <div class="table-wrapper card-container">
-      <h1>Top Fantasy Performers (Previous Day)</h2>
-      <table id="embedded-players-table">
-        <thead>
-          <tr>
-            <th>Player</th>
-            <th>Owner</th>
-            <th>Position</th>
-            <th>Team</th>
-            <th>Fantasy Points</th>
-            <th>Stats</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-  
-    <!-- Matchups Table -->
-  <div class="table-wrapper card-container">
-    <h1>Week 4 Matchups</h1>
-    <table class="standings-table">
-      <thead>
-        <tr>
-          <th>Team A</th>
-          <th>Points / Projected</th>
-          <th>vs</th>
-          <th>Points / Projected</th>
-          <th>Team B</th>
-        </tr>
-      </thead>
-      <tbody id="matchups-body"></tbody>
-    </table>
-  </div>
-
-  <script src="scripts/standings.js"></script>
-  <script src="scripts/fantasy_leaders_embed.js"></script>
-  <script src="scripts/matchups.js"></script>
+    <script src="scripts/standings.js"></script>
+    <script src="scripts/fantasy_leaders_embed.js"></script>
+    <script src="scripts/matchups.js"></script>
+  </div> <!-- end .page-shell -->
 </body>
 </html>
