@@ -194,7 +194,7 @@ function renderSkaterTable(players) {
     row.innerHTML = `
       <td>
         ${p.player_name}
-        ${p.olympics ? ` ${OLYMPIC_FLAGS[p.olympics] ?? ''}` : ''}
+        ${p.olympics ? ` <span class="flag-emoji">${OLYMPIC_FLAGS[p.olympics] ?? ''}</span>` : ''}
       </td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
@@ -228,7 +228,7 @@ function renderGoalieTable(players) {
     row.innerHTML = `
       <td>
         ${p.player_name}
-        ${p.olympics ? ` ${OLYMPIC_FLAGS[p.olympics] ?? ''}` : ''}
+        ${p.olympics ? ` <span class="flag-emoji">${OLYMPIC_FLAGS[p.olympics] ?? ''}</span>` : ''}
       </td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>

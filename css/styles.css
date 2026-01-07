@@ -30,7 +30,14 @@
 
 body {
   background-color: #f5f7fa;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
+    "Apple Color Emoji";
   margin: 0;
   padding: 1rem;
   color: #222;
@@ -257,3 +264,8 @@ td.draft-cell-left {
     align-items: flex-start;
   }
 }
+
+.flag-emoji {
+  font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+}
+
