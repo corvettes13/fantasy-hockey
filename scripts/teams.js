@@ -3,18 +3,18 @@ const teamNum = params.get('team');
 const teamKey = `465.l.13153.t.${teamNum}`; // Match Yahoo format
   
 const OLYMPIC_FLAGS = {
-  "Sweden": "SE",
-  "Czechia": "CZ",
-  "Finland": "FI",
-  "USA": "US",
+  "Sweden": "🇸🇪",
+  "Czechia": "🇨🇿",
+  "Finland": "🇫🇮",
+  "USA": "🇺🇸",
   "Canada": "🇨🇦",
-  "Russia": "RU",
-  "Slovakia": "SK",
-  "Germany": "DE",
-  "Switzerland": "CH",
-  "Norway": "NO",
-  "Latvia": "LV",
-  "Austria": "AT"
+  "Russia": "🇷🇺",
+  "Slovakia": "🇸🇰",
+  "Germany": "🇩🇪",
+  "Switzerland": "🇨🇭",
+  "Norway": "🇳🇴",
+  "Latvia": "🇱🇻",
+  "Austria": "🇦🇹"
 };
 
 document.addEventListener('DOMContentLoaded', () => {
