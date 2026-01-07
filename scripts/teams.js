@@ -1,6 +1,21 @@
 const params = new URLSearchParams(window.location.search);
 const teamNum = params.get('team');
 const teamKey = `465.l.13153.t.${teamNum}`; // Match Yahoo format
+  
+const OLYMPIC_FLAGS = {
+  "Sweden": "SE",
+  "Czechia": "CZ",
+  "Finland": "FI",
+  "USA": "US",
+  "Canada": "CA",
+  "Russia": "RU",
+  "Slovakia": "SK",
+  "Germany": "DE",
+  "Switzerland": "CH",
+  "Norway": "NO",
+  "Latvia": "LV",
+  "Austria": "AT"
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const seasonSelect = document.getElementById('season-select');
@@ -177,7 +192,10 @@ function renderSkaterTable(players) {
   players.forEach(p => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${p.player_name}</td>
+      <td>
+        ${p.player_name}
+        ${p.olympics ? ` ${OLYMPIC_FLAGS[p.olympics] ?? ''}` : ''}
+      </td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
@@ -208,7 +226,10 @@ function renderGoalieTable(players) {
   players.forEach(p => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${p.player_name}</td>
+      <td>
+        ${p.player_name}
+        ${p.olympics ? ` ${OLYMPIC_FLAGS[p.olympics] ?? ''}` : ''}
+      </td>
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
