@@ -7,7 +7,7 @@ const OLYMPIC_FLAGS = {
   "Czechia": "CZ",
   "Finland": "FI",
   "USA": "US",
-  "Canada": "CA",
+  "Canada": "🇨🇦",
   "Russia": "RU",
   "Slovakia": "SK",
   "Germany": "DE",
