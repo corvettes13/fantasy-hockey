@@ -193,8 +193,17 @@ a {
   height: 32px;
   border-radius: 4px;
   object-fit: cover;
-  flex-shrink: 0;      /* prevents logo from shrinking */
+  flex-shrink: 0;
 }
+
+.top-scorer-row .team-logo {
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 
 .current-score {
   font-size: 1rem;
@@ -222,4 +231,46 @@ a {
   font-weight: 600;
   color: #444;
   font-size: 0.85rem;
+}
+
+.top-scorer-row {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: #f8fbff;
+  border: 1px solid #dce7f5;
+  border-radius: 8px;
+    align-items: center;
+}
+
+.top-scorer-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.top-scorer-info {
+  flex-grow: 1;
+}
+
+.top-scorer-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.top-scorer-name a {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #0055a5;
+  text-decoration: none;
+  
+}
+
+.top-scorer-name a:hover {
+  text-decoration: underline;
+}
+
+.top-scorer-points {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
 }

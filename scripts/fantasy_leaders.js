@@ -77,6 +77,8 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 
     // Update on change
     dateSelect.addEventListener('change', () => {
+      const selectedDate = dateSelect.value;
+      renderTable(data, selectedDate);
       applySeasonFilters();
     });
   })
@@ -86,6 +88,17 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 function renderTable(data, date) {
   const players = data[date] || [];
   tableBody.innerHTML = '';
+
+  if (!players || players.length === 0) {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td colspan="6" style="text-align:center; padding:1rem; color:#666;">
+        No games played on this date
+      </td>
+    `;
+    tableBody.appendChild(row);
+    return;
+  }
 
   players.forEach(p => {
     const row = document.createElement('tr');

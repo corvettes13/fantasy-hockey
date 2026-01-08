@@ -47,6 +47,93 @@ fetch('data/2025_matchups.json')
       defaultWeek = weeks[weeks.length - 1];
     }
 
+    function getPreviousWeekTopScorer(weekNumber) {
+      const prevWeek = String(Number(weekNumber) - 1);
+      if (!data.weeks[prevWeek]) return null;
+
+      let bestTeam = null;
+      let bestPoints = -Infinity;
+
+      data.weeks[prevWeek].matchups.forEach(matchup => {
+        matchup.teams.forEach(t => {
+          const team = t.team;
+          const pts = team.team_points?.total ?? 0;
+
+          if (pts > bestPoints) {
+            bestPoints = pts;
+            bestTeam = team;
+          }
+        });
+      });
+
+      return bestTeam
+        ? {
+            name: bestTeam.name,
+            logo: bestTeam.team_logos.team_logo.url,
+            points: bestPoints,
+            id: bestTeam.team_id
+          }
+        : null;
+    }
+    
+    function getWeekTopScorer(weekNumber) {
+      const week = data.weeks[weekNumber];
+      if (!week) return null;
+
+      let bestTeam = null;
+      let bestPoints = -Infinity;
+
+      week.matchups.forEach(matchup => {
+        matchup.teams.forEach(t => {
+          const team = t.team;
+          const pts = team.team_points?.total ?? 0;
+
+          if (pts > bestPoints) {
+            bestPoints = pts;
+            bestTeam = team;
+          }
+        });
+      });
+
+      return bestTeam
+        ? {
+            name: bestTeam.name,
+            logo: bestTeam.team_logos.team_logo.url,
+            points: bestPoints,
+            id: bestTeam.team_id
+          }
+        : null;
+    }
+    
+    function getWeekTopProjection(weekNumber) {
+      const week = data.weeks[weekNumber];
+      if (!week) return null;
+
+      let bestTeam = null;
+      let bestProj = -Infinity;
+
+      week.matchups.forEach(matchup => {
+        matchup.teams.forEach(t => {
+          const team = t.team;
+          const proj = team.team_projected_points?.total ?? 0;
+
+          if (proj > bestProj) {
+            bestProj = proj;
+            bestTeam = team;
+          }
+        });
+      });
+
+      return bestTeam
+        ? {
+            name: bestTeam.name,
+            logo: bestTeam.team_logos.team_logo.url,
+            points: bestProj,
+            id: bestTeam.team_id
+          }
+        : null;
+    }
+
     // Set dropdown and render
     weekSelect.value = defaultWeek;
     renderWeek(defaultWeek);
@@ -65,7 +152,7 @@ fetch('data/2025_matchups.json')
         const projA = teamA.team_projected_points?.total ?? 0;
         const scoreB = teamB.team_points?.total ?? 0;
         const projB = teamB.team_projected_points?.total ?? 0;
-        
+
         const teamNumA = teamA.team_id;
         const teamNumB = teamB.team_id;
 
@@ -116,7 +203,49 @@ fetch('data/2025_matchups.json')
 
         container.appendChild(row);
       });
+
+      // Determine which top scorer to show
+      let top;
+      let label;
+
+      if (Number(weekNumber) === Number(currentWeek)) {
+        // Current week → show last week's top scorer
+        top = getPreviousWeekTopScorer(weekNumber);
+        label = "Top Scorer Last Week";
+
+      } else if (Number(weekNumber) > Number(currentWeek)) {
+        // Future week → show highest projection
+        top = getWeekTopProjection(weekNumber);
+        label = `Top Projected Team Week ${weekNumber}`;
+
+      } else {
+        // Past week → show that week's top scorer
+        top = getWeekTopScorer(weekNumber);
+        label = `Top Scorer Week ${weekNumber}`;
+      }
+
+      if (top) {
+        const highlight = document.createElement('div');
+        highlight.className = 'top-scorer-row';
+
+        highlight.innerHTML = `
+          <div class="top-scorer-inner">
+            <img class="team-logo" src="${top.logo}" alt="${top.name}">
+            <div class="top-scorer-info">
+              <div class="top-scorer-label">${label}</div>
+              <div class="top-scorer-name">
+                <a href="teams/team.html?team=${top.id}">${top.name}</a>
+              </div>
+            </div>
+            <div class="top-scorer-points">${top.points.toFixed(1)} pts</div>
+          </div>
+        `;
+
+        container.appendChild(highlight);
+      }
     }
+
+    
     // Dropdown change
     weekSelect.addEventListener('change', () => {
       renderWeek(weekSelect.value);
@@ -142,5 +271,3 @@ fetch('data/2025_matchups.json')
     });
   })
   .catch(err => console.error('Error loading matchups:', err));
-  
-  
