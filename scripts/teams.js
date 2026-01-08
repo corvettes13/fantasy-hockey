@@ -1,5 +1,5 @@
 const params = new URLSearchParams(window.location.search);
-const teamNum = params.get('team');
+const teamNum = parseInt(params.get('team'), 10);
 const teamKey = `465.l.13153.t.${teamNum}`; // Match Yahoo format
   
 const OLYMPIC_FLAGS = {
@@ -86,9 +86,21 @@ function buildStatMap(players) {
   return map;
 }
 
+
 function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   const teamData = teams.find(t => t.team_info.team_key === teamKey);
   const standingsInfo = standings.teams.find(s => s.team_key === teamKey);
+
+  if (!teamData) {
+    console.error("Team not found for key:", teamKey);
+    document.querySelector('.page-content').innerHTML =
+      `<h2>Team not found.</h2>`;
+    return;
+  }
+
+  if (!standingsInfo) {
+    console.warn("Standings not found for key:", teamKey);
+  }
 
   const teamInfo = teamData.team_info;
   const roster = teamData.roster;

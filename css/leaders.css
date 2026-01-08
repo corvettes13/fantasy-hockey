@@ -212,5 +212,18 @@ select:focus {
   color: green;
 }
 
+#embedded-players-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+#embedded-players-table th,
+#embedded-players-table td {
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
 
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Top Fantasy Performers</title>
   <link rel="stylesheet" href="/fantasy-hockey/css/leaders.css" />
-    <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
   <style>
     .result-container {
@@ -37,7 +37,6 @@
     <div class="header-inner">
       <header class="site-header"></header>
     </div>
-
     <script>
     fetch('/fantasy-hockey/shared/header.html')
       .then(res => res.text())
@@ -45,7 +44,6 @@
         document.querySelector('.site-header').innerHTML = html;
       });
     </script>
-
     <div class="container">
       <h1>Did Bradford Get Screwed Yesterday?</h1>
       <div id="hat-trick-result" class="result-container">Loading...</div>

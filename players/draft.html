@@ -6,17 +6,21 @@
   <title>Draft Results</title>
   <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
 </head>
 <body>
-  <header class="site-header"></header>
-  <br>
-  <script>
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
     fetch('/fantasy-hockey/shared/header.html')
       .then(res => res.text())
       .then(html => {
         document.querySelector('.site-header').innerHTML = html;
       });
-  </script>
+    </script>
     <div class="container">
       <h1>2025 Draft Results</h1>
       <div class="filters">

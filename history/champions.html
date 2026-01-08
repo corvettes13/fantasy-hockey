@@ -4,57 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>League Champions</title>
-  <link rel="stylesheet" href="../css/champions.css" />
-  <link rel="stylesheet" href="../css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/champions.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
 </head>
 <body>
-  <header class="site-header"></header>
-  <br>
-  <script>
-    fetch('../shared/header.html')
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
+    fetch('/fantasy-hockey/shared/header.html')
       .then(res => res.text())
       .then(html => {
         document.querySelector('.site-header').innerHTML = html;
       });
-  </script>
+    </script>
 
-  <div class="container">
-    <h1>League Champions History</h1>
-    <table id="champions-table">
-      <thead>
+    <div class="container">
+      <h1>League Champions History</h1>
+      <table id="champions-table">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Champion</th>
+            <th>Team Name</th>
+            <th>Runner-Up</th>
+            <th>Team Name</th>
+            <th>Score</th>
+            <th>President's Trophy</th>
+            <th>Team Name</th>
+            <th>Record</th>
+          </tr>
+        </thead>
+        <tbody id="champions-body">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+      <hr />
+      <h1>Playoff Pool Champions</h1>
+      <table id="playoff-table">
+        <thead>
         <tr>
-          <th>Season</th>
-          <th>Champion</th>
-          <th>Team Name</th>
-          <th>Runner-Up</th>
-          <th>Team Name</th>
-          <th>Score</th>
-          <th>President's Trophy</th>
-          <th>Team Name</th>
-          <th>Record</th>
+          <th>Year</th>
+          <th>Manager</th>
+          <th>Points</th>
+          <th>Margin</th>
+          <th>Cup Winner</th>
+          <th>Stanley Cup Winner</th>
         </tr>
-      </thead>
-      <tbody id="champions-body">
+        </thead>
+        <tbody id="playoff-body">
         <!-- Rows injected by JS -->
-      </tbody>
-    </table>
-    <hr />
-  	<h1>Playoff Pool Champions</h1>
-  	<table id="playoff-table">
-  	  <thead>
-  		<tr>
-  		  <th>Year</th>
-  		  <th>Manager</th>
-  		  <th>Points</th>
-  		  <th>Margin</th>
-  		  <th>Cup Winner</th>
-  		  <th>Stanley Cup Winner</th>
-  		</tr>
-  	  </thead>
-  	  <tbody id="playoff-body">
-  		<!-- Rows injected by JS -->
-  	  </tbody>
-  	</table>
+        </tbody>
+      </table>
+    </div>
   </div>
   <script src="../scripts/champions.js"></script>
 </body>

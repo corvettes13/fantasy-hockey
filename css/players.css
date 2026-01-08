@@ -1,24 +1,54 @@
+/* === Base page styles (shared) === */
 body {
-  font-family: Arial, sans-serif;
+  font-family:
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
+    "Apple Color Emoji";
   background-color: #f5f7fa;
   margin: 0;
-  padding: 2rem;
+  padding: 1rem;
   color: #222;
 }
 
-.container {
+.layout-shell {
   max-width: 1200px;
-  margin: auto;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.container {
   background: white;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+/* === Headings (shared) === */
 h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 0 0 0.8rem 0;
   color: #0055a5;
+  font-size: 1.3rem;
+}
+
+/* Optional: h2 if you use it on team page */
+.team-page h2.team-name {
+  font-size: 1.2rem;
+  color: #0055a5;
+  margin-bottom: 0.25rem;
+}
+
+
+/* === Shared table + wrapper === */
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
 }
 
 table {
@@ -27,116 +57,239 @@ table {
   font-size: 0.8rem;
 }
 
-.table-wrapper {
-  overflow-x: auto;
-  width: 100%;
-}
-
-th, td {
-  padding: 0.2rem 0.4rem;
+th,
+td {
   text-align: center;
   border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #eaf0f6;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-tbody tr {
-  line-height: 1.2;
 }
 
 tbody tr:hover {
   background-color: #f0f8ff;
 }
 
-.player-cell {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.3rem;
-  width: 100%;
-  height: 100%;
-  padding: 0.2rem 0.4rem;
-  box-sizing: border-box;
-  text-align: left; /* ✅ Explicitly left-align text */
-  border-bottom: 1px solid #ddd;
+/* === Players page table tuning === */
+.players-page th,
+.players-page td {
+  padding: 0.12rem 0.25rem; /* tighter vertical spacing */
 }
 
-.player-cell img {
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0; /* prevents logo from shrinking */
+.players-page th {
+  background-color: #eaf0f6;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-td.player-cell {
-  text-align: left; /* ✅ Override global td center alignment */
+.players-page tbody tr {
+  line-height: 1.0; /* tight row height */
 }
 
-.player-cell .team-abbr {
-  font-size: 0.6rem;
-  color: #888;
-  margin-left: 0.2rem;
-}
-
-.player-cell a {
-  color: #0055a5; /* or leave default blue */
-  text-decoration: none; /* removes underline */
-  font-weight: 500;
-}
-
-.player-cell a:hover {
-  text-decoration: underline; /* optional: add underline on hover */
-}
-
-tbody tr:nth-child(even) {
+.players-page tbody tr:nth-child(even) {
   background-color: #f9fbfd;
 }
 
-#gp-filter {
-  width: 45px; /* or 60px if you want it tighter */
-  padding: 0.2rem;
-  font-size: 0.8rem;
-}
-
-.filters {
+/* === Players page: filters === */
+.players-page .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem; /* adds spacing between filters */
-  margin-bottom: 1rem;
+  gap: 0.8rem;
+  margin-bottom: 0.6rem;
   align-items: center;
 }
 
-@media (max-width: 600px) {
-  .player-cell {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
+.players-page #gp-filter {
+  width: 45px;
+  padding: 0.15rem;
+  font-size: 0.8rem;
+}
+
+.players-page input[type="text"],
+.players-page select,
+.players-page input[type="number"] {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.35rem;
+}
+
+/* === Players page: player cell === */
+.players-page .player-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.12rem 0.25rem;
+  box-sizing: border-box;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.players-page td.player-cell {
+  text-align: left;
+}
+
+.players-page .player-cell img {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.players-page .player-cell .team-abbr {
+  font-size: 0.6rem;
+  color: #888;
+  margin-left: 0.15rem;
+}
+
+.players-page .player-cell a {
+  color: #0055a5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.players-page .player-cell a:hover {
+  text-decoration: underline;
+}
+
+/* Column alignment helpers (players page) */
+.players-page td.draft-cell-left,
+.players-page td.position-cell,
+.players-page td.owner-cell {
+  text-align: left !important;
+  padding-left: 0.35rem;
+}
+
+.players-page .owner-cell a {
+  text-decoration: none;
+}
+
+.players-page .owner-cell a:hover {
+  text-decoration: underline;
+}
+
+/* === Team page specific styles === */
+
+.team-page h1 {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+/* Team profile layout */
+.team-profile {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: flex-start; /* Align children to top */
+  position: relative;
+}
+
+.team-menu_logo-img {
+  width: 6.4rem;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  top: 0;
+  flex-shrink: 0; /* Prevent logo from shrinking */
+}
+
+.team-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-name {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.team-manager {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.team-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.team-meta {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0;
+  flex-grow: 1;
+  display: inline-block;
+}
+
+.team-meta strong {
+  color: #0055a5;
+}
+
+.champion-badge,
+.trophy-badge {
+  margin-left: auto;
+  align-self: flex-start;
+}
+
+.champion-badge img,
+.trophy-badge img {
+  width: 5rem;
+  height: auto;
+}
+
+/* Team page tables slightly roomier if you want */
+.team-page th,
+.team-page td {
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.team-page th {
+  background-color: #eaf0f6;
+  font-weight: bold;
+}
+
+/* Left-align first 3 columns in certain tables */
+.left-align th:nth-child(1),
+.left-align th:nth-child(2),
+.left-align th:nth-child(3),
+.left-align td:nth-child(1),
+.left-align td:nth-child(2),
+.left-align td:nth-child(3) {
+  text-align: left;
+}
+
+/* Contract flag */
+.contract-red {
+  background-color: #ffe5e5; /* light red */
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 768px) {
+  .table-wrapper {
+    overflow-x: auto;
   }
-  .filters {
+
+  .team-page table {
+    min-width: 800px; /* ensure team tables remain scrollable */
+    display: block;
+  }
+
+  .team-page th,
+  .team-page td {
+    padding: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .players-page .filters {
     flex-direction: column;
     align-items: flex-start;
   }
 
-}
-
-td.draft-cell-left {
-  text-align: left !important;
-  padding-left: 0.4rem;
-}
-
-td.position-cell,
-td.owner-cell {
-  text-align: left !important;
-  padding-left: 0.4rem;
-}
-
-.owner-cell a {
-  text-decoration: none;
-}
-
-.owner-cell a:hover {
-  text-decoration: underline; /* or keep it none */
+  .players-page .player-cell {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }

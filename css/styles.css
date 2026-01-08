@@ -12,6 +12,10 @@
   max-width: 1200px;   /* or 1300px, 1400px — whatever feels right */
 }
 
+.players-page .layout-shell {
+  max-width: 1200px;   /* or 1300px, 1400px — whatever feels right */
+}
+
 .table-wrapper {
   overflow-x: auto;
   overflow-y: hidden;
