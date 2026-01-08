@@ -15,11 +15,11 @@
     </div>
 
     <script>
-      fetch('shared/header.html')
-        .then(res => res.text())
-        .then(html => {
-          document.querySelector('.site-header').innerHTML = html;
-        });
+    fetch('/fantasy-hockey/shared/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.querySelector('.site-header').innerHTML = html;
+      });
     </script>
 
     <main class="page-content">
