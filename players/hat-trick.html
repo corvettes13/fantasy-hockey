@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Top Fantasy Performers</title>
   <link rel="stylesheet" href="/fantasy-hockey/css/leaders.css" />
+    <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
   <style>
     .result-container {
@@ -32,50 +33,121 @@
   </style>
 </head>
 <body>
-  <header class="site-header"></header>
-  <br>
-  <script>
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
     fetch('/fantasy-hockey/shared/header.html')
       .then(res => res.text())
       .then(html => {
         document.querySelector('.site-header').innerHTML = html;
       });
-  </script>
+    </script>
 
-  <div class="container">
-    <h1>Did Bradford Get Screwed?</h1>
-    <div id="hat-trick-result" class="result-container">Loading...</div>
+    <div class="container">
+      <h1>Did Bradford Get Screwed Yesterday?</h1>
+      <div id="hat-trick-result" class="result-container">Loading...</div>
+    </div>
+    
+    <div class="container" style="margin-top: 25px;">
+      <h2>Hat Tricks This Season</h2>
+      <!-- Count goes here -->
+      <div id="team7-count" style="font-weight: bold; margin-bottom: 10px; text-align: center;"></div>
+      <div class="table-wrapper">
+        <table id="hat-trick-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Date</th>
+              <th>Screwed</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    
+    <script>
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      const yyyy = yesterday.getFullYear();
+      const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+      const dd = String(yesterday.getDate()).padStart(2, '0');
+      const targetDate = `${yyyy}-${mm}-${dd}`;
+
+      fetch('/fantasy-hockey/data/2025_hat_tricks.json')
+        .then(res => res.json())
+        .then(data => {
+          const resultDiv = document.getElementById('hat-trick-result');
+
+          // Find yesterday's hat trick
+          const match = data.find(entry => entry.date === targetDate);
+
+          // No hat trick at all
+          if (!match) {
+            resultDiv.innerHTML = `
+              <div class="no">No</div>
+              <div class="player-message">No Hype Machine player scored a hat trick yesterday.</div>
+            `;
+            return;
+          }
+
+          // Hat trick but wrong team
+          if (match.on_team_7 === true) {
+            resultDiv.innerHTML = `
+              <div class="yes">Yes</div>
+              <div class="player-message">${match.player_name} scored a hat trick.</div>
+            `;
+            return;
+          }
+        })
+        .catch(err => {
+          console.error('Error loading hat trick data:', err);
+          document.getElementById('hat-trick-result').textContent = 'Error loading data';
+        });
+    </script>
+    
+    <script>
+      fetch('/fantasy-hockey/data/2025_hat_tricks.json')
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector('#hat-trick-table tbody');
+          const countDiv = document.getElementById('team7-count');
+          
+          function formatDatePretty(iso) {
+            const d = new Date(iso);
+            return d.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric"
+            });
+          }
+
+          let team7Count = 0;
+
+          data.forEach(entry => {
+            const row = document.createElement('tr');
+
+            if (entry.on_team_7) team7Count++;
+
+            row.innerHTML = `
+              <td>${entry.player_name}</td>
+              <td>${formatDatePretty(entry.date)}</td>
+              <td style="font-weight: ${entry.on_team_7 ? 'bold' : 'normal'}; color: ${entry.on_team_7 ? 'green' : 'inherit'};">
+                ${entry.on_team_7 ? 'Yes' : 'No'}
+              </td>
+            `;
+
+            tbody.appendChild(row);
+          });
+
+          countDiv.textContent = `Times Bradford Got Screwed: ${team7Count}`;
+        });
+    </script>
+
+    
   </div>
-
-  <script>
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yyyy = yesterday.getFullYear();
-    const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
-    const dd = String(yesterday.getDate()).padStart(2, '0');
-    const targetDate = `${yyyy}-${mm}-${dd}`;
-
-    fetch('/fantasy-hockey/data/2025_hat_tricks.json')
-      .then(res => res.json())
-      .then(data => {
-        const resultDiv = document.getElementById('hat-trick-result');
-        const match = data.find(entry => entry.date === targetDate);
-
-        if (match) {
-          resultDiv.innerHTML = `
-            <div class="yes">Yes</div>
-            <div class="player-message">${match.player_name} scored a hat trick.</div>
-          `;
-        } else {
-          resultDiv.innerHTML = `<div class="no">No</div>
-          <div class="player-message">No Hype Machine player scored a hat trick yesterday.</div>
-          `;
-        }
-      })
-      .catch(err => {
-        console.error('Error loading hat trick data:', err);
-        document.getElementById('hat-trick-result').textContent = 'Error loading data';
-      });
-  </script>
 </body>
 </html>
