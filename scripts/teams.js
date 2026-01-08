@@ -106,7 +106,6 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   const roster = teamData.roster;
 
   document.title = `${teamInfo.name} Roster`;
-  document.querySelector('h1').textContent = `${teamInfo.name}`;
 
   const teamHeader = document.getElementById('team-header');
   teamHeader.innerHTML = `
