@@ -4,27 +4,64 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Top Fantasy Performers</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/styles.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/leaders.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
 </head>
 <body>
-  <header class="site-header"></header>
-  <br>
-  <script>
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
     fetch('/fantasy-hockey/shared/header.html')
       .then(res => res.text())
       .then(html => {
         document.querySelector('.site-header').innerHTML = html;
       });
-  </script>
+    </script>
+    <div class="container">
+        <h2>Daily Top Performers by Date</h1>
+        <label for="date-select">Select Date:</label>
+        <select id="date-select"></select>
+        <hr>
+        <div class="table-wrapper">
+          <table id="players-table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Owner</th>
+                <th>Position</th>
+                <th>Team</th>
+                <th>Fantasy Points</th>
+                <th class="stats-cell">Stats</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+      <h2>Daily Top Performers Performers (Season)</h2>
+      <select id="position-select">
+        <option value="">All Positions</option>
+        <option value="C">Center</option>
+        <option value="LW">Left Wing</option>
+        <option value="RW">Right Wing</option>
+        <option value="D">Defense</option>
+        <option value="G">Goalie</option>
+      </select>
+      
+      <label>
+        <input type="checkbox" id="free-agent-toggle">
+        Free Agents Only
+      </label>
 
-  <div class="container">
-      <h1>Top Fantasy Performers</h1>
-      <label for="date-select">Select Date:</label>
-      <select id="date-select"></select>
-      <hr>
+
       <div class="table-wrapper">
-        <table id="players-table">
+        <table id="season-table">
           <thead>
             <tr>
               <th>Player</th>
@@ -32,12 +69,14 @@
               <th>Position</th>
               <th>Team</th>
               <th>Fantasy Points</th>
+              <th>Date</th>
               <th class="stats-cell">Stats</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
+    </div>
   </div>
 
   <script src="/fantasy-hockey/scripts/fantasy_leaders.js"></script>

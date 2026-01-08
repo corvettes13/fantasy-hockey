@@ -1,5 +1,17 @@
 const dateSelect = document.getElementById('date-select');
 const tableBody = document.querySelector('#players-table tbody');
+const seasonTableBody = document.querySelector('#season-table tbody');
+const positionSelect = document.getElementById('position-select');
+const freeAgentToggle = document.getElementById('free-agent-toggle');
+
+function formatDatePretty(isoDate) {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
 
 // Load JSON file
 fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
@@ -11,16 +23,61 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
     dates.forEach(date => {
       const option = document.createElement('option');
       option.value = date;
-      option.textContent = date;
+      option.textContent = formatDatePretty(date);
       dateSelect.appendChild(option);
     });
+    
+    // Flatten all days into one big array
+    const allPlayers = Object.values(data)
+      .filter(arr => Array.isArray(arr) && arr.length > 0)
+      .flat();
+
+    // Sort by fantasy points descending
+    const sortedSeason = [...allPlayers].sort((a, b) => b.fp - a.fp);
+
+    // Keep top 10
+    let topSeason = sortedSeason.slice(0, 10);
+
+    // Initial render of season table
+    renderSeasonTable(topSeason);
+    
+    function applySeasonFilters() {
+      const pos = positionSelect.value;
+      const freeAgentsOnly = freeAgentToggle.checked;
+
+      let filtered = sortedSeason;
+
+      // Position filter
+      if (pos) {
+        filtered = filtered.filter(p =>
+          p.position.split(',').includes(pos)
+        );
+      }
+
+      // Free agent filter
+      if (freeAgentsOnly) {
+        filtered = filtered.filter(p =>
+          p.owner_team_key === "free_agent"
+        );
+      }
+
+      // Top 10
+      const topSeason = filtered.slice(0, 10);
+      renderSeasonTable(topSeason);
+    }
+
+
+    // Update on position filter change
+    positionSelect.addEventListener('change', applySeasonFilters);
+    freeAgentToggle.addEventListener('change', applySeasonFilters);
 
     // Initial render
-    renderTable(data, dates[0]);
+    const firstDateWithData = dates.find(d => data[d] && data[d].length > 0);
+    renderTable(data, firstDateWithData);
 
     // Update on change
     dateSelect.addEventListener('change', () => {
-      renderTable(data, dateSelect.value);
+      applySeasonFilters();
     });
   })
   .catch(err => console.error('Error loading fantasy leaders:', err));
@@ -64,4 +121,26 @@ function formatStats(position, stats) {
     })
     .map(stat => stat === 'DEC' ? `${stats[stat]}` : `${stats[stat]} ${stat}`)
     .join(', ');
+}
+
+function renderSeasonTable(players) {
+  seasonTableBody.innerHTML = '';
+
+  players.forEach(p => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="player-cell">
+        <img src="${p.headshot_url}" alt="${p.team_abbr} logo" />
+        <a href="${p.url}" target="_blank">${p.player}</a>
+        <span class="team-abbr">${p.team_abbr}</span>
+      </td>
+      <td class="owner-cell">${p.owner_team_name || 'Free Agent'}</td>
+      <td>${p.position}</td>
+      <td>${p.team}</td>
+      <td>${p.fp.toFixed(1)}</td>
+      <td>${formatDatePretty(p.date)}</td>
+      <td class="stats-cell">${formatStats(p.position, p.stats)}</td>
+    `;
+    seasonTableBody.appendChild(row);
+  });
 }

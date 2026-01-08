@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fantasy Hockey Team Page</title>
+  <title>Team Pages</title>
   <link rel="stylesheet" href="../css/styles.css" />
   <link rel="stylesheet" href="../css/teams.css" />
   <link rel="stylesheet" href="../css/header.css" />
 </head>
-<body class="team-page">
+<body>
   <div class="layout-shell">
-    <header class="site-header"></header>
-    <br>
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
     <script>
-      fetch('../shared/header.html')
+      fetch('shared/header.html')
         .then(res => res.text())
         .then(html => {
           document.querySelector('.site-header').innerHTML = html;
