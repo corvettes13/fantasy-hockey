@@ -34,16 +34,13 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
       .filter(arr => Array.isArray(arr) && arr.length > 0)
       .flat();
       
-    const worstSeason = allPlayers
-      .filter(p => p.fp < 0)        // only negative FP
-      .sort((a, b) => a.fp - b.fp)  // most negative first
-      .slice(0, 10);
-
     // Sort by fantasy points descending
     const sortedSeason = [...allPlayers].sort((a, b) => b.fp - a.fp);
+    const sortedBad = [...allPlayers].sort((b, a) => b.fp - a.fp);
 
     // Keep top 10
     let topSeason = sortedSeason.slice(0, 10);
+    let worstSeason = sortedBad.slice(0, 10);
 
     // Initial render of season table
     renderSeasonTable(topSeason);
