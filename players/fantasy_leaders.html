@@ -44,7 +44,7 @@
     </div>
     <br>
     <div class="container">
-      <h2>Daily Top Performers Performers (Season)</h2>
+      <h2>Daily Top Performers (Season)</h2>
       <select id="position-select">
         <option value="">All Positions</option>
         <option value="C">Center</option>
@@ -55,13 +55,37 @@
       </select>
       
       <label>
-        <input type="checkbox" id="free-agent-toggle">
+        <input type="checkbox" id="top-free-agent-toggle">
+        Free Agents Only
+      </label>
+      <br>
+      <div class="table-wrapper">
+        <table id="season-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Owner</th>
+              <th>Position</th>
+              <th>Team</th>
+              <th>Fantasy Points</th>
+              <th>Date</th>
+              <th class="stats-cell">Stats</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <h2>Daily Worst Performers (Season)</h2>
+      <label>
+        <input type="checkbox" id="worst-free-agent-toggle">
         Free Agents Only
       </label>
 
-
       <div class="table-wrapper">
-        <table id="season-table">
+        <table id="worst-table">
           <thead>
             <tr>
               <th>Player</th>

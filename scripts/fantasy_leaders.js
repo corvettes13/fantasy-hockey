@@ -2,7 +2,9 @@ const dateSelect = document.getElementById('date-select');
 const tableBody = document.querySelector('#players-table tbody');
 const seasonTableBody = document.querySelector('#season-table tbody');
 const positionSelect = document.getElementById('position-select');
-const freeAgentToggle = document.getElementById('free-agent-toggle');
+const topFreeAgentToggle = document.getElementById('top-free-agent-toggle');
+const worstFreeAgentToggle = document.getElementById('worst-free-agent-toggle');
+const worstTableBody = document.querySelector('#worst-table tbody');
 
 function formatDatePretty(isoDate) {
   const date = new Date(isoDate);
@@ -31,6 +33,11 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
     const allPlayers = Object.values(data)
       .filter(arr => Array.isArray(arr) && arr.length > 0)
       .flat();
+      
+    const worstSeason = allPlayers
+      .filter(p => p.fp < 0)        // only negative FP
+      .sort((a, b) => a.fp - b.fp)  // most negative first
+      .slice(0, 10);
 
     // Sort by fantasy points descending
     const sortedSeason = [...allPlayers].sort((a, b) => b.fp - a.fp);
@@ -40,36 +47,41 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 
     // Initial render of season table
     renderSeasonTable(topSeason);
+    renderWorstTable(worstSeason);
     
     function applySeasonFilters() {
       const pos = positionSelect.value;
-      const freeAgentsOnly = freeAgentToggle.checked;
+      const topFreeAgentsOnly = topFreeAgentToggle.checked;
+      const worstFreeAgentsOnly = worstFreeAgentToggle.checked;
 
-      let filtered = sortedSeason;
+      let filteredTop = [...sortedSeason];
+      let filteredWorst = [...worstSeason];
 
-      // Position filter
+      // Position filter (top table only)
       if (pos) {
-        filtered = filtered.filter(p =>
+        filteredTop = filteredTop.filter(p =>
           p.position.split(',').includes(pos)
         );
       }
 
-      // Free agent filter
-      if (freeAgentsOnly) {
-        filtered = filtered.filter(p =>
-          p.owner_team_key === "free_agent"
-        );
+      // Top table free-agent filter
+      if (topFreeAgentsOnly) {
+        filteredTop = filteredTop.filter(p => p.owner_team_key === "free_agent");
       }
 
-      // Top 10
-      const topSeason = filtered.slice(0, 10);
-      renderSeasonTable(topSeason);
-    }
+      // Worst table free-agent filter
+      if (worstFreeAgentsOnly) {
+        filteredWorst = filteredWorst.filter(p => p.owner_team_key === "free_agent");
+      }
 
+      renderSeasonTable(filteredTop.slice(0, 10));
+      renderWorstTable(filteredWorst.slice(0, 10));
+    }
 
     // Update on position filter change
     positionSelect.addEventListener('change', applySeasonFilters);
-    freeAgentToggle.addEventListener('change', applySeasonFilters);
+    topFreeAgentToggle.addEventListener('change', applySeasonFilters);
+    worstFreeAgentToggle.addEventListener('change', applySeasonFilters);
 
     // Initial render
     const firstDateWithData = dates.find(d => data[d] && data[d].length > 0);
@@ -86,7 +98,12 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 
 // Render table for selected date
 function renderTable(data, date) {
-  const players = data[date] || [];
+  let players = (data[date] || [])
+    .filter(p => p.fp >= 0)          // remove negative scores
+    .sort((a, b) => a.fp - b.fp)     // ascending order
+    .slice(0, 5);                    // top 5 only
+
+
   tableBody.innerHTML = '';
 
   if (!players || players.length === 0) {
@@ -157,3 +174,26 @@ function renderSeasonTable(players) {
     seasonTableBody.appendChild(row);
   });
 }
+
+function renderWorstTable(players) {
+  worstTableBody.innerHTML = '';
+
+  players.forEach(p => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="player-cell">
+        <img src="${p.headshot_url}" alt="${p.team_abbr} logo" />
+        <a href="${p.url}" target="_blank">${p.player}</a>
+        <span class="team-abbr">${p.team_abbr}</span>
+      </td>
+      <td class="owner-cell">${p.owner_team_name || 'Free Agent'}</td>
+      <td>${p.position}</td>
+      <td>${p.team}</td>
+      <td>${p.fp.toFixed(1)}</td>
+      <td>${formatDatePretty(p.date)}</td>
+      <td class="stats-cell">${formatStats(p.position, p.stats)}</td>
+    `;
+    worstTableBody.appendChild(row);
+  });
+}
+
