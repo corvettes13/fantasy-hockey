@@ -54,6 +54,10 @@ th, td {
   border-bottom: 1px solid #ddd;
 }
 
+td {
+  vertical-align: middle;
+}
+
 th {
   background-color: #eaf0f6;
   font-weight: bold;
@@ -62,6 +66,8 @@ th {
 
 tbody tr {
   line-height: 1.2;
+  height: 68px;        /* or whatever matches your image height + padding */
+  max-height: 68px;
 }
 
 tbody tr:hover {
@@ -79,6 +85,7 @@ tbody tr:hover {
   box-sizing: border-box;
   text-align: left; /* ✅ Explicitly left-align text */
   border-bottom: 1px solid #ddd;
+  min-height: 100%;
 }
 
 .player-cell img {

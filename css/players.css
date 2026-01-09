@@ -292,3 +292,29 @@ tbody tr:hover {
     align-items: center;
   }
 }
+
+/* === Uniform row height fix for players page === */
+/* Ensure all cells obey the row height */
+.players-page td {
+  vertical-align: middle;   /* keeps content centered */
+  height: 0;            /* match the tr height */
+  max-height: 0;
+  overflow: hidden;         /* prevents content from pushing row taller */
+}
+
+/* Prevent flexbox cells from stretching the row */
+.players-page .player-cell,
+.players-page .owner-cell {
+  height: 100%;
+  max-height: 100%;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* Prevent long owner names from expanding the row */
+.players-page .owner-cell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

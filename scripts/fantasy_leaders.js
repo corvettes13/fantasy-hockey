@@ -40,7 +40,7 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 
     // Keep top 10
     let topSeason = sortedSeason.slice(0, 10);
-    let worstSeason = sortedBad.slice(0, 10);
+    let worstSeason = sortedSeason.slice(-10).reverse();
 
     // Initial render of season table
     renderSeasonTable(topSeason);
@@ -97,9 +97,8 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
 function renderTable(data, date) {
   let players = (data[date] || [])
     .filter(p => p.fp >= 0)          // remove negative scores
-    .sort((a, b) => a.fp - b.fp)     // ascending order
-    .slice(0, 5);                    // top 5 only
-
+    .sort((a, b) => b.fp - a.fp)     // descending order
+    .slice(0, 5);                    // top 5
 
   tableBody.innerHTML = '';
 
