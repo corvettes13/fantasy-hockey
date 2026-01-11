@@ -54,7 +54,7 @@ th, td {
   border-bottom: 1px solid #ddd;
 }
 
-td {
+.fantasy-leaders-container td {
   vertical-align: middle;
 }
 
@@ -64,7 +64,7 @@ th {
   cursor: pointer;
 }
 
-tbody tr {
+.fantasy-leaders-container tbody tr {
   line-height: 1.2;
   height: 68px;        /* or whatever matches your image height + padding */
   max-height: 68px;

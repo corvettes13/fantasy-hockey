@@ -5,6 +5,16 @@ h1 {
   color: #0055a5;
 }
 
+.standings-card {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.card.standings-card {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .standings-table {
   width: 100%;
   border-collapse: collapse;
@@ -13,10 +23,11 @@ h1 {
 
 .standings-table th,
 .standings-table td {
-  padding: 0.3rem 0.5rem; /* tighter cell padding */
+  padding: 0.1rem 0.1rem; !important;
   text-align: center;
   border-bottom: 1px solid #ddd;
   white-space: nowrap; /* prevent wrapping */
+  line-height: 1.1 !important;
 }
 
 .standings-table th button {
@@ -36,6 +47,8 @@ h1 {
 .standings-table tbody tr:hover {
   background-color: #eef6ff;
 }
+
+
 
 .positive {
   color: green;
