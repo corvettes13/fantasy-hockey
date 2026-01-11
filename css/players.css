@@ -205,20 +205,9 @@ tbody tr:hover {
   margin-top: 0.25rem;
 }
 
-.team-meta-row {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-
 .team-meta {
   font-size: 0.95rem;
   color: #444;
-  margin: 0;
-  flex-grow: 1;
-  display: inline-block;
 }
 
 .team-meta strong {
@@ -243,7 +232,6 @@ tbody tr:hover {
   padding: 0.5rem;
   font-size: 0.85rem;
 }
-
 .team-page th {
   background-color: #eaf0f6;
   font-weight: bold;

@@ -91,6 +91,7 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   const teamData = teams.find(t => t.team_info.team_key === teamKey);
   const standingsInfo = standings.teams.find(s => s.team_key === teamKey);
 
+
   if (!teamData) {
     console.error("Team not found for key:", teamKey);
     document.querySelector('.page-content').innerHTML =
@@ -104,6 +105,14 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
 
   const teamInfo = teamData.team_info;
   const roster = teamData.roster;
+  
+  // Calculate total team cost
+  const totalCost = roster.reduce((sum, player) => {
+    const cost = parseFloat(player.cost ?? 0);
+    console.log(player.player_name, player.cost);
+    return sum + (isNaN(cost) ? 0 : cost);
+  }, 0);
+  const fCost = totalCost + roster.length * 3;
 
   document.title = `${teamInfo.name} Roster`;
 
@@ -118,6 +127,9 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
           <strong>Rank:</strong> ${standingsInfo?.rank ?? 'N/A'} |
           <strong>Record:</strong> ${standingsInfo?.wins ?? '-'}-${standingsInfo?.losses ?? '-'} |
           <strong>Points For:</strong> ${standingsInfo?.["points for"]?.toFixed(1) ?? 'N/A'}
+          <br>
+          <strong>Salary:</strong> $${totalCost}
+          <strong>Future Salary:</strong> $${fCost}
         </p>
       </div>
       ${standingsInfo?.currentChampion ? `
