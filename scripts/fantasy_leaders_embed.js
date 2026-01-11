@@ -1,11 +1,18 @@
-const embeddedTableBody = document.querySelector('#embedded-players-table tbody');
+const embeddedTableBody = document.querySelector('#embedded-players-table');
 
 fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
   .then(res => res.json())
   .then(data => {
     const dates = Object.keys(data).sort().reverse();
-    const latest = dates[0];
-    renderEmbeddedTable(data[latest]);
+    // Find the most recent date that actually has an array of players
+    const latestValidDate = dates.find(d => Array.isArray(data[d]) && data[d].length > 0);
+
+    if (!latestValidDate) {
+      console.warn("No valid fantasy leader data found");
+      return;
+    }
+
+    renderEmbeddedTable(data[latestValidDate].slice(0, 5));
   })
   .catch(err => console.error('Error loading embedded fantasy leaders:', err));
 
