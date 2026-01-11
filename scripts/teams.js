@@ -109,7 +109,6 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   // Calculate total team cost
   const totalCost = roster.reduce((sum, player) => {
     const cost = parseFloat(player.cost ?? 0);
-    console.log(player.player_name, player.cost);
     return sum + (isNaN(cost) ? 0 : cost);
   }, 0);
   const fCost = totalCost + roster.length * 3;
