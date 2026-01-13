@@ -17,13 +17,13 @@
       "previous_season_team_rank": 2,
       "division_id": "1",
       "waiver_priority": 4,
-      "faab_balance": "40",
-      "number_of_moves": 37,
+      "faab_balance": "39",
+      "number_of_moves": 38,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 15,
-        "value": "0"
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -38,7 +38,7 @@
             "is_commissioner": "1",
             "email": "andrew.benzer@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/4531/27273881469_5e44f2_64sq.jpg",
-            "felo_score": "714",
+            "felo_score": "705",
             "felo_tier": "gold"
           }
         }
@@ -81,32 +81,46 @@
         "olympics": "Canada"
       },
       {
-        "player_key": "465.p.6762",
-        "player_name": "Joel Eriksson Ek",
-        "team_abbr": "MIN",
+        "player_key": "465.p.30545",
+        "player_name": "Leo Carlsson",
+        "team_abbr": "ANA",
         "primary_position": "C",
         "positions": [
           "C",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "C",
-        "cost": 7,
-        "contract_year": 0,
+        "cost": 4,
+        "contract_year": 1,
         "olympics": "Sweden"
       },
       {
-        "player_key": "465.p.9264",
-        "player_name": "Pavol Regenda",
-        "team_abbr": "SJ",
+        "player_key": "465.p.3637",
+        "player_name": "Alex Ovechkin",
+        "team_abbr": "WSH",
         "primary_position": "LW",
         "positions": [
           "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 0,
+        "cost": 14,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8644",
+        "player_name": "Lucas Raymond",
+        "team_abbr": "DET",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 13,
+        "contract_year": 3,
+        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.7947",
@@ -122,21 +136,6 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.6751",
-        "player_name": "Timo Meier",
-        "team_abbr": "NJ",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 15,
-        "contract_year": 0,
-        "olympics": "Switzerland"
-      },
-      {
         "player_key": "465.p.7908",
         "player_name": "Evan Bouchard",
         "team_abbr": "EDM",
@@ -148,20 +147,6 @@
         "selected_position": "D",
         "cost": 12,
         "contract_year": 3
-      },
-      {
-        "player_key": "465.p.7899",
-        "player_name": "Rasmus Dahlin",
-        "team_abbr": "BUF",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 12,
-        "contract_year": 3,
-        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.7910",
@@ -191,46 +176,17 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.3637",
-        "player_name": "Alex Ovechkin",
-        "team_abbr": "WSH",
-        "primary_position": "LW",
+        "player_key": "465.p.33423",
+        "player_name": "Matthew Schaefer",
+        "team_abbr": "NYI",
+        "primary_position": "D",
         "positions": [
-          "LW",
-          "RW",
+          "D",
           "Util"
         ],
-        "selected_position": "Util",
-        "cost": 14,
+        "selected_position": "D",
+        "cost": 2,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8644",
-        "player_name": "Lucas Raymond",
-        "team_abbr": "DET",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 13,
-        "contract_year": 3,
-        "olympics": "Sweden"
-      },
-      {
-        "player_key": "465.p.30545",
-        "player_name": "Leo Carlsson",
-        "team_abbr": "ANA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 4,
-        "contract_year": 1,
-        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.5441",
@@ -244,22 +200,24 @@
           "Util",
           "IR+"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 1,
         "contract_year": 0
       },
       {
-        "player_key": "465.p.33423",
-        "player_name": "Matthew Schaefer",
-        "team_abbr": "NYI",
-        "primary_position": "D",
+        "player_key": "465.p.6751",
+        "player_name": "Timo Meier",
+        "team_abbr": "NJ",
+        "primary_position": "LW",
         "positions": [
-          "D",
+          "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 2,
-        "contract_year": 0
+        "cost": 15,
+        "contract_year": 0,
+        "olympics": "Switzerland"
       },
       {
         "player_key": "465.p.8878",
@@ -275,6 +233,60 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.6762",
+        "player_name": "Joel Eriksson Ek",
+        "team_abbr": "MIN",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "BN",
+        "cost": 7,
+        "contract_year": 0,
+        "olympics": "Sweden"
+      },
+      {
+        "player_key": "465.p.7899",
+        "player_name": "Rasmus Dahlin",
+        "team_abbr": "BUF",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 12,
+        "contract_year": 3,
+        "olympics": "Sweden"
+      },
+      {
+        "player_key": "465.p.4241",
+        "player_name": "James van Riemsdyk",
+        "team_abbr": "DET",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.9238",
+        "player_name": "Brandon Bussi",
+        "team_abbr": "CAR",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 4,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.7569",
         "player_name": "Ukko-Pekka Luukkonen",
         "team_abbr": "BUF",
@@ -282,7 +294,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 3,
         "contract_year": 0,
         "olympics": "Finland"
@@ -301,15 +313,17 @@
         "olympics": "Czechia"
       },
       {
-        "player_key": "465.p.9238",
-        "player_name": "Brandon Bussi",
-        "team_abbr": "CAR",
-        "primary_position": "G",
+        "player_key": "465.p.7066",
+        "player_name": "Mason Marchment",
+        "team_abbr": "CBJ",
+        "primary_position": "LW",
         "positions": [
-          "G"
+          "LW",
+          "Util",
+          "IR+"
         ],
-        "selected_position": "BN",
-        "cost": 4,
+        "selected_position": "IR+",
+        "cost": 3,
         "contract_year": 0
       },
       {
@@ -323,20 +337,6 @@
         ],
         "selected_position": "IR+",
         "cost": 7,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7066",
-        "player_name": "Mason Marchment",
-        "team_abbr": "CBJ",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "IR+",
-        "cost": 3,
         "contract_year": 0
       }
     ]
@@ -381,8 +381,8 @@
             "is_current_login": "1",
             "email": "corvettes13@hotmail.com",
             "image_url": "https://s.yimg.com/ag/images/4554/37452483213_7fb234_64sq.jpg",
-            "felo_score": "804",
-            "felo_tier": "platinum"
+            "felo_score": "799",
+            "felo_tier": "gold"
           }
         }
       ],
@@ -440,20 +440,6 @@
         "olympics": "Finland"
       },
       {
-        "player_key": "465.p.6384",
-        "player_name": "Alex Tuch",
-        "team_abbr": "BUF",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 11,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.8303",
         "player_name": "Connor McMichael",
         "team_abbr": "WSH",
@@ -468,9 +454,23 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8658",
-        "player_name": "Dawson Mercer",
-        "team_abbr": "NJ",
+        "player_key": "465.p.7636",
+        "player_name": "Drake Batherson",
+        "team_abbr": "OTT",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 14,
+        "contract_year": 2
+      },
+      {
+        "player_key": "465.p.5376",
+        "player_name": "J.T. Miller",
+        "team_abbr": "NYR",
         "primary_position": "C",
         "positions": [
           "C",
@@ -478,8 +478,9 @@
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 0,
-        "contract_year": 0
+        "cost": 19,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.8682",
@@ -493,20 +494,6 @@
         "selected_position": "RW",
         "cost": 0,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7944",
-        "player_name": "Martin Fehervary",
-        "team_abbr": "WSH",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 0,
-        "contract_year": 0,
-        "olympics": "Slovakia"
       },
       {
         "player_key": "465.p.8284",
@@ -523,47 +510,6 @@
         "olympics": "Germany"
       },
       {
-        "player_key": "465.p.7124",
-        "player_name": "Jakob Chychrun",
-        "team_abbr": "WSH",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "D",
-        "cost": 15,
-        "contract_year": 1
-      },
-      {
-        "player_key": "465.p.6005",
-        "player_name": "Shea Theodore",
-        "team_abbr": "VGK",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 17,
-        "contract_year": 3,
-        "olympics": "Canada"
-      },
-      {
-        "player_key": "465.p.6370",
-        "player_name": "Sam Bennett",
-        "team_abbr": "FLA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.6643",
         "player_name": "Darren Raddysh",
         "team_abbr": "TB",
@@ -572,23 +518,9 @@
           "D",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "D",
         "cost": 0,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7636",
-        "player_name": "Drake Batherson",
-        "team_abbr": "OTT",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 14,
-        "contract_year": 2
       },
       {
         "player_key": "465.p.8296",
@@ -599,15 +531,70 @@
           "D",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "D",
         "cost": 6,
         "contract_year": 2,
         "olympics": "Canada"
       },
       {
-        "player_key": "465.p.5376",
-        "player_name": "J.T. Miller",
-        "team_abbr": "NYR",
+        "player_key": "465.p.7944",
+        "player_name": "Martin Fehervary",
+        "team_abbr": "WSH",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "Slovakia"
+      },
+      {
+        "player_key": "465.p.7124",
+        "player_name": "Jakob Chychrun",
+        "team_abbr": "WSH",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "Util",
+        "cost": 15,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.6370",
+        "player_name": "Sam Bennett",
+        "team_abbr": "FLA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6384",
+        "player_name": "Alex Tuch",
+        "team_abbr": "BUF",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 11,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8658",
+        "player_name": "Dawson Mercer",
+        "team_abbr": "NJ",
         "primary_position": "C",
         "positions": [
           "C",
@@ -615,9 +602,22 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 19,
-        "contract_year": 0,
-        "olympics": "USA"
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6005",
+        "player_name": "Shea Theodore",
+        "team_abbr": "VGK",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 17,
+        "contract_year": 3,
+        "olympics": "Canada"
       },
       {
         "player_key": "465.p.5820",
@@ -725,7 +725,7 @@
             "guid": "XGOHH3GGZM7JVETYOOCFZZYOXU",
             "email": "rossermcleod@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "658",
+            "felo_score": "672",
             "felo_tier": "silver"
           }
         }
@@ -740,18 +740,17 @@
     },
     "roster": [
       {
-        "player_key": "465.p.6448",
-        "player_name": "Brayden Point",
-        "team_abbr": "TB",
+        "player_key": "465.p.8879",
+        "player_name": "Mason McTavish",
+        "team_abbr": "ANA",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 28,
-        "contract_year": 2,
-        "olympics": "Canada"
+        "cost": 5,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6386",
@@ -768,17 +767,18 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8879",
-        "player_name": "Mason McTavish",
-        "team_abbr": "ANA",
+        "player_key": "465.p.6814",
+        "player_name": "Anthony Cirelli",
+        "team_abbr": "TB",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 5,
-        "contract_year": 1
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "Canada"
       },
       {
         "player_key": "465.p.7267",
@@ -811,20 +811,6 @@
         "olympics": "Finland"
       },
       {
-        "player_key": "465.p.30109",
-        "player_name": "Josh Doan",
-        "team_abbr": "BUF",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.5425",
         "player_name": "Nikita Kucherov",
         "team_abbr": "TB",
@@ -836,6 +822,19 @@
         "selected_position": "RW",
         "cost": 43,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.32779",
+        "player_name": "Beckett Sennecke",
+        "team_abbr": "ANA",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 1,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.30561",
@@ -904,44 +903,18 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5053",
-        "player_name": "Bryan Rust",
-        "team_abbr": "PIT",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "BN",
-        "cost": 4,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.32779",
-        "player_name": "Beckett Sennecke",
-        "team_abbr": "ANA",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6814",
-        "player_name": "Anthony Cirelli",
+        "player_key": "465.p.6448",
+        "player_name": "Brayden Point",
         "team_abbr": "TB",
         "primary_position": "C",
         "positions": [
           "C",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0,
+        "cost": 28,
+        "contract_year": 2,
         "olympics": "Canada"
       },
       {
@@ -958,17 +931,32 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8895",
-        "player_name": "Jesper Wallstedt",
-        "team_abbr": "MIN",
-        "primary_position": "G",
+        "player_key": "465.p.30109",
+        "player_name": "Josh Doan",
+        "team_abbr": "BUF",
+        "primary_position": "LW",
         "positions": [
-          "G"
+          "LW",
+          "RW",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 1,
-        "contract_year": 0,
-        "olympics": "Sweden"
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.5053",
+        "player_name": "Bryan Rust",
+        "team_abbr": "PIT",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.8489",
@@ -978,7 +966,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 4,
         "contract_year": 1
       },
@@ -993,6 +981,19 @@
         "selected_position": "BN",
         "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8895",
+        "player_name": "Jesper Wallstedt",
+        "team_abbr": "MIN",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 1,
+        "contract_year": 0,
+        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.30547",
@@ -1042,13 +1043,13 @@
       "previous_season_team_rank": 5,
       "division_id": "2",
       "waiver_priority": 5,
-      "faab_balance": "48",
-      "number_of_moves": 58,
+      "faab_balance": "46",
+      "number_of_moves": 59,
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 15,
-        "value": "2"
+        "value": "3"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -1062,7 +1063,7 @@
             "guid": "FQGLP6OXPOUPNREEX7S6INFY3E",
             "email": "wweiler00@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "929",
+            "felo_score": "931",
             "felo_tier": "diamond"
           }
         }
@@ -1076,19 +1077,6 @@
       "weekly_high_score": 0
     },
     "roster": [
-      {
-        "player_key": "465.p.7534",
-        "player_name": "Josh Norris",
-        "team_abbr": "BUF",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 3,
-        "contract_year": 0
-      },
       {
         "player_key": "465.p.8652",
         "player_name": "Anton Lundell",
@@ -1119,6 +1107,19 @@
         "olympics": "Sweden"
       },
       {
+        "player_key": "465.p.30546",
+        "player_name": "Adam Fantilli",
+        "team_abbr": "CBJ",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 3,
+        "contract_year": 1
+      },
+      {
         "player_key": "465.p.30227",
         "player_name": "Matthew Knies",
         "team_abbr": "TOR",
@@ -1147,20 +1148,6 @@
         "olympics": "Canada"
       },
       {
-        "player_key": "465.p.7527",
-        "player_name": "Martin Necas",
-        "team_abbr": "COL",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 15,
-        "contract_year": 1,
-        "olympics": "Czechia"
-      },
-      {
         "player_key": "465.p.6766",
         "player_name": "Travis Konecny",
         "team_abbr": "PHI",
@@ -1168,12 +1155,24 @@
         "positions": [
           "LW",
           "RW",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "RW",
         "cost": 16,
         "contract_year": 2
+      },
+      {
+        "player_key": "465.p.30550",
+        "player_name": "Ryan Leonard",
+        "team_abbr": "WSH",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.30154",
@@ -1202,9 +1201,9 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.8292",
-        "player_name": "Cam York",
-        "team_abbr": "PHI",
+        "player_key": "465.p.8522",
+        "player_name": "Charle-Edouard D'Astous",
+        "team_abbr": "TB",
         "primary_position": "D",
         "positions": [
           "D",
@@ -1213,6 +1212,47 @@
         "selected_position": "D",
         "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.30796",
+        "player_name": "Oliver Kapanen",
+        "team_abbr": "MTL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "Util",
+        "cost": 4,
+        "contract_year": 0,
+        "olympics": "Finland"
+      },
+      {
+        "player_key": "465.p.7534",
+        "player_name": "Josh Norris",
+        "team_abbr": "BUF",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.7527",
+        "player_name": "Martin Necas",
+        "team_abbr": "COL",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 15,
+        "contract_year": 1,
+        "olympics": "Czechia"
       },
       {
         "player_key": "465.p.6746",
@@ -1225,36 +1265,10 @@
           "RW",
           "Util"
         ],
-        "selected_position": "Util",
+        "selected_position": "BN",
         "cost": 39,
         "contract_year": 1,
         "olympics": "Canada"
-      },
-      {
-        "player_key": "465.p.30550",
-        "player_name": "Ryan Leonard",
-        "team_abbr": "WSH",
-        "primary_position": "RW",
-        "positions": [
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.30546",
-        "player_name": "Adam Fantilli",
-        "team_abbr": "CBJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 1
       },
       {
         "player_key": "465.p.32794",
@@ -1271,30 +1285,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.30796",
-        "player_name": "Oliver Kapanen",
-        "team_abbr": "MTL",
+        "player_key": "465.p.8310",
+        "player_name": "Shane Pinto",
+        "team_abbr": "OTT",
         "primary_position": "C",
         "positions": [
           "C",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 4,
-        "contract_year": 0,
-        "olympics": "Finland"
-      },
-      {
-        "player_key": "465.p.8522",
-        "player_name": "Charle-Edouard D'Astous",
-        "team_abbr": "TB",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
+        "cost": 2,
         "contract_year": 0
       },
       {
@@ -1306,8 +1306,20 @@
           "G"
         ],
         "selected_position": "G",
-        "cost": 22,
+        "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6447",
+        "player_name": "Ilya Sorokin",
+        "team_abbr": "NYI",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 9,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6887",
@@ -1321,18 +1333,6 @@
         "cost": 4,
         "contract_year": 0,
         "olympics": "Czechia"
-      },
-      {
-        "player_key": "465.p.6447",
-        "player_name": "Ilya Sorokin",
-        "team_abbr": "NYI",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 9,
-        "contract_year": 1
       },
       {
         "player_key": "465.p.5988",
@@ -1403,7 +1403,7 @@
             "guid": "HIRMHH64PVJ4W5IBA4G2ZLELQY",
             "email": "lindsey.getches@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "546",
+            "felo_score": "550",
             "felo_tier": "bronze"
           }
         },
@@ -1444,6 +1444,20 @@
         "olympics": "Canada"
       },
       {
+        "player_key": "465.p.8922",
+        "player_name": "Logan Stankoven",
+        "team_abbr": "CAR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.8725",
         "player_name": "Justin Sourdif",
         "team_abbr": "WSH",
@@ -1459,35 +1473,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8279",
-        "player_name": "Jack Hughes",
-        "team_abbr": "NJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 15,
-        "contract_year": 1,
-        "olympics": "USA"
-      },
-      {
-        "player_key": "465.p.6377",
-        "player_name": "Kevin Fiala",
-        "team_abbr": "LA",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 12,
-        "contract_year": 0,
-        "olympics": "Switzerland"
-      },
-      {
         "player_key": "465.p.8641",
         "player_name": "Alexis Lafreniere",
         "team_abbr": "NYR",
@@ -1500,6 +1485,21 @@
         "selected_position": "LW",
         "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6055",
+        "player_name": "Pavel Buchnevich",
+        "team_abbr": "STL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 3,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.7332",
@@ -1582,34 +1582,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.4990",
-        "player_name": "Brock Nelson",
-        "team_abbr": "COL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "Util",
-        "cost": 4,
-        "contract_year": 0,
-        "olympics": "USA"
-      },
-      {
-        "player_key": "465.p.8922",
-        "player_name": "Logan Stankoven",
-        "team_abbr": "CAR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.7143",
         "player_name": "Jordan Kyrou",
         "team_abbr": "STL",
@@ -1618,9 +1590,23 @@
           "RW",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 14,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8642",
+        "player_name": "Quinton Byfield",
+        "team_abbr": "LA",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 6,
+        "contract_year": 2
       },
       {
         "player_key": "465.p.5367",
@@ -1638,33 +1624,32 @@
         "olympics": "Sweden"
       },
       {
-        "player_key": "465.p.8642",
-        "player_name": "Quinton Byfield",
+        "player_key": "465.p.6377",
+        "player_name": "Kevin Fiala",
         "team_abbr": "LA",
-        "primary_position": "C",
+        "primary_position": "LW",
         "positions": [
-          "C",
           "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 6,
-        "contract_year": 2
+        "cost": 12,
+        "contract_year": 0,
+        "olympics": "Switzerland"
       },
       {
-        "player_key": "465.p.6055",
-        "player_name": "Pavel Buchnevich",
-        "team_abbr": "STL",
+        "player_key": "465.p.4990",
+        "player_name": "Brock Nelson",
+        "team_abbr": "COL",
         "primary_position": "C",
         "positions": [
           "C",
-          "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 1
+        "cost": 4,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.7114",
@@ -1679,6 +1664,21 @@
         ],
         "selected_position": "BN",
         "cost": 31,
+        "contract_year": 1,
+        "olympics": "USA"
+      },
+      {
+        "player_key": "465.p.8279",
+        "player_name": "Jack Hughes",
+        "team_abbr": "NJ",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 15,
         "contract_year": 1,
         "olympics": "USA"
       },
@@ -1761,7 +1761,7 @@
             "guid": "KVFECVFNUM4VGNDDKZOZISHUUM",
             "email": "combedge@yahoo.com",
             "image_url": "https://s.yimg.com/ag/images/4487/26330086179_1aede4_64sq.jpg",
-            "felo_score": "544",
+            "felo_score": "548",
             "felo_tier": "bronze"
           }
         }
@@ -1790,6 +1790,21 @@
         "olympics": "USA"
       },
       {
+        "player_key": "465.p.6374",
+        "player_name": "William Nylander",
+        "team_abbr": "TOR",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 20,
+        "contract_year": 2,
+        "olympics": "Sweden"
+      },
+      {
         "player_key": "465.p.6758",
         "player_name": "Mathew Barzal",
         "team_abbr": "NYI",
@@ -1801,22 +1816,6 @@
         ],
         "selected_position": "C",
         "cost": 4,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.7582",
-        "player_name": "Morgan Geekie",
-        "team_abbr": "BOS",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "C",
-        "cost": 3,
         "contract_year": 0
       },
       {
@@ -1834,17 +1833,17 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.5020",
-        "player_name": "Tyler Toffoli",
-        "team_abbr": "SJ",
-        "primary_position": "LW",
+        "player_key": "465.p.5405",
+        "player_name": "Boone Jenner",
+        "team_abbr": "CBJ",
+        "primary_position": "C",
         "positions": [
+          "C",
           "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 0,
+        "cost": 1,
         "contract_year": 0
       },
       {
@@ -1896,8 +1895,7 @@
         "primary_position": "D",
         "positions": [
           "D",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "D",
         "cost": 1,
@@ -1931,17 +1929,19 @@
         "olympics": "Slovakia"
       },
       {
-        "player_key": "465.p.5405",
-        "player_name": "Boone Jenner",
-        "team_abbr": "CBJ",
+        "player_key": "465.p.7582",
+        "player_name": "Morgan Geekie",
+        "team_abbr": "BOS",
         "primary_position": "C",
         "positions": [
           "C",
           "LW",
-          "Util"
+          "RW",
+          "Util",
+          "IR+"
         ],
         "selected_position": "Util",
-        "cost": 1,
+        "cost": 3,
         "contract_year": 0
       },
       {
@@ -1959,35 +1959,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6390",
-        "player_name": "Jared McCann",
-        "team_abbr": "SEA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6374",
-        "player_name": "William Nylander",
-        "team_abbr": "TOR",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 20,
-        "contract_year": 2,
-        "olympics": "Sweden"
-      },
-      {
         "player_key": "465.p.4974",
         "player_name": "Jaden Schwartz",
         "team_abbr": "SEA",
@@ -2002,15 +1973,31 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8651",
-        "player_name": "Yaroslav Askarov",
-        "team_abbr": "SJ",
-        "primary_position": "G",
+        "player_key": "465.p.6390",
+        "player_name": "Jared McCann",
+        "team_abbr": "SEA",
+        "primary_position": "C",
         "positions": [
-          "G"
+          "C",
+          "LW",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 4,
+        "selected_position": "BN",
+        "cost": 2,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.5020",
+        "player_name": "Tyler Toffoli",
+        "team_abbr": "SJ",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -2021,10 +2008,22 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 1,
         "contract_year": 0,
         "olympics": "Czechia"
+      },
+      {
+        "player_key": "465.p.8651",
+        "player_name": "Yaroslav Askarov",
+        "team_abbr": "SJ",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.8033",
@@ -2087,12 +2086,12 @@
       "division_id": "1",
       "waiver_priority": 3,
       "faab_balance": "62",
-      "number_of_moves": 35,
+      "number_of_moves": 36,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 15,
-        "value": "0"
+        "value": "1"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2106,7 +2105,7 @@
             "guid": "UR22XJ5DF3CWLRL2JRNA6OJVAM",
             "email": "bradfordmilesneumann@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "637",
+            "felo_score": "622",
             "felo_tier": "silver"
           }
         }
@@ -2136,19 +2135,6 @@
         "olympics": "Germany"
       },
       {
-        "player_key": "465.p.7903",
-        "player_name": "Barrett Hayton",
-        "team_abbr": "UTA",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.6743",
         "player_name": "Connor McDavid",
         "team_abbr": "EDM",
@@ -2161,6 +2147,21 @@
         "cost": 46,
         "contract_year": 1,
         "olympics": "Canada"
+      },
+      {
+        "player_key": "465.p.7902",
+        "player_name": "Brady Tkachuk",
+        "team_abbr": "OTT",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 45,
+        "contract_year": 1,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.5096",
@@ -2190,9 +2191,9 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5989",
-        "player_name": "Valeri Nichushkin",
-        "team_abbr": "COL",
+        "player_key": "465.p.8369",
+        "player_name": "Aliaksei Protas",
+        "team_abbr": "WSH",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2200,33 +2201,6 @@
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 4,
-        "contract_year": 1
-      },
-      {
-        "player_key": "465.p.7854",
-        "player_name": "Kiefer Sherwood",
-        "team_abbr": "VAN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.6367",
-        "player_name": "Aaron Ekblad",
-        "team_abbr": "FLA",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
         "cost": 0,
         "contract_year": 0
       },
@@ -2272,6 +2246,19 @@
         "olympics": "Czechia"
       },
       {
+        "player_key": "465.p.6760",
+        "player_name": "Thomas Chabot",
+        "team_abbr": "OTT",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 1,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.5691",
         "player_name": "Filip Forsberg",
         "team_abbr": "NSH",
@@ -2285,9 +2272,36 @@
         "contract_year": 2
       },
       {
-        "player_key": "465.p.7902",
-        "player_name": "Brady Tkachuk",
-        "team_abbr": "OTT",
+        "player_key": "465.p.5989",
+        "player_name": "Valeri Nichushkin",
+        "team_abbr": "COL",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.6367",
+        "player_name": "Aaron Ekblad",
+        "team_abbr": "FLA",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.3638",
+        "player_name": "Evgeni Malkin",
+        "team_abbr": "PIT",
         "primary_position": "C",
         "positions": [
           "C",
@@ -2295,9 +2309,8 @@
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 45,
-        "contract_year": 1,
-        "olympics": "USA"
+        "cost": 1,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6753",
@@ -2314,9 +2327,9 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8369",
-        "player_name": "Aliaksei Protas",
-        "team_abbr": "WSH",
+        "player_key": "465.p.8666",
+        "player_name": "Jake Neighbours",
+        "team_abbr": "STL",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2328,17 +2341,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6760",
-        "player_name": "Thomas Chabot",
-        "team_abbr": "OTT",
-        "primary_position": "D",
+        "player_key": "465.p.7593",
+        "player_name": "Stuart Skinner",
+        "team_abbr": "PIT",
+        "primary_position": "G",
         "positions": [
-          "D",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0
+        "selected_position": "G",
+        "cost": 9,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.7163",
@@ -2348,22 +2360,10 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 9,
         "contract_year": 3,
         "olympics": "Sweden"
-      },
-      {
-        "player_key": "465.p.7593",
-        "player_name": "Stuart Skinner",
-        "team_abbr": "PIT",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 9,
-        "contract_year": 1
       },
       {
         "player_key": "465.p.8890",
@@ -2378,17 +2378,18 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.3638",
-        "player_name": "Evgeni Malkin",
-        "team_abbr": "PIT",
-        "primary_position": "C",
+        "player_key": "465.p.7854",
+        "player_name": "Kiefer Sherwood",
+        "team_abbr": "VAN",
+        "primary_position": "LW",
         "positions": [
-          "C",
           "LW",
-          "Util"
+          "RW",
+          "Util",
+          "IR+"
         ],
         "selected_position": "IR+",
-        "cost": 1,
+        "cost": 0,
         "contract_year": 0
       }
     ]
@@ -2412,12 +2413,12 @@
       "division_id": "2",
       "waiver_priority": 9,
       "faab_balance": "67",
-      "number_of_moves": 63,
+      "number_of_moves": 64,
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 15,
-        "value": "2"
+        "value": "3"
       },
       "league_scoring_type": "headpoint",
       "has_draft_grade": 0,
@@ -2431,7 +2432,7 @@
             "guid": "R32UKXMYWLBNE4DGSB7Z73EENY",
             "email": "greeney41@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "683",
+            "felo_score": "672",
             "felo_tier": "silver"
           }
         }
@@ -2445,21 +2446,6 @@
       "weekly_high_score": 0
     },
     "roster": [
-      {
-        "player_key": "465.p.8287",
-        "player_name": "Trevor Zegras",
-        "team_abbr": "PHI",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 5,
-        "contract_year": 0
-      },
       {
         "player_key": "465.p.6777",
         "player_name": "Sebastian Aho",
@@ -2490,9 +2476,22 @@
         "olympics": "Czechia"
       },
       {
-        "player_key": "465.p.8357",
-        "player_name": "Pavel Dorofeyev",
-        "team_abbr": "VGK",
+        "player_key": "465.p.8285",
+        "player_name": "Dylan Cozens",
+        "team_abbr": "OTT",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 7,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6765",
+        "player_name": "Brock Boeser",
+        "team_abbr": "VAN",
         "primary_position": "LW",
         "positions": [
           "LW",
@@ -2500,21 +2499,21 @@
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 4,
-        "contract_year": 1
+        "cost": 0,
+        "contract_year": 0
       },
       {
-        "player_key": "465.p.6402",
-        "player_name": "Ivan Barbashev",
-        "team_abbr": "VGK",
+        "player_key": "465.p.6062",
+        "player_name": "Carter Verhaeghe",
+        "team_abbr": "FLA",
         "primary_position": "LW",
         "positions": [
           "LW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 5,
-        "contract_year": 1
+        "cost": 3,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6395",
@@ -2531,18 +2530,17 @@
         "olympics": "Sweden"
       },
       {
-        "player_key": "465.p.30075",
-        "player_name": "Brock Faber",
+        "player_key": "465.p.4921",
+        "player_name": "Mats Zuccarello",
         "team_abbr": "MIN",
-        "primary_position": "D",
+        "primary_position": "RW",
         "positions": [
-          "D",
+          "RW",
           "Util"
         ],
-        "selected_position": "D",
+        "selected_position": "RW",
         "cost": 0,
-        "contract_year": 0,
-        "olympics": "USA"
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7905",
@@ -2559,19 +2557,6 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.7950",
-        "player_name": "Sean Durzi",
-        "team_abbr": "UTA",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.32766",
         "player_name": "Zeev Buium",
         "team_abbr": "VAN",
@@ -2585,17 +2570,31 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6062",
-        "player_name": "Carter Verhaeghe",
-        "team_abbr": "FLA",
-        "primary_position": "LW",
+        "player_key": "465.p.7950",
+        "player_name": "Sean Durzi",
+        "team_abbr": "UTA",
+        "primary_position": "D",
         "positions": [
-          "LW",
+          "D",
           "Util"
         ],
-        "selected_position": "Util",
-        "cost": 3,
+        "selected_position": "D",
+        "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.30075",
+        "player_name": "Brock Faber",
+        "team_abbr": "MIN",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.6375",
@@ -2607,36 +2606,52 @@
           "RW",
           "Util"
         ],
-        "selected_position": "BN",
+        "selected_position": "Util",
         "cost": 10,
         "contract_year": 2,
         "olympics": "Denmark"
       },
       {
-        "player_key": "465.p.4921",
-        "player_name": "Mats Zuccarello",
-        "team_abbr": "MIN",
-        "primary_position": "RW",
+        "player_key": "465.p.8287",
+        "player_name": "Trevor Zegras",
+        "team_abbr": "PHI",
+        "primary_position": "C",
         "positions": [
+          "C",
+          "LW",
           "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 0,
+        "cost": 5,
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8285",
-        "player_name": "Dylan Cozens",
-        "team_abbr": "OTT",
-        "primary_position": "C",
+        "player_key": "465.p.6402",
+        "player_name": "Ivan Barbashev",
+        "team_abbr": "VGK",
+        "primary_position": "LW",
         "positions": [
-          "C",
+          "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 7,
-        "contract_year": 0
+        "cost": 5,
+        "contract_year": 1
+      },
+      {
+        "player_key": "465.p.8357",
+        "player_name": "Pavel Dorofeyev",
+        "team_abbr": "VGK",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.30548",
@@ -2653,30 +2668,14 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.5810",
-        "player_name": "Jaccob Slavin",
-        "team_abbr": "CAR",
-        "primary_position": "D",
+        "player_key": "465.p.9389",
+        "player_name": "Dennis Hildeby",
+        "team_abbr": "TOR",
+        "primary_position": "G",
         "positions": [
-          "D",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0,
-        "olympics": "USA"
-      },
-      {
-        "player_key": "465.p.6765",
-        "player_name": "Brock Boeser",
-        "team_abbr": "VAN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 0,
         "contract_year": 0
       },
@@ -2694,17 +2693,16 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.5161",
-        "player_name": "Frederik Andersen",
-        "team_abbr": "CAR",
+        "player_key": "465.p.8291",
+        "player_name": "Spencer Knight",
+        "team_abbr": "CHI",
         "primary_position": "G",
         "positions": [
           "G"
         ],
         "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0,
-        "olympics": "Denmark"
+        "cost": 8,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6405",
@@ -2718,19 +2716,6 @@
         "selected_position": "IR+",
         "cost": 19,
         "contract_year": 2
-      },
-      {
-        "player_key": "465.p.8291",
-        "player_name": "Spencer Knight",
-        "team_abbr": "CHI",
-        "primary_position": "G",
-        "positions": [
-          "G",
-          "IR+"
-        ],
-        "selected_position": "IR+",
-        "cost": 8,
-        "contract_year": 1
       }
     ]
   },
@@ -2772,7 +2757,7 @@
             "guid": "EL4RIVA7EABT6TCHON2V4ZYJIY",
             "email": "kaseyfkirby@yahoo.com",
             "image_url": "https://s.yimg.com/ag/images/4562/37915101540_b8ecff_64sq.jpg",
-            "felo_score": "590",
+            "felo_score": "584",
             "felo_tier": "bronze"
           }
         }
@@ -2794,7 +2779,8 @@
         "positions": [
           "C",
           "RW",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "C",
         "cost": 31,
@@ -2925,6 +2911,21 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.6035",
+        "player_name": "Artturi Lehkonen",
+        "team_abbr": "COL",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "Util",
+        "cost": 13,
+        "contract_year": 2,
+        "olympics": "Finland"
+      },
+      {
         "player_key": "465.p.7545",
         "player_name": "Eeli Tolvanen",
         "team_abbr": "SEA",
@@ -2934,7 +2935,7 @@
           "RW",
           "Util"
         ],
-        "selected_position": "Util",
+        "selected_position": "BN",
         "cost": 0,
         "contract_year": 0,
         "olympics": "Finland"
@@ -2985,21 +2986,6 @@
         "olympics": "Finland"
       },
       {
-        "player_key": "465.p.6035",
-        "player_name": "Artturi Lehkonen",
-        "team_abbr": "COL",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 13,
-        "contract_year": 2,
-        "olympics": "Finland"
-      },
-      {
         "player_key": "465.p.6388",
         "player_name": "Kasperi Kapanen",
         "team_abbr": "EDM",
@@ -3013,18 +2999,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5057",
-        "player_name": "Scott Wedgewood",
-        "team_abbr": "COL",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "G",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.5336",
         "player_name": "Darcy Kuemper",
         "team_abbr": "LA",
@@ -3032,10 +3006,22 @@
         "positions": [
           "G"
         ],
-        "selected_position": "BN",
+        "selected_position": "G",
         "cost": 5,
         "contract_year": 1,
         "olympics": "Canada"
+      },
+      {
+        "player_key": "465.p.5057",
+        "player_name": "Scott Wedgewood",
+        "team_abbr": "COL",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.5022",
@@ -3116,7 +3102,7 @@
             "nickname": "Brett S",
             "guid": "JBWMEDA2CMV6YEU36KLOLETIHM",
             "image_url": "https://s.yimg.com/ag/images/4534/24384625807_5f715f_64sq.jpg",
-            "felo_score": "831",
+            "felo_score": "839",
             "felo_tier": "platinum"
           }
         },
@@ -3142,20 +3128,6 @@
       "weekly_high_score": 0
     },
     "roster": [
-      {
-        "player_key": "465.p.6744",
-        "player_name": "Jack Eichel",
-        "team_abbr": "VGK",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 30,
-        "contract_year": 0,
-        "olympics": "USA"
-      },
       {
         "player_key": "465.p.4471",
         "player_name": "Steven Stamkos",
@@ -3186,19 +3158,19 @@
         "olympics": "Switzerland"
       },
       {
-        "player_key": "465.p.7115",
-        "player_name": "Clayton Keller",
-        "team_abbr": "UTA",
-        "primary_position": "LW",
+        "player_key": "465.p.8643",
+        "player_name": "Tim Stutzle",
+        "team_abbr": "OTT",
+        "primary_position": "C",
         "positions": [
+          "C",
           "LW",
-          "RW",
           "Util"
         ],
-        "selected_position": "LW",
-        "cost": 29,
-        "contract_year": 0,
-        "olympics": "USA"
+        "selected_position": "C",
+        "cost": 15,
+        "contract_year": 2,
+        "olympics": "Germany"
       },
       {
         "player_key": "465.p.6759",
@@ -3215,47 +3187,48 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.5152",
-        "player_name": "Mark Stone",
-        "team_abbr": "VGK",
-        "primary_position": "RW",
+        "player_key": "465.p.9269",
+        "player_name": "Juraj Slafkovský",
+        "team_abbr": "MTL",
+        "primary_position": "LW",
         "positions": [
+          "LW",
           "RW",
           "Util"
         ],
-        "selected_position": "RW",
-        "cost": 13,
-        "contract_year": 0,
-        "olympics": "Canada"
-      },
-      {
-        "player_key": "465.p.7134",
-        "player_name": "Tage Thompson",
-        "team_abbr": "BUF",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 14,
+        "selected_position": "LW",
+        "cost": 4,
         "contract_year": 1,
-        "olympics": "USA"
+        "olympics": "Slovakia"
       },
       {
-        "player_key": "465.p.7519",
-        "player_name": "Cale Makar",
-        "team_abbr": "COL",
-        "primary_position": "D",
+        "player_key": "465.p.7554",
+        "player_name": "Jason Robertson",
+        "team_abbr": "DAL",
+        "primary_position": "LW",
         "positions": [
-          "D",
+          "LW",
+          "RW",
           "Util"
         ],
-        "selected_position": "D",
-        "cost": 32,
+        "selected_position": "RW",
+        "cost": 19,
+        "contract_year": 2
+      },
+      {
+        "player_key": "465.p.7115",
+        "player_name": "Clayton Keller",
+        "team_abbr": "UTA",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 0,
         "contract_year": 0,
-        "olympics": "Canada"
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.6750",
@@ -3295,9 +3268,23 @@
           "Util"
         ],
         "selected_position": "D",
-        "cost": 10,
+        "cost": 0,
         "contract_year": 0,
         "olympics": "Canada"
+      },
+      {
+        "player_key": "465.p.32773",
+        "player_name": "Zayne Parekh",
+        "team_abbr": "CGY",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "D",
+        "cost": 2,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6728",
@@ -3313,47 +3300,61 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.32773",
-        "player_name": "Zayne Parekh",
-        "team_abbr": "CGY",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "BN",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8643",
-        "player_name": "Tim Stutzle",
-        "team_abbr": "OTT",
+        "player_key": "465.p.6744",
+        "player_name": "Jack Eichel",
+        "team_abbr": "VGK",
         "primary_position": "C",
         "positions": [
           "C",
-          "LW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 15,
-        "contract_year": 2,
-        "olympics": "Germany"
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
-        "player_key": "465.p.7554",
-        "player_name": "Jason Robertson",
-        "team_abbr": "DAL",
-        "primary_position": "LW",
+        "player_key": "465.p.7519",
+        "player_name": "Cale Makar",
+        "team_abbr": "COL",
+        "primary_position": "D",
         "positions": [
-          "LW",
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "Canada"
+      },
+      {
+        "player_key": "465.p.7134",
+        "player_name": "Tage Thompson",
+        "team_abbr": "BUF",
+        "primary_position": "C",
+        "positions": [
+          "C",
           "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 19,
-        "contract_year": 2
+        "cost": 14,
+        "contract_year": 1,
+        "olympics": "USA"
+      },
+      {
+        "player_key": "465.p.5152",
+        "player_name": "Mark Stone",
+        "team_abbr": "VGK",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 13,
+        "contract_year": 0,
+        "olympics": "Canada"
       },
       {
         "player_key": "465.p.7535",
@@ -3362,26 +3363,12 @@
         "primary_position": "C",
         "positions": [
           "C",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "BN",
-        "cost": 12,
+        "cost": 0,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.9269",
-        "player_name": "Juraj Slafkovsk\u00fd",
-        "team_abbr": "MTL",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 4,
-        "contract_year": 1,
-        "olympics": "Slovakia"
       },
       {
         "player_key": "465.p.9118",
@@ -3442,7 +3429,7 @@
     "team_info": {
       "team_key": "465.l.13153.t.11",
       "team_id": "11",
-      "name": "Archie\u2019s Cousin",
+      "name": "Archie’s Cousin",
       "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/11",
       "team_logos": [
         {
@@ -3476,7 +3463,7 @@
             "guid": "EGI324AY6DUD2PASBKXCWBDGVE",
             "email": "macgreg4@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
-            "felo_score": "570",
+            "felo_score": "576",
             "felo_tier": "bronze"
           }
         }
@@ -3518,32 +3505,17 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.5768",
-        "player_name": "Chandler Stephenson",
-        "team_abbr": "SEA",
+        "player_key": "465.p.5368",
+        "player_name": "Mark Scheifele",
+        "team_abbr": "WPG",
         "primary_position": "C",
         "positions": [
           "C",
-          "Util",
-          "IR+"
-        ],
-        "selected_position": "C",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.30139",
-        "player_name": "Alex Laferriere",
-        "team_abbr": "LA",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
           "Util"
         ],
-        "selected_position": "LW",
-        "cost": 1,
-        "contract_year": 0
+        "selected_position": "C",
+        "cost": 16,
+        "contract_year": 1
       },
       {
         "player_key": "465.p.6756",
@@ -3558,6 +3530,21 @@
         "selected_position": "LW",
         "cost": 0,
         "contract_year": 0
+      },
+      {
+        "player_key": "465.p.6748",
+        "player_name": "Pavel Zacha",
+        "team_abbr": "BOS",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 2,
+        "contract_year": 0,
+        "olympics": "Czechia"
       },
       {
         "player_key": "465.p.6391",
@@ -3585,19 +3572,6 @@
         ],
         "selected_position": "RW",
         "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8282",
-        "player_name": "Bowen Byram",
-        "team_abbr": "BUF",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 2,
         "contract_year": 0
       },
       {
@@ -3640,6 +3614,19 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.6184",
+        "player_name": "MacKenzie Weegar",
+        "team_abbr": "CGY",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 13,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.7518",
         "player_name": "Miro Heiskanen",
         "team_abbr": "DAL",
@@ -3654,32 +3641,45 @@
         "olympics": "Finland"
       },
       {
-        "player_key": "465.p.6748",
-        "player_name": "Pavel Zacha",
-        "team_abbr": "BOS",
+        "player_key": "465.p.5768",
+        "player_name": "Chandler Stephenson",
+        "team_abbr": "SEA",
         "primary_position": "C",
         "positions": [
           "C",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "BN",
+        "cost": 2,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.30139",
+        "player_name": "Alex Laferriere",
+        "team_abbr": "LA",
+        "primary_position": "LW",
+        "positions": [
           "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 1,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.8282",
+        "player_name": "Bowen Byram",
+        "team_abbr": "BUF",
+        "primary_position": "D",
+        "positions": [
+          "D",
           "Util"
         ],
         "selected_position": "BN",
         "cost": 2,
-        "contract_year": 0,
-        "olympics": "Czechia"
-      },
-      {
-        "player_key": "465.p.5368",
-        "player_name": "Mark Scheifele",
-        "team_abbr": "WPG",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 16,
-        "contract_year": 1
+        "contract_year": 0
       },
       {
         "player_key": "465.p.8883",
@@ -3696,16 +3696,15 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.6184",
-        "player_name": "MacKenzie Weegar",
-        "team_abbr": "CGY",
-        "primary_position": "D",
+        "player_key": "465.p.5407",
+        "player_name": "John Gibson",
+        "team_abbr": "DET",
+        "primary_position": "G",
         "positions": [
-          "D",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 13,
+        "selected_position": "G",
+        "cost": 3,
         "contract_year": 0
       },
       {
@@ -3716,22 +3715,10 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 5,
         "contract_year": 0,
         "olympics": "Sweden"
-      },
-      {
-        "player_key": "465.p.5407",
-        "player_name": "John Gibson",
-        "team_abbr": "DET",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 0
       },
       {
         "player_key": "465.p.7170",
@@ -3815,7 +3802,7 @@
             "guid": "RVF4OST5N7NAI6PU2QHFWFE55A",
             "email": "mcdono51@gmail.com",
             "image_url": "https://s.yimg.com/ag/images/4529/38942269861_ebff6b_64sq.jpg",
-            "felo_score": "851",
+            "felo_score": "850",
             "felo_tier": "platinum"
           }
         }
@@ -3830,31 +3817,18 @@
     },
     "roster": [
       {
-        "player_key": "465.p.4786",
-        "player_name": "Ryan O'Reilly",
-        "team_abbr": "NSH",
+        "player_key": "465.p.5362",
+        "player_name": "Ryan Nugent-Hopkins",
+        "team_abbr": "EDM",
         "primary_position": "C",
         "positions": [
           "C",
+          "LW",
           "Util"
         ],
         "selected_position": "C",
-        "cost": 0,
+        "cost": 3,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.5993",
-        "player_name": "Alexander Wennberg",
-        "team_abbr": "SJ",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "Util"
-        ],
-        "selected_position": "C",
-        "cost": 0,
-        "contract_year": 0,
-        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.6745",
@@ -3868,6 +3842,19 @@
         "selected_position": "C",
         "cost": 7,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.4786",
+        "player_name": "Ryan O'Reilly",
+        "team_abbr": "NSH",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "C",
+        "cost": 0,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.7900",
@@ -3884,17 +3871,31 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.7961",
-        "player_name": "Jack McBain",
-        "team_abbr": "UTA",
-        "primary_position": "C",
+        "player_key": "465.p.4704",
+        "player_name": "Marcus Johansson",
+        "team_abbr": "MIN",
+        "primary_position": "LW",
         "positions": [
-          "C",
           "LW",
           "Util"
         ],
         "selected_position": "LW",
         "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.4519",
+        "player_name": "Jamie Benn",
+        "team_abbr": "DAL",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 2,
         "contract_year": 0
       },
       {
@@ -3908,23 +3909,8 @@
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 9,
+        "cost": 0,
         "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8290",
-        "player_name": "Matt Boldy",
-        "team_abbr": "MIN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "RW",
-        "cost": 13,
-        "contract_year": 0,
-        "olympics": "USA"
       },
       {
         "player_key": "465.p.7930",
@@ -3962,7 +3948,7 @@
           "Util"
         ],
         "selected_position": "D",
-        "cost": 6,
+        "cost": 0,
         "contract_year": 0
       },
       {
@@ -3993,17 +3979,19 @@
         "olympics": "Sweden"
       },
       {
-        "player_key": "465.p.4687",
-        "player_name": "Nazem Kadri",
-        "team_abbr": "CGY",
-        "primary_position": "C",
+        "player_key": "465.p.8290",
+        "player_name": "Matt Boldy",
+        "team_abbr": "MIN",
+        "primary_position": "LW",
         "positions": [
-          "C",
+          "LW",
+          "RW",
           "Util"
         ],
         "selected_position": "BN",
-        "cost": 7,
-        "contract_year": 0
+        "cost": 0,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.5431",
@@ -4020,30 +4008,30 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.5362",
-        "player_name": "Ryan Nugent-Hopkins",
-        "team_abbr": "EDM",
+        "player_key": "465.p.5993",
+        "player_name": "Alexander Wennberg",
+        "team_abbr": "SJ",
         "primary_position": "C",
         "positions": [
           "C",
-          "LW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 3,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.4704",
-        "player_name": "Marcus Johansson",
-        "team_abbr": "MIN",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
           "Util"
         ],
         "selected_position": "BN",
         "cost": 0,
+        "contract_year": 0,
+        "olympics": "Sweden"
+      },
+      {
+        "player_key": "465.p.4687",
+        "player_name": "Nazem Kadri",
+        "team_abbr": "CGY",
+        "primary_position": "C",
+        "positions": [
+          "C",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 7,
         "contract_year": 0
       },
       {
@@ -4060,18 +4048,6 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.6941",
-        "player_name": "Joey Daccord",
-        "team_abbr": "SEA",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 2,
-        "contract_year": 0
-      },
-      {
         "player_key": "465.p.6985",
         "player_name": "Connor Ingram",
         "team_abbr": "EDM",
@@ -4084,18 +4060,14 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.4519",
-        "player_name": "Jamie Benn",
-        "team_abbr": "DAL",
-        "primary_position": "C",
+        "player_key": "465.p.6941",
+        "player_name": "Joey Daccord",
+        "team_abbr": "SEA",
+        "primary_position": "G",
         "positions": [
-          "C",
-          "LW",
-          "RW",
-          "Util",
-          "IR+"
+          "G"
         ],
-        "selected_position": "IR+",
+        "selected_position": "BN",
         "cost": 2,
         "contract_year": 0
       }
