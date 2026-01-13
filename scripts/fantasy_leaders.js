@@ -7,7 +7,10 @@ const worstFreeAgentToggle = document.getElementById('worst-free-agent-toggle');
 const worstTableBody = document.querySelector('#worst-table tbody');
 
 function formatDatePretty(isoDate) {
-  const date = new Date(isoDate);
+  // Adding 'T00:00:00' forces the browser to treat it as a local date
+  // OR you can specify the timeZone as UTC in the formatter.
+  const date = new Date(isoDate + 'T00:00:00'); 
+  
   return date.toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
@@ -20,6 +23,7 @@ fetch('/fantasy-hockey/data/fantasy_leaders_by_day.json')
   .then(res => res.json())
   .then(data => {
     const dates = Object.keys(data).sort().reverse(); // latest dates first
+    console.log("Raw date keys:", dates);
 
     // Populate dropdown
     dates.forEach(date => {
