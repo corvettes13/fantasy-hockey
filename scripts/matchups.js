@@ -149,9 +149,9 @@ fetch('data/2025_matchups.json')
         const [teamA, teamB] = matchup.teams.map(t => t.team);
 
         const scoreA = teamA.team_points?.total ?? 0;
-        const projA = teamA.team_projected_points?.total ?? 0;
+        const projA = teamA.new_projected_total ?? 0;
         const scoreB = teamB.team_points?.total ?? 0;
-        const projB = teamB.team_projected_points?.total ?? 0;
+        const projB = teamB.new_projected_total ?? 0;
 
         const teamNumA = teamA.team_id;
         const teamNumB = teamB.team_id;

@@ -36,13 +36,13 @@ function loadSeasonStats(seasonKey) {
   let goalieFile = '';
 
   switch (seasonKey) {
+    case '2026_stats':
+      skaterFile = '../data/2026_skater_stats.json';
+      goalieFile = '../data/2026_goalie_stats.json';
+      break;
     case '2025_stats':
       skaterFile = '../data/2025_skater_stats.json';
       goalieFile = '../data/2025_goalie_stats.json';
-      break;
-    case '2024_stats':
-      skaterFile = '../data/2024_skater_stats.json';
-      goalieFile = '../data/2024_goalie_stats.json';
       break;
     case '2025_projections':
       skaterFile = '../data/2025_skater_proj.json';
