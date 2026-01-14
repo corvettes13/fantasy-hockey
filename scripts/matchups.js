@@ -115,7 +115,7 @@ fetch('data/2025_matchups.json')
       week.matchups.forEach(matchup => {
         matchup.teams.forEach(t => {
           const team = t.team;
-          const proj = team.team_projected_points?.total ?? 0;
+          const proj = team.initial_projection ?? 0;
 
           if (proj > bestProj) {
             bestProj = proj;
