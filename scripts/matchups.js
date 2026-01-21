@@ -148,10 +148,21 @@ fetch('data/2025_matchups.json')
       weekData.matchups.forEach(matchup => {
         const [teamA, teamB] = matchup.teams.map(t => t.team);
 
+        // Determine which projection to show
+        let projA, projB;
+
+        if (Number(weekNumber) === Number(currentWeek)) {
+          // Current week → show updated projections
+          projA = teamA.new_projected_total ?? teamA.initial_projection ?? 0;
+          projB = teamB.new_projected_total ?? teamB.initial_projection ?? 0;
+        } else {
+          // Past or future → show initial projections
+          projA = teamA.initial_projection ?? 0;
+          projB = teamB.initial_projection ?? 0;
+        }
+
         const scoreA = teamA.team_points?.total ?? 0;
-        const projA = teamA.new_projected_total ?? 0;
         const scoreB = teamB.team_points?.total ?? 0;
-        const projB = teamB.new_projected_total ?? 0;
 
         const teamNumA = teamA.team_id;
         const teamNumB = teamB.team_id;
