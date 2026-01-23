@@ -15,12 +15,13 @@
     </div>
 
     <script>
-    fetch('/fantasy-hockey/shared/header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.querySelector('.site-header').innerHTML = html;
-      });
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
+        });
     </script>
+    
     <div class="container">
       <h1>2025 Draft Results</h1>
       <div class="filters">

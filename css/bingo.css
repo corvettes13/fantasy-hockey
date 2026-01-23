@@ -1,0 +1,147 @@
+/* === Bingo Card Layout === */
+
+.bingo-card {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 1rem;
+  margin: 1.5rem auto;
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.bingo-card h2 {
+  margin: 0.5rem 0 0.25rem;
+  color: #0055a5;
+}
+
+.bingo-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+/* === Bingo Grid === */
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  margin-top: 1rem;
+  border: 2px solid #ccc;
+}
+
+.bingo-grid div {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  background: white;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* FREE square styling */
+.bingo-grid .free {
+  background: #eaf0f6;
+  font-weight: bold;
+  color: #0055a5;
+}
+
+/* Highlight validated squares (optional) */
+.bingo-grid .validated {
+  background: #d8f5d1;
+  border-color: #8bc98b;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+#card-select {
+  padding: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.bingo-grid div {
+  aspect-ratio: 1 / 1;   /* makes every cell a perfect square */
+  padding: 0;            /* remove padding so aspect ratio is exact */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  background: white;
+  box-sizing: border-box;
+}
+
+#cards-container .bingo-card {
+  margin-bottom: 2rem;
+    background: white;
+}
+
+.winner-status {
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.winner-status::before {
+  color: #d4a017;
+}
+
+.bingo-grid .free {
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/2560px-Olympic_rings_without_rims.svg.png");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  background-color: #d8f5d1; /* same green as validated squares */
+  border: 1px solid #8bc98b;
+
+  font-size: 0; /* hides the FREE text */
+  box-sizing: border-box;
+}
+
+#leaderboard {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.leaderboard-section {
+  margin-bottom: 1rem;
+}
+
+.leaderboard-section h3 {
+  margin: 0 0 0.5rem;
+  color: #0055a5;
+}
+
+.leaderboard-entry {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.leaderboard-entry:last-child {
+  border-bottom: none;
+}
+
+.container {
+  background: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
