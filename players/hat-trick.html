@@ -40,6 +40,7 @@
         document.querySelector('.site-header').innerHTML = html;
       });
     </script>
+
     <div class="container">
       <h1>Did Bradford Get Screwed Yesterday?</h1>
       <div id="hat-trick-result" class="result-container">Loading...</div>
@@ -63,83 +64,88 @@
       </div>
     </div>
     
-    <script>
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yyyy = yesterday.getFullYear();
-      const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
-      const dd = String(yesterday.getDate()).padStart(2, '0');
-      const targetDate = `${yyyy}-${mm}-${dd}`;
+<script>
+  function cleanDate(iso) {
+    if (!iso) return "";
+    return String(iso).trim();
+  }
 
-      fetch('/fantasy-hockey/data/2025_hat_tricks.json')
-        .then(res => res.json())
-        .then(data => {
-          const resultDiv = document.getElementById('hat-trick-result');
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yyyy = yesterday.getFullYear();
+  const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+  const dd = String(yesterday.getDate()).padStart(2, '0');
+  const targetDate = `${yyyy}-${mm}-${dd}`;
 
-          // Find yesterday's hat trick
-          const match = data.find(entry => entry.date === targetDate);
+  fetch('/fantasy-hockey/data/2025_hat_tricks.json')
+    .then(res => res.json())
+    .then(data => {
 
-          // No hat trick at all
-          if (!match) {
-            resultDiv.innerHTML = `
-              <div class="no">No</div>
-              <div class="player-message">No Hype Machine player scored a hat trick yesterday.</div>
-            `;
-            return;
-          }
+      // -------------------------
+      // Yesterday logic
+      // -------------------------
+      const resultDiv = document.getElementById('hat-trick-result');
 
-          // Hat trick but wrong team
-          if (match.on_team_7 === true) {
-            resultDiv.innerHTML = `
-              <div class="yes">Yes</div>
-              <div class="player-message">${match.player_name} scored a hat trick.</div>
-            `;
-            return;
-          }
-        })
-        .catch(err => {
-          console.error('Error loading hat trick data:', err);
-          document.getElementById('hat-trick-result').textContent = 'Error loading data';
+      const match = data.find(entry => cleanDate(entry.date) === targetDate);
+
+      if (!match) {
+        resultDiv.innerHTML = `
+          <div class="no">No</div>
+          <div class="player-message">No Hype Machine player scored a hat trick yesterday.</div>
+        `;
+      } else if (match.on_team_7) {
+        resultDiv.innerHTML = `
+          <div class="yes">Yes</div>
+          <div class="player-message">${match.player_name} scored a hat trick.</div>
+        `;
+      } else {
+        resultDiv.innerHTML = `
+          <div class="no">No</div>
+          <div class="player-message">No Hype Machine player scored a hat trick yesterday.</div>
+        `;
+      }
+
+
+      // -------------------------
+      // Table logic
+      // -------------------------
+      const tbody = document.querySelector('#hat-trick-table tbody');
+      const countDiv = document.getElementById('team7-count');
+
+      function formatDatePretty(iso) {
+        const d = new Date(cleanDate(iso));
+        return d.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
         });
-    </script>
-    
-    <script>
-      fetch('/fantasy-hockey/data/2025_hat_tricks.json')
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.querySelector('#hat-trick-table tbody');
-          const countDiv = document.getElementById('team7-count');
-          
-          function formatDatePretty(iso) {
-            const d = new Date(iso);
-            return d.toLocaleDateString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric"
-            });
-          }
+      }
 
-          let team7Count = 0;
+      let team7Count = 0;
 
-          data.forEach(entry => {
-            const row = document.createElement('tr');
+      data.forEach(entry => {
+        const row = document.createElement('tr');
 
-            if (entry.on_team_7) team7Count++;
+        if (entry.on_team_7) team7Count++;
 
-            row.innerHTML = `
-              <td>${entry.player_name}</td>
-              <td>${formatDatePretty(entry.date)}</td>
-              <td style="font-weight: ${entry.on_team_7 ? 'bold' : 'normal'}; color: ${entry.on_team_7 ? 'green' : 'inherit'};">
-                ${entry.on_team_7 ? 'Yes' : 'No'}
-              </td>
-            `;
+        row.innerHTML = `
+          <td>${entry.player_name}</td>
+          <td>${formatDatePretty(entry.date)}</td>
+          <td style="font-weight: ${entry.on_team_7 ? 'bold' : 'normal'}; color: ${entry.on_team_7 ? 'green' : 'inherit'};">
+            ${entry.on_team_7 ? 'Yes' : 'No'}
+          </td>
+        `;
 
-            tbody.appendChild(row);
-          });
+        tbody.appendChild(row);
+      });
 
-          countDiv.textContent = `Times Bradford Got Screwed: ${team7Count}`;
-        });
-    </script>
+      countDiv.textContent = `Times Bradford Got Screwed: ${team7Count}`;
+    })
+    .catch(err => {
+      console.error('Error loading hat trick data:', err);
+      document.getElementById('hat-trick-result').textContent = 'Error loading data';
+    });
+</script>
 
     
   </div>
