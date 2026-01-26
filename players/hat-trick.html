@@ -113,13 +113,14 @@
       const countDiv = document.getElementById('team7-count');
 
       function formatDatePretty(iso) {
-        const d = new Date(cleanDate(iso));
-        return d.toLocaleDateString("en-US", {
+        const [year, month, day] = cleanDate(iso).split("-");
+        return new Date(year, month - 1, day).toLocaleDateString("en-US", {
           month: "short",
           day: "numeric",
           year: "numeric"
         });
       }
+
 
       let team7Count = 0;
 
