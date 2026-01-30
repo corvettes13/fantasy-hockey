@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
 </head>
+
 <body class="team-page">
   <div class="layout-shell">
     <div class="header-inner">
@@ -14,64 +15,85 @@
     </div>
 
     <script>
-    fetch('/fantasy-hockey/shared/header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.querySelector('.site-header').innerHTML = html;
-      });
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
+        });
     </script>
 
     <div class="container">
       <div class="card">
-      <!-- Team Header injected by JS -->
+
+        <!-- Team Header injected by JS -->
         <div id="team-header"></div>
+
+        <!-- Season / Mode Selector -->
         <label for="season-select">Season:</label>
         <select id="season-select">
           <option value="2026_stats">Current Season</option>
           <option value="2025_stats">2024–25 Stats</option>
           <option value="2025_projections">2025–26 Projections</option>
+          <option value="2026_team_log">Team Log</option>
+          <option value="daily">Daily Stats</option>
         </select>
-        <hr>
-        <div class="table-wrapper">
-            <table id="team-table" class="left-align">
-              <thead>
-                <tr>
-                  <th data-sort="player_name">Player</th>
-                  <th data-sort="team_abbr">Team</th>
-                  <th data-sort="primary_position">Pos</th>
-                  <th data-sort="cost">Cost</th>
-                  <th data-sort="contract_year">Contract</th>
-                  <th data-sort="FP">Points</th>
-                  <th data-sort="FPG">FP/G</th>
-                  <th data-sort="GP">GP</th>
-                  <th data-sort="G">G</th>
-                  <th data-sort="A">A</th>
-                  <th data-sort="PTS">PTS</th>
-                  <th data-sort="PIM">PIM</th>
-                  <th data-sort="SOG">SOG</th>
-                  <th data-sort="SPCT">S%</th>
-                  <th data-sort="SHG">SHG</th>
-                  <th data-sort="GWG">GWG</th>
-                  <th data-sort="BLK">BLK</th>
-                  <th data-sort="HIT">HIT</th>
-                  <th data-sort="ATOI">ATOI</th>
-                </tr>
-              </thead>
-              <tbody id="team-body">
-                <!-- Rows injected by JS -->
-              </tbody>
-            </table>
+
+        <!-- DAILY MODE CONTROLS -->
+        <div id="daily-controls" style="display:none; margin-top:10px;">
+          <strong>Date:</strong>
+          <span id="daily-date-display"></span>
+          <div id="daily-summary" style="display:none; margin: 10px 0; font-weight: bold;">
+          <!-- Filled by JS -->
+          </div>
+
+          <button id="daily-prev" style="margin-left:10px;">Previous</button>
+          <button id="daily-next">Next</button>
         </div>
+
         <hr>
-        <div class="table-wrapper">
+
+        <!-- SEASON SKATER TABLE -->
+        <div id="season-skaters-wrapper" class="table-wrapper">
+          <table id="team-table" class="left-align">
+            <thead>
+              <tr>
+                <th data-sort="player_name">Player</th>
+                <th data-sort="team_abbr">Team</th>
+                <th data-sort="primary_position">Pos</th>
+                <th data-sort="cost">Cost</th>
+                <th data-sort="contract_year">Contract</th>
+                <th data-sort="FP">Points</th>
+                <th data-sort="FPG">FP/G</th>
+                <th data-sort="GP">GP</th>
+                <th data-sort="G">G</th>
+                <th data-sort="A">A</th>
+                <th data-sort="PTS">PTS</th>
+                <th data-sort="PIM">PIM</th>
+                <th data-sort="SOG">SOG</th>
+                <th data-sort="SPCT">S%</th>
+                <th data-sort="SHG">SHG</th>
+                <th data-sort="GWG">GWG</th>
+                <th data-sort="BLK">BLK</th>
+                <th data-sort="HIT">HIT</th>
+                <th data-sort="ATOI">ATOI</th>
+              </tr>
+            </thead>
+            <tbody id="team-body"></tbody>
+          </table>
+        </div>
+
+        <hr>
+
+        <!-- SEASON GOALIE TABLE -->
+        <div id="season-goalies-wrapper" class="table-wrapper">
           <table id="goalie-table" class="left-align">
             <thead>
               <tr>
-                <th>Player</th>
-                <th>Team</th>
-                <th>Pos</th>
+                <th data-sort="player_name">Player</th>
+                <th data-sort="team_abbr">Team</th>
+                <th data-sort="primary_position">Pos</th>
                 <th data-sort="cost">Cost</th>
-                <th data-sort="contract">Contract</th>
+                <th data-sort="contract_year">Contract</th>
                 <th data-sort="FP">Points</th>
                 <th data-sort="FPG">FP/G</th>
                 <th data-sort="GP">GP</th>
@@ -80,19 +102,62 @@
                 <th data-sort="GA">GA</th>
                 <th data-sort="SV">SV</th>
                 <th data-sort="GAA">GAA</th>
-                <th data-sort="SV%">SV%</th>
+                <th data-sort="SVP">SV%</th>
                 <th data-sort="SO">SO</th>
                 <th data-sort="MIN">MIN</th>
               </tr>
             </thead>
-            <tbody id="goalie-body">
-              <!-- Goalie rows injected by JS -->
-            </tbody>
+            <tbody id="goalie-body"></tbody>
           </table>
         </div>
+
+        <!-- DAILY SKATER TABLE -->
+        <div id="daily-skaters-wrapper" class="table-wrapper" style="display:none;">
+          <table id="daily-skaters-table" class="left-align">
+            <thead>
+              <tr>
+                <th data-sort="player_name">Player</th>
+                <th data-sort="position_status">Pos</th>
+                <th data-sort="FP">FP</th>
+                <th data-sort="G">G</th>
+                <th data-sort="A">A</th>
+                <th data-sort="PIM">PIM</th>
+                <th data-sort="SHG">SHG</th>
+                <th data-sort="GWG">GWG</th>
+                <th data-sort="SOG">SOG</th>
+                <th data-sort="HIT">HIT</th>
+                <th data-sort="BLK">BLK</th>
+              </tr>
+            </thead>
+            <tbody id="daily-skaters-body"></tbody>
+          </table>
+        </div>
+
+        <!-- DAILY GOALIE TABLE -->
+        <div id="daily-goalies-wrapper" class="table-wrapper" style="display:none;">
+          <table id="daily-goalies-table" class="left-align">
+            <thead>
+              <tr>
+                <th data-sort="player_name">Player</th>
+                <th data-sort="position_status">Pos</th>
+                <th data-sort="FP">FP</th>
+                <th data-sort="GS">GS</th>
+                <th data-sort="W">W</th>
+                <th data-sort="L">L</th>
+                <th data-sort="GA">GA</th>
+                <th data-sort="SV">SV</th>
+                <th data-sort="SVP">SV%</th>
+                <th data-sort="SHO">SHO</th>
+              </tr>
+            </thead>
+            <tbody id="daily-goalies-body"></tbody>
+          </table>
+        </div>
+
       </div>
     </div>
   </div>
+
   <script src="../scripts/teams.js"></script>
 </body>
 </html>

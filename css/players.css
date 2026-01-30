@@ -306,3 +306,8 @@ tbody tr:hover {
   text-overflow: ellipsis;
 }
 
+.player-not-on-team {
+  background-color: #D0D0D0;
+  border-left: 4px solid #cc0000;
+}
+
