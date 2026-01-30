@@ -192,7 +192,7 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
   if (!teamData) return;
 
   const roster = teamData.roster;
-  const standingsInfo = standings[teamKey];
+  const standingsInfo = standings.teams.find(s => s.team_key === teamKey);
 
   // Build roster metadata map
   window.teamRosterMeta = {};
