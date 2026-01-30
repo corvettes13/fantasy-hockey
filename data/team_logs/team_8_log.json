@@ -22943,12 +22943,12 @@
           "position_status": "C",
           "stats": {
             "1": 0.0,
-            "2": 0.0,
+            "2": 1.0,
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
             "14": 0.0,
-            "31": 0.0,
+            "31": 1.0,
             "32": 0.0
           }
         },
@@ -22962,8 +22962,8 @@
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
+            "14": 3.0,
+            "31": 3.0,
             "32": 0.0
           }
         },
@@ -22978,6 +22978,21 @@
             "9": 0.0,
             "12": 0.0,
             "14": 0.0,
+            "31": 1.0,
+            "32": 1.0
+          }
+        },
+        {
+          "player_id": 6062,
+          "player_name": "Carter Verhaeghe",
+          "position_status": "LW",
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
             "31": 0.0,
             "32": 0.0
           }
@@ -22988,26 +23003,11 @@
           "position_status": "LW",
           "stats": {
             "1": 0.0,
-            "2": 0.0,
+            "2": 1.0,
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
-            "32": 0.0
-          }
-        },
-        {
-          "player_id": 9251,
-          "player_name": "Bobby McMann",
-          "position_status": "LW",
-          "stats": {
-            "1": 0.0,
-            "2": 0.0,
-            "5": 0.0,
-            "9": 0.0,
-            "12": 0.0,
-            "14": 0.0,
+            "14": 2.0,
             "31": 0.0,
             "32": 0.0
           }
@@ -23032,13 +23032,13 @@
           "player_name": "Adrian Kempe",
           "position_status": "RW",
           "stats": {
-            "1": 0.0,
+            "1": 1.0,
             "2": 0.0,
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
+            "14": 4.0,
+            "31": 3.0,
             "32": 0.0
           }
         },
@@ -23048,11 +23048,11 @@
           "position_status": "D",
           "stats": {
             "1": 0.0,
-            "2": 0.0,
-            "5": 0.0,
+            "2": 1.0,
+            "5": 2.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
+            "14": 4.0,
             "31": 0.0,
             "32": 0.0
           }
@@ -23063,11 +23063,11 @@
           "position_status": "D",
           "stats": {
             "1": 0.0,
-            "2": 0.0,
-            "5": 0.0,
+            "2": 1.0,
+            "5": 2.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
+            "14": 2.0,
             "31": 0.0,
             "32": 0.0
           }
@@ -23082,14 +23082,14 @@
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
-            "32": 0.0
+            "14": 1.0,
+            "31": 2.0,
+            "32": 1.0
           }
         },
         {
-          "player_id": 6062,
-          "player_name": "Carter Verhaeghe",
+          "player_id": 9251,
+          "player_name": "Bobby McMann",
           "position_status": "Util",
           "stats": {
             "1": 0.0,
@@ -23097,8 +23097,8 @@
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
+            "14": 3.0,
+            "31": 2.0,
             "32": 0.0
           }
         },
@@ -23114,7 +23114,7 @@
             "12": 0.0,
             "14": 0.0,
             "31": 0.0,
-            "32": 0.0
+            "32": 5.0
           }
         },
         {
@@ -23127,7 +23127,7 @@
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
+            "14": 1.0,
             "31": 0.0,
             "32": 0.0
           }
@@ -23137,43 +23137,34 @@
           "player_name": "Matvei Michkov",
           "position_status": "BN",
           "stats": {
-            "1": 0.0,
+            "1": 1.0,
             "2": 0.0,
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
+            "14": 2.0,
             "31": 0.0,
-            "32": 0.0
+            "32": 1.0
           }
         },
         {
           "player_id": 8285,
           "player_name": "Dylan Cozens",
           "position_status": "BN",
-          "stats": {
-            "1": 0.0,
-            "2": 0.0,
-            "5": 0.0,
-            "9": 0.0,
-            "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
-            "32": 0.0
-          }
+          "stats": {}
         },
         {
           "player_id": 6402,
           "player_name": "Ivan Barbashev",
           "position_status": "BN",
           "stats": {
-            "1": 0.0,
+            "1": 1.0,
             "2": 0.0,
             "5": 0.0,
             "9": 0.0,
             "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
+            "14": 4.0,
+            "31": 3.0,
             "32": 0.0
           }
         },
@@ -23182,11 +23173,11 @@
           "player_name": "Jake Oettinger",
           "position_status": "G",
           "stats": {
-            "18": 0.0,
-            "19": 0.0,
+            "18": 1.0,
+            "19": 1.0,
             "20": 0.0,
-            "22": 0.0,
-            "25": 0.0,
+            "22": 4.0,
+            "25": 17.0,
             "27": 0.0
           }
         },
@@ -23195,11 +23186,11 @@
           "player_name": "Arvid Soderblom",
           "position_status": "BN",
           "stats": {
-            "18": 0.0,
+            "18": 1.0,
             "19": 0.0,
-            "20": 0.0,
-            "22": 0.0,
-            "25": 0.0,
+            "20": 1.0,
+            "22": 6.0,
+            "25": 38.0,
             "27": 0.0
           }
         },
@@ -23207,29 +23198,137 @@
           "player_id": 8291,
           "player_name": "Spencer Knight",
           "position_status": "BN",
-          "stats": {
-            "18": 0.0,
-            "19": 0.0,
-            "20": 0.0,
-            "22": 0.0,
-            "25": 0.0,
-            "27": 0.0
-          }
+          "stats": {}
         },
         {
           "player_id": 6765,
           "player_name": "Brock Boeser",
           "position_status": "IR+",
-          "stats": {
-            "1": 0.0,
-            "2": 0.0,
-            "5": 0.0,
-            "9": 0.0,
-            "12": 0.0,
-            "14": 0.0,
-            "31": 0.0,
-            "32": 0.0
-          }
+          "stats": {}
+        }
+      ]
+    },
+    "2026-01-30": {
+      "players": [
+        {
+          "player_id": 5697,
+          "player_name": "Tomas Hertl",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 6777,
+          "player_name": "Sebastian Aho",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 8287,
+          "player_name": "Trevor Zegras",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 6375,
+          "player_name": "Nikolaj Ehlers",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 9251,
+          "player_name": "Bobby McMann",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 8357,
+          "player_name": "Pavel Dorofeyev",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 6395,
+          "player_name": "Adrian Kempe",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 7905,
+          "player_name": "Quinn Hughes",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 30075,
+          "player_name": "Brock Faber",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 4472,
+          "player_name": "Drew Doughty",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6062,
+          "player_name": "Carter Verhaeghe",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 5993,
+          "player_name": "Alexander Wennberg",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6549,
+          "player_name": "Victor Olofsson",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 30548,
+          "player_name": "Matvei Michkov",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8285,
+          "player_name": "Dylan Cozens",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6402,
+          "player_name": "Ivan Barbashev",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8291,
+          "player_name": "Spencer Knight",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 7541,
+          "player_name": "Jake Oettinger",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8871,
+          "player_name": "Arvid Soderblom",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6765,
+          "player_name": "Brock Boeser",
+          "position_status": "IR+",
+          "stats": {}
         }
       ]
     }
