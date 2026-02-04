@@ -23475,19 +23475,46 @@
           "player_id": 4681,
           "player_name": "John Tavares",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 1.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 7938,
           "player_name": "Ryan McLeod",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 5991,
           "player_name": "Max Domi",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 8883,
@@ -23499,7 +23526,16 @@
           "player_id": 4002,
           "player_name": "Claude Giroux",
           "position_status": "RW",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 0.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 4351,
@@ -23511,7 +23547,16 @@
           "player_id": 6424,
           "player_name": "Brandon Montour",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 2.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 1.0,
+            "32": 5.0
+          }
         },
         {
           "player_id": 6184,
@@ -23523,13 +23568,31 @@
           "player_id": 6383,
           "player_name": "Travis Sanheim",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 0.0,
+            "31": 1.0,
+            "32": 4.0
+          }
         },
         {
           "player_id": 5769,
           "player_name": "Shayne Gostisbehere",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 5368,
@@ -23565,11 +23628,148 @@
           "player_id": 4947,
           "player_name": "Jacob Markstrom",
           "position_status": "G",
+          "stats": {
+            "18": 1.0,
+            "19": 0.0,
+            "20": 1.0,
+            "22": 2.0,
+            "25": 23.0,
+            "27": 0.0
+          }
+        },
+        {
+          "player_id": 5407,
+          "player_name": "John Gibson",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 7170,
+          "player_name": "Joseph Woll",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8882,
+          "player_name": "Simon Edvinsson",
+          "position_status": "IR+",
+          "stats": {}
+        },
+        {
+          "player_id": 6748,
+          "player_name": "Pavel Zacha",
+          "position_status": "IR+",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-02-04": {
+      "players": [
+        {
+          "player_id": 6381,
+          "player_name": "Dylan Larkin",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 7938,
+          "player_name": "Ryan McLeod",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 4681,
+          "player_name": "John Tavares",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 8883,
+          "player_name": "William Eklund",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 30139,
+          "player_name": "Alex Laferriere",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 4351,
+          "player_name": "Brad Marchand",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 6391,
+          "player_name": "David Pastrnak",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 7518,
+          "player_name": "Miro Heiskanen",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6424,
+          "player_name": "Brandon Montour",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6184,
+          "player_name": "MacKenzie Weegar",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 8884,
+          "player_name": "Brandt Clarke",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5368,
+          "player_name": "Mark Scheifele",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 5991,
+          "player_name": "Max Domi",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 4002,
+          "player_name": "Claude Giroux",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6383,
+          "player_name": "Travis Sanheim",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5769,
+          "player_name": "Shayne Gostisbehere",
+          "position_status": "BN",
           "stats": {}
         },
         {
           "player_id": 5407,
           "player_name": "John Gibson",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 4947,
+          "player_name": "Jacob Markstrom",
           "position_status": "BN",
           "stats": {}
         },
