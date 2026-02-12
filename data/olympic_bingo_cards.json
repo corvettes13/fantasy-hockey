@@ -20,7 +20,7 @@
                 [
                     "Philipp Kurashev Point",
                     "Tim Stutzle Assist",
-                    "FREE",
+                    "Leon Draisaitl Assist",
                     "Connor McDavid Assist",
                     "Any Player Misconduct Penalty"
                 ],
@@ -88,10 +88,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:18:28.309277Z"
-                },
                 "Connor McDavid Assist": {
                     "validated": false,
                     "timestamp": null
@@ -137,9 +133,18 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
+                },
+                "Leon Draisaitl Assist": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "2": {
@@ -162,7 +167,7 @@
                 [
                     "Travis Sanheim Point",
                     "Non-NHL Player 2 pt Game",
-                    "FREE",
+                    "Jesper Wallstedt Win",
                     "Overtime Goal",
                     "Shootout Win"
                 ],
@@ -230,10 +235,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:18:28.326362Z"
-                },
                 "Overtime Goal": {
                     "validated": false,
                     "timestamp": null
@@ -281,7 +282,16 @@
                 "Leon Draisaitl Goal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jesper Wallstedt Win": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "3": {
@@ -304,7 +314,7 @@
                 [
                     "Connor Hellebuyck Win",
                     "Non-NHL Player Goal",
-                    "FREE",
+                    "Filip Gustavsson Win",
                     "Any Player Hat Trick",
                     "Slovakia Loss"
                 ],
@@ -372,10 +382,6 @@
                     "validated": true,
                     "timestamp": "2026-02-11T13:12:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:18:28.337393Z"
-                },
                 "Any Player Hat Trick": {
                     "validated": false,
                     "timestamp": null
@@ -423,7 +429,16 @@
                 "Mitch Marner Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Filip Gustavsson Win": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "4": {
@@ -446,7 +461,7 @@
                 [
                     "Auston Matthews Goal",
                     "Tage Thompson Point",
-                    "FREE",
+                    "Eetu Luostarinen Point",
                     "France Win",
                     "United States Loss"
                 ],
@@ -514,10 +529,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:18:28.348061Z"
-                },
                 "France Win": {
                     "validated": false,
                     "timestamp": null
@@ -531,8 +542,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Timo Meier Point": {
                     "validated": false,
@@ -551,8 +562,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Any Player Misconduct Penalty": {
                     "validated": false,
@@ -565,7 +576,16 @@
                 "Jordan Binnington Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Eetu Luostarinen Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "5": {
@@ -588,7 +608,7 @@
                 [
                     "Kyle Connor Point",
                     "Lucas Raymond Goal",
-                    "FREE",
+                    "Radko Gudas Point",
                     "Shootout Goal",
                     "Joel Armia Point"
                 ],
@@ -603,7 +623,7 @@
                     "Finland Win",
                     "Any Player 2 Assist Game",
                     "Dylan Larkin Point",
-                    "Ukko-Pekka Luukkonen Win",
+                    "Jake Guentzel Point",
                     "Any Player Major Penalty"
                 ]
             ],
@@ -656,10 +676,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:18:28.359812Z"
-                },
                 "Shootout Goal": {
                     "validated": false,
                     "timestamp": null
@@ -693,21 +709,30 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Dylan Larkin Point": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "Ukko-Pekka Luukkonen Win": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Any Player Major Penalty": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Radko Gudas Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jake Guentzel Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "6": {
@@ -730,7 +755,7 @@
                 [
                     "Nick Suzuki Point",
                     "Shootout Win",
-                    "FREE",
+                    "Rasmus Dahlin Point",
                     "Nikolaj Ehlers Point",
                     "Elias Lindholm Point"
                 ],
@@ -798,10 +823,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:27:24.879744Z"
-                },
                 "Nikolaj Ehlers Point": {
                     "validated": false,
                     "timestamp": null
@@ -849,7 +870,16 @@
                 "Pontus Holmberg Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Rasmus Dahlin Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:40:07.624963Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "7": {
@@ -872,7 +902,7 @@
                 [
                     "Goalie Shutout",
                     "Slovakia Loss",
-                    "FREE",
+                    "Jack Eichel Assist",
                     "Canada Win",
                     "Jackson Lacombe Point"
                 ],
@@ -940,10 +970,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:27:24.895939Z"
-                },
                 "Canada Win": {
                     "validated": false,
                     "timestamp": null
@@ -977,8 +1003,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Martin Pospisil Point": {
                     "validated": false,
@@ -991,7 +1017,16 @@
                 "\u2265 15 Team PIM in a Game": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jack Eichel Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "8": {
@@ -1014,7 +1049,7 @@
                 [
                     "Overtime Goal",
                     "Zach Werenski Point",
-                    "FREE",
+                    "Ondrej Palat Point",
                     "Overtime Win",
                     "Artturi Lehkonen Point"
                 ],
@@ -1082,10 +1117,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:27:24.909117Z"
-                },
                 "Overtime Win": {
                     "validated": false,
                     "timestamp": null
@@ -1133,7 +1164,16 @@
                 "\u2265 15 Team PIM in a Game": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Ondrej Palat Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "9": {
@@ -1156,7 +1196,7 @@
                 [
                     "Sweden Win",
                     "Sweden Medal",
-                    "FREE",
+                    "Drew Doughty Point",
                     "Rickard Rakell Point",
                     "Tom Wilson Point"
                 ],
@@ -1217,20 +1257,16 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Sweden Medal": {
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:27:24.922206Z"
-                },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Tom Wilson Point": {
                     "validated": false,
@@ -1275,7 +1311,16 @@
                 "Juuse Saros Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Drew Doughty Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "10": {
@@ -1298,7 +1343,7 @@
                 [
                     "Sweden Win",
                     "Any Player 2 Assist Game",
-                    "FREE",
+                    "Connor Hellebuyck Win",
                     "Goal call reversed",
                     "Germany Loss"
                 ],
@@ -1347,8 +1392,8 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Non-NHL Player 2 pt Game": {
                     "validated": false,
@@ -1359,16 +1404,12 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "FREE": {
                     "validated": true,
-                    "timestamp": "2026-02-11T05:27:24.936085Z"
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Goal call reversed": {
                     "validated": false,
@@ -1417,7 +1458,16 @@
                 "Connor McDavid Assist": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Connor Hellebuyck Win": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "11": {
@@ -1440,7 +1490,7 @@
                 [
                     "Anton Lundell Point",
                     "Shootout Goal",
-                    "FREE",
+                    "Martin Fehervary Point",
                     "\u2265 15 Team PIM in a Game",
                     "Clayton Keller Point"
                 ],
@@ -1461,8 +1511,8 @@
             ],
             "events": {
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Tomas Hertl Point": {
                     "validated": false,
@@ -1489,8 +1539,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Rasmus Ristolainen Point": {
                     "validated": false,
@@ -1507,10 +1557,6 @@
                 "Shootout Goal": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:07.592365Z"
                 },
                 "\u2265 15 Team PIM in a Game": {
                     "validated": false,
@@ -1541,8 +1587,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Jack Eichel Goal": {
                     "validated": false,
@@ -1559,7 +1605,16 @@
                 "Artturi Lehkonen Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Martin Fehervary Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "12": {
@@ -1582,7 +1637,7 @@
                 [
                     "Joel Armia Point",
                     "Nino Niederreiter Point",
-                    "FREE",
+                    "Sebastian Aho Goal",
                     "Tom Wilson Point",
                     "Any Player Misconduct Penalty"
                 ],
@@ -1603,8 +1658,8 @@
             ],
             "events": {
                 "Simon Nemec Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0512:50:45.868776Z"
                 },
                 "Denmark Loss": {
                     "validated": false,
@@ -1649,10 +1704,6 @@
                 "Nino Niederreiter Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:07.610480Z"
                 },
                 "Tom Wilson Point": {
                     "validated": false,
@@ -1701,7 +1752,16 @@
                 "Lukas Reichel Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Sebastian Aho Goal": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "13": {
@@ -1724,7 +1784,7 @@
                 [
                     "Czech Republic Win",
                     "Germany Loss",
-                    "FREE",
+                    "Ondrej Palat Point",
                     "Any Player Major Penalty",
                     "Switzerland Loss"
                 ],
@@ -1792,10 +1852,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:07.624963Z"
-                },
                 "Any Player Major Penalty": {
                     "validated": false,
                     "timestamp": null
@@ -1805,8 +1861,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Goalie Shutout": {
                     "validated": false,
@@ -1843,7 +1899,16 @@
                 "Tomas Tatar Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Ondrej Palat Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "14": {
@@ -1866,7 +1931,7 @@
                 [
                     "Non-NHL Player 2 pt Game",
                     "Rickard Rakell Point",
-                    "FREE",
+                    "Esa Lindell Point",
                     "Canada Win",
                     "Any Player Hat Trick"
                 ],
@@ -1895,8 +1960,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Connor McDavid Goal": {
                     "validated": false,
@@ -1931,12 +1996,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "FREE": {
                     "validated": true,
-                    "timestamp": "2026-02-11T05:28:07.640269Z"
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Canada Win": {
                     "validated": false,
@@ -1985,7 +2046,16 @@
                 "Dylan Larkin Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Esa Lindell Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "15": {
@@ -2008,7 +2078,7 @@
                 [
                     "Tomas Tatar Point",
                     "Brandon Hagel Point",
-                    "FREE",
+                    "Macklin Celebrini Point",
                     "Lucas Raymond Goal",
                     "Jackson Lacombe Point"
                 ],
@@ -2076,10 +2146,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:07.656019Z"
-                },
                 "Lucas Raymond Goal": {
                     "validated": false,
                     "timestamp": null
@@ -2112,13 +2178,13 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Shorthanded Goal": {
                     "validated": false,
@@ -2127,7 +2193,16 @@
                 "Elias Lindholm Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Macklin Celebrini Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "16": {
@@ -2150,7 +2225,7 @@
                 [
                     "Tomas Tatar Point",
                     "Germany Win",
-                    "FREE",
+                    "Mikael Granlund Point",
                     "Jack Eichel Assist",
                     "Jaccob Slavin Point"
                 ],
@@ -2183,8 +2258,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Lucas Raymond Goal": {
                     "validated": false,
@@ -2218,10 +2293,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:14.064477Z"
-                },
                 "Jack Eichel Assist": {
                     "validated": false,
                     "timestamp": null
@@ -2243,8 +2314,8 @@
                     "timestamp": "2026-02-11T15:27:07.624963Z"
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Nino Niederreiter Point": {
                     "validated": false,
@@ -2255,8 +2326,8 @@
                     "timestamp": null
                 },
                 "William Nylander Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Jonas Brodin Point": {
                     "validated": false,
@@ -2269,7 +2340,16 @@
                 "Artturi Lehkonen Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Mikael Granlund Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "17": {
@@ -2292,7 +2372,7 @@
                 [
                     "Sweden Loss",
                     "Shootout Goal",
-                    "FREE",
+                    "David Kampf Point",
                     "Roman Josi Point",
                     "Switzerland Loss"
                 ],
@@ -2360,10 +2440,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:14.082881Z"
-                },
                 "Roman Josi Point": {
                     "validated": false,
                     "timestamp": null
@@ -2389,8 +2465,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Slovakia Loss": {
                     "validated": false,
@@ -2411,7 +2487,16 @@
                 "Slovakia Playoff Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "David Kampf Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "18": {
@@ -2434,7 +2519,7 @@
                 [
                     "France Win",
                     "Auston Matthews Goal",
-                    "FREE",
+                    "Philipp Grubauer Win",
                     "Switzerland Playoff Win",
                     "Slovakia Loss"
                 ],
@@ -2448,7 +2533,7 @@
                 [
                     "Juuse Saros Win",
                     "Kyle Connor Point",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "Devon Toews Point",
                     "Philipp Kurashev Point"
                 ]
@@ -2502,10 +2587,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:14.100380Z"
-                },
                 "Switzerland Playoff Win": {
                     "validated": false,
                     "timestamp": null
@@ -2519,12 +2600,12 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Czech Republic Win": {
                     "validated": false,
@@ -2542,7 +2623,7 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -2553,7 +2634,16 @@
                 "Philipp Kurashev Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Philipp Grubauer Win": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "19": {
@@ -2576,7 +2666,7 @@
                 [
                     "2 PP Goals by 1 Team in Game",
                     "Tim Stutzle Assist",
-                    "FREE",
+                    "Martin Necas Assist",
                     "Erik Karlsson Point",
                     "Non-NHL Player 2 pt Game"
                 ],
@@ -2601,8 +2691,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Martin Pospisil Point": {
                     "validated": false,
@@ -2643,10 +2733,6 @@
                 "Tim Stutzle Assist": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:14.117460Z"
                 },
                 "Erik Karlsson Point": {
                     "validated": true,
@@ -2695,7 +2781,16 @@
                 "Sweden Medal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Martin Necas Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "20": {
@@ -2718,7 +2813,7 @@
                 [
                     "Vincent Trocheck Point",
                     "Goalie Shutout",
-                    "FREE",
+                    "Nikolaj Ehlers Point",
                     "Goal call reversed",
                     "Lukas Dostal Win"
                 ],
@@ -2726,7 +2821,7 @@
                     "Oliver Kapanen Point",
                     "Jack Hughes Point",
                     "Connor McDavid Goal",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "Any Player 3 Point Game"
                 ],
                 [
@@ -2755,12 +2850,12 @@
                     "timestamp": null
                 },
                 "William Nylander Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Devon Toews Point": {
                     "validated": false,
@@ -2786,10 +2881,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:14.135010Z"
-                },
                 "Goal call reversed": {
                     "validated": false,
                     "timestamp": null
@@ -2810,7 +2901,7 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -2837,7 +2928,16 @@
                 "Radko Gudas Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Nikolaj Ehlers Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "21": {
@@ -2860,7 +2960,7 @@
                 [
                     "Czech Republic Win",
                     "Shootout Win",
-                    "FREE",
+                    "Cale Makar Point",
                     "Nico Hischier Point",
                     "Gabriel Landeskog Point"
                 ],
@@ -2889,8 +2989,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "J.T. Miller Point": {
                     "validated": false,
@@ -2927,10 +3027,6 @@
                 "Shootout Win": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:45.812500Z"
                 },
                 "Nico Hischier Point": {
                     "validated": false,
@@ -2979,7 +3075,16 @@
                 "Shootout Goal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Cale Makar Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "22": {
@@ -3002,7 +3107,7 @@
                 [
                     "Connor McDavid Assist",
                     "Denmark Playoff Win",
-                    "FREE",
+                    "Colton Parayko Point",
                     "Erik Haula Point",
                     "Canada Medal"
                 ],
@@ -3070,10 +3175,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:45.831023Z"
-                },
                 "Erik Haula Point": {
                     "validated": false,
                     "timestamp": null
@@ -3121,7 +3222,16 @@
                 "Any Player Misconduct Penalty": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Colton Parayko Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "23": {
@@ -3144,7 +3254,7 @@
                 [
                     "Jesper Bratt Point",
                     "Latvia Win",
-                    "FREE",
+                    "Sandis Vilmanis Point",
                     "\u2265 15 Team PIM in a Game",
                     "Jack Eichel Goal"
                 ],
@@ -3212,10 +3322,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:45.849765Z"
-                },
                 "\u2265 15 Team PIM in a Game": {
                     "validated": false,
                     "timestamp": null
@@ -3225,8 +3331,8 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Mikael Granlund Point": {
                     "validated": false,
@@ -3263,7 +3369,16 @@
                 "Lukas Reichel Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Sandis Vilmanis Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "24": {
@@ -3286,7 +3401,7 @@
                 [
                     "Juraj Slafkovsky Point",
                     "Eetu Luostarinen Point",
-                    "FREE",
+                    "Radko Gudas Point",
                     "Sam Bennett Point",
                     "Brock Faber Point"
                 ],
@@ -3339,12 +3454,12 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Juraj Slafkovsky Point": {
                     "validated": true,
@@ -3353,10 +3468,6 @@
                 "Eetu Luostarinen Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:45.868776Z"
                 },
                 "Sam Bennett Point": {
                     "validated": false,
@@ -3383,8 +3494,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Lucas Raymond Goal": {
                     "validated": false,
@@ -3405,7 +3516,16 @@
                 "Latvia Playoff Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Radko Gudas Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "25": {
@@ -3428,7 +3548,7 @@
                 [
                     "Finland Medal",
                     "Shea Theodore Point",
-                    "FREE",
+                    "William Nylander Assist",
                     "\u2265 15 Team PIM in a Game",
                     "Any Player Major Penalty"
                 ],
@@ -3496,10 +3616,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:28:45.888967Z"
-                },
                 "\u2265 15 Team PIM in a Game": {
                     "validated": false,
                     "timestamp": null
@@ -3541,13 +3657,22 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Teuvo Teravainen Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "William Nylander Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "26": {
@@ -3570,7 +3695,7 @@
                 [
                     "Denmark Playoff Win",
                     "Brock Faber Point",
-                    "FREE",
+                    "Erik Cernak Point",
                     "Shootout Win",
                     "Logan Thompson Win"
                 ],
@@ -3607,8 +3732,8 @@
                     "timestamp": "2026-02-11T15:27:07.624963Z"
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Any Player 3 Point Game": {
                     "validated": true,
@@ -3637,10 +3762,6 @@
                 "Brock Faber Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:02.369799Z"
                 },
                 "Shootout Win": {
                     "validated": false,
@@ -3683,13 +3804,22 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Finland Medal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Erik Cernak Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "27": {
@@ -3712,7 +3842,7 @@
                 [
                     "Leon Draisaitl Goal",
                     "Philip Broberg Point",
-                    "FREE",
+                    "Jack Eichel Goal",
                     "Shorthanded Goal",
                     "Goalie Shutout"
                 ],
@@ -3753,8 +3883,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Lars Eller Point": {
                     "validated": false,
@@ -3779,10 +3909,6 @@
                 "Philip Broberg Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:02.390512Z"
                 },
                 "Shorthanded Goal": {
                     "validated": false,
@@ -3831,7 +3957,16 @@
                 "Matt Boldy Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jack Eichel Goal": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "28": {
@@ -3854,7 +3989,7 @@
                 [
                     "Sebastian Aho Goal",
                     "Denmark Playoff Win",
-                    "FREE",
+                    "Devon Toews Point",
                     "Denmark Loss",
                     "Roman Josi Point"
                 ],
@@ -3922,10 +4057,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:02.410868Z"
-                },
                 "Denmark Loss": {
                     "validated": false,
                     "timestamp": null
@@ -3943,8 +4074,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Tomas Tatar Point": {
                     "validated": true,
@@ -3973,7 +4104,16 @@
                 "Jack Hughes Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Devon Toews Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "29": {
@@ -3996,7 +4136,7 @@
                 [
                     "Brock Nelson Point",
                     "Jack Eichel Assist",
-                    "FREE",
+                    "Lars Eller Point",
                     "Italy Win",
                     "Lukas Reichel Point"
                 ],
@@ -4037,8 +4177,8 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Sidney Crosby Assist": {
                     "validated": false,
@@ -4064,10 +4204,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:02.435834Z"
-                },
                 "Italy Win": {
                     "validated": false,
                     "timestamp": null
@@ -4077,8 +4213,8 @@
                     "timestamp": null
                 },
                 "Filip Gustavsson Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "France Loss": {
                     "validated": false,
@@ -4115,7 +4251,16 @@
                 "Germany Loss": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Lars Eller Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "30": {
@@ -4138,7 +4283,7 @@
                 [
                     "Latvia Playoff Win",
                     "Any Player 3 Point Game",
-                    "FREE",
+                    "Martin Fehervary Point",
                     "Artturi Lehkonen Point",
                     "\u2265 15 Team PIM in a Game"
                 ],
@@ -4150,7 +4295,7 @@
                     "France Loss"
                 ],
                 [
-                    "Ukko-Pekka Luukkonen Win",
+                    "Moritz Seider Point",
                     "Rasmus Dahlin Point",
                     "Switzerland Loss",
                     "David Kampf Point",
@@ -4183,8 +4328,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Any Player Misconduct Penalty": {
                     "validated": false,
@@ -4205,10 +4350,6 @@
                 "Any Player 3 Point Game": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:10:07.624963Z"
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:02.457416Z"
                 },
                 "Artturi Lehkonen Point": {
                     "validated": true,
@@ -4238,10 +4379,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
                 "Rasmus Dahlin Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T15:40:07.624963Z"
@@ -4257,7 +4394,20 @@
                 "Any Player Major Penalty": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Martin Fehervary Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Moritz Seider Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "31": {
@@ -4280,7 +4430,7 @@
                 [
                     "Alexander Wennberg Point",
                     "Mikko Rantanen Assist",
-                    "FREE",
+                    "Simon Nemec Point",
                     "Germany Playoff Win",
                     "Kaapo Kakko Point"
                 ],
@@ -4348,10 +4498,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:11.724807Z"
-                },
                 "Germany Playoff Win": {
                     "validated": false,
                     "timestamp": null
@@ -4399,7 +4545,16 @@
                 "Tomas Tatar Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Simon Nemec Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0512:50:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "32": {
@@ -4422,7 +4577,7 @@
                 [
                     "Lars Eller Point",
                     "Gabriel Landeskog Point",
-                    "FREE",
+                    "Oliver Bjorkstrand Point",
                     "Slovakia Loss",
                     "Slovakia Win"
                 ],
@@ -4490,10 +4645,6 @@
                     "validated": true,
                     "timestamp": "2026-02-11T15:27:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:11.752198Z"
-                },
                 "Slovakia Loss": {
                     "validated": false,
                     "timestamp": null
@@ -4541,7 +4692,16 @@
                 "Non-NHL Player Goal": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:12:07.624963Z"
+                },
+                "Oliver Bjorkstrand Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "33": {
@@ -4564,7 +4724,7 @@
                 [
                     "Auston Matthews Assist",
                     "Nathan MacKinnon Assist",
-                    "FREE",
+                    "Esa Lindell Point",
                     "Filip Forsberg Point",
                     "Brock Nelson Point"
                 ],
@@ -4613,8 +4773,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Cale Makar Point": {
                     "validated": false,
@@ -4631,10 +4791,6 @@
                 "Nathan MacKinnon Assist": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:11.774047Z"
                 },
                 "Filip Forsberg Point": {
                     "validated": false,
@@ -4681,9 +4837,18 @@
                     "timestamp": "2026-02-11T13:15:07.624963Z"
                 },
                 "Filip Gustavsson Win": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
+                },
+                "Esa Lindell Point": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "34": {
@@ -4706,7 +4871,7 @@
                 [
                     "Denmark Win",
                     "Brock Faber Point",
-                    "FREE",
+                    "Filip Forsberg Point",
                     "Pius Suter Point",
                     "Brock Nelson Point"
                 ],
@@ -4721,7 +4886,7 @@
                     "Slovakia Loss",
                     "Latvia Playoff Win",
                     "Rickard Rakell Point",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "Oliver Ekman-Larsson Point"
                 ]
             ],
@@ -4774,10 +4939,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:11.797108Z"
-                },
                 "Pius Suter Point": {
                     "validated": false,
                     "timestamp": null
@@ -4795,8 +4956,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Roman Josi Point": {
                     "validated": false,
@@ -4815,17 +4976,26 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Oliver Ekman-Larsson Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Filip Forsberg Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "35": {
@@ -4848,7 +5018,7 @@
                 [
                     "Joel Armia Point",
                     "Pavel Zacha Point",
-                    "FREE",
+                    "Mika Zibanejad Point",
                     "Victor Hedman Point",
                     "Switzerland Playoff Win"
                 ],
@@ -4856,7 +5026,7 @@
                     "Nikolaj Ehlers Point",
                     "United States Loss",
                     "Shea Theodore Point",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "Sidney Crosby Goal"
                 ],
                 [
@@ -4916,13 +5086,9 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:11.820052Z"
-                },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Switzerland Playoff Win": {
                     "validated": false,
@@ -4940,7 +5106,7 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -4967,7 +5133,16 @@
                 "Latvia Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Mika Zibanejad Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "36": {
@@ -4990,15 +5165,15 @@
                 [
                     "Martin Necas Goal",
                     "Canada Win",
-                    "FREE",
+                    "Juraj Slafkovsky Point",
                     "Samuel Hlavaj Win",
                     "Logan Thompson Win"
                 ],
                 [
                     "Bo Horvat Point",
-                    "Ukko-Pekka Luukkonen Win",
+                    "Matthew Tkachuk Point",
                     "Tom Wilson Point",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "Nathan MacKinnon Goal"
                 ],
                 [
@@ -5058,10 +5233,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:17.832040Z"
-                },
                 "Samuel Hlavaj Win": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:15:07.624963Z"
@@ -5074,15 +5245,11 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
                 "Tom Wilson Point": {
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -5091,8 +5258,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Elias Pettersson Point": {
                     "validated": false,
@@ -5109,7 +5276,20 @@
                 "Czechia Playoff Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Juraj Slafkovsky Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:30:45.868776Z"
+                },
+                "Matthew Tkachuk Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "37": {
@@ -5132,7 +5312,7 @@
                 [
                     "Czech Republic Loss",
                     "France Loss",
-                    "FREE",
+                    "Filip Gustavsson Win",
                     "Mika Zibanejad Point",
                     "Mikael Granlund Point"
                 ],
@@ -5200,10 +5380,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:17.857053Z"
-                },
                 "Mika Zibanejad Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T15:27:07.624963Z"
@@ -5229,8 +5405,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Auston Matthews Goal": {
                     "validated": false,
@@ -5251,7 +5427,16 @@
                 "Shootout Goal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Filip Gustavsson Win": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "38": {
@@ -5274,7 +5459,7 @@
                 [
                     "Sweden Loss",
                     "Any Player Hat Trick",
-                    "FREE",
+                    "Artturi Lehkonen Point",
                     "Shorthanded Goal",
                     "Lukas Dostal Win"
                 ],
@@ -5342,10 +5527,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:17.881592Z"
-                },
                 "Shorthanded Goal": {
                     "validated": false,
                     "timestamp": null
@@ -5359,8 +5540,8 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Mikko Rantanen Goal": {
                     "validated": false,
@@ -5371,8 +5552,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Jack Eichel Assist": {
                     "validated": false,
@@ -5393,7 +5574,16 @@
                 "Eeli Toivanen Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Artturi Lehkonen Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "39": {
@@ -5416,7 +5606,7 @@
                 [
                     "Kevin Fiala Assist",
                     "Adrian Kempe Point",
-                    "FREE",
+                    "Kaapo Kakko Point",
                     "Jackson Lacombe Point",
                     "Radek Faksa Point"
                 ],
@@ -5481,12 +5671,8 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "FREE": {
                     "validated": true,
-                    "timestamp": "2026-02-11T05:29:17.907795Z"
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Jackson Lacombe Point": {
                     "validated": false,
@@ -5535,7 +5721,16 @@
                 "Brady Tkachuk Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Kaapo Kakko Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "40": {
@@ -5558,7 +5753,7 @@
                 [
                     "Filip Gustavsson Win",
                     "Leon Draisaitl Goal",
-                    "FREE",
+                    "Erik Karlsson Point",
                     "Elias Pettersson Point",
                     "Brady Tkachuk Point"
                 ],
@@ -5619,16 +5814,12 @@
                     "timestamp": null
                 },
                 "Filip Gustavsson Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Leon Draisaitl Goal": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:17.933431Z"
                 },
                 "Elias Pettersson Point": {
                     "validated": false,
@@ -5677,7 +5868,16 @@
                 "France Loss": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Erik Karlsson Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "41": {
@@ -5691,7 +5891,7 @@
                     "United States Medal"
                 ],
                 [
-                    "Ukko-Pekka Luukkonen Win",
+                    "Pavol Regenda Point",
                     "Brandon Hagel Point",
                     "Tomas Hertl Point",
                     "Sweden Loss",
@@ -5700,7 +5900,7 @@
                 [
                     "Colton Parayko Point",
                     "Non-NHL Player 2 pt Game",
-                    "FREE",
+                    "Uvis Balinskis Point",
                     "Tage Thompson Point",
                     "Any Player 3 Point Game"
                 ],
@@ -5740,10 +5940,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
                 "Brandon Hagel Point": {
                     "validated": false,
                     "timestamp": null
@@ -5767,10 +5963,6 @@
                 "Non-NHL Player 2 pt Game": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:26.457535Z"
                 },
                 "Tage Thompson Point": {
                     "validated": false,
@@ -5819,7 +6011,20 @@
                 "Lukas Reichel Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Pavol Regenda Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Uvis Balinskis Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "42": {
@@ -5842,7 +6047,7 @@
                 [
                     "Rickard Rakell Point",
                     "Any Player Hat Trick",
-                    "FREE",
+                    "Mark Stone Point",
                     "Denmark Playoff Win",
                     "Latvia Loss"
                 ],
@@ -5903,24 +6108,20 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Any Player Hat Trick": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:26.484534Z"
                 },
                 "Denmark Playoff Win": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Brady Tkachuk Point": {
                     "validated": false,
@@ -5961,7 +6162,16 @@
                 "Clayton Keller Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Mark Stone Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "43": {
@@ -5984,7 +6194,7 @@
                 [
                     "Ondrej Palat Point",
                     "France Loss",
-                    "FREE",
+                    "Oscar Fisker Molgaard Point",
                     "Erik Cernak Point",
                     "Switzerland Playoff Win"
                 ],
@@ -6052,10 +6262,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:26.511732Z"
-                },
                 "Erik Cernak Point": {
                     "validated": false,
                     "timestamp": null
@@ -6103,7 +6309,16 @@
                 "Lucas Raymond Assist": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Oscar Fisker Molgaard Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "44": {
@@ -6126,7 +6341,7 @@
                 [
                     "Elias Lindholm Point",
                     "Leon Draisaitl Assist",
-                    "FREE",
+                    "Sidney Crosby Goal",
                     "Cale Makar Point",
                     "Brady Tkachuk Point"
                 ],
@@ -6167,8 +6382,8 @@
                     "timestamp": "2026-02-11T13:12:07.624963Z"
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "2 PP Goals by 1 Team in Game": {
                     "validated": false,
@@ -6193,10 +6408,6 @@
                 "Leon Draisaitl Assist": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:26.538425Z"
                 },
                 "Cale Makar Point": {
                     "validated": false,
@@ -6245,7 +6456,16 @@
                 "Switzerland Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Sidney Crosby Goal": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "45": {
@@ -6268,7 +6488,7 @@
                 [
                     "Mark Stone Point",
                     "Rasmus Andersson Point",
-                    "FREE",
+                    "Charlie McAvoy Point",
                     "Denmark Win",
                     "David Kampf Point"
                 ],
@@ -6293,8 +6513,8 @@
                     "timestamp": null
                 },
                 "William Nylander Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Philipp Kurashev Point": {
                     "validated": false,
@@ -6325,8 +6545,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Mark Stone Point": {
                     "validated": false,
@@ -6335,10 +6555,6 @@
                 "Rasmus Andersson Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:26.566078Z"
                 },
                 "Denmark Win": {
                     "validated": false,
@@ -6387,7 +6603,16 @@
                 "Juraj Slafkovsky Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T0511:30:45.868776Z"
+                },
+                "Charlie McAvoy Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "46": {
@@ -6410,7 +6635,7 @@
                 [
                     "Mikko Rantanen Goal",
                     "Canada Win",
-                    "FREE",
+                    "Colton Parayko Point",
                     "United States Loss",
                     "Canada Medal"
                 ],
@@ -6478,10 +6703,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:32.366556Z"
-                },
                 "United States Loss": {
                     "validated": false,
                     "timestamp": null
@@ -6529,7 +6750,16 @@
                 "Clayton Keller Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Colton Parayko Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "47": {
@@ -6537,7 +6767,7 @@
             "grid": [
                 [
                     "Mikko Rantanen Assist",
-                    "Seth Jarvis Cirelli Point",
+                    "Seth Jarvis Point",
                     "J.J. Moser Point",
                     "Connor Hellebuyck Win",
                     "Shorthanded Goal"
@@ -6552,7 +6782,7 @@
                 [
                     "Non-NHL Player 2 pt Game",
                     "Shootout Win",
-                    "FREE",
+                    "David Kampf Point",
                     "Roman Josi Point",
                     "Rasmus Ristolainen Point"
                 ],
@@ -6576,7 +6806,7 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -6620,10 +6850,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:32.402046Z"
-                },
                 "Roman Josi Point": {
                     "validated": false,
                     "timestamp": null
@@ -6641,16 +6867,16 @@
                     "timestamp": null
                 },
                 "Non-NHL Player Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:12:07.624963Z"
                 },
                 "Jake Sanderson Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Any Player 3 Point Game": {
                     "validated": true,
@@ -6671,7 +6897,16 @@
                 "Quinn Hughes Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "David Kampf Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "48": {
@@ -6694,7 +6929,7 @@
                 [
                     "Roman Josi Point",
                     "Denmark Win",
-                    "FREE",
+                    "Josh Samanski Point",
                     "Tom Wilson Point",
                     "Goal call reversed"
                 ],
@@ -6762,10 +6997,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:32.430457Z"
-                },
                 "Tom Wilson Point": {
                     "validated": false,
                     "timestamp": null
@@ -6807,13 +7038,22 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Jordan Binnington Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Josh Samanski Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "49": {
@@ -6836,7 +7076,7 @@
                 [
                     "Sam Bennett Point",
                     "David Pastrnak Assist",
-                    "FREE",
+                    "Jesper Bratt Point",
                     "Simon Nemec Point",
                     "Nico Hischier Point"
                 ],
@@ -6877,8 +7117,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Jack Hughes Point": {
                     "validated": false,
@@ -6903,10 +7143,6 @@
                 "David Pastrnak Assist": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:32.458894Z"
                 },
                 "Simon Nemec Point": {
                     "validated": true,
@@ -6955,7 +7191,16 @@
                 "Devon Toews Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jesper Bratt Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:40:07.624963Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "50": {
@@ -6978,7 +7223,7 @@
                 [
                     "Juuse Saros Win",
                     "Quinn Hughes Point",
-                    "FREE",
+                    "Joel Eriksson Ek Point",
                     "Martin Necas Goal",
                     "Bo Horvat Point"
                 ],
@@ -7046,10 +7291,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:32.488454Z"
-                },
                 "Martin Necas Goal": {
                     "validated": false,
                     "timestamp": null
@@ -7091,13 +7332,22 @@
                     "timestamp": null
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Nathan MacKinnon Goal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Joel Eriksson Ek Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "51": {
@@ -7120,7 +7370,7 @@
                 [
                     "Denmark Loss",
                     "United States Loss",
-                    "FREE",
+                    "Radek Faksa Point",
                     "Overtime Win",
                     "Shootout Win"
                 ],
@@ -7177,8 +7427,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Denmark Loss": {
                     "validated": false,
@@ -7187,10 +7437,6 @@
                 "United States Loss": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:38.284582Z"
                 },
                 "Overtime Win": {
                     "validated": false,
@@ -7205,8 +7451,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "J.T. Miller Point": {
                     "validated": false,
@@ -7217,8 +7463,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Germany Win": {
                     "validated": false,
@@ -7239,7 +7485,16 @@
                 "Canada Medal": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Radek Faksa Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "52": {
@@ -7262,7 +7517,7 @@
                 [
                     "2 PP Goals by 1 Team in Game",
                     "Matt Boldy Point",
-                    "FREE",
+                    "Sam Bennett Point",
                     "Non-NHL Player Goal",
                     "\u2265 15 Team PIM in a Game"
                 ],
@@ -7330,10 +7585,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:38.315478Z"
-                },
                 "Non-NHL Player Goal": {
                     "validated": true,
                     "timestamp": "2026-02-11T13:12:07.624963Z"
@@ -7375,13 +7626,22 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Colton Parayko Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Sam Bennett Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "53": {
@@ -7404,7 +7664,7 @@
                 [
                     "Finland Win",
                     "Latvia Win",
-                    "FREE",
+                    "William Nylander Assist",
                     "Tim Stutzle Assist",
                     "Canada Loss"
                 ],
@@ -7449,8 +7709,8 @@
                     "timestamp": null
                 },
                 "Filip Gustavsson Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Non-NHL Player Goal": {
                     "validated": true,
@@ -7471,10 +7731,6 @@
                 "Latvia Win": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:38.346603Z"
                 },
                 "Tim Stutzle Assist": {
                     "validated": false,
@@ -7523,7 +7779,16 @@
                 "Martin Fehervary Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "William Nylander Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "54": {
@@ -7546,7 +7811,7 @@
                 [
                     "Jackson Lacombe Point",
                     "Shootout Win",
-                    "FREE",
+                    "Roman Josi Point",
                     "Tage Thompson Point",
                     "Oliver Ekman-Larsson Point"
                 ],
@@ -7614,10 +7879,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:38.377240Z"
-                },
                 "Tage Thompson Point": {
                     "validated": false,
                     "timestamp": null
@@ -7665,7 +7926,16 @@
                 "Elias Pettersson Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Roman Josi Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "55": {
@@ -7688,7 +7958,7 @@
                 [
                     "Pontus Holmberg Point",
                     "Auston Matthews Goal",
-                    "FREE",
+                    "Cale Makar Point",
                     "Overtime Win",
                     "Jack Eichel Goal"
                 ],
@@ -7725,8 +7995,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "France Win": {
                     "validated": false,
@@ -7755,10 +8025,6 @@
                 "Auston Matthews Goal": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:38.409082Z"
                 },
                 "Overtime Win": {
                     "validated": false,
@@ -7801,13 +8067,22 @@
                     "timestamp": null
                 },
                 "Filip Gustavsson Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Connor Hellebuyck Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Cale Makar Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "56": {
@@ -7830,7 +8105,7 @@
                 [
                     "Latvia Win",
                     "Macklin Celebrini Point",
-                    "FREE",
+                    "Lukas Dostal Win",
                     "Matt Boldy Point",
                     "Sweden Win"
                 ],
@@ -7863,8 +8138,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Jack Eichel Goal": {
                     "validated": false,
@@ -7898,17 +8173,13 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:45.323023Z"
-                },
                 "Matt Boldy Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Overtime Goal": {
                     "validated": false,
@@ -7939,8 +8210,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Mikael Granlund Point": {
                     "validated": false,
@@ -7949,7 +8220,16 @@
                 "Radko Gudas Penalty": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Lukas Dostal Win": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "57": {
@@ -7972,7 +8252,7 @@
                 [
                     "Brad Marchand Point",
                     "Non-NHL Player 2 pt Game",
-                    "FREE",
+                    "Shea Theodore Point",
                     "Italy Win",
                     "Jack Hughes Point"
                 ],
@@ -8013,8 +8293,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Non-NHL Player Goal": {
                     "validated": true,
@@ -8025,8 +8305,8 @@
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Czech Republic Win": {
                     "validated": false,
@@ -8039,10 +8319,6 @@
                 "Non-NHL Player 2 pt Game": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:45.355335Z"
                 },
                 "Italy Win": {
                     "validated": false,
@@ -8091,7 +8367,16 @@
                 "Shootout Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Shea Theodore Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "58": {
@@ -8114,12 +8399,12 @@
                 [
                     "Nino Niederreiter Point",
                     "Jesper Bratt Point",
-                    "FREE",
+                    "Roope Hintz Point",
                     "Victor Hedman Point",
                     "Colton Parayko Point"
                 ],
                 [
-                    "Ukko-Pekka Luukkonen Win",
+                    "Esa Lindell Point",
                     "Non-NHL Player 2 pt Game",
                     "David Pastrnak Assist",
                     "Leon Draisaitl Goal",
@@ -8135,12 +8420,12 @@
             ],
             "events": {
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Italy Loss": {
                     "validated": false,
@@ -8182,19 +8467,11 @@
                     "validated": true,
                     "timestamp": "2026-02-11T15:40:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:45.387725Z"
-                },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Colton Parayko Point": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "Ukko-Pekka Luukkonen Win": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -8233,7 +8510,20 @@
                 "Elias Lindholm Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Roope Hintz Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Esa Lindell Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "59": {
@@ -8256,7 +8546,7 @@
                 [
                     "Any Player Major Penalty",
                     "Moritz Seider Point",
-                    "FREE",
+                    "Joel Kiviranta Point",
                     "Germany Loss",
                     "Sweden Win"
                 ],
@@ -8324,17 +8614,13 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:45.421000Z"
-                },
                 "Germany Loss": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Any Player Hat Trick": {
                     "validated": false,
@@ -8353,8 +8639,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Denmark Loss": {
                     "validated": false,
@@ -8375,7 +8661,16 @@
                 "Goal call reversed": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Joel Kiviranta Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "60": {
@@ -8398,7 +8693,7 @@
                 [
                     "Nikolaj Ehlers Point",
                     "Nick Suzuki Point",
-                    "FREE",
+                    "Radko Gudas Penalty",
                     "Any Player Major Penalty",
                     "Tomas Tatar Point"
                 ],
@@ -8466,10 +8761,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:45.454899Z"
-                },
                 "Any Player Major Penalty": {
                     "validated": false,
                     "timestamp": null
@@ -8517,7 +8808,16 @@
                 "Jordan Binnington Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Radko Gudas Penalty": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "61": {
@@ -8540,7 +8840,7 @@
                 [
                     "Lucas Raymond Assist",
                     "Anton Lundell Point",
-                    "FREE",
+                    "Nathan MacKinnon Goal",
                     "Germany Playoff Win",
                     "Tim Stutzle Assist"
                 ],
@@ -8608,10 +8908,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:50.347964Z"
-                },
                 "Germany Playoff Win": {
                     "validated": false,
                     "timestamp": null
@@ -8629,8 +8925,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Shorthanded Goal": {
                     "validated": false,
@@ -8659,7 +8955,16 @@
                 "Tage Thompson Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Nathan MacKinnon Goal": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "62": {
@@ -8682,7 +8987,7 @@
                 [
                     "Zach Werenski Point",
                     "Finland Win",
-                    "FREE",
+                    "Elias Lindholm Point",
                     "Denmark Loss",
                     "Tomas Tatar Point"
                 ],
@@ -8703,8 +9008,8 @@
             ],
             "events": {
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Martin Necas Goal": {
                     "validated": false,
@@ -8750,10 +9055,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:59.362443Z"
-                },
                 "Denmark Loss": {
                     "validated": false,
                     "timestamp": null
@@ -8783,8 +9084,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Vincent Trocheck Point": {
                     "validated": false,
@@ -8801,7 +9102,16 @@
                 "Nico Sturm Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Elias Lindholm Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "63": {
@@ -8824,7 +9134,7 @@
                 [
                     "Italy Loss",
                     "Matt Boldy Point",
-                    "FREE",
+                    "Noah Hanifin Point",
                     "Pavol Regenda Point",
                     "Shootout Goal"
                 ],
@@ -8892,10 +9202,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:59.398304Z"
-                },
                 "Pavol Regenda Point": {
                     "validated": false,
                     "timestamp": null
@@ -8943,7 +9249,16 @@
                 "Italy Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Noah Hanifin Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "64": {
@@ -8966,7 +9281,7 @@
                 [
                     "Czechia Playoff Win",
                     "Erik Cernak Point",
-                    "FREE",
+                    "Teddy Blueger",
                     "United States Win",
                     "Goalie Shutout"
                 ],
@@ -9034,10 +9349,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:59.434132Z"
-                },
                 "United States Win": {
                     "validated": false,
                     "timestamp": null
@@ -9047,8 +9358,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Joel Armia Point": {
                     "validated": true,
@@ -9083,9 +9394,18 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
+                },
+                "Teddy Blueger": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "65": {
@@ -9108,7 +9428,7 @@
                 [
                     "Sam Bennett Point",
                     "Jordan Binnington Win",
-                    "FREE",
+                    "Mika Zibanejad Point",
                     "Mitch Marner Point",
                     "Any Player Hat Trick"
                 ],
@@ -9129,8 +9449,8 @@
             ],
             "events": {
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Noah Hanifin Point": {
                     "validated": false,
@@ -9149,8 +9469,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Shootout Goal": {
                     "validated": false,
@@ -9175,10 +9495,6 @@
                 "Jordan Binnington Win": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:59.469575Z"
                 },
                 "Mitch Marner Point": {
                     "validated": false,
@@ -9213,8 +9529,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Leon Draisaitl Goal": {
                     "validated": false,
@@ -9227,7 +9543,16 @@
                 "Non-NHL Player 2 pt Game": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Mika Zibanejad Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "66": {
@@ -9250,7 +9575,7 @@
                 [
                     "Rasmus Dahlin Point",
                     "Matt Boldy Point",
-                    "FREE",
+                    "Joel Armia Point",
                     "Sebastian Aho Goal",
                     "Overtime Goal"
                 ],
@@ -9266,7 +9591,7 @@
                     "Erik Haula Point",
                     "Rasmus Ristolainen Point",
                     "Any Player Major Penalty",
-                    "Ukko-Pekka Luukkonen Win"
+                    "Jake Sanderson Point"
                 ]
             ],
             "events": {
@@ -9318,10 +9643,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:29:59.504800Z"
-                },
                 "Sebastian Aho Goal": {
                     "validated": false,
                     "timestamp": null
@@ -9366,10 +9687,19 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
+                "Joel Armia Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Jake Sanderson Point": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "67": {
@@ -9392,7 +9722,7 @@
                 [
                     "France Loss",
                     "Connor Hellebuyck Win",
-                    "FREE",
+                    "Sam Bennett Point",
                     "Esa Lindell Point",
                     "Victor Hedman Point"
                 ],
@@ -9460,17 +9790,13 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:05.366484Z"
-                },
                 "Esa Lindell Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Finland Loss": {
                     "validated": true,
@@ -9511,7 +9837,16 @@
                 "Goal call reversed": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Sam Bennett Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "68": {
@@ -9534,7 +9869,7 @@
                 [
                     "Tom Wilson Point",
                     "Tom Wilson Penalty",
-                    "FREE",
+                    "Kevin Fiala Assist",
                     "Mikko Rantanen Assist",
                     "Latvia Playoff Win"
                 ],
@@ -9602,10 +9937,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:05.402996Z"
-                },
                 "Mikko Rantanen Assist": {
                     "validated": false,
                     "timestamp": null
@@ -9653,7 +9984,16 @@
                 "Jesper Wallstedt Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Kevin Fiala Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "69": {
@@ -9664,7 +10004,7 @@
                     "Travis Sanheim Point",
                     "Latvia Win",
                     "Sebastian Aho Assist",
-                    "Ukko-Pekka Luukkonen Win"
+                    "Jake Guentzel Point"
                 ],
                 [
                     "Overtime Goal",
@@ -9676,7 +10016,7 @@
                 [
                     "Switzerland Loss",
                     "Philipp Kurashev Point",
-                    "FREE",
+                    "Vincent Trocheck Point",
                     "Jaccob Slavin Point",
                     "Rickard Rakell Point"
                 ],
@@ -9712,17 +10052,13 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
                 "Overtime Goal": {
                     "validated": false,
                     "timestamp": null
                 },
                 "William Nylander Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Any Player Hat Trick": {
                     "validated": false,
@@ -9744,25 +10080,21 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:05.439925Z"
-                },
                 "Jaccob Slavin Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Rickard Rakell Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:24:45.868776Z"
                 },
                 "Charlie McAvoy Point": {
                     "validated": false,
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Jesper Wallstedt Win": {
                     "validated": false,
@@ -9789,13 +10121,26 @@
                     "timestamp": null
                 },
                 "Gabriel Landeskog Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
                 },
                 "France Loss": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jake Guentzel Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Vincent Trocheck Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "70": {
@@ -9818,7 +10163,7 @@
                 [
                     "United States Win",
                     "Devon Toews Point",
-                    "FREE",
+                    "Anton Lundell Point",
                     "Any Player Hat Trick",
                     "Tomas Tatar Point"
                 ],
@@ -9886,10 +10231,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:05.477607Z"
-                },
                 "Any Player Hat Trick": {
                     "validated": false,
                     "timestamp": null
@@ -9937,7 +10278,16 @@
                 "United States Loss": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Anton Lundell Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "71": {
@@ -9960,7 +10310,7 @@
                 [
                     "Any Player Major Penalty",
                     "Overtime Win",
-                    "FREE",
+                    "Nino Niederreiter Point",
                     "Shootout Win",
                     "Jordan Binnington Win"
                 ],
@@ -9981,8 +10331,8 @@
             ],
             "events": {
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Any Player Misconduct Penalty": {
                     "validated": false,
@@ -9997,8 +10347,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Slovakia Playoff Win": {
                     "validated": false,
@@ -10027,10 +10377,6 @@
                 "Overtime Win": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:05.515701Z"
                 },
                 "Shootout Win": {
                     "validated": false,
@@ -10079,7 +10425,16 @@
                 "Italy Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Nino Niederreiter Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "72": {
@@ -10102,7 +10457,7 @@
                 [
                     "Jonas Brodin Point",
                     "Overtime Win",
-                    "FREE",
+                    "Henri Jokiharju Point",
                     "France Win",
                     "JJ Peterka Point"
                 ],
@@ -10170,10 +10525,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:14.142434Z"
-                },
                 "France Win": {
                     "validated": false,
                     "timestamp": null
@@ -10203,8 +10554,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Non-NHL Player 2 pt Game": {
                     "validated": false,
@@ -10219,9 +10570,18 @@
                     "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Any Player 2 Assist Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Henri Jokiharju Point": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "73": {
@@ -10244,7 +10604,7 @@
                 [
                     "Any Player 3 Point Game",
                     "Sam Reinhart Point",
-                    "FREE",
+                    "Kaapo Kakko Point",
                     "J.T. Miller Point",
                     "Any Player Hat Trick"
                 ],
@@ -10260,7 +10620,7 @@
                     "2 PP Goals by 1 Team in Game",
                     "\u2265 15 Team PIM in a Game",
                     "Sebastian Aho Assist",
-                    "Ukko-Pekka Luukkonen Win"
+                    "Martin Pospisil Point"
                 ]
             ],
             "events": {
@@ -10312,10 +10672,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:14.183352Z"
-                },
                 "J.T. Miller Point": {
                     "validated": false,
                     "timestamp": null
@@ -10329,8 +10685,8 @@
                     "timestamp": null
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Leon Draisaitl Assist": {
                     "validated": false,
@@ -10360,10 +10716,19 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "Ukko-Pekka Luukkonen Win": {
+                "Kaapo Kakko Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Martin Pospisil Point": {
                     "validated": false,
                     "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "74": {
@@ -10386,7 +10751,7 @@
                 [
                     "Finland Medal",
                     "Mika Zibanejad Point",
-                    "FREE",
+                    "Auston Matthews Assist",
                     "Czech Republic Loss",
                     "Tomas Tatar Point"
                 ],
@@ -10454,10 +10819,6 @@
                     "validated": true,
                     "timestamp": "2026-02-11T15:27:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:14.221462Z"
-                },
                 "Czech Republic Loss": {
                     "validated": false,
                     "timestamp": null
@@ -10479,8 +10840,8 @@
                     "timestamp": null
                 },
                 "Gustav Forsling Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:40:07.624963Z"
                 },
                 "Germany Playoff Win": {
                     "validated": false,
@@ -10505,7 +10866,16 @@
                 "Switzerland Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Auston Matthews Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "75": {
@@ -10528,7 +10898,7 @@
                 [
                     "Sweden Medal",
                     "Matthew Tkachuk Penalty",
-                    "FREE",
+                    "Artturi Lehkonen Point",
                     "Tomas Hertl Point",
                     "United States Win"
                 ],
@@ -10569,8 +10939,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Finland Win": {
                     "validated": false,
@@ -10595,10 +10965,6 @@
                 "Matthew Tkachuk Penalty": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:14.261567Z"
                 },
                 "Tomas Hertl Point": {
                     "validated": false,
@@ -10647,7 +11013,16 @@
                 "Germany Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Artturi Lehkonen Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "76": {
@@ -10670,7 +11045,7 @@
                 [
                     "Shootout Goal",
                     "Gustav Forsling Point",
-                    "FREE",
+                    "William Nylander Goal",
                     "Tom Wilson Penalty",
                     "Non-NHL Player Goal"
                 ],
@@ -10738,10 +11113,6 @@
                     "validated": true,
                     "timestamp": "2026-02-11T15:40:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:14.300985Z"
-                },
                 "Tom Wilson Penalty": {
                     "validated": false,
                     "timestamp": null
@@ -10789,7 +11160,16 @@
                 "Cale Makar Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "William Nylander Goal": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "77": {
@@ -10812,7 +11192,7 @@
                 [
                     "Any Player 3 Point Game",
                     "Sweden Win",
-                    "FREE",
+                    "Eetu Luostarinen Point",
                     "William Nylander Goal",
                     "Tim Stutzle Assist"
                 ],
@@ -10877,16 +11257,12 @@
                     "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Sweden Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "FREE": {
                     "validated": true,
-                    "timestamp": "2026-02-11T05:30:18.804867Z"
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "William Nylander Goal": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Tim Stutzle Assist": {
                     "validated": false,
@@ -10931,7 +11307,16 @@
                 "Goal call reversed": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Eetu Luostarinen Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "78": {
@@ -10954,7 +11339,7 @@
                 [
                     "Non-NHL Player Goal",
                     "Cale Makar Point",
-                    "FREE",
+                    "Pavol Regenda Point",
                     "Canada Win",
                     "Italy Loss"
                 ],
@@ -10987,8 +11372,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Goal call reversed": {
                     "validated": false,
@@ -11021,10 +11406,6 @@
                 "Cale Makar Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:18.846158Z"
                 },
                 "Canada Win": {
                     "validated": false,
@@ -11073,7 +11454,16 @@
                 "JJ Peterka Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Pavol Regenda Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "79": {
@@ -11096,7 +11486,7 @@
                 [
                     "Eeli Toivanen Point",
                     "Sidney Crosby Assist",
-                    "FREE",
+                    "Auston Matthews Goal",
                     "2 PP Goals by 1 Team in Game",
                     "Shootout Win"
                 ],
@@ -11164,10 +11554,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:18.885801Z"
-                },
                 "2 PP Goals by 1 Team in Game": {
                     "validated": false,
                     "timestamp": null
@@ -11215,7 +11601,16 @@
                 "Jake Sanderson Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Auston Matthews Goal": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "80": {
@@ -11238,7 +11633,7 @@
                 [
                     "Tomas Hertl Point",
                     "Gustav Forsling Point",
-                    "FREE",
+                    "Charlie McAvoy Point",
                     "Denmark Loss",
                     "Canada Win"
                 ],
@@ -11306,10 +11701,6 @@
                     "validated": true,
                     "timestamp": "2026-02-11T15:40:07.624963Z"
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:18.926784Z"
-                },
                 "Denmark Loss": {
                     "validated": false,
                     "timestamp": null
@@ -11323,8 +11714,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "United States Medal": {
                     "validated": false,
@@ -11357,7 +11748,16 @@
                 "Martin Fehervary Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Charlie McAvoy Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "81": {
@@ -11380,8 +11780,8 @@
                 [
                     "Leon Draisaitl Assist",
                     "Sidney Crosby Goal",
-                    "FREE",
-                    "Seth Jarvis Cirelli Point",
+                    "Joel Armia Point",
+                    "Seth Jarvis Point",
                     "Any Player 3 Point Game"
                 ],
                 [
@@ -11448,11 +11848,7 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:30:18.967953Z"
-                },
-                "Seth Jarvis Cirelli Point": {
+                "Seth Jarvis Point": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -11489,8 +11885,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Oliver Ekman-Larsson Point": {
                     "validated": false,
@@ -11499,7 +11895,16 @@
                 "Eetu Luostarinen Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Joel Armia Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "82": {
@@ -11522,7 +11927,7 @@
                 [
                     "Denmark Win",
                     "Goal call reversed",
-                    "FREE",
+                    "Rasmus Ristolainen Point",
                     "Brad Marchand Point",
                     "Any Player Major Penalty"
                 ],
@@ -11590,10 +11995,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:34:07.363401Z"
-                },
                 "Brad Marchand Point": {
                     "validated": false,
                     "timestamp": null
@@ -11611,8 +12012,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Martin Fehervary Point": {
                     "validated": false,
@@ -11641,7 +12042,16 @@
                 "Matthew Tkachuk Penalty": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Rasmus Ristolainen Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "83": {
@@ -11664,14 +12074,14 @@
                 [
                     "Switzerland Loss",
                     "Latvia Playoff Win",
-                    "FREE",
+                    "Jake Sanderson Point",
                     "Shea Theodore Point",
                     "Non-NHL Player 2 pt Game"
                 ],
                 [
                     "Switzerland Playoff Win",
                     "Jesper Wallstedt Win",
-                    "Ukko-Pekka Luukkonen Win",
+                    "Tim Stutzle Assist",
                     "Timo Meier Point",
                     "J.J. Moser Point"
                 ],
@@ -11732,10 +12142,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:34:07.408685Z"
-                },
                 "Shea Theodore Point": {
                     "validated": false,
                     "timestamp": null
@@ -11749,10 +12155,6 @@
                     "timestamp": null
                 },
                 "Jesper Wallstedt Win": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "Ukko-Pekka Luukkonen Win": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -11783,7 +12185,20 @@
                 "Shootout Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Jake Sanderson Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Tim Stutzle Assist": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "84": {
@@ -11806,7 +12221,7 @@
                 [
                     "Noah Hanifin Point",
                     "Macklin Celebrini Point",
-                    "FREE",
+                    "Simon Nemec Point",
                     "Sebastian Aho Assist",
                     "United States Medal"
                 ],
@@ -11831,8 +12246,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Sebastian Aho Goal": {
                     "validated": false,
@@ -11873,10 +12288,6 @@
                 "Macklin Celebrini Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:34:07.451408Z"
                 },
                 "Sebastian Aho Assist": {
                     "validated": false,
@@ -11925,7 +12336,16 @@
                 "Germany Playoff Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Simon Nemec Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0512:50:45.868776Z"
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "85": {
@@ -11948,7 +12368,7 @@
                 [
                     "Kevin Fiala Goal",
                     "United States Loss",
-                    "FREE",
+                    "Nick Suzuki Point",
                     "Moritz Seider Point",
                     "Roman Josi Point"
                 ],
@@ -12016,10 +12436,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:34:07.494890Z"
-                },
                 "Moritz Seider Point": {
                     "validated": false,
                     "timestamp": null
@@ -12067,7 +12483,16 @@
                 "Nikolaj Ehlers Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Nick Suzuki Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "86": {
@@ -12090,7 +12515,7 @@
                 [
                     "JJ Peterka Point",
                     "Artturi Lehkonen Point",
-                    "FREE",
+                    "Lukas Reichel Point",
                     "Esa Lindell Point",
                     "Goalie Shutout"
                 ],
@@ -12131,8 +12556,8 @@
                     "timestamp": null
                 },
                 "Victor Hedman Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
                 },
                 "Finland Loss": {
                     "validated": true,
@@ -12147,8 +12572,8 @@
                     "timestamp": null
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "JJ Peterka Point": {
                     "validated": false,
@@ -12157,10 +12582,6 @@
                 "Artturi Lehkonen Point": {
                     "validated": true,
                     "timestamp": "2026-02-11T0511:49:45.868776Z"
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T05:34:07.538050Z"
                 },
                 "Esa Lindell Point": {
                     "validated": false,
@@ -12209,7 +12630,16 @@
                 "Overtime Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Lukas Reichel Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "87": {
@@ -12232,7 +12662,7 @@
                 [
                     "Any Player Misconduct Penalty",
                     "Canada Loss",
-                    "FREE",
+                    "Rasmus Ristolainen Point",
                     "Macklin Celebrini Point",
                     "Denmark Loss"
                 ],
@@ -12285,8 +12715,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Sweden Medal": {
                     "validated": false,
@@ -12299,10 +12729,6 @@
                 "Canada Loss": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T12:43:46.910394Z"
                 },
                 "Macklin Celebrini Point": {
                     "validated": false,
@@ -12351,7 +12777,16 @@
                 "Czech Republic Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Rasmus Ristolainen Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "88": {
@@ -12374,7 +12809,7 @@
                 [
                     "Tomas Tatar Point",
                     "Czechia Playoff Win",
-                    "FREE",
+                    "Pavol Regenda Point",
                     "Overtime Goal",
                     "Mika Zibanejad Point"
                 ],
@@ -12427,8 +12862,8 @@
                     "timestamp": "2026-02-11T13:15:07.624963Z"
                 },
                 "Adrian Kempe Point": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0516:36:45.868776Z"
                 },
                 "Kyle Connor Point": {
                     "validated": false,
@@ -12441,10 +12876,6 @@
                 "Czechia Playoff Win": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T12:43:46.956223Z"
                 },
                 "Overtime Goal": {
                     "validated": false,
@@ -12467,8 +12898,8 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Any Player Major Penalty": {
                     "validated": false,
@@ -12493,7 +12924,16 @@
                 "Finland Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Pavol Regenda Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "89": {
@@ -12509,14 +12949,14 @@
                 [
                     "Any Player 2 Assist Game",
                     "Thomas Harley Point",
-                    "Ukko-Pekka Luukkonen Win",
+                    "Kevin Fiala Assist",
                     "Shorthanded Goal",
                     "Czech Republic Loss"
                 ],
                 [
                     "Italy Win",
                     "Quinn Hughes Point",
-                    "FREE",
+                    "Teuvo Teravainen Point",
                     "Connor McDavid Assist",
                     "Roman Josi Point"
                 ],
@@ -12557,14 +12997,10 @@
                     "timestamp": null
                 },
                 "Any Player 2 Assist Game": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
                 },
                 "Thomas Harley Point": {
-                    "validated": false,
-                    "timestamp": null
-                },
-                "Ukko-Pekka Luukkonen Win": {
                     "validated": false,
                     "timestamp": null
                 },
@@ -12583,10 +13019,6 @@
                 "Quinn Hughes Point": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T12:43:47.000794Z"
                 },
                 "Connor McDavid Assist": {
                     "validated": false,
@@ -12621,8 +13053,8 @@
                     "timestamp": "2026-02-11T15:40:07.624963Z"
                 },
                 "Latvia Loss": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Canada Loss": {
                     "validated": false,
@@ -12635,7 +13067,20 @@
                 "Shea Theodore Point": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Kevin Fiala Assist": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Teuvo Teravainen Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "90": {
@@ -12658,7 +13103,7 @@
                 [
                     "David Pastrnak Goal",
                     "Nathan MacKinnon Goal",
-                    "FREE",
+                    "Elias Lindholm Point",
                     "Brock Faber Point",
                     "Goal call reversed"
                 ],
@@ -12707,8 +13152,8 @@
                     "timestamp": null
                 },
                 "Filip Gustavsson Win": {
-                    "validated": false,
-                    "timestamp": null
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
                 },
                 "Jordan Binnington Win": {
                     "validated": false,
@@ -12725,10 +13170,6 @@
                 "Nathan MacKinnon Goal": {
                     "validated": false,
                     "timestamp": null
-                },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T12:43:47.045229Z"
                 },
                 "Brock Faber Point": {
                     "validated": false,
@@ -12777,7 +13218,16 @@
                 "Czech Republic Win": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Elias Lindholm Point": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         },
         "91": {
@@ -12800,7 +13250,7 @@
                 [
                     "Czechia Playoff Win",
                     "Tomas Hertl Point",
-                    "FREE",
+                    "Nikolas Matinpalo",
                     "Devon Toews Point",
                     "Denmark Loss"
                 ],
@@ -12868,10 +13318,6 @@
                     "validated": false,
                     "timestamp": null
                 },
-                "FREE": {
-                    "validated": true,
-                    "timestamp": "2026-02-11T12:43:47.090635Z"
-                },
                 "Devon Toews Point": {
                     "validated": false,
                     "timestamp": null
@@ -12919,7 +13365,751 @@
                 "Italy Loss": {
                     "validated": false,
                     "timestamp": null
+                },
+                "Nikolas Matinpalo": {
+                    "validated": false,
+                    "timestamp": null
                 }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
+            }
+        },
+        "92": {
+            "name": "Bradford Neumann",
+            "grid": [
+                [
+                    "France Win",
+                    "Germany Loss",
+                    "Overtime Goal",
+                    "2 PP Goals by 1 Team in Game",
+                    "Non-NHL Player Goal"
+                ],
+                [
+                    "Nikolas Matinpalo",
+                    "Samuel Hlavaj Win",
+                    "Czech Republic Loss",
+                    "France Loss",
+                    "Jackson Lacombe Point"
+                ],
+                [
+                    "Germany Playoff Win",
+                    "Quinn Hughes Point",
+                    "Jonas Brodin Point",
+                    "Eeli Toivanen Point",
+                    "Miro Heiskanen Point"
+                ],
+                [
+                    "Oliver Kapanen Point",
+                    "Finland Win",
+                    "Zach Werenski Point",
+                    "Clayton Keller Point",
+                    "Moritz Seider Point"
+                ],
+                [
+                    "Oliver Ekman-Larsson Point",
+                    "Kaapo Kakko Point",
+                    "Dalibor Dvorsky Point",
+                    "Martin Necas Goal",
+                    "Victor Hedman Point"
+                ]
+            ],
+            "events": {
+                "France Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Germany Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Overtime Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "2 PP Goals by 1 Team in Game": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Non-NHL Player Goal": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:12:07.624963Z"
+                },
+                "Nikolas Matinpalo": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Samuel Hlavaj Win": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:15:07.624963Z"
+                },
+                "Czech Republic Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "France Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jackson Lacombe Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Germany Playoff Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Quinn Hughes Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jonas Brodin Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Eeli Toivanen Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Miro Heiskanen Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Oliver Kapanen Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Finland Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Zach Werenski Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Clayton Keller Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Moritz Seider Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Oliver Ekman-Larsson Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Kaapo Kakko Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Dalibor Dvorsky Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Martin Necas Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Victor Hedman Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
+                }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
+            }
+        },
+        "93": {
+            "name": "Bradford Neumann",
+            "grid": [
+                [
+                    "Kaapo Kakko Point",
+                    "Sidney Crosby Goal",
+                    "Latvia Playoff Win",
+                    "Kevin Fiala Goal",
+                    "Germany Win"
+                ],
+                [
+                    "Switzerland Loss",
+                    "Rasmus Ristolainen Point",
+                    "Erik Karlsson Point",
+                    "Brady Tkachuk Penalty",
+                    "Latvia Loss"
+                ],
+                [
+                    "Any Player 2 Assist Game",
+                    "Leon Draisaitl Goal",
+                    "Mikko Rantanen Goal",
+                    "Any Player Hat Trick",
+                    "Denmark Loss"
+                ],
+                [
+                    "Marcus Johansson Point",
+                    "Hampus Lindholm Point",
+                    "Sweden Loss",
+                    "Travis Sanheim Point",
+                    "Any Player 3 Point Game"
+                ],
+                [
+                    "Overtime Win",
+                    "Tomas Tatar Point",
+                    "Pius Suter Point",
+                    "Canada Medal",
+                    "Non-NHL Player 2 pt Game"
+                ]
+            ],
+            "events": {
+                "Kaapo Kakko Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Sidney Crosby Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Latvia Playoff Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Kevin Fiala Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Germany Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Switzerland Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Rasmus Ristolainen Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Erik Karlsson Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
+                },
+                "Brady Tkachuk Penalty": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Latvia Loss": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:32:45.868776Z"
+                },
+                "Any Player 2 Assist Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Leon Draisaitl Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Mikko Rantanen Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player Hat Trick": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Denmark Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Marcus Johansson Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Hampus Lindholm Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Sweden Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Travis Sanheim Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player 3 Point Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Overtime Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Tomas Tatar Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Pius Suter Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Canada Medal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Non-NHL Player 2 pt Game": {
+                    "validated": false,
+                    "timestamp": null
+                }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
+            }
+        },
+        "94": {
+            "name": "Bradford Neumann",
+            "grid": [
+                [
+                    "United States Medal",
+                    "Germany Loss",
+                    "Lukas Reichel Point",
+                    "Jonas Brodin Point",
+                    "Brock Faber Point"
+                ],
+                [
+                    "Juuse Saros Win",
+                    "David Pastrnak Goal",
+                    "2 PP Goals by 1 Team in Game",
+                    "\u2265 15 Team PIM in a Game",
+                    "Connor Hellebuyck Win"
+                ],
+                [
+                    "Henri Jokiharju Point",
+                    "Goalie Shutout",
+                    "Non-NHL Player 2 pt Game",
+                    "Noah Hanifin Point",
+                    "Shea Theodore Point"
+                ],
+                [
+                    "Czech Republic Loss",
+                    "Pontus Holmberg Point",
+                    "Latvia Win",
+                    "Colton Parayko Point",
+                    "Finland Win"
+                ],
+                [
+                    "Juraj Slafkovsky Point",
+                    "Any Player Misconduct Penalty",
+                    "Any Player 2 Assist Game",
+                    "William Nylander Assist",
+                    "Overtime Win"
+                ]
+            ],
+            "events": {
+                "United States Medal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Germany Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Lukas Reichel Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jonas Brodin Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Brock Faber Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Juuse Saros Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "David Pastrnak Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "2 PP Goals by 1 Team in Game": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "\u2265 15 Team PIM in a Game": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Connor Hellebuyck Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Henri Jokiharju Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Goalie Shutout": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Non-NHL Player 2 pt Game": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Noah Hanifin Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Shea Theodore Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Czech Republic Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Pontus Holmberg Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Latvia Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Colton Parayko Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Finland Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Juraj Slafkovsky Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:30:45.868776Z"
+                },
+                "Any Player Misconduct Penalty": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player 2 Assist Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "William Nylander Assist": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Overtime Win": {
+                    "validated": false,
+                    "timestamp": null
+                }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
+            }
+        },
+        "95": {
+            "name": "Bradford Neumann",
+            "grid": [
+                [
+                    "Germany Loss",
+                    "Nikolaj Ehlers Point",
+                    "Joel Eriksson Ek Point",
+                    "Erik Karlsson Point",
+                    "Nico Sturm Point"
+                ],
+                [
+                    "Goal call reversed",
+                    "Eeli Toivanen Point",
+                    "Lukas Dostal Win",
+                    "Jack Eichel Assist",
+                    "Sidney Crosby Goal"
+                ],
+                [
+                    "Any Player 2 Assist Game",
+                    "Dalibor Dvorsky Point",
+                    "Alexander Wennberg Point",
+                    "Alexandre Texier Point",
+                    "Italy Loss"
+                ],
+                [
+                    "Shootout Win",
+                    "Any Player 3 Point Game",
+                    "Jake Guentzel Point",
+                    "Mikael Granlund Point",
+                    "Pius Suter Point"
+                ],
+                [
+                    "Any Player Hat Trick",
+                    "Olli Maatta Point",
+                    "Filip Hronek Point",
+                    "Sweden Loss",
+                    "Kevin Fiala Assist"
+                ]
+            ],
+            "events": {
+                "Germany Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Nikolaj Ehlers Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Joel Eriksson Ek Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Erik Karlsson Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T15:27:07.624963Z"
+                },
+                "Nico Sturm Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Goal call reversed": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Eeli Toivanen Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Lukas Dostal Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jack Eichel Assist": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Sidney Crosby Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player 2 Assist Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Dalibor Dvorsky Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Alexander Wennberg Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Alexandre Texier Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Italy Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Shootout Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player 3 Point Game": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T13:10:07.624963Z"
+                },
+                "Jake Guentzel Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Mikael Granlund Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Pius Suter Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player Hat Trick": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Olli Maatta Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Filip Hronek Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Sweden Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Kevin Fiala Assist": {
+                    "validated": false,
+                    "timestamp": null
+                }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
+            }
+        },
+        "96": {
+            "name": "Bradford Neumann",
+            "grid": [
+                [
+                    "Nino Niederreiter Point",
+                    "Switzerland Win",
+                    "Denmark Loss",
+                    "Goal call reversed",
+                    "Radko Gudas Penalty"
+                ],
+                [
+                    "Alexandre Texier Point",
+                    "Roman Josi Point",
+                    "United States Win",
+                    "Finland Medal",
+                    "Germany Win"
+                ],
+                [
+                    "Pavel Zacha Point",
+                    "Olli Maatta Point",
+                    "Victor Hedman Point",
+                    "Slovakia Loss",
+                    "Artturi Lehkonen Point"
+                ],
+                [
+                    "Nick Suzuki Point",
+                    "Jesper Wallstedt Win",
+                    "Lucas Raymond Goal",
+                    "Tom Wilson Penalty",
+                    "France Win"
+                ],
+                [
+                    "Moritz Seider Point",
+                    "Joel Kiviranta Point",
+                    "Joel Eriksson Ek Point",
+                    "Clayton Keller Point",
+                    "Any Player Major Penalty"
+                ]
+            ],
+            "events": {
+                "Nino Niederreiter Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Switzerland Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Denmark Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Goal call reversed": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Radko Gudas Penalty": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Alexandre Texier Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Roman Josi Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "United States Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Finland Medal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Germany Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Pavel Zacha Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Olli Maatta Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Victor Hedman Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0517:30:45.868776Z"
+                },
+                "Slovakia Loss": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Artturi Lehkonen Point": {
+                    "validated": true,
+                    "timestamp": "2026-02-11T0511:49:45.868776Z"
+                },
+                "Nick Suzuki Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Jesper Wallstedt Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Lucas Raymond Goal": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Tom Wilson Penalty": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "France Win": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Moritz Seider Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Joel Kiviranta Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Joel Eriksson Ek Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Clayton Keller Point": {
+                    "validated": false,
+                    "timestamp": null
+                },
+                "Any Player Major Penalty": {
+                    "validated": false,
+                    "timestamp": null
+                }
+            },
+            "winner": {
+                "is_winner": false,
+                "type": "none",
+                "timestamp": null
             }
         }
     }
