@@ -34,10 +34,20 @@ function renderSingleCard(cardNum, card, container) {
   let winnerHTML = "";
 
   if (card.winner?.is_winner) {
-    const formatted = formatTimestamp(card.winner.timestamp);
-    winnerHTML = `<p class="winner-status">BINGO! (${card.winner.type}) (${formatted})</p>`; 
+    const parts = [];
+
+    if (card.winner.regular)
+      parts.push(`Regular — ${formatTimestamp(card.winner.regular)}`);
+
+    if (card.winner.x)
+      parts.push(`X — ${formatTimestamp(card.winner.x)}`);
+
+    if (card.winner.box)
+      parts.push(`Box — ${formatTimestamp(card.winner.box)}`);
+
+    winnerHTML = `<p class="winner-status">BINGO!<br>${parts.join("<br>")}</p>`;
   }
-  
+
   wrapper.innerHTML = `
     <h2>${card.name}</h2>
     <h3>Card #${cardNum}</h3>
@@ -97,19 +107,19 @@ function buildLeaderboard(cards) {
 
   // Helper: sort by timestamp
   const sortByTime = arr =>
-    arr.sort((a, b) => new Date(a.winner.timestamp) - new Date(b.winner.timestamp));
+    arr.sort((a, b) => new Date(a.winner.earliest) - new Date(b.winner.earliest));
 
   // Filter by type
   const regular = sortByTime(
-    winners.filter(c => c.winner.type.includes("regular"))
+    winners.filter(c => c.winner.regular)
   ).slice(0, 5);
 
   const xbingos = sortByTime(
-    winners.filter(c => c.winner.type.includes("x"))
+    winners.filter(c => c.winner.x)
   ).slice(0, 2);
 
   const box = sortByTime(
-    winners.filter(c => c.winner.type.includes("box"))
+    winners.filter(c => c.winner.box)
   ).slice(0, 1);
 
   // Render a section
@@ -122,15 +132,26 @@ function buildLeaderboard(cards) {
     if (list.length === 0) {
       section.innerHTML += `<p>No ${title.toLowerCase()} yet.</p>`;
     } else {
-      list.forEach(c => {
-        const formatted = formatTimestamp(c.winner.timestamp);
-        const div = document.createElement("div");
+    list.forEach(c => {
+      let ts = null;
+
+      if (title.includes("Regular"))
+        ts = c.winner.regular;
+
+      else if (title.includes("X"))
+        ts = c.winner.x;
+
+      else if (title.includes("Box"))
+        ts = c.winner.box;
+
+      const formatted = formatTimestamp(ts);
+
+      const div = document.createElement("div");
         div.classList.add("leaderboard-entry");
         div.textContent = `${c.name} — Card #${c.num} — ${formatted}`;
         section.appendChild(div);
       });
     }
-
     leaderboard.appendChild(section);
   };
 

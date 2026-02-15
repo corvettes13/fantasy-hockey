@@ -643,7 +643,7 @@
       "waiver_priority": 4,
       "faab_balance": "46",
       "number_of_moves": 57,
-      "number_of_trades": 0,
+      "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 18,
@@ -726,17 +726,16 @@
         "olympics": "Sweden"
       },
       {
-        "player_key": "465.p.30109",
-        "player_name": "Josh Doan",
-        "team_abbr": "BUF",
+        "player_key": "465.p.6402",
+        "player_name": "Ivan Barbashev",
+        "team_abbr": "VGK",
         "primary_position": "LW",
         "positions": [
           "LW",
-          "RW",
           "Util"
         ],
         "selected_position": "LW",
-        "cost": 0,
+        "cost": 5,
         "contract_year": 0
       },
       {
@@ -779,19 +778,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.31751",
-        "player_name": "Lane Hutson",
-        "team_abbr": "MTL",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 4,
-        "contract_year": 1
-      },
-      {
         "player_key": "465.p.4930",
         "player_name": "Roman Josi",
         "team_abbr": "NSH",
@@ -818,6 +804,20 @@
         "cost": 0,
         "contract_year": 0,
         "olympics": "Sweden"
+      },
+      {
+        "player_key": "465.p.7905",
+        "player_name": "Quinn Hughes",
+        "team_abbr": "MIN",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "D",
+        "cost": 24,
+        "contract_year": 0,
+        "olympics": "USA"
       },
       {
         "player_key": "465.p.5053",
@@ -887,6 +887,19 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.7541",
+        "player_name": "Jake Oettinger",
+        "team_abbr": "DAL",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "G",
+        "cost": 15,
+        "contract_year": 0,
+        "olympics": "USA"
+      },
+      {
         "player_key": "465.p.6818",
         "player_name": "Adin Hill",
         "team_abbr": "VGK",
@@ -894,7 +907,7 @@
         "positions": [
           "G"
         ],
-        "selected_position": "G",
+        "selected_position": "BN",
         "cost": 14,
         "contract_year": 1
       },
@@ -909,19 +922,6 @@
         "selected_position": "BN",
         "cost": 4,
         "contract_year": 1
-      },
-      {
-        "player_key": "465.p.8895",
-        "player_name": "Jesper Wallstedt",
-        "team_abbr": "MIN",
-        "primary_position": "G",
-        "positions": [
-          "G"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0,
-        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.6448",
@@ -1024,7 +1024,8 @@
         "primary_position": "C",
         "positions": [
           "C",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "C",
         "cost": 5,
@@ -2291,7 +2292,7 @@
       "waiver_priority": 9,
       "faab_balance": "66",
       "number_of_moves": 80,
-      "number_of_trades": 0,
+      "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
         "coverage_value": 18,
@@ -2374,19 +2375,6 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6402",
-        "player_name": "Ivan Barbashev",
-        "team_abbr": "VGK",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 5,
-        "contract_year": 1
-      },
-      {
         "player_key": "465.p.6395",
         "player_name": "Adrian Kempe",
         "team_abbr": "LA",
@@ -2413,20 +2401,6 @@
         "selected_position": "RW",
         "cost": 4,
         "contract_year": 1
-      },
-      {
-        "player_key": "465.p.7905",
-        "player_name": "Quinn Hughes",
-        "team_abbr": "MIN",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "D",
-        "cost": 24,
-        "contract_year": 2,
-        "olympics": "USA"
       },
       {
         "player_key": "465.p.30075",
@@ -2554,17 +2528,31 @@
         "contract_year": 1
       },
       {
-        "player_key": "465.p.7541",
-        "player_name": "Jake Oettinger",
-        "team_abbr": "DAL",
-        "primary_position": "G",
+        "player_key": "465.p.30109",
+        "player_name": "Josh Doan",
+        "team_abbr": "BUF",
+        "primary_position": "LW",
         "positions": [
-          "G"
+          "LW",
+          "RW",
+          "Util"
         ],
-        "selected_position": "G",
-        "cost": 15,
-        "contract_year": 1,
-        "olympics": "USA"
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
+        "player_key": "465.p.31751",
+        "player_name": "Lane Hutson",
+        "team_abbr": "MTL",
+        "primary_position": "D",
+        "positions": [
+          "D",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 4,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.8291",
@@ -2577,6 +2565,19 @@
         "selected_position": "BN",
         "cost": 8,
         "contract_year": 1
+      },
+      {
+        "player_key": "465.p.8895",
+        "player_name": "Jesper Wallstedt",
+        "team_abbr": "MIN",
+        "primary_position": "G",
+        "positions": [
+          "G"
+        ],
+        "selected_position": "BN",
+        "cost": 1,
+        "contract_year": 0,
+        "olympics": "Sweden"
       },
       {
         "player_key": "465.p.6765",
