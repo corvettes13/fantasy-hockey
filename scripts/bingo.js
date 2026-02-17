@@ -105,22 +105,29 @@ function buildLeaderboard(cards) {
     return;
   }
 
+  const sortBy = (arr, field) =>
+    arr.sort((a, b) => new Date(a.winner[field]) - new Date(b.winner[field]));
+
   // Helper: sort by timestamp
   const sortByTime = arr =>
     arr.sort((a, b) => new Date(a.winner.earliest) - new Date(b.winner.earliest));
 
   // Filter by type
-  const regular = sortByTime(
-    winners.filter(c => c.winner.regular)
+  const regular = sortBy(
+    winners.filter(c => c.winner.regular),
+    "regular"
   ).slice(0, 5);
 
-  const xbingos = sortByTime(
-    winners.filter(c => c.winner.x)
+  const xbingos = sortBy(
+    winners.filter(c => c.winner.x),
+    "x"
   ).slice(0, 2);
 
-  const box = sortByTime(
-    winners.filter(c => c.winner.box)
+  const box = sortBy(
+    winners.filter(c => c.winner.box),
+    "box"
   ).slice(0, 1);
+
 
   // Render a section
   const renderSection = (title, list) => {
