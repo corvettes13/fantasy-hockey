@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 const skaterStatIdMap = {
   0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
   6: 'PPG', 7: 'PPA', 9: 'SHG', 10: 'SHA', 12: 'GWG', 14: 'SOG',

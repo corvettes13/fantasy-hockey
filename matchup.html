@@ -53,45 +53,75 @@
       </div>
 
       <div class="matchup-controls">
-        <div class="view-toggle">
-          <button id="view-total" class="active">Matchup Total</button>
-          <button id="view-daily">Daily Breakdown</button>
+        <div class="moduletabs navlist">
+          <ul class="Nav-h Nav-bordered-south" id="day-tabs">
+          </ul>
         </div>
-        <div id="day-selector" style="display:none;">
-          </div>
       </div>
 
       <div class="matchup-tables-container">
-        <div class="matchup-column">
+        
+        <div class="matchup-column" id="team1-tables">
           <div class="table-wrapper">
-            <table id="team1-table" class="left-align">
+            <table class="matchup-table left-align">
               <thead>
                 <tr>
                   <th>Player</th>
-                  <th>FP</th>
+                  <th>FP</th><th>G</th><th>A</th><th>PIM</th><th>SHG</th><th>GWG</th><th>SOG</th><th>BLK</th><th>HIT</th>
                 </tr>
               </thead>
-              <tbody id="team1-body"></tbody>
+              <tbody id="team1-skaters-body"></tbody>
+              <tfoot id="team1-skaters-footer" class="matchup-totals"></tfoot>
+            </table>
+          </div>
+
+          <div class="matchup-section-divider"></div>
+
+          <div class="table-wrapper">
+            <table class="matchup-table left-align">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>FP</th><th>GS</th><th>W</th><th>L</th><th>GA</th><th>SV</th><th>SV%</th><th>SHO</th>
+                </tr>
+              </thead>
+              <tbody id="team1-goalies-body"></tbody>
+              <tfoot id="team1-goalies-footer" class="matchup-totals"></tfoot>
             </table>
           </div>
         </div>
 
-        <div class="matchup-column">
+        <div class="matchup-column" id="team2-tables">
           <div class="table-wrapper">
-            <table id="team2-table" class="left-align">
+            <table class="matchup-table left-align">
               <thead>
                 <tr>
                   <th>Player</th>
-                  <th>FP</th>
+                  <th>FP</th><th>G</th><th>A</th><th>PIM</th><th>SHG</th><th>GWG</th><th>SOG</th><th>BLK</th><th>HIT</th>
                 </tr>
               </thead>
-              <tbody id="team2-body"></tbody>
+              <tbody id="team2-skaters-body"></tbody>
+              <tfoot id="team2-skaters-footer" class="matchup-totals"></tfoot>
+            </table>
+          </div>
+          
+          <div class="matchup-section-divider"></div>
+
+          <div class="table-wrapper">
+            <table class="matchup-table left-align">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>FP</th><th>GS</th><th>W</th><th>L</th><th>GA</th><th>SV</th><th>SV%</th><th>SHO</th>
+                </tr>
+              </thead>
+              <tbody id="team2-goalies-body"></tbody>
+              <tfoot id="team2-goalies-footer" class="matchup-totals"></tfoot>
             </table>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+
+      </div> </div> </div>
 
   <script src="scripts/team-matchups.js"></script>
 </body>

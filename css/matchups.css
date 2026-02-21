@@ -316,6 +316,27 @@ a {
     text-align: center;
 }
 
+.matchup-column h3 {
+    font-size: 1rem;
+    color: #0055a5;
+    border-bottom: 2px solid #eaf0f6;
+    margin: 20px 0 10px 0;
+    padding-bottom: 5px;
+}
+
+.matchup-table th, .matchup-table td {
+    padding: 6px 4px;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.matchup-table .player-cell-matchup {
+    text-align: left;
+    min-width: 180px;
+}
+
+.fw-bold { font-weight: bold; }
+
 .vs-divider {
     font-weight: 900;
     color: #999;
@@ -500,4 +521,139 @@ a {
 
 .player-cell-matchup {
     padding-left: 10px;
+}
+
+.matchup-totals {
+    border-top: 2px solid #333;
+    background-color: #f1f4f8;
+}
+
+.totals-row td {
+    font-weight: 800 !important;
+    color: #222;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 10px 4px !important;
+}
+
+.totals-row td:first-child {
+    text-align: left;
+    padding-left: 10px !important;
+}
+
+.matchup-section-divider {
+    height: 1px;
+    background-color: #d1d8e0;
+    margin: 25px 0;
+    position: relative;
+}
+
+/* Optional: Adding a small "hockey rink" icon or dot in the center for flair */
+.matchup-section-divider::after {
+    content: "•";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 0 10px;
+    color: #d1d8e0;
+    font-size: 1.2rem;
+}
+
+.matchup-column h3 {
+    margin-top: 0; /* Since the divider provides the spacing now */
+    background: #f1f4f8;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+}
+
+.Nav-h {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 5px;
+}
+
+/* Container for the tabs to allow scrolling */
+.moduletabs.navlist {
+    width: 100%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.Nav-h {
+    display: flex;
+    flex-wrap: wrap; /* This allows the tabs to move to a second/third row */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 8px 4px; /* Vertical gap of 8px, Horizontal gap of 4px */
+}
+
+.Navitem {
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #0055a5;
+    background: #f1f4f8;
+    border: 1px solid #d1d8e0;
+    border-radius: 4px; /* Full radius since they aren't "connected" to the bottom line anymore */
+    transition: all 0.2s ease;
+    text-align: center;
+    min-width: 70px;
+}
+
+.Navitem:hover {
+    background: #eaf0f6;
+    border-color: #0055a5;
+}
+
+.Navitem.Selected {
+    background: #0055a5;
+    color: #fff;
+    border-color: #0055a5;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Styling for projected points in the table */
+.fw-bold em {
+    font-style: normal;
+    color: #888; /* Grey out projected points */
+    font-weight: 400;
+}
+
+.fw-bold em::after {
+    content: " (proj)";
+    font-size: 0.65rem;
+    vertical-align: middle;
+}
+
+/* Keeps the cursor consistent and adds a subtle hover effect */
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.clickable-row:hover {
+    background-color: rgba(255, 255, 255, 0.05); /* Adjust based on your theme */
+}
+
+/* Ensure the team links still look like links but don't break the row click */
+.team-name a {
+    position: relative;
+    z-index: 2;
+    text-decoration: none;
+    color: inherit; /* or your preferred link color */
+}
+
+.team-name a:hover {
+    text-decoration: underline;
 }
