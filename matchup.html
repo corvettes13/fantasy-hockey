@@ -2,29 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Player List</title>
-  <link rel="stylesheet" href="/fantasy-hockey/css/matchup.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matchup View</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/matchups.css" />
 </head>
-<body>
- <header class="site-header"></header>
-   <script>
-    fetch('/fantasy-hockey/shared/header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.querySelector('.site-header').innerHTML = html;
-      });
-   </script>
-<body>
-  <header>
-    <h1>Fantasy Matchups – Week <span id="week-label"></span></h1>
-  </header>
 
-  <main>
-    <div id="matchup-container"></div>
-  </main>
+<body class="matchup-page">
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
 
-  <script src="/fantasy-hockey/scripts/matchup.js"></script>
+    <script>
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
+        });
+    </script>
+
+    <div class="container">
+      <div class="matchup-hero">
+        <div class="team-block" id="team1-header">
+          <img class="matchup-logo" id="team1-logo" src="" alt="">
+          <div class="team-details">
+            <div class="team-info-group">
+              <h2 class="team-name-matchup" id="team1-name"></h2>
+              <p class="team-manager" id="team1-manager"></p>
+              <p class="team-meta" id="team1-meta"></p>
+            </div>
+          </div>
+          <div class="matchup-score" id="team1-score">0.0</div>
+        </div>
+
+        <div class="vs-divider">VS</div>
+
+        <div class="team-block home-block" id="team2-header">
+          <div class="matchup-score" id="team2-score">0.0</div>
+          <div class="team-details">
+            <div class="team-info-group">
+              <h2 class="team-name-matchup" id="team2-name"></h2>
+              <p class="team-manager" id="team2-manager"></p>
+              <p class="team-meta" id="team2-meta"></p>
+            </div>
+          </div>
+          <img class="matchup-logo" id="team2-logo" src="" alt="">
+        </div>
+      </div>
+
+      <div class="matchup-controls">
+        <div class="view-toggle">
+          <button id="view-total" class="active">Matchup Total</button>
+          <button id="view-daily">Daily Breakdown</button>
+        </div>
+        <div id="day-selector" style="display:none;">
+          </div>
+      </div>
+
+      <div class="matchup-tables-container">
+        <div class="matchup-column">
+          <div class="table-wrapper">
+            <table id="team1-table" class="left-align">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>FP</th>
+                </tr>
+              </thead>
+              <tbody id="team1-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="matchup-column">
+          <div class="table-wrapper">
+            <table id="team2-table" class="left-align">
+              <thead>
+                <tr>
+                  <th>Player</th>
+                  <th>FP</th>
+                </tr>
+              </thead>
+              <tbody id="team2-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/team-matchups.js"></script>
 </body>
 </html>
