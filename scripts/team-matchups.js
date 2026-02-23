@@ -14,25 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!team1Id || !team2Id) return;
     loadMatchupFromLogs();
 });
-
 async function loadMatchupFromLogs() {
     try {
-        // 1. Fetch initial metadata
         const [teams, standings, matchups, playersMetaRaw, projections] = await Promise.all([
             fetch('/fantasy-hockey/data/league_teams.json').then(r => r.json()),
             fetch('/fantasy-hockey/data/2025_standings.json').then(r => r.json()),
             fetch('/fantasy-hockey/data/2025_matchups.json').then(r => r.json()),
             fetch('/fantasy-hockey/data/players.json').then(r => r.json()),
-            fetch('/fantasy-hockey/data/player_projections.json').then(r => r.json()) // New Fetch
+            fetch('/fantasy-hockey/data/player_projections.json').then(r => r.json())
         ]);
 
-        // Create the lookup map
         const playersMeta = {};
         playersMetaRaw.players.forEach(p => {
             playersMeta[String(p.player_id)] = p;
         });
 
-        // 2. Get Date Range for the week
+        const currentWeek = standings.teams[0].current_week; // Get current week from first team
+        const targetWeekInt = parseInt(weekNum);
+        const isFutureWeek = targetWeekInt > currentWeek;
+
         const weekData = matchups.weeks[weekNum];
         if (!weekData) throw new Error("Week not found");
         
@@ -40,25 +40,96 @@ async function loadMatchupFromLogs() {
             start: weekData.matchups[0].week_start,
             end: weekData.matchups[0].week_end
         };
+        
+        // Inside loadMatchupFromLogs, after you find 'weekData'
+        const team1Key = `465.l.13153.t.${team1Id}`;
+        const team2Key = `465.l.13153.t.${team2Id}`;
+
+        const currentMatchupData = weekData.matchups.find(m => 
+            m.teams.some(t => t.team.team_key === team1Key)
+        );
+
+        if (currentMatchupData) {
+            currentMatchupData.teams.forEach(t => {
+                const side = t.team.team_key === team1Key ? 1 : 2;
+                document.getElementById(`team${side}-skater-rem`).textContent = t.team.games_remaining_skaters || 0;
+                document.getElementById(`team${side}-goalie-rem`).textContent = t.team.games_remaining_goalies || 0;
+            });
+        }
+        
+        // Inside loadMatchupFromLogs, after finding currentMatchupData
+        if (currentMatchupData) {
+            currentMatchupData.teams.forEach(t => {
+                const side = t.team.team_key === team1Key ? 1 : 2;
+                
+                const initProj = t.team.initial_projection || 0;
+                const newProj = t.team.new_projected_total || 0;
+
+                // Update Initial Projection text
+                document.getElementById(`team${side}-init-proj`).textContent = initProj.toFixed(1);
+
+                // Update New Projection text and color
+                const newProjEl = document.getElementById(`team${side}-new-proj`);
+                const newProjContainer = document.getElementById(`team${side}-new-proj-container`);
+                
+                newProjEl.textContent = newProj.toFixed(1);
+
+                // Apply Green/Red logic
+                if (newProj > initProj) {
+                    newProjContainer.classList.add('proj-better');
+                    newProjContainer.classList.remove('proj-worse');
+                } else if (newProj < initProj) {
+                    newProjContainer.classList.add('proj-worse');
+                    newProjContainer.classList.remove('proj-better');
+                } else {
+                    newProjContainer.classList.remove('proj-better', 'proj-worse');
+                }
+            });
+        }
 
         renderDayTabs(dateRange, team1Id, team2Id);
 
-        // 3. Load Team Logs (Now that we have the IDs)
         const [log1, log2] = await Promise.all([
-            fetch(`/fantasy-hockey/data/team_logs/team_${team1Id}_log.json`).then(r => r.json()),
-            fetch(`/fantasy-hockey/data/team_logs/team_${team2Id}_log.json`).then(r => r.json())
+            fetch(`/fantasy-hockey/data/team_logs/team_${team1Id}_log.json`).then(r => r.json()).catch(() => ({log:{}})),
+            fetch(`/fantasy-hockey/data/team_logs/team_${team2Id}_log.json`).then(r => r.json()).catch(() => ({log:{}}))
         ]);
 
-        // 4. Render Hero Section
         renderTeamHero(1, team1Id, teams, standings);
         renderTeamHero(2, team2Id, teams, standings);
 
-        // 5. Aggregate Stats and Render Rosters (Only call these ONCE)
+        // Render Roster
         renderRosterFromLogs(1, log1, dateRange, playersMeta, projections, teams);
         renderRosterFromLogs(2, log2, dateRange, playersMeta, projections, teams);
 
+        // OVERRIDE SCORE IF FUTURE WEEK
+        if (isFutureWeek) {
+            overrideScoresWithProjections(weekData.matchups, team1Id, team2Id);
+        }
+
     } catch (err) {
         console.error("Error loading log-based matchups:", err);
+    }
+}
+
+function overrideScoresWithProjections(matchups, t1Id, t2Id) {
+    // Find the specific matchup involving these two teams
+    const team1Key = `465.l.13153.t.${t1Id}`;
+    const team2Key = `465.l.13153.t.${t2Id}`;
+    
+    const matchup = matchups.find(m => 
+        m.teams.some(t => t.team.team_key === team1Key) && 
+        m.teams.some(t => t.team.team_key === team2Key)
+    );
+
+    if (matchup) {
+        matchup.teams.forEach(t => {
+            const scoreVal = t.team.initial_projection.toFixed(1);
+            if (t.team.team_key === team1Key) {
+                document.getElementById('team1-score').innerHTML = `<span class="proj-label">PROJ:</span> ${scoreVal}`;
+            } else {
+                document.getElementById('team2-score').innerHTML = `<span class="proj-label">PROJ:</span> ${scoreVal}`;
+            }
+        });
     }
 }
 
@@ -85,19 +156,28 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
     const skaterFooter = document.getElementById(`team${index}-skaters-footer`);
     const goalieFooter = document.getElementById(`team${index}-goalies-footer`);
     
-    // NEW: Get the current roster player keys for THIS team
+    // Clear previous renders
+    if (skaterBody) skaterBody.innerHTML = '';
+    if (goalieBody) goalieBody.innerHTML = '';
+    if (skaterFooter) skaterFooter.innerHTML = '';
+    if (goalieFooter) goalieFooter.innerHTML = '';
+
+    if (!skaterBody || !goalieBody || !teamLog.log) return;
+
+    // Trackers for current roster and counts
     const teamKey = `465.l.13153.t.${index === 1 ? team1Id : team2Id}`;
     const currentTeamData = teams.find(t => t.team_info.team_key === teamKey);
     const currentRosterKeys = new Set(currentTeamData?.roster.map(p => p.player_key) || []);
-    
-    if (!skaterBody || !goalieBody) return;
 
     const skaters = {};
     const goalies = {};
-    const activeSkaterTotals = { points: 0, 1:0, 2:0, 5:0, 9:0, 12:0, 14:0, 32:0, 31:0 };
-    const activeGoalieTotals = { points: 0, 18:0, 19:0, 20:0, 22:0, 25:0, 27:0 };
+    const activeSkaterTotals = { points: 0, 1: 0, 2: 0, 5: 0, 9: 0, 12: 0, 14: 0, 32: 0, 31: 0 };
+    const activeGoalieTotals = { points: 0, 18: 0, 19: 0, 20: 0, 22: 0, 25: 0, 27: 0 };
+    
+    let activeSkaterGP = 0;
+    let activeGoalieGP = 0;
 
-    // Create a set of all dates in the range to iterate through
+    // Generate array of dates for the matchup week
     let start = new Date(range.start + "T12:00:00");
     const end = new Date(range.end + "T12:00:00");
     const datesInRange = [];
@@ -106,6 +186,7 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
         start.setDate(start.getDate() + 1);
     }
 
+    // Process each day
     datesInRange.forEach(date => {
         const isSingleDateView = (currentViewDate !== "totals" && currentViewDate === date);
         const isTotalsView = (currentViewDate === "totals");
@@ -115,16 +196,33 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
         const dayLog = teamLog.log[date];
 
         if (dayLog) {
-            // ACTUAL STATS: Process normally (historical record)
+            // SCENARIO A: Historical/Actual data from Team Logs
             dayLog.players.forEach(p => {
-                processPlayerData(String(p.player_id), p.stats, p.position_status, skaters, goalies, activeSkaterTotals, activeGoalieTotals, playersMeta, false, true);
+                const isActive = p.position_status !== 'BN' && p.position_status !== 'IR' && p.position_status !== 'IR+';
+                
+                // Count Games Played if Active and had stats recorded
+                if (isActive && p.stats && Object.keys(p.stats).length > 0) {
+                    if (p.position_status === 'G') activeGoalieGP++;
+                    else activeSkaterGP++;
+                }
+
+                processPlayerData(
+                    String(p.player_id), 
+                    p.stats, 
+                    p.position_status, 
+                    skaters, 
+                    goalies, 
+                    activeSkaterTotals, 
+                    activeGoalieTotals, 
+                    playersMeta, 
+                    false, // isProjected
+                    true   // shouldCount (Banked stats)
+                );
             });
         } else if (isSingleDateView) {
-            // PROJECTIONS: Only process if the user clicked a future date
+            // SCENARIO B: Future data from Projections (Only show on specific Day tab)
             Object.keys(projections).forEach(playerKey => {
-                
-                // --- WHITELIST CHECK ---
-                // Only show projections if the player is actually on the team right now
+                // Only show projection if player is currently on this team's roster
                 if (!currentRosterKeys.has(playerKey)) return;
 
                 const playerProj = projections[playerKey];
@@ -132,21 +230,45 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                 
                 if (playerProj[date]) {
                     const projPoints = playerProj[date];
-                    processPlayerData(id, { "pointsOnly": projPoints }, "Util", skaters, goalies, activeSkaterTotals, activeGoalieTotals, playersMeta, true, false);
+                    // Projections use a placeholder stats object and do not count toward Team Totals
+                    processPlayerData(
+                        id, 
+                        { "pointsOnly": projPoints }, 
+                        "Util", 
+                        skaters, 
+                        goalies, 
+                        activeSkaterTotals, 
+                        activeGoalieTotals, 
+                        playersMeta, 
+                        true, // isProjected
+                        false // shouldCount (Do not add to matchup total)
+                    );
                 }
             });
         }
     });
 
+    // Update Games Played Display
+    const skGPDisplay = document.getElementById(`team${index}-skater-gp`);
+    const goGPDisplay = document.getElementById(`team${index}-goalie-gp`);
+    if (skGPDisplay) skGPDisplay.textContent = activeSkaterGP;
+    if (goGPDisplay) goGPDisplay.textContent = activeGoalieGP;
+
+    // Render Table Rows
     renderSkaterRows(skaterBody, skaters, playersMeta);
     renderGoalieRows(goalieBody, goalies, playersMeta);
     
+    // Render the Totals/Footer
     renderTotalsFooter(skaterFooter, activeSkaterTotals, 'skater');
     renderTotalsFooter(goalieFooter, activeGoalieTotals, 'goalie');
 
-    // Header score update
+    // Update Header Score (only if not a future week override)
     const totalScore = activeSkaterTotals.points + activeGoalieTotals.points;
-    document.getElementById(`team${index}-score`).textContent = totalScore.toFixed(1);
+    const scoreEl = document.getElementById(`team${index}-score`);
+    // Check if score is currently overridden by 'initial_projection' label
+    if (scoreEl && !scoreEl.innerHTML.includes('PROJ:')) {
+        scoreEl.textContent = totalScore.toFixed(1);
+    }
 }
 
 function renderTotalsFooter(footer, totals, type) {
@@ -334,6 +456,28 @@ function processPlayerData(id, stats, status, skaters, goalies, activeSkaterTota
             const numId = Number(statId);
             if (teamTotals.hasOwnProperty(numId)) {
                 teamTotals[numId] += val;
+            }
+        });
+    }
+}
+
+function overrideScoresWithProjections(matchups, t1Id, t2Id) {
+    // Find the specific matchup involving these two teams
+    const team1Key = `465.l.13153.t.${t1Id}`;
+    const team2Key = `465.l.13153.t.${t2Id}`;
+    
+    const matchup = matchups.find(m => 
+        m.teams.some(t => t.team.team_key === team1Key) && 
+        m.teams.some(t => t.team.team_key === team2Key)
+    );
+
+    if (matchup) {
+        matchup.teams.forEach(t => {
+            const scoreVal = t.team.initial_projection.toFixed(1);
+            if (t.team.team_key === team1Key) {
+                document.getElementById('team1-score').innerHTML = `<span class="proj-label">PROJ:</span> ${scoreVal}`;
+            } else {
+                document.getElementById('team2-score').innerHTML = `<span class="proj-label">PROJ:</span> ${scoreVal}`;
             }
         });
     }

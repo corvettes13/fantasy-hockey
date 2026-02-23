@@ -34,13 +34,29 @@
               <p class="team-meta" id="team1-meta"></p>
             </div>
           </div>
-          <div class="matchup-score" id="team1-score">0.0</div>
+          <div class="score-container">
+            <div class="matchup-score" id="team1-score">0.0</div>
+              <div class="projection-details" id="team1-projections">
+                  <div class="initial-proj"><span id="team1-init-proj">0.0</span></div>
+                  <div class="new-proj" id="team1-new-proj-container">
+                      <span id="team1-new-proj">0.0</span>
+                  </div>
+              </div>
+          </div>
         </div>
 
         <div class="vs-divider">VS</div>
 
         <div class="team-block home-block" id="team2-header">
-          <div class="matchup-score" id="team2-score">0.0</div>
+          <div class="score-container">
+            <div class="matchup-score" id="team2-score">0.0</div>
+              <div class="projection-details" id="team2-projections">
+                  <div class="initial-proj"><span id="team2-init-proj">0.0</span></div>
+                  <div class="new-proj" id="team2-new-proj-container">
+                      <span id="team2-new-proj">0.0</span>
+                  </div>
+              </div>
+          </div>
           <div class="team-details">
             <div class="team-info-group">
               <h2 class="team-name-matchup" id="team2-name"></h2>
@@ -63,6 +79,10 @@
         
         <div class="matchup-column" id="team1-tables">
           <div class="table-wrapper">
+            <div class="team-game-stats" id="team1-game-stats">
+                <span class="stat-pill">Skaters: <strong id="team1-skater-gp">0</strong> Played | <strong id="team1-skater-rem">0</strong> Rem</span>
+                <span class="stat-pill">Goalies: <strong id="team1-goalie-gp">0</strong> Played | <strong id="team1-goalie-rem">0</strong> Rem</span>
+            </div>
             <table class="matchup-table left-align">
               <thead>
                 <tr>
@@ -93,6 +113,10 @@
 
         <div class="matchup-column" id="team2-tables">
           <div class="table-wrapper">
+            <div class="team-game-stats" id="team2-game-stats">
+              <span class="stat-pill">Skaters: <strong id="team2-skater-gp">0</strong> Played | <strong id="team2-skater-rem">0</strong> Rem</span>
+              <span class="stat-pill">Goalies: <strong id="team2-goalie-gp">0</strong> Played | <strong id="team2-goalie-rem">0</strong> Rem</span>
+            </div>
             <table class="matchup-table left-align">
               <thead>
                 <tr>

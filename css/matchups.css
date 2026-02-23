@@ -5,7 +5,14 @@
   text-align: center;
   margin-bottom: 0.5rem;
   font-size: 1.4rem;
-  color: #0055a5;
+  font-family:
+    'Helvetica Neue',
+    Arial,
+    sans-serif,
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji",
+    "Apple Color Emoji";
 }
 
 /* Week Selector Wrapper */
@@ -657,3 +664,62 @@ a {
 .team-name a:hover {
     text-decoration: underline;
 }
+
+.proj-label {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: -5px;
+}
+
+.matchup-score span.proj-label {
+    font-size: 0.8rem;
+}
+
+.team-game-stats {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.stat-pill {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #495057;
+}
+
+.stat-pill strong {
+    color: #0055a5;
+}
+
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+}
+
+.projection-details {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+.initial-proj {
+    font-style: italic;
+}
+
+.new-proj {
+    font-weight: bold;
+}
+
+/* Color classes for the New Projected Total */
+.proj-better { color: #28a745; } /* Green */
+.proj-worse { color: #dc3545; }  /* Red */
