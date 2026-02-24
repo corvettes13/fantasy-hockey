@@ -185,8 +185,9 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
         datesInRange.push(start.toISOString().split('T')[0]);
         start.setDate(start.getDate() + 1);
     }
+    
+    const todayStr = new Date().toISOString().split('T')[0];
 
-    // Process each day
     datesInRange.forEach(date => {
         const isSingleDateView = (currentViewDate !== "totals" && currentViewDate === date);
         const isTotalsView = (currentViewDate === "totals");
@@ -195,12 +196,11 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
 
         const dayLog = teamLog.log[date];
 
+        // 1. Process Actual Logs (Past or Current)
         if (dayLog) {
-            // SCENARIO A: Historical/Actual data from Team Logs
             dayLog.players.forEach(p => {
                 const isActive = p.position_status !== 'BN' && p.position_status !== 'IR' && p.position_status !== 'IR+';
                 
-                // Count Games Played if Active and had stats recorded
                 if (isActive && p.stats && Object.keys(p.stats).length > 0) {
                     if (p.position_status === 'G') activeGoalieGP++;
                     else activeSkaterGP++;
@@ -215,14 +215,16 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                     activeSkaterTotals, 
                     activeGoalieTotals, 
                     playersMeta, 
-                    false, // isProjected
-                    true   // shouldCount (Banked stats)
+                    false, 
+                    isActive // Only counts toward matchup total if Active
                 );
             });
-        } else if (isSingleDateView) {
-            // SCENARIO B: Future data from Projections (Only show on specific Day tab)
+        } 
+
+        // 2. Process Projections (Current or Future)
+        // Rule: Show if it's a single date view AND (date is today OR date is future)
+        if (isSingleDateView && date >= todayStr) {
             Object.keys(projections).forEach(playerKey => {
-                // Only show projection if player is currently on this team's roster
                 if (!currentRosterKeys.has(playerKey)) return;
 
                 const playerProj = projections[playerKey];
@@ -230,7 +232,6 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                 
                 if (playerProj[date]) {
                     const projPoints = playerProj[date];
-                    // Projections use a placeholder stats object and do not count toward Team Totals
                     processPlayerData(
                         id, 
                         { "pointsOnly": projPoints }, 
@@ -241,7 +242,7 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                         activeGoalieTotals, 
                         playersMeta, 
                         true, // isProjected
-                        false // shouldCount (Do not add to matchup total)
+                        false // Never counts toward the hard "Banked" Matchup Total
                     );
                 }
             });
@@ -425,7 +426,6 @@ function createTab(label, value) {
 function processPlayerData(id, stats, status, skaters, goalies, activeSkaterTotals, activeGoalieTotals, playersMeta, isProjected, shouldCount) {
     const isG = status === 'G' || (playersMeta[id] && playersMeta[id].primary_position === 'G');
     const targetMap = isG ? goalies : skaters;
-    const isActive = status !== 'BN' && status !== 'IR' && status !== 'IR+';
 
     if (!targetMap[id]) {
         targetMap[id] = { 
@@ -437,17 +437,20 @@ function processPlayerData(id, stats, status, skaters, goalies, activeSkaterTota
         };
     }
 
-    if (isProjected) targetMap[id].isProjected = true;
-
     const dayPoints = calculatePointsFromLog(stats, isG);
     
-    // Only add points to the player's total if they are "Active" and "Counting" (Actual Log Data)
-    // OR if we are looking at a specific projection day
-    if (shouldCount || isProjected) {
+    // Logic for individual player row points:
+    if (isProjected) {
+        // If we are looking at a projection, set the flag and add points
+        targetMap[id].isProjected = true;
+        targetMap[id].points += dayPoints; 
+    } else if (shouldCount) {
+        // If it's a log, only add points if they were Active (shouldCount)
         targetMap[id].points += dayPoints;
     }
 
-    if (isActive && shouldCount) {
+    // Logic for Matchup Totals (Footer & Header Score):
+    if (shouldCount) {
         const teamTotals = isG ? activeGoalieTotals : activeSkaterTotals;
         teamTotals.points += dayPoints;
 

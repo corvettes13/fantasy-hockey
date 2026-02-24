@@ -534,7 +534,8 @@
         "primary_position": "C",
         "positions": [
           "C",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "BN",
         "cost": 22,
@@ -1472,19 +1473,17 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.6377",
-        "player_name": "Kevin Fiala",
-        "team_abbr": "LA",
-        "primary_position": "LW",
+        "player_key": "465.p.5685",
+        "player_name": "Morgan Rielly",
+        "team_abbr": "TOR",
+        "primary_position": "D",
         "positions": [
-          "LW",
-          "Util",
-          "IR+"
+          "D",
+          "Util"
         ],
         "selected_position": "Util",
-        "cost": 12,
-        "contract_year": 0,
-        "olympics": "Switzerland"
+        "cost": 10,
+        "contract_year": 2
       },
       {
         "player_key": "465.p.6055",
@@ -1562,8 +1561,7 @@
         "team_abbr": "OTT",
         "primary_position": "G",
         "positions": [
-          "G",
-          "IR+"
+          "G"
         ],
         "selected_position": "G",
         "cost": 17,
@@ -1594,6 +1592,21 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.6377",
+        "player_name": "Kevin Fiala",
+        "team_abbr": "LA",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "Util",
+          "IR+"
+        ],
+        "selected_position": "IR+",
+        "cost": 12,
+        "contract_year": 0,
+        "olympics": "Switzerland"
+      },
+      {
         "player_key": "465.p.30832",
         "player_name": "Logan Cooley",
         "team_abbr": "UTA",
@@ -1605,19 +1618,6 @@
         ],
         "selected_position": "IR+",
         "cost": 6,
-        "contract_year": 2
-      },
-      {
-        "player_key": "465.p.5685",
-        "player_name": "Morgan Rielly",
-        "team_abbr": "TOR",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "IR+",
-        "cost": 10,
         "contract_year": 2
       }
     ]
@@ -1952,8 +1952,7 @@
         "team_abbr": "BUF",
         "primary_position": "G",
         "positions": [
-          "G",
-          "IR+"
+          "G"
         ],
         "selected_position": "IR+",
         "cost": 3,
@@ -2863,8 +2862,7 @@
         "primary_position": "C",
         "positions": [
           "C",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "BN",
         "cost": 0,
@@ -3394,6 +3392,20 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.8369",
+        "player_name": "Aliaksei Protas",
+        "team_abbr": "WSH",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.4351",
         "player_name": "Brad Marchand",
         "team_abbr": "FLA",
@@ -3407,6 +3419,20 @@
         "cost": 5,
         "contract_year": 0,
         "olympics": "Canada"
+      },
+      {
+        "player_key": "465.p.31759",
+        "player_name": "Cutter Gauthier",
+        "team_abbr": "ANA",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "RW",
+        "cost": 1,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6184",
@@ -3529,34 +3555,6 @@
         "cost": 3,
         "contract_year": 0,
         "olympics": "Canada"
-      },
-      {
-        "player_key": "465.p.8369",
-        "player_name": "Aliaksei Protas",
-        "team_abbr": "WSH",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 0,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.31759",
-        "player_name": "Cutter Gauthier",
-        "team_abbr": "ANA",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 1,
-        "contract_year": 0
       },
       {
         "player_key": "465.p.4947",
