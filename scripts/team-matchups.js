@@ -1,8 +1,10 @@
 const params = new URLSearchParams(window.location.search);
 const team1Id = params.get('team1');
 const team2Id = params.get('team2');
-const weekNum = params.get('week') || "1";
-let currentViewDate = "totals"; // Global state
+
+// Change this to 'let' and remove the default "1"
+let weekNum = params.get('week'); 
+let currentViewDate = "totals";
 
 const SCORING_WEIGHTS = {
     "G": 3.0, "A": 2.0, "SOG": 0.2, "HIT": 0.1, "BLK": 0.3,
@@ -11,7 +13,6 @@ const SCORING_WEIGHTS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (!team1Id || !team2Id) return;
     loadMatchupFromLogs();
 });
 async function loadMatchupFromLogs() {
@@ -23,18 +24,104 @@ async function loadMatchupFromLogs() {
             fetch('/fantasy-hockey/data/players.json').then(r => r.json()),
             fetch('/fantasy-hockey/data/player_projections.json').then(r => r.json())
         ]);
+        
+        const liveWeek = standings.teams[0].current_week;
+        if (!weekNum) {
+            weekNum = String(liveWeek);
+        }
 
         const playersMeta = {};
         playersMetaRaw.players.forEach(p => {
             playersMeta[String(p.player_id)] = p;
         });
-
-        const currentWeek = standings.teams[0].current_week; // Get current week from first team
+        
         const targetWeekInt = parseInt(weekNum);
-        const isFutureWeek = targetWeekInt > currentWeek;
+        const isFutureWeek = targetWeekInt > liveWeek;
 
         const weekData = matchups.weeks[weekNum];
         if (!weekData) throw new Error("Week not found");
+        setupWeekSwitcher(matchups);
+
+        // Inside loadMatchupFromLogs, after you have 'matchups' and 'weekNum'
+        renderLeagueScoreboard(matchups.weeks[weekNum].matchups, weekNum);
+
+        function renderLeagueScoreboard(allMatchups, week) {
+            const container = document.getElementById('league-scoreboard');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // 1. Find the highest score across all 12 teams
+            let highestScore = 0;
+            allMatchups.forEach(m => {
+                m.teams.forEach(t => {
+                    const score = t.team.team_points.total;
+                    if (score > highestScore) highestScore = score;
+                });
+            });
+
+            // 2. Render the cards
+            allMatchups.forEach(m => {
+                const team1 = m.teams[0].team;
+                const team2 = m.teams[1].team;
+
+                const t1Score = team1.team_points.total;
+                const t2Score = team2.team_points.total;
+
+                // Flags for matchup leader and league high
+                const t1Leading = t1Score > t2Score;
+                const t2Leading = t2Score > t1Score;
+                const t1IsHigh = t1Score === highestScore && highestScore > 0;
+                const t2IsHigh = t2Score === highestScore && highestScore > 0;
+
+                const matchupLink = `matchups.html?week=${week}&team1=${team1.team_id}&team2=${team2.team_id}`;
+                
+                const card = document.createElement('a');
+                card.href = matchupLink;
+                card.className = 'mini-matchup-card';
+                
+                // Highlight active matchup
+                if ((team1.team_id == team1Id && team2.team_id == team2Id) || 
+                    (team1.team_id == team2Id && team2.team_id == team1Id)) {
+                    card.style.borderColor = '#0055a5';
+                    card.style.background = '#f0f7ff';
+                }
+
+                card.innerHTML = `
+                    ${renderMiniTeamRow(team1, t1Leading, t1IsHigh)}
+                    ${renderMiniTeamRow(team2, t2Leading, t2IsHigh)}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderMiniTeamRow(t, isLeader, isLeagueHigh) {
+            const currentScore = t.team_points.total.toFixed(1);
+            let newProj = t.new_projected_total || 0.00;
+            newProj = newProj.toFixed(1);
+            const logo = t.team_logos.team_logo.url;
+            
+            const movesMade = t.roster_adds.value || 0;
+            const movesDisplay = `${movesMade} moves of 5`;
+
+            // Logic: apply 'mini-leader' for bold, 'league-high' for Money Green
+            let scoreClass = 'mini-current-score';
+            if (isLeader) scoreClass += ' mini-leader';
+            if (isLeagueHigh) scoreClass += ' league-high';
+
+            return `
+                <div class="mini-team-row">
+                    <div class="mini-team-info">
+                        <img src="${logo}" class="mini-logo">
+                        <span class="mini-name">${t.name}</span>
+                    </div>
+                    <div class="mini-score-group">
+                        <span class="${scoreClass}">${currentScore}</span>
+                        <span class="mini-proj-score"><i>Proj: ${newProj}</i></span>
+                        <span class="mini-adds">${movesDisplay}</span>
+                    </div>
+                </div>
+            `;
+        }
         
         const dateRange = {
             start: weekData.matchups[0].week_start,
@@ -140,8 +227,14 @@ function renderTeamHero(index, teamId, allTeams, standings) {
 
     if (!teamData || !standingInfo) return;
 
+    // Set Logo
     document.getElementById(`team${index}-logo`).src = teamData.team_info.logo_url || standingInfo.manager.image_url;
-    document.getElementById(`team${index}-name`).textContent = teamData.team_info.name;
+    
+    // Updated: Make Name Clickable
+    const nameEl = document.getElementById(`team${index}-name`);
+    const teamUrl = `/fantasy-hockey/team.html?team=${teamId}`;
+    nameEl.innerHTML = `<a href="${teamUrl}" class="hero-team-link">${teamData.team_info.name}</a>`;
+    
     document.getElementById(`team${index}-manager`).textContent = `${standingInfo.manager.nickname}`;
     
     const record = `${standingInfo.wins}-${standingInfo.losses}`;
@@ -186,7 +279,11 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
         start.setDate(start.getDate() + 1);
     }
     
-    const todayStr = new Date().toISOString().split('T')[0];
+    const today = new Date();
+    const todayStr = today.getFullYear() + "-" +
+                     String(today.getMonth() + 1).padStart(2, "0") + "-" +
+                     String(today.getDate()).padStart(2, "0");
+
 
     datesInRange.forEach(date => {
         const isSingleDateView = (currentViewDate !== "totals" && currentViewDate === date);
@@ -196,53 +293,59 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
 
         const dayLog = teamLog.log[date];
 
-        // 1. Process Actual Logs (Past or Current)
-        if (dayLog) {
+        // 1. Process Actual Logs (ONLY for Past Dates)
+        // Since stats update the next day, we ignore dayLogs for today or future.
+        if (dayLog && date < todayStr) {
             dayLog.players.forEach(p => {
                 const isActive = p.position_status !== 'BN' && p.position_status !== 'IR' && p.position_status !== 'IR+';
-                
-                if (isActive && p.stats && Object.keys(p.stats).length > 0) {
+                const hasStats = p.stats && Object.keys(p.stats).length > 0;
+
+                // Skip if no stats were recorded for this player on this past day
+                if (!hasStats) return;
+
+                // Count GP only for players in starting slots on past days
+                if (isActive) {
                     if (p.position_status === 'G') activeGoalieGP++;
                     else activeSkaterGP++;
                 }
 
                 processPlayerData(
-                    String(p.player_id), 
-                    p.stats, 
-                    p.position_status, 
-                    skaters, 
-                    goalies, 
-                    activeSkaterTotals, 
-                    activeGoalieTotals, 
-                    playersMeta, 
-                    false, 
-                    isActive // Only counts toward matchup total if Active
+                    String(p.player_id),
+                    p.stats,
+                    p.position_status,
+                    skaters,
+                    goalies,
+                    activeSkaterTotals,
+                    activeGoalieTotals,
+                    playersMeta,
+                    false, // isProjected
+                    isActive // Only counts toward matchup total if active
                 );
             });
-        } 
+        }
 
-        // 2. Process Projections (Current or Future)
-        // Rule: Show if it's a single date view AND (date is today OR date is future)
+        // 2. Process Projections (For Today and Future Dates)
+        // Only displayed when a user clicks into a specific day tab.
         if (isSingleDateView && date >= todayStr) {
             Object.keys(projections).forEach(playerKey => {
                 if (!currentRosterKeys.has(playerKey)) return;
 
                 const playerProj = projections[playerKey];
                 const id = String(playerProj.player_id);
-                
-                if (playerProj[date]) {
-                    const projPoints = playerProj[date];
+                const projPoints = playerProj[date];
+
+                if (projPoints && projPoints > 0) {
                     processPlayerData(
-                        id, 
-                        { "pointsOnly": projPoints }, 
-                        "Util", 
-                        skaters, 
-                        goalies, 
-                        activeSkaterTotals, 
-                        activeGoalieTotals, 
-                        playersMeta, 
+                        id,
+                        { "pointsOnly": projPoints },
+                        "Util",
+                        skaters,
+                        goalies,
+                        activeSkaterTotals,
+                        activeGoalieTotals,
+                        playersMeta,
                         true, // isProjected
-                        false // Never counts toward the hard "Banked" Matchup Total
+                        false // Projections NEVER count toward the hard Matchup Total
                     );
                 }
             });
@@ -484,4 +587,75 @@ function overrideScoresWithProjections(matchups, t1Id, t2Id) {
             }
         });
     }
+}
+
+function setupWeekSwitcher(matchupsData) {
+    const dropdown = document.getElementById('week-selector-dropdown');
+    const prevBtn = document.getElementById('prev-week');
+    const nextBtn = document.getElementById('next-week');
+    if (!dropdown) return;
+
+    // 1. Populate Dropdown with all available weeks
+    const availableWeeks = Object.keys(matchupsData.weeks).sort((a, b) => a - b);
+    dropdown.innerHTML = '';
+    
+    availableWeeks.forEach(w => {
+        const option = document.createElement('option');
+        option.value = w;
+        option.textContent = w;
+        if (w === weekNum) option.selected = true;
+        dropdown.appendChild(option);
+    });
+
+    // 2. Handle Dropdown Change
+    dropdown.onchange = (e) => {
+        navigateToWeek(e.target.value);
+    };
+
+    // 3. Handle Arrows
+    const currentIndex = availableWeeks.indexOf(weekNum);
+    
+    prevBtn.disabled = currentIndex <= 0;
+    nextBtn.disabled = currentIndex >= availableWeeks.length - 1;
+
+    prevBtn.onclick = () => {
+        if (currentIndex > 0) navigateToWeek(availableWeeks[currentIndex - 1]);
+    };
+
+    nextBtn.onclick = () => {
+        if (currentIndex < availableWeeks.length - 1) navigateToWeek(availableWeeks[currentIndex + 1]);
+    };
+}
+
+function navigateToWeek(newWeek) {
+    // Keep the same teams but change the week
+    const newUrl = `matchups.html?week=${newWeek}&team1=${team1Id}&team2=${team2Id}`;
+    window.location.href = newUrl;
+}
+
+function setupWeekSwitcher(matchupsData) {
+    const dropdown = document.getElementById('week-selector-dropdown');
+    const prevBtn = document.getElementById('prev-week');
+    const nextBtn = document.getElementById('next-week');
+    if (!dropdown) return;
+
+    const availableWeeks = Object.keys(matchupsData.weeks).sort((a, b) => a - b);
+    dropdown.innerHTML = '';
+    
+    availableWeeks.forEach(w => {
+        const option = document.createElement('option');
+        option.value = w;
+        option.textContent = w;
+        if (w === weekNum) option.selected = true;
+        dropdown.appendChild(option);
+    });
+
+    dropdown.onchange = (e) => navigateToWeek(e.target.value);
+
+    const currentIndex = availableWeeks.indexOf(weekNum);
+    prevBtn.disabled = currentIndex <= 0;
+    nextBtn.disabled = currentIndex >= availableWeeks.length - 1;
+
+    prevBtn.onclick = () => navigateToWeek(availableWeeks[currentIndex - 1]);
+    nextBtn.onclick = () => navigateToWeek(availableWeeks[currentIndex + 1]);
 }

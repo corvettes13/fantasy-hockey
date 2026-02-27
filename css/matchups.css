@@ -1,10 +1,6 @@
 /* Page Base */
-
-/* Header */
-.matchups-container h1 {
-  text-align: center;
-  margin-bottom: 0.5rem;
-  font-size: 1.4rem;
+body {
+  background-color: #f5f7fa;
   font-family:
     'Helvetica Neue',
     Arial,
@@ -13,22 +9,32 @@
     "Segoe UI Symbol",
     "Noto Color Emoji",
     "Apple Color Emoji";
+  margin: 0;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.matchups-container h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #0055a5;
 }
 
 /* Week Selector Wrapper */
 /* Container: label left, controls right */
 .week-selector {
   display: flex;
-  justify-content: space-between; /* label left, controls right */
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
 }
 
-/* Controls stay grouped tightly on the right */
 .week-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* small spacing between arrows + dropdown */
+  gap: 0.5rem;
 }
 
 /* Dropdown */
@@ -41,7 +47,6 @@
   cursor: pointer;
 }
 
-/* Arrow Buttons */
 .week-arrow {
   background: #0055a5;
   color: white;
@@ -125,47 +130,42 @@ a {
   text-align: left;
 }
 
-/* LEFT TEAM SCORES (right aligned) */
 .team-scores-left {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   text-align: right;
   line-height: 1.1;
-  width: 55px;         /* consistent score column width */
+  width: 55px;
   display: flex;
   flex-direction: column;
   line-height: 1.1;
 }
 
-/* RIGHT TEAM SCORES (left aligned) */
 .team-scores-right {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   line-height: 1.1;
-  width: 55px;         /* consistent score column width */
+  width: 55px;
   display: flex;
   flex-direction: column;
   line-height: 1.1;
 }
 
-/* RIGHT TEAM INFO (left aligned) */
 .team-right .team-info {
   text-align: left;
   align-items: flex-start;
 }
 
-/* LEFT TEAM INFO (right aligned) */
 .team-left .team-info {
   text-align: right;
   align-items: flex-end;
 }
 
-/* Shared */
 .team-info {
-  width: 250px;        /* adjust to taste */
+  width: 250px;
   display: flex;
   flex-direction: column;
   line-height: 1.1;
@@ -186,10 +186,10 @@ a {
   text-decoration: none;
   color: inherit;
   font-family: inherit;
-  font-weight: 525;    /* match .team-name */
-  font-size: inherit;  /* ensure no size change */
+  font-weight: 525;
+  font-size: inherit;
   line-height: 1.1;
-  display: inline;     /* no extra box behavior */
+  display: inline;
 }
 
 .team-name a:hover {
@@ -301,7 +301,6 @@ a {
     flex: 1;
 }
 
-/* Home team (Team 2) usually has the logo on the right */
 .home-block {
     text-align: right;
     justify-content: flex-end;
@@ -356,6 +355,24 @@ a {
     height: auto;
 }
 
+/* Matchup Hero Team Link */
+.hero-team-link {
+    color: #0055a5; /* Using your signature blue */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.hero-team-link:hover {
+    color: #003f7f; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* Ensure the H2 styling still applies to the link inside it */
+.team-name-matchup a {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
 @media (max-width: 768px) {
     .matchup-hero { flex-direction: column; gap: 15px; }
     .vs-divider { display: none; }
@@ -369,7 +386,6 @@ a {
   flex: 1;
 }
 
-/* This container takes up the remaining space between logo and score */
 .team-details {
   flex-grow: 1;
   display: flex;
@@ -377,9 +393,8 @@ a {
   justify-content: center;
 }
 
-/* Reset margins to keep text tight */
 .team-info-group p {
-  margin: 2px 0; /* Tight vertical spacing between manager and meta */
+  margin: 2px 0;
   line-height: 1.2;
 }
 
@@ -394,16 +409,14 @@ a {
   font-weight: bold;
 }
 
-/* Ensure the score doesn't push the text around vertically */
 .matchup-score {
   font-size: 2.2rem;
   font-weight: 800;
   min-width: 70px;
   text-align: center;
-  align-self: center; /* Center vertically relative to the whole block */
+  align-self: center;
 }
 
-/* For the home team, make sure the text aligns to the right */
 .home-block .team-info-group {
   text-align: right;
 }
@@ -416,10 +429,9 @@ a {
 
 .matchup-column {
     flex: 1;
-    min-width: 0; /* Prevents table from breaking flexbox */
+    min-width: 0;
 }
 
-/* Tighten up the tables for comparison */
 .matchup-column table {
     font-size: 0.75rem;
 }
@@ -467,7 +479,6 @@ a {
     text-transform: uppercase;
 }
 
-/* Zebra striping for comparison */
 .matchup-column tbody tr:nth-child(even) {
     background-color: #fcfdfe;
 }
@@ -478,11 +489,9 @@ a {
     }
 }
 
-/* Container for the image and text */
-/* Layout for the player cell */
 .player-container {
     display: flex;
-    align-items: center; /* Centering vertically */
+    align-items: center;
     gap: 12px;
     padding: 4px 0;
 }
@@ -517,7 +526,6 @@ a {
     line-height: 1.2;
 }
 
-/* Points column styling */
 .points-cell {
     font-weight: bold;
     font-size: 1rem;
@@ -555,7 +563,6 @@ a {
     position: relative;
 }
 
-/* Optional: Adding a small "hockey rink" icon or dot in the center for flair */
 .matchup-section-divider::after {
     content: "•";
     position: absolute;
@@ -569,7 +576,7 @@ a {
 }
 
 .matchup-column h3 {
-    margin-top: 0; /* Since the divider provides the spacing now */
+    margin-top: 0;
     background: #f1f4f8;
     padding: 6px 10px;
     font-size: 0.85rem;
@@ -587,7 +594,6 @@ a {
     gap: 5px;
 }
 
-/* Container for the tabs to allow scrolling */
 .moduletabs.navlist {
     width: 100%;
     margin-bottom: 20px;
@@ -597,11 +603,11 @@ a {
 
 .Nav-h {
     display: flex;
-    flex-wrap: wrap; /* This allows the tabs to move to a second/third row */
+    flex-wrap: wrap;
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: 8px 4px; /* Vertical gap of 8px, Horizontal gap of 4px */
+    gap: 8px 4px;
 }
 
 .Navitem {
@@ -611,7 +617,7 @@ a {
     color: #0055a5;
     background: #f1f4f8;
     border: 1px solid #d1d8e0;
-    border-radius: 4px; /* Full radius since they aren't "connected" to the bottom line anymore */
+    border-radius: 4px;
     transition: all 0.2s ease;
     text-align: center;
     min-width: 70px;
@@ -630,10 +636,9 @@ a {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Styling for projected points in the table */
 .fw-bold em {
     font-style: normal;
-    color: #888; /* Grey out projected points */
+    color: #888;
     font-weight: 400;
 }
 
@@ -643,22 +648,20 @@ a {
     vertical-align: middle;
 }
 
-/* Keeps the cursor consistent and adds a subtle hover effect */
 .clickable-row {
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .clickable-row:hover {
-    background-color: rgba(255, 255, 255, 0.05); /* Adjust based on your theme */
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Ensure the team links still look like links but don't break the row click */
 .team-name a {
     position: relative;
     z-index: 2;
     text-decoration: none;
-    color: inherit; /* or your preferred link color */
+    color: inherit;
 }
 
 .team-name a:hover {
@@ -720,6 +723,295 @@ a {
     font-weight: bold;
 }
 
-/* Color classes for the New Projected Total */
 .proj-better { color: #28a745; } /* Green */
 .proj-worse { color: #dc3545; }  /* Red */
+
+.league-scoreboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.mini-matchup-card {
+    background: #fff;
+    border: 2px solid #e0e6ed;
+    border-radius: 10px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.mini-matchup-card:hover {
+    border-color: #0055a5;
+    box-shadow: 0 4px 12px rgba(0,85,165,0.15);
+}
+
+.mini-team-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: #fcfdfe;
+    border: 1px solid #f0f3f7;
+    border-radius: 6px;
+}
+
+.mini-team-row:first-child {
+    margin-bottom: 2px;
+}
+
+.mini-team-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.mini-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: normal; 
+    overflow: visible;
+    text-overflow: clip;
+    max-width: none; 
+}
+
+.mini-logo {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.mini-score-group {
+    text-align: right;
+}
+
+.mini-current-score {
+    font-size: 0.9rem;
+    font-weight: 800;
+    display: block;
+}
+
+.mini-proj-score {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+@media (max-width: 900px) {
+    .league-scoreboard { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .league-scoreboard { grid-template-columns: 1fr; }
+}
+
+.mini-score-group {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+    min-width: 70px;
+    padding-left: 8px;
+    border-left: 1px solid #eee;
+}
+
+.mini-current-score {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Matchup Leader (Bold) */
+.mini-leader {
+    font-weight: 900;
+}
+
+/* League High Score */
+.league-high {
+    color: #2e7d32;
+    font-weight: 900;
+}
+
+.mini-score-group {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.1;
+    min-width: 75px;
+}
+
+.mini-adds {
+    font-size: 0.6rem;
+    color: #999;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.matchup-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    padding: 0 15px 15px 15px;
+    max-width: 1200px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header-placeholder, 
+.week-nav-container {
+    flex: 1;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0055a5;
+    margin: 0;
+    text-align: center;
+    letter-spacing: -0.01em;
+    flex: 2;
+    text-transform: none;
+}
+
+/* --- Modern Week Controls --- */
+.week-nav-controls {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #d1d9e6;
+    border-radius: 10px;
+    padding: 3px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.week-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-left: 1px solid #edf2f7;
+    border-right: 1px solid #edf2f7;
+    gap: 6px;
+}
+
+.week-prefix {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #718096;
+    text-transform: uppercase;
+}
+
+#week-selector-dropdown {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0055a5;
+    cursor: pointer;
+    outline: none;
+}
+
+/* --- Layout Adjustments for New Font --- */
+.mini-name, .player-name-link, .team-name-matchup {
+    letter-spacing: -0.01em; /* Helvetica can look a bit "loose" without this */
+}
+
+.stat-pill {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600;
+}
+
+.week-nav-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    text-align: center;
+    letter-spacing: -0.02em;
+    flex: 2;
+}
+
+.week-nav-controls {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.week-dropdown-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    border-left: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    gap: 6px;
+}
+
+.week-prefix {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #94a3b8;
+}
+
+#week-selector-dropdown {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0055a5;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.week-dropdown-wrapper::after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #64748b;
+    margin-left: 4px;
+    pointer-events: none;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #f1f5f9;
+    color: #0055a5;
+}
+
+.nav-btn:disabled {
+    color: #cbd5e1;
+    cursor: not-allowed;
+}

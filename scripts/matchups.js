@@ -121,7 +121,7 @@ fetch('data/2025_matchups.json')
         // Matchup Detail Redirect
         row.addEventListener('click', (e) => {
           if (e.target.tagName === 'A') return;
-          window.location.href = `matchup.html?team1=${teamNumA}&team2=${teamNumB}&week=${weekNumber}`;
+          window.location.href = `matchups.html?team1=${teamNumA}&team2=${teamNumB}&week=${weekNumber}`;
         });
 
         row.innerHTML = `
