@@ -300,10 +300,17 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                 const isActive = p.position_status !== 'BN' && p.position_status !== 'IR' && p.position_status !== 'IR+';
                 const hasStats = p.stats && Object.keys(p.stats).length > 0;
 
-                // Skip if no stats were recorded for this player on this past day
+                // --- THE FIX ---
+                // If we are looking at a specific single date (Past Tab), 
+                // ONLY process the player if they were in a starting position.
+                if (isSingleDateView && !isActive) return; 
+
+                // If we are looking at the "Totals" view, we still want to see the player
+                // in the list if they were active AT LEAST ONCE during the week.
+                // ----------------
+
                 if (!hasStats) return;
 
-                // Count GP only for players in starting slots on past days
                 if (isActive) {
                     if (p.position_status === 'G') activeGoalieGP++;
                     else activeSkaterGP++;
@@ -318,8 +325,8 @@ function renderRosterFromLogs(index, teamLog, range, playersMeta, projections, t
                     activeSkaterTotals,
                     activeGoalieTotals,
                     playersMeta,
-                    false, // isProjected
-                    isActive // Only counts toward matchup total if active
+                    false, 
+                    isActive 
                 );
             });
         }
@@ -541,19 +548,17 @@ function processPlayerData(id, stats, status, skaters, goalies, activeSkaterTota
     }
 
     const dayPoints = calculatePointsFromLog(stats, isG);
-    
-    // Logic for individual player row points:
+
     if (isProjected) {
-        // If we are looking at a projection, set the flag and add points
         targetMap[id].isProjected = true;
         targetMap[id].points += dayPoints; 
     } else if (shouldCount) {
-        // If it's a log, only add points if they were Active (shouldCount)
+        // This is the gatekeeper for historical points
         targetMap[id].points += dayPoints;
     }
 
     // Logic for Matchup Totals (Footer & Header Score):
-    if (shouldCount) {
+    if (shouldCount && !isProjected) {
         const teamTotals = isG ? activeGoalieTotals : activeSkaterTotals;
         teamTotals.points += dayPoints;
 
