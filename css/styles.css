@@ -276,3 +276,7 @@ td.draft-cell-left {
   font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
 }
 
+.row-even { background-color: #ffffff !important; }
+.row-odd { background-color: #f9fbfd !important; }
+#transactions-widget-table td { padding: 6px 10px; border-bottom: 1px solid #eee; }
+#transactions-widget-table .icon-col { text-align: center; width: 40px; }

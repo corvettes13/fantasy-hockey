@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transactions</title>
+  
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/transactions.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
+  <style>
+    /* Specific overrides for transactions to handle the Yahoo-style badges */
+
+  </style>
+</head>
+
+<body class="players-page"> <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
+        });
+    </script>
+
+    <div class="container">
+      <h1>Transactions</h1>
+
+      <div class="transaction-nav">
+        <button class="nav-tab active" data-filter="all">All Transactions</button>
+        <button class="nav-tab" data-filter="add">Added Players</button>
+        <button class="nav-tab" data-filter="drop">Dropped Players</button>
+        <button class="nav-tab" data-filter="trade">Trades</button>
+      </div>
+
+      <div class="filters" style="margin-top: 15px;">
+        <label for="team-filter">Filter by Team:</label>
+        <select id="team-filter">
+          <option value="all">All Teams</option>
+          </select>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="players-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;"></th>
+              <th style="text-align: left;">Player</th>
+              <th style="width: 10%;"></th>
+              <th style="text-align: right; padding-right: 20px;">Team / Date</th>
+            </tr>
+          </thead>
+          <tbody id="transactions-body"></tbody>
+        </table>
+      </div>
+      <div class="paging-container">
+        <ul class="paging-nav">
+            <li id="prev-btn" class="paging-item disabled">Previous 25</li>
+            <li id="next-btn" class="paging-item">Next 25</li>
+        </ul>
+        <span class="paging-info" id="paging-info">Showing 1-25</span>
+      </div>
+    </div>
+    
+
+  <script src="/fantasy-hockey/scripts/transactions.js"></script>
+</body>
+</html>

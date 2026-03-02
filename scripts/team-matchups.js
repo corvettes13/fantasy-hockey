@@ -101,7 +101,7 @@ async function loadMatchupFromLogs() {
             const logo = t.team_logos.team_logo.url;
             
             const movesMade = t.roster_adds.value || 0;
-            const movesDisplay = `${movesMade} moves of 5`;
+            const movesDisplay = `${movesMade} of 5`;
 
             // Logic: apply 'mini-leader' for bold, 'league-high' for Money Green
             let scoreClass = 'mini-current-score';
@@ -232,7 +232,7 @@ function renderTeamHero(index, teamId, allTeams, standings) {
     
     // Updated: Make Name Clickable
     const nameEl = document.getElementById(`team${index}-name`);
-    const teamUrl = `/fantasy-hockey/team.html?team=${teamId}`;
+    const teamUrl = `/fantasy-hockey/teams/team.html?team=${teamId}`;
     nameEl.innerHTML = `<a href="${teamUrl}" class="hero-team-link">${teamData.team_info.name}</a>`;
     
     document.getElementById(`team${index}-manager`).textContent = `${standingInfo.manager.nickname}`;

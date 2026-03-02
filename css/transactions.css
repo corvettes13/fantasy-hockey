@@ -1,0 +1,187 @@
+/* transactions.css - Optimized for Yahoo Multi-Row Trades */
+
+#players-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    height: auto !important;
+}
+
+/* 1. Icon Column - MUST NOT use display: flex for rowspan to work */
+.icon-col {
+    width: 45px;
+    min-width: 45px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.f-icon {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1;
+    font-weight: 900;
+    font-family: Arial, sans-serif;
+}
+
+.icon-add { color: #008343; }
+.icon-drop { color: #cc0e25; font-size: 1.6rem; }
+.icon-trade { color: #5e5efd; font-size: 1.5rem; }
+
+/* 2. Trade Specifics */
+/* Remove or comment out the old background-color from .trade-icon-cell */
+.trade-icon-cell {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+/* New Alternating Logic for Grouped Rows */
+.row-even {
+    background-color: #ffffff !important;
+}
+
+.row-odd {
+    background-color: #f9fbfd !important; /* Your standard players.css alternate color */
+}
+
+/* Ensure the icon cell matches the row color for trades */
+.trade-icon-cell {
+    background-color: inherit;
+}
+
+/* Vertical centering fix for the trade symbol */
+.trade-icon-cell .icon-trade {
+    margin: 0 auto;
+}
+
+/* Remove border between the two trade rows to make it look like one block */
+#transactions-body tr:has(+ tr .trade-text-cell) td {
+    border-bottom: none !important;
+}
+
+.trade-text-cell {
+    font-size: 0.7rem;
+    color: #888;
+    vertical-align: middle;
+    text-align: center;
+    width: 70px;
+    text-transform: uppercase;
+}
+
+/* 3. Player & Team Info */
+.player-info-col {
+    text-align: left !important;
+}
+
+.player-name-link {
+    font-weight: bold;
+    color: #0055a5;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.player-pos-team {
+    font-size: 0.75rem;
+    color: #666;
+    margin-left: 4px;
+}
+
+.transaction-subtext {
+    margin: 2px 0 0 0;
+    font-size: 0.7rem;
+    color: #888;
+    font-weight: normal;
+}
+
+.team-time-col {
+    text-align: right !important;
+}
+
+.yahoo-team-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.team-time-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.team-link {
+    font-weight: bold;
+    color: #0055a5;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.timestamp-text {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.team-logo-small {
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+/* 4. Navigation Tabs */
+.transaction-nav {
+    display: flex;
+    border-bottom: 2px solid #e0e4e9;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.nav-tab {
+    background: none;
+    border: none;
+    padding: 10px 5px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+}
+
+.nav-tab.active {
+    color: #0055a5;
+    font-weight: bold;
+    border-bottom: 2px solid #0055a5;
+    margin-bottom: -2px;
+}
+
+.paging-container {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.paging-nav {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.paging-item {
+    font-size: 0.75rem;
+    color: #0055a5;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.paging-item.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.paging-info {
+    font-size: 0.75rem;
+    color: #888;
+}
