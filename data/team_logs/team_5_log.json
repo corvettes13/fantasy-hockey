@@ -28103,13 +28103,31 @@
           "player_id": 4990,
           "player_name": "Brock Nelson",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 1.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 5367,
           "player_name": "Mika Zibanejad",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 5.0,
+            "31": 3.0,
+            "32": 3.0
+          }
         },
         {
           "player_id": 8642,
@@ -28124,22 +28142,40 @@
           "stats": {}
         },
         {
-          "player_id": 6055,
-          "player_name": "Pavel Buchnevich",
-          "position_status": "RW",
-          "stats": {}
-        },
-        {
           "player_id": 7114,
           "player_name": "Matthew Tkachuk",
           "position_status": "RW",
           "stats": {}
         },
         {
+          "player_id": 7332,
+          "player_name": "Mathieu Olivier",
+          "position_status": "RW",
+          "stats": {
+            "1": 1.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 3.0,
+            "32": 2.0
+          }
+        },
+        {
           "player_id": 3358,
           "player_name": "Brent Burns",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 3.0,
+            "31": 0.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 5986,
@@ -28151,7 +28187,16 @@
           "player_id": 5685,
           "player_name": "Morgan Rielly",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 2.0
+          }
         },
         {
           "player_id": 5254,
@@ -28163,6 +28208,12 @@
           "player_id": 7143,
           "player_name": "Jordan Kyrou",
           "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 6055,
+          "player_name": "Pavel Buchnevich",
+          "position_status": "BN",
           "stats": {}
         },
         {
@@ -28190,8 +28241,132 @@
           "stats": {}
         },
         {
+          "player_id": 4901,
+          "player_name": "Sergei Bobrovsky",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 5853,
+          "player_name": "Linus Ullmark",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6024,
+          "player_name": "Tristan Jarry",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 4503,
+          "player_name": "John Carlson",
+          "position_status": "IR+",
+          "stats": {}
+        },
+        {
+          "player_id": 3737,
+          "player_name": "Sidney Crosby",
+          "position_status": "IR+",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-03-03": {
+      "players": [
+        {
+          "player_id": 4990,
+          "player_name": "Brock Nelson",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 30832,
+          "player_name": "Logan Cooley",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 6009,
+          "player_name": "Ryan Hartman",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 4699,
+          "player_name": "Chris Kreider",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 8279,
+          "player_name": "Jack Hughes",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 7114,
+          "player_name": "Matthew Tkachuk",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
           "player_id": 7332,
           "player_name": "Mathieu Olivier",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 3358,
+          "player_name": "Brent Burns",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5986,
+          "player_name": "Darnell Nurse",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5254,
+          "player_name": "Dmitry Orlov",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 4503,
+          "player_name": "John Carlson",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5696,
+          "player_name": "Tom Wilson",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 5685,
+          "player_name": "Morgan Rielly",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 7143,
+          "player_name": "Jordan Kyrou",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5367,
+          "player_name": "Mika Zibanejad",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6055,
+          "player_name": "Pavel Buchnevich",
           "position_status": "BN",
           "stats": {}
         },
@@ -28214,8 +28389,8 @@
           "stats": {}
         },
         {
-          "player_id": 4503,
-          "player_name": "John Carlson",
+          "player_id": 8642,
+          "player_name": "Quinton Byfield",
           "position_status": "IR+",
           "stats": {}
         },
