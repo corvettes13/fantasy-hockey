@@ -1,10 +1,9 @@
 /* transactions.css - Optimized for Yahoo Multi-Row Trades */
 
 #players-table td {
-    padding: 8px 12px;
+    padding: 2px 5px;
     border-bottom: 1px solid #eee;
     vertical-align: middle;
-    height: auto !important;
 }
 
 /* 1. Icon Column - MUST NOT use display: flex for rowspan to work */
@@ -24,7 +23,7 @@
 }
 
 .icon-add { color: #008343; }
-.icon-drop { color: #cc0e25; font-size: 1.6rem; }
+.icon-drop { color: #cc0e25; font-size: 1.5rem; }
 .icon-trade { color: #5e5efd; font-size: 1.5rem; }
 
 /* 2. Trade Specifics */
@@ -51,6 +50,14 @@
 /* Vertical centering fix for the trade symbol */
 .trade-icon-cell .icon-trade {
     margin: 0 auto;
+}
+.icon-draft {
+    color: #f1c40f;
+    font-size: 1.2rem;
+}
+
+.f-icon.icon-draft {
+    font-weight: normal; 
 }
 
 /* Remove border between the two trade rows to make it look like one block */
@@ -184,4 +191,38 @@
 .paging-info {
     font-size: 0.75rem;
     color: #888;
+}
+
+/* Tighten up player entries specifically in trade rows */
+.player-entry-trade {
+    margin: 0 !important; /* Remove all margins */
+    padding: 1px 0;      /* Minimal vertical breathing room */
+    line-height: 1.1;    /* Tighter line spacing */
+}
+
+/* Reduce the overall padding of the trade cells to keep them dense */
+.trade-text-cell, 
+.trade-icon-cell,
+.player-info-col.No-pstart {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+}
+
+/* Optional: If the player names feel too cramped, 
+   reduce the size of the team/position text slightly */
+.player-entry-trade .player-pos-team {
+    font-size: 0.7rem;
+}
+
+/* Add a separator line between the two teams in a trade */
+/* This targets the second row of a trade because that row DOES NOT have the rowspan td */
+#transactions-body tr:not(:has(.trade-icon-cell)) .player-info-col,
+#transactions-body tr:not(:has(.trade-icon-cell)) .trade-text-cell,
+#transactions-body tr:not(:has(.trade-icon-cell)) .team-time-col {
+    border-top: 1px solid #e0e4e9 !important;
+}
+
+/* Ensure the rowspan icon cell doesn't get a partial line inside it */
+.trade-icon-cell {
+    border-top: none !important;
 }

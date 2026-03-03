@@ -89,14 +89,27 @@ function renderWidget(blocks, playerLookup, teamLookup) {
             let finalLogo = (block.team_display_key === "Free Agent" || !teamData.logo) ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" : teamData.logo;
 
             const iconsHtml = block.items.map(item => {
+                if (item.acq_type === "draft") {
+                    return `<span class="f-icon icon-draft">🏆</span>`;
+                }
                 const symbol = item.acq_type === "add" ? "+" : "–";
                 const cls = item.acq_type === "add" ? "icon-add" : "icon-drop";
                 return `<span class="f-icon ${cls}">${symbol}</span>`;
             }).join("");
-
+            
             const playersHtml = block.items.map(item => {
                 const p = playerLookup[item.player_id] || { full_name: "Unknown" };
-                const sub = item.acq_type === "drop" ? "To Waivers" : (item.cost > 0 ? `$${item.cost} Waiver` : "Waiver");
+                
+                // Logic for subtext based on acquisition type
+                let sub = "";
+                if (item.acq_type === "draft") {
+                    sub = `Drafted ($${item.cost})`;
+                } else if (item.acq_type === "drop") {
+                    sub = "To Waivers";
+                } else {
+                    sub = item.cost > 0 ? `$${item.cost} Waiver` : "Waiver";
+                }
+
                 return `<div class="player-entry">
                     <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
                     <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>

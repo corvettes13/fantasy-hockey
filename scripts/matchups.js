@@ -22,11 +22,16 @@ fetch('data/2025_matchups.json')
     let currentWeek = null;
     weeks.forEach(week => {
       const w = data.weeks[week];
-      const firstMatchup = w.matchups[0];
-      const start = new Date(firstMatchup.week_start + "T00:00:00");
-      const end = new Date(firstMatchup.week_end + "T23:59:59");
-      if (today >= start && today <= end) {
-        currentWeek = week;
+      
+      // Guard against empty playoff weeks
+      if (w.matchups && w.matchups.length > 0) {
+        const firstMatchup = w.matchups[0];
+        const start = new Date(firstMatchup.week_start + "T00:00:00");
+        const end = new Date(firstMatchup.week_end + "T23:59:59");
+        
+        if (today >= start && today <= end) {
+          currentWeek = week;
+        }
       }
     });
 
@@ -94,6 +99,20 @@ fetch('data/2025_matchups.json')
       container.innerHTML = '';
       weekTitle.textContent = `Week ${weekNumber} Matchups`;
 
+      // Handle Empty Playoff Weeks
+      if (!weekData.matchups || weekData.matchups.length === 0) {
+        const tbdMessage = document.createElement('div');
+        tbdMessage.className = 'playoff-tbd-message';
+        tbdMessage.innerHTML = `
+          <div style="text-align: center; padding: 40px; border: 2px dashed #ccc; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-bottom: 10px;">🏆 Championship Bracket</h3>
+            <p style="color: #666;">Matchups TBD: Check back soon for the playoff schedule!</p>
+          </div>
+        `;
+        container.appendChild(tbdMessage);
+        return; // Exit function so it doesn't try to loop through matchups
+      }
+      
       weekData.matchups.forEach(matchup => {
         const [teamA, teamB] = matchup.teams.map(t => t.team);
 
