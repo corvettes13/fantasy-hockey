@@ -1,4 +1,4 @@
-let allGroupedTransactions = []; 
+let allTransactions = []; 
 let currentTypeFilter = 'all';
 let currentTeamFilter = 'all';
 let currentPage = 0;
@@ -36,13 +36,8 @@ async function loadTransactions() {
             teamSelect.appendChild(opt);
         });
 
-        // 2. Group Data
-        allGroupedTransactions = groupTransactions(tx);
-        
-        // 3. Attach Listeners
+        allTransactions = tx;
         setupEventListeners();
-
-        // 4. Initial Render
         applyFilters();
 
     } catch (err) {
@@ -51,7 +46,6 @@ async function loadTransactions() {
 }
 
 function setupEventListeners() {
-    // Nav Tabs
     document.querySelectorAll('.nav-tab').forEach(tab => {
         tab.addEventListener('click', (e) => {
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -61,13 +55,11 @@ function setupEventListeners() {
         });
     });
 
-    // Team Dropdown
     document.getElementById('team-filter').addEventListener('change', (e) => {
         currentTeamFilter = e.target.value;
         applyFilters();
     });
     
-    // Pagination
     document.getElementById('next-btn').addEventListener('click', () => {
         if ((currentPage + 1) * pageSize < filteredData.length) {
             currentPage++;
@@ -85,40 +77,26 @@ function setupEventListeners() {
 
 function applyFilters() {
     currentPage = 0; 
-    filteredData = []; 
-
-    allGroupedTransactions.forEach(group => {
-        // Clone the group
-        let newGroup = { ...group, items: [...group.items] };
+    filteredData = allTransactions.filter(tx => {
+        // Skip commish transactions with no players
+        if (tx.type === 'commish' || !tx.players || tx.players.length === 0) return false;
 
         // 1. Team Filtering
-        // For trades, we check if the selected team is involved in any part of the deal
         if (currentTeamFilter !== 'all') {
-            const teamInvolved = newGroup.items.some(item => item.team_key === currentTeamFilter);
-            // Also check the display key (in case it's an add/drop pair)
-            if (!teamInvolved && newGroup.team_display_key !== currentTeamFilter) {
-                return; 
-            }
+            const teamInvolved = tx.players.some(p => p.team_key === currentTeamFilter);
+            if (!teamInvolved) return false;
         }
 
         // 2. Type Filtering
         if (currentTypeFilter === 'add') {
-            // Show both free agent adds AND draft picks
-            newGroup.items = newGroup.items.filter(item => 
-                item.acq_type === 'add' || item.acq_type === 'draft'
-            );
-        }
-        else if (currentTypeFilter === 'drop') {
-            newGroup.items = newGroup.items.filter(item => item.acq_type === 'drop');
-            if (newGroup.items.length === 0) return;
-        } 
-        else if (currentTypeFilter === 'trade') {
-            // Check if this group is a trade. If not, discard it.
-            const isActuallyATrade = newGroup.items.some(item => item.acq_type === 'trade');
-            if (!isActuallyATrade) return;
+            return tx.type === 'add' || tx.type === 'add/drop' || tx.type === 'draft';
+        } else if (currentTypeFilter === 'drop') {
+            return tx.type === 'drop' || tx.type === 'add/drop';
+        } else if (currentTypeFilter === 'trade') {
+            return tx.type === 'trade';
         }
 
-        filteredData.push(newGroup);
+        return true;
     });
 
     renderCurrentPage();
@@ -133,39 +111,39 @@ function renderCurrentPage() {
     updatePaginationUI();
 }
 
-function renderTransactions(blocks) {
+function renderTransactions(transactions) {
     const tbody = document.getElementById("transactions-body");
     tbody.innerHTML = "";
 
-    blocks.forEach((block, groupIndex) => {
-        const formattedDate = formatYahooDate(block.datetime);
-        // Determine color class based on the block's position in the filtered list
-        const rowColorClass = groupIndex % 2 === 0 ? "row-even" : "row-odd";
+    transactions.forEach((tx, idx) => {
+        const formattedDate = formatYahooDate(tx.datetime);
+        const rowColorClass = idx % 2 === 0 ? "row-even" : "row-odd";
 
-        if (block.type === 'trade') {
+        if (tx.type === 'trade') {
             const byTeam = {};
-            block.items.forEach(item => {
-                if (!byTeam[item.team_key]) byTeam[item.team_key] = [];
-                byTeam[item.team_key].push(item);
+            tx.players.forEach(p => {
+                if (!byTeam[p.team_key]) byTeam[p.team_key] = [];
+                byTeam[p.team_key].push(p);
             });
 
             const teamKeys = Object.keys(byTeam);
-            teamKeys.forEach((teamKey, index) => {
+            teamKeys.forEach((teamKey, tIdx) => {
                 const tr = document.createElement("tr");
-                tr.className = rowColorClass; // Apply alternating color to both trade rows
-
-                const teamData = globalTeamLookup[teamKey] || { name: teamKey, logo: "" };
-                let finalLogo = (teamKey === "Free Agent" || !teamData.logo) 
+                tr.className = rowColorClass;
+                const teamData = globalTeamLookup[teamKey] || { name: "Free Agent", logo: "" };
+                let finalLogo = (!teamData.logo || teamKey === "free_agent") 
                     ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" 
                     : teamData.logo;
 
-                const playerHtml = byTeam[teamKey].map(item => {
-                    const p = globalPlayerLookup[item.player_id] || { full_name: "Unknown" };
-                    return `<p class="player-entry-trade"><a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
-                            <span class="player-pos-team">${p.team_abbr} - ${p.position}</span></p>`;
+                const playerHtml = byTeam[teamKey].map(tp => {
+                    const p = globalPlayerLookup[tp.player_id] || { full_name: "Unknown", team_abbr: "??", position: "???" };
+                    return `<div class="player-entry-trade">
+                        <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
+                        <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
+                    </div>`;
                 }).join("");
 
-                if (index === 0) {
+                if (tIdx === 0) {
                     tr.innerHTML = `<td rowspan="${teamKeys.length}" class="icon-col trade-icon-cell"><span class="f-icon icon-trade">🔄</span></td>`;
                 }
 
@@ -180,46 +158,40 @@ function renderTransactions(blocks) {
                             </div>
                             <img src="${finalLogo}" class="team-logo-small">
                         </div>
-                    </td>
-                `;
+                    </td>`;
                 tbody.appendChild(tr);
             });
         } else {
-            // Standard Add/Drop
             const tr = document.createElement("tr");
-            tr.className = rowColorClass; // Apply alternating color
+            tr.className = rowColorClass;
 
-            const teamData = globalTeamLookup[block.team_display_key] || { name: block.team_display_key, logo: "" };
-            let finalLogo = (block.team_display_key === "Free Agent" || !teamData.logo) 
+            // Find the active league team involved in this add/drop/draft
+            const mainAction = tx.players.find(p => p.team_key !== 'free_agent') || tx.players[0];
+            const teamData = globalTeamLookup[mainAction.team_key] || { name: "Free Agent", logo: "" };
+            let finalLogo = (!teamData.logo || mainAction.team_key === "free_agent") 
                 ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" 
                 : teamData.logo;
 
-            const iconsHtml = block.items.map(item => {
-                if (item.acq_type === "draft") {
-                    return `<span class="f-icon icon-draft">💲</span>`;
-                }
-                const symbol = item.acq_type === "add" ? "+" : "–";
-                const cls = item.acq_type === "add" ? "icon-add" : "icon-drop";
+            const iconsHtml = tx.players.map(p => {
+                if (tx.type === 'draft') return `<span class="f-icon icon-draft">🏆</span>`;
+                const symbol = p.type === "add" ? "+" : "–";
+                const cls = p.type === "add" ? "icon-add" : "icon-drop";
                 return `<span class="f-icon ${cls}">${symbol}</span>`;
             }).join("");
 
-            const playersHtml = block.items.map(item => {
-                const p = globalPlayerLookup[item.player_id] || { full_name: "Unknown" };
+            const playersHtml = tx.players.map(tp => {
+                const p = globalPlayerLookup[tp.player_id] || { full_name: "Unknown", team_abbr: "??", position: "???" };
                 let sub = "";
-                    if (item.acq_type === "draft") {
-                        sub = `Drafted ($${item.cost})`;
-                    } else if (item.acq_type === "drop") {
-                        sub = "To Waivers";
-                    } else {
-                        sub = item.cost > 0 ? `$${item.cost} Waiver` : "Waiver";
-                    }
+                if (tx.type === 'draft') sub = `Drafted ($${tp.cost})`;
+                else if (tp.type === 'drop') sub = "To Waivers";
+                else sub = tp.cost > 0 ? `$${tp.cost} Waiver` : "Waiver";
 
-                    return `<div class="player-entry">
-                        <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
-                        <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
-                        <h6 class="transaction-subtext">${sub}</h6>
-                    </div>`;
-                }).join("");
+                return `<div class="player-entry">
+                    <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
+                    <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
+                    <h6 class="transaction-subtext">${sub}</h6>
+                </div>`;
+            }).join("");
 
             tr.innerHTML = `
                 <td class="icon-col">${iconsHtml}</td>
@@ -232,55 +204,10 @@ function renderTransactions(blocks) {
                         </div>
                         <img src="${finalLogo}" class="team-logo-small">
                     </div>
-                </td>
-            `;
+                </td>`;
             tbody.appendChild(tr);
         }
     });
-}
-
-function groupTransactions(tx) {
-    const grouped = [];
-    const usedIndices = new Set();
-
-    for (let i = 0; i < tx.length; i++) {
-        if (usedIndices.has(i)) continue;
-
-        const current = tx[i];
-        let group = {
-            type: current.acq_type,
-            datetime: current.datetime,
-            items: [current],
-            team_display_key: current.team_key
-        };
-
-        if (current.acq_type === 'trade') {
-            group.type = 'trade'; // Ensure this is set
-            for (let j = i + 1; j < tx.length; j++) {
-                if (!usedIndices.has(j) && tx[j].datetime === current.datetime && tx[j].acq_type === 'trade') {
-                    group.items.push(tx[j]);
-                    usedIndices.add(j);
-                }
-            }
-        } else if (current.acq_type === 'add' || current.acq_type === 'drop') {
-            for (let j = i + 1; j < tx.length; j++) {
-                if (!usedIndices.has(j) && tx[j].datetime === current.datetime) {
-                    const isPair = (current.acq_type === 'add' && tx[j].acq_type === 'drop') || 
-                                   (current.acq_type === 'drop' && tx[j].acq_type === 'add');
-                    if (isPair) {
-                        group.items.push(tx[j]);
-                        usedIndices.add(j);
-                        group.type = 'add_drop';
-                        group.team_display_key = current.team_key === "Free Agent" ? tx[j].team_key : current.team_key;
-                        break;
-                    }
-                }
-            }
-        }
-        usedIndices.add(i);
-        grouped.push(group);
-    }
-    return grouped;
 }
 
 function formatYahooDate(datetime) {
@@ -295,13 +222,14 @@ function updatePaginationUI() {
     const nextBtn = document.getElementById('next-btn');
     const info = document.getElementById('paging-info');
 
-    prevBtn.classList.toggle('disabled', currentPage === 0);
-    nextBtn.classList.toggle('disabled', (currentPage + 1) * pageSize >= filteredData.length);
+    if (prevBtn && nextBtn && info) {
+        prevBtn.classList.toggle('disabled', currentPage === 0);
+        nextBtn.classList.toggle('disabled', (currentPage + 1) * pageSize >= filteredData.length);
 
-    const startIdx = filteredData.length === 0 ? 0 : (currentPage * pageSize) + 1;
-    const endIdx = Math.min((currentPage + 1) * pageSize, filteredData.length);
-    info.textContent = `Showing ${startIdx}-${endIdx} of ${filteredData.length}`;
+        const startIdx = filteredData.length === 0 ? 0 : (currentPage * pageSize) + 1;
+        const endIdx = Math.min((currentPage + 1) * pageSize, filteredData.length);
+        info.textContent = `Showing ${startIdx}-${endIdx} of ${filteredData.length}`;
+    }
 }
 
-// Start the process
 document.addEventListener('DOMContentLoaded', loadTransactions);

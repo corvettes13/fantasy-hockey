@@ -1,66 +1,76 @@
 async function loadTransactionsWidget() {
-    const [txRes, playersRes, teamsRes] = await Promise.all([
-        fetch("data/transactions.json"),
-        fetch("data/players.json"),
-        fetch("data/league_teams.json")
-    ]);
+    try {
+        const [txRes, playersRes, teamsRes] = await Promise.all([
+            fetch("data/transactions.json"),
+            fetch("data/players.json"),
+            fetch("data/league_teams.json")
+        ]);
 
-    const tx = await txRes.json();
-    const playersData = await playersRes.json();
-    const teamsData = await teamsRes.json();
+        const tx = await txRes.json();
+        const playersData = await playersRes.json();
+        const teamsData = await teamsRes.json();
 
-    tx.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+        // 1. Prepare Metadata
+        tx.sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+        
+        const playerLookup = {};
+        playersData.players.forEach(p => playerLookup[p.player_id] = p);
 
-    const playerLookup = {};
-    playersData.players.forEach(p => playerLookup[p.player_id] = p);
+        const teamLookup = {};
+        teamsData.forEach(t => {
+            teamLookup[t.team_info.team_key] = { 
+                name: t.team_info.name, 
+                logo: t.team_info.logo_url 
+            };
+        });
 
-    const teamLookup = {};
-    teamsData.forEach(t => {
-        teamLookup[t.team_info.team_key] = { 
-            name: t.team_info.name, 
-            logo: t.team_info.logo_url 
-        };
-    });
+        // 2. Filter logic: All of today, but at least the last 5 transactions
+        // We filter out 'commish' types or transactions with no players for the widget
+        const validTx = tx.filter(t => t.type !== 'commish' && t.players && t.players.length > 0);
+        
+        const todayStr = new Date().toISOString().split('T')[0];
+        let displayList = validTx.filter(t => t.datetime.startsWith(todayStr));
+        
+        if (displayList.length < 5) {
+            displayList = validTx.slice(0, 5);
+        }
 
-    const allGrouped = groupTransactions(tx);
-    
-    // Filter logic: All of today, but at least the last 5 transactions
-    const today = new Date().toLocaleDateString();
-    let displayList = allGrouped.filter(g => new Date(g.datetime).toLocaleDateString() === today);
-    
-    if (displayList.length < 5) {
-        displayList = allGrouped.slice(0, 5);
+        renderWidget(displayList, playerLookup, teamLookup);
+    } catch (err) {
+        console.error("Error loading transactions widget:", err);
     }
-
-    renderWidget(displayList, playerLookup, teamLookup);
 }
 
-function renderWidget(blocks, playerLookup, teamLookup) {
+function renderWidget(transactions, playerLookup, teamLookup) {
     const tbody = document.getElementById("transactions-widget-body");
     tbody.innerHTML = "";
 
-    blocks.forEach((block, groupIndex) => {
+    transactions.forEach((tx, groupIndex) => {
         const rowColorClass = groupIndex % 2 === 0 ? "row-even" : "row-odd";
-        const formattedDate = formatYahooDate(block.datetime);
+        const formattedDate = formatYahooDate(tx.datetime);
 
-        if (block.type === 'trade') {
+        if (tx.type === 'trade') {
             const byTeam = {};
-            block.items.forEach(item => {
-                if (!byTeam[item.team_key]) byTeam[item.team_key] = [];
-                byTeam[item.team_key].push(item);
+            tx.players.forEach(p => {
+                if (!byTeam[p.team_key]) byTeam[p.team_key] = [];
+                byTeam[p.team_key].push(p);
             });
 
             const teamKeys = Object.keys(byTeam);
             teamKeys.forEach((teamKey, index) => {
                 const tr = document.createElement("tr");
                 tr.className = rowColorClass;
-                const teamData = teamLookup[teamKey] || { name: teamKey, logo: "" };
-                let finalLogo = (teamKey === "Free Agent" || !teamData.logo) ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" : teamData.logo;
+                const teamData = teamLookup[teamKey] || { name: "Free Agent", logo: "" };
+                let finalLogo = (!teamData.logo || teamKey === "free_agent") 
+                    ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" 
+                    : teamData.logo;
 
-                const p1Html = byTeam[teamKey].map(item => {
-                    const p = playerLookup[item.player_id] || { full_name: "Unknown" };
-                    return `<p class="player-entry-trade"><a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
-                            <span class="player-pos-team">${p.team_abbr} - ${p.position}</span></p>`;
+                const playerHtml = byTeam[teamKey].map(tp => {
+                    const p = playerLookup[tp.player_id] || { full_name: "Unknown", team_abbr: "??", position: "???" };
+                    return `<div class="player-entry-trade">
+                                <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
+                                <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
+                            </div>`;
                 }).join("");
 
                 if (index === 0) {
@@ -68,7 +78,7 @@ function renderWidget(blocks, playerLookup, teamLookup) {
                 }
 
                 tr.innerHTML += `
-                    <td class="player-info-col No-pstart">${p1Html}</td>
+                    <td class="player-info-col No-pstart">${playerHtml}</td>
                     <td class="trade-text-cell">Traded to</td>
                     <td class="team-time-col Ta-end">
                         <div class="yahoo-team-wrapper">
@@ -85,29 +95,30 @@ function renderWidget(blocks, playerLookup, teamLookup) {
         } else {
             const tr = document.createElement("tr");
             tr.className = rowColorClass;
-            const teamData = teamLookup[block.team_display_key] || { name: block.team_display_key, logo: "" };
-            let finalLogo = (block.team_display_key === "Free Agent" || !teamData.logo) ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" : teamData.logo;
 
-            const iconsHtml = block.items.map(item => {
-                if (item.acq_type === "draft") {
-                    return `<span class="f-icon icon-draft">🏆</span>`;
-                }
-                const symbol = item.acq_type === "add" ? "+" : "–";
-                const cls = item.acq_type === "add" ? "icon-add" : "icon-drop";
+            // Identify the league team (not free_agent) to display the correct logo/name
+            const mainAction = tx.players.find(p => p.team_key !== 'free_agent') || tx.players[0];
+            const teamData = teamLookup[mainAction.team_key] || { name: "Free Agent", logo: "" };
+            let finalLogo = (!teamData.logo || mainAction.team_key === "free_agent") 
+                ? "https://s.yimg.com/cv/apiv2/default/nhl/nhl_1.png" 
+                : teamData.logo;
+
+            const iconsHtml = tx.players.map(p => {
+                if (tx.type === "draft") return `<span class="f-icon icon-draft">🏆</span>`;
+                const symbol = p.type === "add" ? "+" : "–";
+                const cls = p.type === "add" ? "icon-add" : "icon-drop";
                 return `<span class="f-icon ${cls}">${symbol}</span>`;
             }).join("");
             
-            const playersHtml = block.items.map(item => {
-                const p = playerLookup[item.player_id] || { full_name: "Unknown" };
-                
-                // Logic for subtext based on acquisition type
+            const playersHtml = tx.players.map(tp => {
+                const p = playerLookup[tp.player_id] || { full_name: "Unknown", team_abbr: "??", position: "???" };
                 let sub = "";
-                if (item.acq_type === "draft") {
-                    sub = `Drafted ($${item.cost})`;
-                } else if (item.acq_type === "drop") {
+                if (tx.type === "draft") {
+                    sub = `Drafted ($${tp.cost})`;
+                } else if (tp.type === "drop") {
                     sub = "To Waivers";
                 } else {
-                    sub = item.cost > 0 ? `$${item.cost} Waiver` : "Waiver";
+                    sub = tp.cost > 0 ? `$${tp.cost} Waiver` : "Waiver";
                 }
 
                 return `<div class="player-entry">
@@ -133,41 +144,6 @@ function renderWidget(blocks, playerLookup, teamLookup) {
             tbody.appendChild(tr);
         }
     });
-}
-
-function groupTransactions(tx) {
-    const grouped = [];
-    const usedIndices = new Set();
-    for (let i = 0; i < tx.length; i++) {
-        if (usedIndices.has(i)) continue;
-        const current = tx[i];
-        let group = { type: current.acq_type, datetime: current.datetime, items: [current], team_display_key: current.team_key };
-        if (current.acq_type === 'trade') {
-            group.type = 'trade';
-            for (let j = i + 1; j < tx.length; j++) {
-                if (!usedIndices.has(j) && tx[j].datetime === current.datetime && tx[j].acq_type === 'trade') {
-                    group.items.push(tx[j]);
-                    usedIndices.add(j);
-                }
-            }
-        } else if (current.acq_type === 'add' || current.acq_type === 'drop') {
-            for (let j = i + 1; j < tx.length; j++) {
-                if (!usedIndices.has(j) && tx[j].datetime === current.datetime) {
-                    const isPair = (current.acq_type === 'add' && tx[j].acq_type === 'drop') || (current.acq_type === 'drop' && tx[j].acq_type === 'add');
-                    if (isPair) {
-                        group.items.push(tx[j]);
-                        usedIndices.add(j);
-                        group.type = 'add_drop';
-                        group.team_display_key = current.team_key === "Free Agent" ? tx[j].team_key : current.team_key;
-                        break;
-                    }
-                }
-            }
-        }
-        usedIndices.add(i);
-        grouped.push(group);
-    }
-    return grouped;
 }
 
 function formatYahooDate(datetime) {
