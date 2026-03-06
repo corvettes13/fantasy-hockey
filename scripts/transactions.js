@@ -234,27 +234,33 @@ function updatePaginationUI() {
 }
 
 function calculateTransactionStats() {
-    const addCounts = {};
+    const addCounts = {}; // { player_id: total_count }
+    const teamBreakdown = {}; // { player_id: { team_key: count } }
 
-    // Aggregate counts from all transactions
     allTransactions.forEach(tx => {
         if (!tx.players) return;
         tx.players.forEach(p => {
-            // We only care about adds and draft picks (initial adds)
             if (p.type === 'add' || tx.type === 'draft') {
-                addCounts[p.player_id] = (addCounts[p.player_id] || 0) + 1;
+                const pid = p.player_id;
+                const tkey = p.team_key;
+
+                // Update Total Count
+                addCounts[pid] = (addCounts[pid] || 0) + 1;
+
+                // Update Team Breakdown
+                if (!teamBreakdown[pid]) teamBreakdown[pid] = {};
+                teamBreakdown[pid][tkey] = (teamBreakdown[pid][tkey] || 0) + 1;
             }
         });
     });
 
-    renderStatTable("most-added-body", addCounts);
+    renderStatTable("most-added-body", addCounts, teamBreakdown);
 }
 
-function renderStatTable(elementId, countMap) {
+function renderStatTable(elementId, countMap, teamMap) {
     const tbody = document.getElementById(elementId);
     if (!tbody) return;
 
-    // Sort descending and take top 20
     const sortedIds = Object.keys(countMap)
         .sort((a, b) => countMap[b] - countMap[a])
         .slice(0, 20);
@@ -263,19 +269,25 @@ function renderStatTable(elementId, countMap) {
         const p = globalPlayerLookup[pid] || { full_name: "Unknown", team_abbr: "??", position: "???" };
         const rowColorClass = index % 2 === 0 ? "row-even" : "row-odd";
         
-        // Highlight the top 3 with a slightly different rank style
-        const rankDisplay = (index < 3) 
-            ? `<span style="color: #0055a5; font-weight: 900;">${index + 1}</span>` 
-            : index + 1;
+        // Generate the Team list HTML
+        const teamsInvolved = teamMap[pid];
+        const teamChipsHtml = Object.entries(teamsInvolved)
+            .map(([tkey, count]) => {
+                const tData = globalTeamLookup[tkey] || { name: "Unknown" };
+                // If they added them more than once (streaming), show the count next to the team
+                const countSuffix = count > 1 ? ` (x${count})` : "";
+                return `<span class="team-stat-chip">${tData.name}${countSuffix}</span>`;
+            }).join("");
 
         return `
             <tr class="${rowColorClass}">
-                <td class="rank-number" style="text-align: center; font-size: 0.9rem; padding: 10px 0;">${rankDisplay}</td>
+                <td class="rank-number" style="text-align: center;">${index + 1}</td>
                 <td style="text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
-                        <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
-                    </div>
+                    <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
+                    <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
+                </td>
+                <td style="text-align: left;">
+                    <div class="team-chips-container">${teamChipsHtml}</div>
                 </td>
                 <td style="text-align: right; padding-right: 25px;">
                     <span class="count-badge">${countMap[pid]}</span>
