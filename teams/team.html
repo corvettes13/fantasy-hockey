@@ -28,15 +28,24 @@
         <!-- Team Header injected by JS -->
         <div id="team-header"></div>
 
-        <!-- Season / Mode Selector -->
-        <label for="season-select">Season:</label>
-        <select id="season-select">
-          <option value="2026_stats">Current Season</option>
-          <option value="2025_stats">2024–25 Stats</option>
-          <option value="2025_projections">2025–26 Projections</option>
-          <option value="2026_team_log">Team Log</option>
-          <option value="daily">Daily Stats</option>
-        </select>
+        <div class="mode-navigation" style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <div class="dropdown-group">
+            <label for="season-select"><strong>Season:</strong></label>
+            <select id="season-select">
+              <option value="2026_stats">Current Season</option>
+              <option value="2025_stats">2024–25 Stats</option>
+              <option value="2025_projections">2025–26 Projections</option>
+              <option value="2026_team_log">Team Log</option>
+              <option value="daily">Daily Stats</option>
+            </select>
+          </div>
+
+          <div class="tab-group">
+            <button id="tab-salary-mgmt" class="tab-button" style="padding: 6px 15px; cursor: pointer; border: 1px solid #ccc; border-radius: 4px; background: #f0f0f0;">
+              Salary Management
+            </button>
+          </div>
+        </div>
 
         <!-- DAILY MODE CONTROLS -->
         <div id="daily-controls" style="display:none; margin-top:10px;">
@@ -48,6 +57,18 @@
 
           <button id="daily-prev" style="margin-left:10px;">Previous</button>
           <button id="daily-next">Next</button>
+        </div>
+        
+        <div id="salary-mgmt-controls" style="display:none; margin-top:10px; padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #ddd;">
+          <div style="display: flex; gap: 20px; align-items: center;">
+            <div><strong>Players Kept:</strong> <span id="keep-count">0</span> / 19</div>
+            <div><strong>Total Salary:</strong> $<span id="keep-salary">0</span> / $200</div>
+            <div><strong>Cap Space:</strong> $<span id="cap-space">0</span></div>
+            <div id="roster-status" style="font-weight: bold; padding: 5px 10px; border-radius: 4px;"></div>
+          </div>
+          <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+            * Keepers cost current salary + $3. Valid rosters require $1 cap space for every empty slot up to 19 players.
+          </p>
         </div>
 
         <hr>

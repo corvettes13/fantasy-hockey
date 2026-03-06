@@ -137,3 +137,30 @@ tbody tr:hover {
 .contract-red {
   background-color: #ffe5e5; /* light red */
 }
+
+.tab-button {
+  transition: all 0.2s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.tab-button:hover {
+  background-color: #e0e0e0;
+}
+
+/* Optional: Highlight for the dropdown when active */
+select#season-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.keeper-checkbox {
+  margin-right: 8px;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+tr:has(.keeper-checkbox:checked) {
+    background-color: #f0f7ff;
+}

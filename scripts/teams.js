@@ -1,10 +1,11 @@
 const params = new URLSearchParams(window.location.search);
 const teamNum = parseInt(params.get('team'), 10);
-const teamKey = `465.l.13153.t.${teamNum}`; // Match Yahoo format
+const teamKey = `465.l.13153.t.${teamNum}`; 
 const playerPositions = {}; // player_id (string) -> positions array
-const requestedDate = params.get('date'); // e.g. "2025-10-07"
+const requestedDate = params.get('date');
 let allPlayersMeta = {}; // player_id -> metadata from players.json
-let currentMode = 'season'; // 'season', 'daily', or 'team_log'
+let currentMode = 'season'; 
+const selectedKeepers = new Set();
 
 
 const tableData = {
@@ -43,13 +44,42 @@ document.addEventListener('DOMContentLoaded', () => {
   bindSortEvents('goalie-table', 'goalies');
 
   const seasonSelect = document.getElementById('season-select');
+  const salaryTab = document.getElementById('tab-salary-mgmt');
   const prevBtn = document.getElementById('daily-prev');
   const nextBtn = document.getElementById('daily-next');
 
   if (prevBtn) prevBtn.addEventListener('click', prevDay);
   if (nextBtn) nextBtn.addEventListener('click', nextDay);
 
-  // Load players.json FIRST, then decide mode
+  // 1. Tab Click Handler
+  salaryTab.addEventListener('click', () => {
+    salaryTab.style.background = "#007bff";
+    salaryTab.style.color = "white";
+    
+    showSalaryMgmtMode();
+    loadSeasonStats('2026_stats'); 
+  });
+
+  // 2. Handle dropdown changes
+  seasonSelect.addEventListener('change', () => {
+    const val = seasonSelect.value;
+    currentSortKey = null;
+    sortDirection = -1;
+    
+    // Reset Salary Tab visual state when switching to standard seasons
+    salaryTab.style.background = "#f0f0f0";
+    salaryTab.style.color = "black";
+
+    if (val === 'daily') {
+      showDailyMode();
+      loadDailyStats();
+    } else {
+      showSeasonMode();
+      loadSeasonStats(val);
+    }
+  }); // Correctly closing the dropdown listener
+
+  // 3. Initial Data Load
   fetch('../data/players.json')
     .then(r => r.json())
     .then(data => {
@@ -57,7 +87,6 @@ document.addEventListener('DOMContentLoaded', () => {
         allPlayersMeta[String(p.player_id)] = p;
       });
 
-      // Now that metadata is loaded, decide mode
       if (requestedDate) {
         seasonSelect.value = 'daily';
         showDailyMode();
@@ -67,22 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadSeasonStats(seasonSelect.value);
       }
     });
-
-
-  // Handle dropdown changes
-  seasonSelect.addEventListener('change', () => {
-    const val = seasonSelect.value;
-    currentSortKey = null;
-    sortDirection = -1;
-
-    if (val === 'daily') {
-      showDailyMode();
-      loadDailyStats();
-    } else {
-      showSeasonMode();
-      loadSeasonStats(val);
-    }
-  });
 });
 
 function showDailyMode() {
@@ -99,22 +112,34 @@ function showDailyMode() {
   if (dailyControls) dailyControls.style.display = 'block';
 }
 
-function showSeasonMode() {
-  const seasonSkaters = document.getElementById('season-skaters-wrapper');
-  const seasonGoalies = document.getElementById('season-goalies-wrapper');
-  const dailySkaters = document.getElementById('daily-skaters-wrapper');
-  const dailyGoalies = document.getElementById('daily-goalies-wrapper');
-  const dailyControls = document.getElementById('daily-controls');
+function showSalaryMgmtMode() {
+  currentMode = 'salary_mgmt';
+  document.getElementById('daily-controls').style.display = 'none';
+  document.getElementById('daily-skaters-wrapper').style.display = 'none';
+  document.getElementById('daily-goalies-wrapper').style.display = 'none';
+  
+  document.getElementById('salary-mgmt-controls').style.display = 'block';
+  document.getElementById('season-skaters-wrapper').style.display = 'block';
+  document.getElementById('season-goalies-wrapper').style.display = 'block';
+}
 
-  if (seasonSkaters) seasonSkaters.style.display = 'block';
-  if (seasonGoalies) seasonGoalies.style.display = 'block';
-  if (dailySkaters) dailySkaters.style.display = 'none';
-  if (dailyGoalies) dailyGoalies.style.display = 'none';
-  if (dailyControls) dailyControls.style.display = 'none';
+function showSeasonMode() {
+  currentMode = 'season';
+  document.getElementById('salary-mgmt-controls').style.display = 'none';
+  document.getElementById('daily-controls').style.display = 'none';
+  document.getElementById('daily-skaters-wrapper').style.display = 'none';
+  document.getElementById('daily-goalies-wrapper').style.display = 'none';
+  
+  document.getElementById('season-skaters-wrapper').style.display = 'block';
+  document.getElementById('season-goalies-wrapper').style.display = 'block';
 }
 
 function loadSeasonStats(seasonKey) {
-  currentMode = (seasonKey === '2026_team_log') ? 'team_log' : 'season'
+  // Only change the mode if we AREN'T already in salary_mgmt
+  if (currentMode !== 'salary_mgmt') {
+    currentMode = (seasonKey === '2026_team_log') ? 'team_log' : 'season';
+  }
+  
   let skaterFile = '';
   let goalieFile = '';
   currentSortKey = null;
@@ -125,21 +150,17 @@ function loadSeasonStats(seasonKey) {
       skaterFile = '../data/2026_skater_stats.json';
       goalieFile = '../data/2026_goalie_stats.json';
       break;
-
     case '2025_stats':
       skaterFile = '../data/2025_skater_stats.json';
       goalieFile = '../data/2025_goalie_stats.json';
       break;
-
     case '2025_projections':
       skaterFile = '../data/2025_skater_proj.json';
       goalieFile = '../data/2025_goalie_proj.json';
       break;
-
     case '2026_team_log':
       loadTeamLogSeason();
-      return; // prevent normal season loader
-
+      return;
     default:
       console.error(`Unknown season key: ${seasonKey}`);
       return;
@@ -318,18 +339,16 @@ function renderSkaterTable(players) {
 
   players.forEach(p => {
     const row = document.createElement('tr');
-
-    // Only highlight in team-log season mode
-    if (currentMode === 'team_log') {
-      const notOnTeam = !window.teamRosterMeta[String(p.player_id)];
-      if (notOnTeam) {
-        row.classList.add('player-not-on-team');
-      }
+    
+    let checkboxHtml = '';
+    if (currentMode === 'salary_mgmt') {
+      const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
+      checkboxHtml = `<input type="checkbox" class="keeper-checkbox" data-id="${p.player_id}" data-cost="${p.cost}" ${isChecked}> `;
     }
 
     row.innerHTML = `
       <td>
-        ${p.player_name}
+        ${checkboxHtml}${p.player_name}
         ${p.olympics ? ` <span class="flag-emoji">${OLYMPIC_FLAGS[p.olympics] ?? ''}</span>` : ''}
       </td>
       <td>${p.team_abbr ?? ''}</td>
@@ -351,28 +370,29 @@ function renderSkaterTable(players) {
       <td>${p.HIT}</td>
       <td>${p.ATOI}</td>
     `;
-
     tbody.appendChild(row);
   });
+
+  if (currentMode === 'salary_mgmt') initSalaryMgmt();
 }
 
 function renderGoalieTable(players) {
   const tbody = document.getElementById('goalie-body');
   if (!tbody) return;
   tbody.innerHTML = '';
+
   players.forEach(p => {
     const row = document.createElement('tr');
-    const notOnTeam = !window.teamRosterMeta[String(p.player_id)];
-    if (currentMode === 'team_log') {
-      const notOnTeam = !window.teamRosterMeta[String(p.player_id)];
-      if (notOnTeam) {
-        row.classList.add('player-not-on-team');
-      }
+
+    let checkboxHtml = '';
+    if (currentMode === 'salary_mgmt') {
+      const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
+      checkboxHtml = `<input type="checkbox" class="keeper-checkbox" data-id="${p.player_id}" data-cost="${p.cost}" ${isChecked}> `;
     }
 
     row.innerHTML = `
       <td>
-        ${p.player_name}
+        ${checkboxHtml}${p.player_name}
         ${p.olympics ? ` <span class="flag-emoji">${OLYMPIC_FLAGS[p.olympics] ?? ''}</span>` : ''}
       </td>
       <td>${p.team_abbr ?? ''}</td>
@@ -393,6 +413,8 @@ function renderGoalieTable(players) {
     `;
     tbody.appendChild(row);
   });
+  
+  if (currentMode === 'salary_mgmt') initSalaryMgmt();
 }
 
 function bindSortEvents(tableId, dataKey) {
@@ -854,4 +876,54 @@ function enrichGoalieFromLog(p, stats) {
     SO: stats[27] ?? 0,
     MIN: minutes
   };
+}
+
+function initSalaryMgmt() {
+  const checkboxes = document.querySelectorAll('.keeper-checkbox');
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', (e) => {
+      // Save state so sorting doesn't wipe selections
+      const id = e.target.getAttribute('data-id');
+      if (e.target.checked) selectedKeepers.add(id);
+      else selectedKeepers.delete(id);
+      
+      calculateSalaryTotals();
+    });
+  });
+  calculateSalaryTotals();
+}
+
+function calculateSalaryTotals() {
+  const checkboxes = document.querySelectorAll('.keeper-checkbox:checked');
+  let count = checkboxes.length;
+  let totalSalary = 0;
+
+  checkboxes.forEach(cb => {
+    const currentCost = parseFloat(cb.getAttribute('data-cost')) || 0;
+    totalSalary += (currentCost + 3);
+  });
+
+  const capSpace = 200 - totalSalary;
+  const emptySlots = 19 - count;
+  const statusEl = document.getElementById('roster-status');
+  
+  // Roster is legal if:
+  // 1. Players <= 19
+  // 2. Total Salary <= 200
+  // 3. Cap Space >= $1 for every remaining slot to 19
+  const isLegal = count <= 19 && totalSalary <= 200 && capSpace >= emptySlots;
+
+  document.getElementById('keep-count').textContent = count;
+  document.getElementById('keep-salary').textContent = totalSalary;
+  document.getElementById('cap-space').textContent = capSpace;
+
+  if (isLegal) {
+    statusEl.textContent = "VALID ROSTER";
+    statusEl.style.backgroundColor = "#d4edda";
+    statusEl.style.color = "#155724";
+  } else {
+    statusEl.textContent = "ILLEGAL ROSTER";
+    statusEl.style.backgroundColor = "#f8d7da";
+    statusEl.style.color = "#721c24";
+  }
 }
