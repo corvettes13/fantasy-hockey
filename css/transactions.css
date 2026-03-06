@@ -226,3 +226,21 @@
 .trade-icon-cell {
     border-top: none !important;
 }
+
+.rank-number {
+    font-family: 'Arial Black', sans-serif;
+    color: #bbb;
+}
+
+.count-badge {
+    display: inline-block;
+    min-width: 24px;
+    text-align: center;
+    background: #0055a5;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}

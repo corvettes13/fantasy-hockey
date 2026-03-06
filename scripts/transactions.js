@@ -39,6 +39,7 @@ async function loadTransactions() {
         allTransactions = tx;
         setupEventListeners();
         applyFilters();
+        calculateTransactionStats();
 
     } catch (err) {
         console.error("Error loading transaction data:", err);
@@ -230,6 +231,58 @@ function updatePaginationUI() {
         const endIdx = Math.min((currentPage + 1) * pageSize, filteredData.length);
         info.textContent = `Showing ${startIdx}-${endIdx} of ${filteredData.length}`;
     }
+}
+
+function calculateTransactionStats() {
+    const addCounts = {};
+
+    // Aggregate counts from all transactions
+    allTransactions.forEach(tx => {
+        if (!tx.players) return;
+        tx.players.forEach(p => {
+            // We only care about adds and draft picks (initial adds)
+            if (p.type === 'add' || tx.type === 'draft') {
+                addCounts[p.player_id] = (addCounts[p.player_id] || 0) + 1;
+            }
+        });
+    });
+
+    renderStatTable("most-added-body", addCounts);
+}
+
+function renderStatTable(elementId, countMap) {
+    const tbody = document.getElementById(elementId);
+    if (!tbody) return;
+
+    // Sort descending and take top 20
+    const sortedIds = Object.keys(countMap)
+        .sort((a, b) => countMap[b] - countMap[a])
+        .slice(0, 20);
+
+    tbody.innerHTML = sortedIds.map((pid, index) => {
+        const p = globalPlayerLookup[pid] || { full_name: "Unknown", team_abbr: "??", position: "???" };
+        const rowColorClass = index % 2 === 0 ? "row-even" : "row-odd";
+        
+        // Highlight the top 3 with a slightly different rank style
+        const rankDisplay = (index < 3) 
+            ? `<span style="color: #0055a5; font-weight: 900;">${index + 1}</span>` 
+            : index + 1;
+
+        return `
+            <tr class="${rowColorClass}">
+                <td class="rank-number" style="text-align: center; font-size: 0.9rem; padding: 10px 0;">${rankDisplay}</td>
+                <td style="text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <a href="${p.url || '#'}" class="player-name-link">${p.full_name}</a>
+                        <span class="player-pos-team">${p.team_abbr} - ${p.position}</span>
+                    </div>
+                </td>
+                <td style="text-align: right; padding-right: 25px;">
+                    <span class="count-badge">${countMap[pid]}</span>
+                </td>
+            </tr>
+        `;
+    }).join("");
 }
 
 document.addEventListener('DOMContentLoaded', loadTransactions);
