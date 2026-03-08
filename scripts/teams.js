@@ -338,13 +338,24 @@ function renderSkaterTable(players) {
   tbody.innerHTML = '';
 
   players.forEach(p => {
-    const row = document.createElement('tr');
-    
-    let checkboxHtml = '';
-    if (currentMode === 'salary_mgmt') {
-      const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
-      checkboxHtml = `<input type="checkbox" class="keeper-checkbox" data-id="${p.player_id}" data-cost="${p.cost}" ${isChecked}> `;
-    }
+      const row = document.createElement('tr');
+      const isExpired = p.contract_year >= 3; // Ensure this is defined FIRST
+      
+      let checkboxHtml = '';
+      if (currentMode === 'salary_mgmt') {
+          const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
+          const disabledAttr = isExpired ? 'disabled' : '';
+          // Add data-pos attribute here
+          checkboxHtml = `<input type="checkbox" class="keeper-checkbox" 
+              data-id="${p.player_id}" 
+              data-cost="${p.cost}" 
+              data-pos="${p.primary_position}" 
+              ${isChecked} ${disabledAttr}> `;
+      }
+      
+      if (isExpired && currentMode === 'salary_mgmt') {
+          row.classList.add('contract-expired');
+      }
 
     row.innerHTML = `
       <td>
@@ -354,7 +365,7 @@ function renderSkaterTable(players) {
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
-      <td class="${p.contract_year === 3 ? 'contract-red' : ''}">${p.contract_year ?? '-'}</td>
+      <td class="${p.contract_year >= 3 ? 'contract-red' : ''}">${p.contract_year ?? '-'}</td>
       <td>${p.FP.toFixed(1)}</td>
       <td>${p.FPG.toFixed(2)}</td>
       <td>${p.GP}</td>
@@ -383,11 +394,22 @@ function renderGoalieTable(players) {
 
   players.forEach(p => {
     const row = document.createElement('tr');
-
+    const isExpired = p.contract_year >= 3; // Ensure this is defined FIRST
+    
     let checkboxHtml = '';
     if (currentMode === 'salary_mgmt') {
-      const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
-      checkboxHtml = `<input type="checkbox" class="keeper-checkbox" data-id="${p.player_id}" data-cost="${p.cost}" ${isChecked}> `;
+        const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
+        const disabledAttr = isExpired ? 'disabled' : '';
+        // Add data-pos attribute here
+        checkboxHtml = `<input type="checkbox" class="keeper-checkbox" 
+            data-id="${p.player_id}" 
+            data-cost="${p.cost}" 
+            data-pos="${p.primary_position}" 
+            ${isChecked} ${disabledAttr}> `;
+    }
+    
+    if (isExpired && currentMode === 'salary_mgmt') {
+        row.classList.add('contract-expired');
     }
 
     row.innerHTML = `
@@ -898,25 +920,42 @@ function calculateSalaryTotals() {
   let count = checkboxes.length;
   let totalSalary = 0;
 
+  // Initialize position counters
+  const counts = { C: 0, LW: 0, RW: 0, D: 0, G: 0 };
+
   checkboxes.forEach(cb => {
+    const id = cb.getAttribute('data-id');
     const currentCost = parseFloat(cb.getAttribute('data-cost')) || 0;
+    const pos = cb.getAttribute('data-pos');
+    
+    // Add to salary total
     totalSalary += (currentCost + 3);
+
+    // Increment the count if the position exists in our object
+    if (pos && counts.hasOwnProperty(pos)) {
+      counts[pos]++;
+    }
   });
 
   const capSpace = 200 - totalSalary;
   const emptySlots = 19 - count;
   const statusEl = document.getElementById('roster-status');
   
-  // Roster is legal if:
-  // 1. Players <= 19
-  // 2. Total Salary <= 200
-  // 3. Cap Space >= $1 for every remaining slot to 19
   const isLegal = count <= 19 && totalSalary <= 200 && capSpace >= emptySlots;
 
+  // Update Main UI
   document.getElementById('keep-count').textContent = count;
   document.getElementById('keep-salary').textContent = totalSalary;
   document.getElementById('cap-space').textContent = capSpace;
 
+  // Update Position UI
+  document.getElementById('pos-C').textContent = counts.C;
+  document.getElementById('pos-LW').textContent = counts.LW;
+  document.getElementById('pos-RW').textContent = counts.RW;
+  document.getElementById('pos-D').textContent = counts.D;
+  document.getElementById('pos-G').textContent = counts.G;
+
+  // Set Status Visuals
   if (isLegal) {
     statusEl.textContent = "VALID ROSTER";
     statusEl.style.backgroundColor = "#d4edda";

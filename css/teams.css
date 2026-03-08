@@ -164,3 +164,25 @@ select#season-select:focus {
 tr:has(.keeper-checkbox:checked) {
     background-color: #f0f7ff;
 }
+
+/* Grey out the player name and stats for expired contracts */
+.contract-expired {
+  color: #999;
+  background-color: #fcfcfc;
+}
+
+.contract-expired td {
+  text-decoration: none; /* Keep text clean, just lighter color */
+}
+
+/* Make the disabled checkbox look clearly unclickable */
+input.keeper-checkbox:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Style for the contract year specifically */
+.contract-red {
+  color: #d9534f;
+  font-weight: bold;
+}
