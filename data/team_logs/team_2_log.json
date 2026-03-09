@@ -29000,7 +29000,16 @@
           "player_id": 6384,
           "player_name": "Alex Tuch",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 2.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 1.0,
+            "12": 0.0,
+            "14": 4.0,
+            "31": 3.0,
+            "32": 2.0
+          }
         },
         {
           "player_id": 7636,
@@ -29024,30 +29033,72 @@
           "player_id": 8284,
           "player_name": "Moritz Seider",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 2.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 1.0,
+            "14": 5.0,
+            "31": 1.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 6643,
           "player_name": "Darren Raddysh",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 3.0,
+            "5": 7.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 4.0,
+            "31": 1.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 8296,
           "player_name": "Thomas Harley",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6005,
           "player_name": "Shea Theodore",
           "position_status": "D",
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 2.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
+        },
+        {
+          "player_id": 6890,
+          "player_name": "Troy Terry",
+          "position_status": "Util",
           "stats": {}
         },
         {
           "player_id": 30155,
           "player_name": "Jackson Blake",
-          "position_status": "Util",
+          "position_status": "BN",
           "stats": {}
         },
         {
@@ -29069,14 +29120,8 @@
           "stats": {}
         },
         {
-          "player_id": 5376,
-          "player_name": "J.T. Miller",
-          "position_status": "BN",
-          "stats": {}
-        },
-        {
-          "player_id": 6791,
-          "player_name": "Roope Hintz",
+          "player_id": 4988,
+          "player_name": "Charlie Coyle",
           "position_status": "BN",
           "stats": {}
         },
@@ -29099,14 +29144,144 @@
           "stats": {}
         },
         {
-          "player_id": 6890,
-          "player_name": "Troy Terry",
+          "player_id": 5376,
+          "player_name": "J.T. Miller",
           "position_status": "IR+",
+          "stats": {}
+        },
+        {
+          "player_id": 6791,
+          "player_name": "Roope Hintz",
+          "position_status": "IR+",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-03-09": {
+      "players": [
+        {
+          "player_id": 5993,
+          "player_name": "Alexander Wennberg",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 8653,
+          "player_name": "Seth Jarvis",
+          "position_status": "C",
           "stats": {}
         },
         {
           "player_id": 4988,
           "player_name": "Charlie Coyle",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 6384,
+          "player_name": "Alex Tuch",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 7636,
+          "player_name": "Drake Batherson",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 8682,
+          "player_name": "Luke Evangelista",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 4498,
+          "player_name": "Jordan Eberle",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 6643,
+          "player_name": "Darren Raddysh",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 8296,
+          "player_name": "Thomas Harley",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6005,
+          "player_name": "Shea Theodore",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 7124,
+          "player_name": "Jakob Chychrun",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6890,
+          "player_name": "Troy Terry",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 8284,
+          "player_name": "Moritz Seider",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6370,
+          "player_name": "Sam Bennett",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6368,
+          "player_name": "Sam Reinhart",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8674,
+          "player_name": "JJ Peterka",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5820,
+          "player_name": "Connor Hellebuyck",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 5085,
+          "player_name": "Philipp Grubauer",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6078,
+          "player_name": "Juuse Saros",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5376,
+          "player_name": "J.T. Miller",
+          "position_status": "IR+",
+          "stats": {}
+        },
+        {
+          "player_id": 6791,
+          "player_name": "Roope Hintz",
           "position_status": "IR+",
           "stats": {}
         }
