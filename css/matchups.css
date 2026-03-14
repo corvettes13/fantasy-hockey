@@ -1014,3 +1014,104 @@ a {
     color: #cbd5e1;
     cursor: not-allowed;
 }
+
+/* Bracket Layout Container */
+.bracket-wrapper {
+    display: flex;
+    gap: 40px;
+    padding: 20px 0;
+    overflow-x: auto;
+    align-items: stretch;
+}
+
+.bracket-round {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Key for the tree look */
+    min-width: 280px;
+}
+
+/* The Individual Matchup Card */
+.bracket-matchup-card {
+    background: #fff;
+    border: 1px solid #d1d9e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 15px 0;
+}
+
+.bracket-matchup-card:hover {
+    border-color: #0055a5;
+    box-shadow: 0 4px 12px rgba(0,85,165,0.15);
+}
+
+/* The Team Rows inside the card */
+.bracket-row {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 12px;
+}
+
+.bracket-row:first-child {
+    border-bottom: 1px solid #edf2f7;
+}
+
+.bracket-team-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.bracket-team-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bracket-seed {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+/* Score/Projection Box */
+.bracket-score-box {
+    text-align: right;
+    min-width: 60px;
+    line-height: 1.1;
+}
+
+.bracket-score-box .current-score {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.bracket-score-box .projected-score {
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.bracket-placeholder {
+    height: 60px;
+    border: 2px dashed #e2e8f0;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cbd5e1;
+    border-radius: 8px;
+}
+
+.bracket-round h3 {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}

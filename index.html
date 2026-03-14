@@ -25,22 +25,35 @@
     </script>
     
     <main class="page-content">
-      <!-- Matchups Table -->
       <div class="card standings-card">
-        <div class="week-selector">
-          <span class="week-label"></span>
-          <div class="week-controls">
-            <button id="week-prev" class="week-arrow">←</button>
-            <select id="week-select"></select>
-            <button id="week-next" class="week-arrow">→</button>
-          </div>
+        <div class="moduletabs navlist" style="margin-bottom: 15px; padding-bottom: 0; border-bottom: 1px solid #e2e8f0;">
+          <ul class="Nav-h" style="border-bottom: none; margin-bottom: 5px;">
+            <li id="tab-matchups" class="Navitem Selected">Matchups</li>
+            <li id="tab-bracket" class="Navitem">Playoff Bracket</li>
+          </ul>
         </div>
 
-        <h1 id="week-title">Week Matchups</h1>
-        <div id="matchups-body"></div>
+        <div id="view-matchups">
+          <div class="week-selector">
+            <span class="week-label"></span>
+            <div class="week-controls">
+              <button id="week-prev" class="week-arrow">←</button>
+              <select id="week-select"></select>
+              <button id="week-next" class="week-arrow">→</button>
+            </div>
+          </div>
+          <h1 id="week-title">Week Matchups</h1>
+          <div id="matchups-body"></div>
+        </div>
+
+        <div id="view-bracket" style="display: none;">
+          <h1 style="margin-top: 10px;">Championship Bracket</h1>
+          <div id="bracket-container" class="bracket-wrapper"></div>
+        </div>
       </div>
+    </main>
       
-      <br>
+    <br>
       
       <!-- Standings Section -->
       <div class="card">
@@ -145,6 +158,7 @@
     <script src="scripts/standings.js"></script>
     <script src="scripts/fantasy_leaders_embed.js"></script>
     <script src="scripts/matchups.js"></script>
+    <script src="scripts/playoffs.js"></script>
   </div> <!-- end .page-shell -->
 </body>
 </html>

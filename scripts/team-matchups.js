@@ -41,7 +41,7 @@ async function loadMatchupFromLogs() {
         const weekData = matchups.weeks[weekNum];
         if (!weekData) throw new Error("Week not found");
         setupWeekSwitcher(matchups);
-
+        console.log(weekNum);
         // Inside loadMatchupFromLogs, after you have 'matchups' and 'weekNum'
         renderLeagueScoreboard(matchups.weeks[weekNum].matchups, weekNum);
 
@@ -100,7 +100,7 @@ async function loadMatchupFromLogs() {
             newProj = newProj.toFixed(1);
             const logo = t.team_logos.team_logo.url;
             
-            const movesMade = t.roster_adds.value || 0;
+            const movesMade = t.roster_adds ? (t.roster_adds.value || 0) : 0;
             const movesDisplay = `${movesMade} of 5`;
 
             // Logic: apply 'mini-leader' for bold, 'league-high' for Money Green
