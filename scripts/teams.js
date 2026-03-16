@@ -338,24 +338,31 @@ function renderSkaterTable(players) {
   tbody.innerHTML = '';
 
   players.forEach(p => {
-      const row = document.createElement('tr');
-      const isExpired = p.contract_year >= 3; // Ensure this is defined FIRST
+    const row = document.createElement('tr');
+
+    // --- LOGIC FIX START ---
+    // A player is ineligible if contract is 3+ OR Python script flagged them
+    const isNotKeepable = (p.contract_year >= 3) || (p.can_keep === false);
+    // --- LOGIC FIX END ---
+
+    let checkboxHtml = '';
+    if (currentMode === 'salary_mgmt') {
+      const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
       
-      let checkboxHtml = '';
-      if (currentMode === 'salary_mgmt') {
-          const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
-          const disabledAttr = isExpired ? 'disabled' : '';
-          // Add data-pos attribute here
-          checkboxHtml = `<input type="checkbox" class="keeper-checkbox" 
+      // Use our new combined logic to disable the checkbox
+      const disabledAttr = isNotKeepable ? 'disabled' : '';
+      
+      checkboxHtml = `<input type="checkbox" class="keeper-checkbox" 
               data-id="${p.player_id}" 
               data-cost="${p.cost}" 
               data-pos="${p.primary_position}" 
               ${isChecked} ${disabledAttr}> `;
-      }
-      
-      if (isExpired && currentMode === 'salary_mgmt') {
-          row.classList.add('contract-expired');
-      }
+    }
+
+    // Apply the visual "expired" or "ineligible" class to the row
+    if (isNotKeepable && currentMode === 'salary_mgmt') {
+      row.classList.add('contract-expired');
+    }
 
     row.innerHTML = `
       <td>
@@ -394,13 +401,17 @@ function renderGoalieTable(players) {
 
   players.forEach(p => {
     const row = document.createElement('tr');
-    const isExpired = p.contract_year >= 3; // Ensure this is defined FIRST
+    
+    // --- CONSISTENT LOGIC: Combined contract and deadline check ---
+    const isNotKeepable = (p.contract_year >= 3) || (p.can_keep === false);
     
     let checkboxHtml = '';
     if (currentMode === 'salary_mgmt') {
         const isChecked = selectedKeepers.has(String(p.player_id)) ? 'checked' : '';
-        const disabledAttr = isExpired ? 'disabled' : '';
-        // Add data-pos attribute here
+        
+        // Disable if either rule is triggered
+        const disabledAttr = isNotKeepable ? 'disabled' : '';
+        
         checkboxHtml = `<input type="checkbox" class="keeper-checkbox" 
             data-id="${p.player_id}" 
             data-cost="${p.cost}" 
@@ -408,7 +419,8 @@ function renderGoalieTable(players) {
             ${isChecked} ${disabledAttr}> `;
     }
     
-    if (isExpired && currentMode === 'salary_mgmt') {
+    // Apply visual styling for ineligible players
+    if (isNotKeepable && currentMode === 'salary_mgmt') {
         row.classList.add('contract-expired');
     }
 
@@ -420,7 +432,7 @@ function renderGoalieTable(players) {
       <td>${p.team_abbr ?? ''}</td>
       <td>${p.primary_position}</td>
       <td>$${p.cost}</td>
-      <td class="${p.contract_year === 3 ? 'contract-red' : ''}">${p.contract_year ?? '-'}</td>
+      <td class="${p.contract_year >= 3 ? 'contract-red' : ''}">${p.contract_year ?? '-'}</td>
       <td>${p.FP.toFixed(1)}</td>
       <td>${p.FPG.toFixed(2)}</td>
       <td>${p.GP}</td>
