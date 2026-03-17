@@ -1,35 +1,31 @@
 export default {
-  async fetch(request, env, ctx) {
-    // 1. Get the email from the Cloudflare Access header
+  async fetch(request, env) {
     const userEmail = request.headers.get("Cf-Access-Authenticated-User-Email");
+    const url = new URL(request.url);
 
-    if (!userEmail) {
-      return new Response("Unauthorized: Please log in via Cloudflare Access.", { status: 401 });
+    // 1. Let images and CSS load automatically
+    if (url.pathname.includes(".")) {
+      return env.ASSETS.fetch(request);
     }
 
-    // 2. Map emails to team numbers (1-12)
+    // 2. Map your 12 teams
     const teamMapping = {
-      "pfajman1@gmail.com": 1,
-      "player2@example.com": 2,
-      "player3@example.com": 3,
-      // ... add the rest of your 12 managers here
+      "pfajman1": 1,
+      "manager2@gmail.com": 2,
+      // ... add the others
     };
 
-    const teamNumber = teamMapping[userEmail.toLowerCase()];
+    const teamNumber = teamMapping[userEmail?.toLowerCase()];
 
-    // 3. Handle cases where an email isn't assigned to a team
-    if (!teamNumber) {
-      return new Response(`Hello ${userEmail}, you aren't assigned to a team yet. Contact the commish!`, { status: 403 });
+    // 3. Redirect to their team page
+    if (teamNumber) {
+      // If they hit the main site, send them to their team file
+      if (url.pathname === "/") {
+        return Response.redirect(`${url.origin}/team${teamNumber}.html`, 302);
+      }
+      return env.ASSETS.fetch(request);
     }
 
-    // 4. Direct them to their team
-    // Option A: Internal logic (Show them the page directly)
-    return new Response(`Welcome Manager! You are viewing Team #${teamNumber}.`, {
-      headers: { "content-type": "text/html" },
-    });
-
-    /* Option B: Redirect to a specific URL path
-    return Response.redirect(`${new URL(request.url).origin}/team/${teamNumber}`, 302);
-    */
-  },
+    return new Response("Access Denied: Team not assigned.", { status: 403 });
+  }
 };
