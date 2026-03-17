@@ -17222,5 +17222,56 @@
         "team_key": "free_agent"
       }
     ]
+  },
+  {
+    "transaction_id": 980,
+    "datetime": "2026-03-17T08:03:56+00:00",
+    "type": "add",
+    "players": [
+      {
+        "player_id": 8922,
+        "type": "add",
+        "cost": 3,
+        "team_key": "465.l.13153.t.7"
+      }
+    ]
+  },
+  {
+    "transaction_id": 979,
+    "datetime": "2026-03-17T08:03:56+00:00",
+    "type": "add/drop",
+    "players": [
+      {
+        "player_id": 30548,
+        "type": "add",
+        "cost": 3,
+        "team_key": "465.l.13153.t.11"
+      },
+      {
+        "player_id": 6383,
+        "type": "drop",
+        "cost": 0,
+        "team_key": "free_agent"
+      }
+    ]
+  },
+  {
+    "transaction_id": 978,
+    "datetime": "2026-03-17T08:03:56+00:00",
+    "type": "add/drop",
+    "players": [
+      {
+        "player_id": 8700,
+        "type": "add",
+        "cost": 4,
+        "team_key": "465.l.13153.t.7"
+      },
+      {
+        "player_id": 5753,
+        "type": "drop",
+        "cost": 0,
+        "team_key": "free_agent"
+      }
+    ]
   }
 ]
