@@ -1487,16 +1487,16 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.5995",
-        "player_name": "Nikita Zadorov",
-        "team_abbr": "BOS",
+        "player_key": "465.p.4503",
+        "player_name": "John Carlson",
+        "team_abbr": "ANA",
         "primary_position": "D",
         "positions": [
           "D",
           "Util"
         ],
         "selected_position": "D",
-        "cost": 0,
+        "cost": 6,
         "contract_year": 0
       },
       {
@@ -1607,19 +1607,6 @@
         ],
         "selected_position": "BN",
         "cost": 20,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.4503",
-        "player_name": "John Carlson",
-        "team_abbr": "ANA",
-        "primary_position": "D",
-        "positions": [
-          "D",
-          "Util"
-        ],
-        "selected_position": "IR+",
-        "cost": 6,
         "contract_year": 0
       },
       {
@@ -2720,17 +2707,19 @@
         "olympics": "USA"
       },
       {
-        "player_key": "465.p.32790",
-        "player_name": "Ivan Demidov",
-        "team_abbr": "MTL",
-        "primary_position": "RW",
+        "player_key": "465.p.4683",
+        "player_name": "Matt Duchene",
+        "team_abbr": "DAL",
+        "primary_position": "C",
         "positions": [
+          "C",
           "RW",
           "Util"
         ],
         "selected_position": "RW",
-        "cost": 3,
-        "contract_year": 1
+        "cost": 6,
+        "can_keep": false,
+        "contract_year": 0
       },
       {
         "player_key": "465.p.6451",
@@ -2803,6 +2792,19 @@
         "olympics": "Finland"
       },
       {
+        "player_key": "465.p.32790",
+        "player_name": "Ivan Demidov",
+        "team_abbr": "MTL",
+        "primary_position": "RW",
+        "positions": [
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 3,
+        "contract_year": 1
+      },
+      {
         "player_key": "465.p.7534",
         "player_name": "Josh Norris",
         "team_abbr": "BUF",
@@ -2842,21 +2844,6 @@
         "selected_position": "BN",
         "cost": 6,
         "contract_year": 2
-      },
-      {
-        "player_key": "465.p.4683",
-        "player_name": "Matt Duchene",
-        "team_abbr": "DAL",
-        "primary_position": "C",
-        "positions": [
-          "C",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "BN",
-        "cost": 6,
-        "can_keep": false,
-        "contract_year": 0
       },
       {
         "player_key": "465.p.6784",
