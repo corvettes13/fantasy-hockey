@@ -31464,7 +31464,16 @@
           "player_id": 33441,
           "player_name": "Ben Kindel",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6877,
@@ -31475,6 +31484,179 @@
         {
           "player_id": 5391,
           "player_name": "Rickard Rakell",
+          "position_status": "LW",
+          "stats": {
+            "1": 0.0,
+            "2": 2.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 1.0,
+            "32": 0.0
+          }
+        },
+        {
+          "player_id": 6057,
+          "player_name": "Jake Guentzel",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 4683,
+          "player_name": "Matt Duchene",
+          "position_status": "RW",
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 3.0,
+            "31": 0.0,
+            "32": 1.0
+          }
+        },
+        {
+          "player_id": 6451,
+          "player_name": "Jake Walman",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6795,
+          "player_name": "Rasmus Andersson",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5983,
+          "player_name": "Seth Jones",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5370,
+          "player_name": "Dougie Hamilton",
+          "position_status": "D",
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 1.0,
+            "32": 1.0
+          }
+        },
+        {
+          "player_id": 4969,
+          "player_name": "Mikael Granlund",
+          "position_status": "Util",
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 0.0,
+            "31": 0.0,
+            "32": 0.0
+          }
+        },
+        {
+          "player_id": 32790,
+          "player_name": "Ivan Demidov",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 7534,
+          "player_name": "Josh Norris",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6038,
+          "player_name": "Tyler Bertuzzi",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 7526,
+          "player_name": "Gabriel Vilardi",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5057,
+          "player_name": "Scott Wedgewood",
+          "position_status": "G",
+          "stats": {
+            "18": 1.0,
+            "19": 0.0,
+            "20": 0.0,
+            "22": 1.0,
+            "25": 17.0,
+            "27": 0.0
+          }
+        },
+        {
+          "player_id": 6784,
+          "player_name": "Mackenzie Blackwood",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5336,
+          "player_name": "Darcy Kuemper",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5363,
+          "player_name": "Gabriel Landeskog",
+          "position_status": "IR+",
+          "stats": {}
+        },
+        {
+          "player_id": 6035,
+          "player_name": "Artturi Lehkonen",
+          "position_status": "IR+",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-03-19": {
+      "players": [
+        {
+          "player_id": 32763,
+          "player_name": "Macklin Celebrini",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 30544,
+          "player_name": "Connor Bedard",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 7534,
+          "player_name": "Josh Norris",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 6877,
+          "player_name": "Kirill Kaprizov",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 6038,
+          "player_name": "Tyler Bertuzzi",
           "position_status": "LW",
           "stats": {}
         },
@@ -31515,26 +31697,20 @@
           "stats": {}
         },
         {
-          "player_id": 4969,
-          "player_name": "Mikael Granlund",
+          "player_id": 7526,
+          "player_name": "Gabriel Vilardi",
           "position_status": "Util",
           "stats": {}
         },
         {
-          "player_id": 7534,
-          "player_name": "Josh Norris",
+          "player_id": 5391,
+          "player_name": "Rickard Rakell",
           "position_status": "BN",
           "stats": {}
         },
         {
-          "player_id": 6038,
-          "player_name": "Tyler Bertuzzi",
-          "position_status": "BN",
-          "stats": {}
-        },
-        {
-          "player_id": 7526,
-          "player_name": "Gabriel Vilardi",
+          "player_id": 4969,
+          "player_name": "Mikael Granlund",
           "position_status": "BN",
           "stats": {}
         },
@@ -31545,20 +31721,26 @@
           "stats": {}
         },
         {
-          "player_id": 6784,
-          "player_name": "Mackenzie Blackwood",
-          "position_status": "G",
-          "stats": {}
-        },
-        {
-          "player_id": 5336,
-          "player_name": "Darcy Kuemper",
+          "player_id": 32764,
+          "player_name": "Artyom Levshunov",
           "position_status": "BN",
           "stats": {}
         },
         {
           "player_id": 5057,
           "player_name": "Scott Wedgewood",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 6784,
+          "player_name": "Mackenzie Blackwood",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5336,
+          "player_name": "Darcy Kuemper",
           "position_status": "BN",
           "stats": {}
         },
