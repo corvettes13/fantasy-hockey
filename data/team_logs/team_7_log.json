@@ -30727,73 +30727,181 @@
           "player_id": 7902,
           "player_name": "Brady Tkachuk",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 0.0,
+            "5": 5.0,
+            "9": 0.0,
+            "12": 1.0,
+            "14": 6.0,
+            "31": 3.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6743,
           "player_name": "Connor McDavid",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 8700,
           "player_name": "Gage Goncalves",
           "position_status": "C",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 1.0,
+            "32": 1.0
+          }
         },
         {
           "player_id": 8641,
           "player_name": "Alexis Lafreniere",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 5096,
           "player_name": "Zach Hyman",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 1.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6391,
           "player_name": "David Pastrnak",
           "position_status": "RW",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 1.0,
+            "5": 4.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 4.0,
+            "31": 3.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 8644,
           "player_name": "Lucas Raymond",
           "position_status": "RW",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 1.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6760,
           "player_name": "Thomas Chabot",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 0.0,
+            "32": 2.0
+          }
         },
         {
           "player_id": 6367,
           "player_name": "Aaron Ekblad",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 7161,
           "player_name": "Filip Hronek",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 6747,
           "player_name": "Noah Hanifin",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 0.0,
+            "32": 3.0
+          }
         },
         {
           "player_id": 5691,
           "player_name": "Filip Forsberg",
           "position_status": "Util",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 2.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 2.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 8922,
@@ -30834,6 +30942,130 @@
         {
           "player_id": 5734,
           "player_name": "Anthony Stolarz",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6369,
+          "player_name": "Leon Draisaitl",
+          "position_status": "IR+",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-03-20": {
+      "players": [
+        {
+          "player_id": 8700,
+          "player_name": "Gage Goncalves",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 8922,
+          "player_name": "Logan Stankoven",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 5441,
+          "player_name": "Blake Coleman",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 5096,
+          "player_name": "Zach Hyman",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 5989,
+          "player_name": "Valeri Nichushkin",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 8644,
+          "player_name": "Lucas Raymond",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 30155,
+          "player_name": "Jackson Blake",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 6760,
+          "player_name": "Thomas Chabot",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6367,
+          "player_name": "Aaron Ekblad",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 7161,
+          "player_name": "Filip Hronek",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 6747,
+          "player_name": "Noah Hanifin",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 5691,
+          "player_name": "Filip Forsberg",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 7902,
+          "player_name": "Brady Tkachuk",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6743,
+          "player_name": "Connor McDavid",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 8641,
+          "player_name": "Alexis Lafreniere",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6391,
+          "player_name": "David Pastrnak",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 3638,
+          "player_name": "Evgeni Malkin",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5734,
+          "player_name": "Anthony Stolarz",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 7593,
+          "player_name": "Stuart Skinner",
           "position_status": "BN",
           "stats": {}
         },
