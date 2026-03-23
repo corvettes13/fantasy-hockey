@@ -13674,7 +13674,8 @@
         {
           "is_consolation": 0,
           "is_playoffs": 1,
-          "status": "midevent",
+          "is_tied": 0,
+          "status": "postevent",
           "teams": [
             {
               "team": {
@@ -13700,8 +13701,8 @@
                 "number_of_trades": 3,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 3
+                  "coverage_value": 22,
+                  "value": 0
                 },
                 "team_id": 1,
                 "team_key": "465.l.13153.t.1",
@@ -13713,21 +13714,18 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 156.9,
+                  "total": 176.7,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 157.19,
+                  "total": 157.22,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/1",
                 "waiver_priority": 5,
                 "initial_projection": 182.97,
-                "new_projected_total": 186.96,
-                "games_remaining": 10,
-                "games_remaining_skaters": 9,
-                "games_remaining_goalies": 1
+                "new_projected_total": 186.96
               }
             },
             {
@@ -13753,8 +13751,8 @@
                 "number_of_trades": 1,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 0
                 },
                 "team_id": 3,
                 "team_key": "465.l.13153.t.3",
@@ -13766,32 +13764,31 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 157.4,
+                  "total": 200.1,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 173.82,
+                  "total": 175.55,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/3",
                 "waiver_priority": 12,
                 "initial_projection": 168.87,
-                "new_projected_total": 189.54,
-                "games_remaining": 11,
-                "games_remaining_skaters": 10,
-                "games_remaining_goalies": 1
+                "new_projected_total": 189.54
               }
             }
           ],
           "week": 21,
           "week_end": "2026-03-22",
-          "week_start": "2026-03-16"
+          "week_start": "2026-03-16",
+          "winner_team_key": "465.l.13153.t.3"
         },
         {
           "is_consolation": 0,
           "is_playoffs": 1,
-          "status": "midevent",
+          "is_tied": 0,
+          "status": "postevent",
           "teams": [
             {
               "team": {
@@ -13814,12 +13811,12 @@
                   }
                 },
                 "name": "Blips and Hintz",
-                "number_of_moves": 69,
+                "number_of_moves": 71,
                 "number_of_trades": 0,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 2
                 },
                 "team_id": 2,
                 "team_key": "465.l.13153.t.2",
@@ -13831,21 +13828,18 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 112.7,
+                  "total": 154.1,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 165.58,
+                  "total": 165.28,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/2",
                 "waiver_priority": 11,
                 "initial_projection": 158.22,
-                "new_projected_total": 142.69,
-                "games_remaining": 11,
-                "games_remaining_skaters": 10,
-                "games_remaining_goalies": 1
+                "new_projected_total": 142.69
               }
             },
             {
@@ -13871,8 +13865,8 @@
                 "number_of_trades": 0,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 0
                 },
                 "team_id": 9,
                 "team_key": "465.l.13153.t.9",
@@ -13884,32 +13878,31 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 95.3,
+                  "total": 128.2,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 167.71,
+                  "total": 168.5,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/9",
                 "waiver_priority": 7,
                 "initial_projection": 171.72,
-                "new_projected_total": 128.61,
-                "games_remaining": 12,
-                "games_remaining_skaters": 11,
-                "games_remaining_goalies": 1
+                "new_projected_total": 128.61
               }
             }
           ],
           "week": 21,
           "week_end": "2026-03-22",
-          "week_start": "2026-03-16"
+          "week_start": "2026-03-16",
+          "winner_team_key": "465.l.13153.t.2"
         },
         {
           "is_consolation": 0,
           "is_playoffs": 1,
-          "status": "midevent",
+          "is_tied": 0,
+          "status": "postevent",
           "teams": [
             {
               "team": {
@@ -13934,8 +13927,8 @@
                 "number_of_trades": 2,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 0
                 },
                 "team_id": 4,
                 "team_key": "465.l.13153.t.4",
@@ -13947,28 +13940,25 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 120.0,
+                  "total": 163.0,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 178.71,
+                  "total": 185.93,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/4",
                 "waiver_priority": 8,
                 "initial_projection": 174.77,
-                "new_projected_total": 156.79,
-                "games_remaining": 13,
-                "games_remaining_skaters": 12,
-                "games_remaining_goalies": 1
+                "new_projected_total": 156.79
               }
             },
             {
               "team": {
                 "clinched_playoffs": 1,
                 "division_id": 1,
-                "faab_balance": 38,
+                "faab_balance": 35,
                 "has_draft_grade": 0,
                 "league_scoring_type": "headpoint",
                 "managers": {
@@ -13983,12 +13973,12 @@
                   }
                 },
                 "name": "Hype Machine",
-                "number_of_moves": 61,
+                "number_of_moves": 62,
                 "number_of_trades": 2,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 1
                 },
                 "team_id": 7,
                 "team_key": "465.l.13153.t.7",
@@ -14000,32 +13990,31 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 152.4,
+                  "total": 173.6,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 175.62,
+                  "total": 175.52,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/7",
                 "waiver_priority": 10,
                 "initial_projection": 167.8,
-                "new_projected_total": 174.79,
-                "games_remaining": 9,
-                "games_remaining_skaters": 8,
-                "games_remaining_goalies": 1
+                "new_projected_total": 174.79
               }
             }
           ],
           "week": 21,
           "week_end": "2026-03-22",
-          "week_start": "2026-03-16"
+          "week_start": "2026-03-16",
+          "winner_team_key": "465.l.13153.t.7"
         },
         {
           "is_consolation": 0,
           "is_playoffs": 1,
-          "status": "midevent",
+          "is_tied": 0,
+          "status": "postevent",
           "teams": [
             {
               "team": {
@@ -14064,8 +14053,8 @@
                 "number_of_trades": 0,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
-                  "value": 5
+                  "coverage_value": 22,
+                  "value": 0
                 },
                 "team_id": 5,
                 "team_key": "465.l.13153.t.5",
@@ -14077,21 +14066,18 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 165.4,
+                  "total": 195.6,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 171.46,
+                  "total": 172.75,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/5",
                 "waiver_priority": 9,
                 "initial_projection": 171.06,
-                "new_projected_total": 200.47,
-                "games_remaining": 13,
-                "games_remaining_skaters": 12,
-                "games_remaining_goalies": 1
+                "new_projected_total": 200.47
               }
             },
             {
@@ -14130,7 +14116,7 @@
                 "number_of_trades": 2,
                 "roster_adds": {
                   "coverage_type": "week",
-                  "coverage_value": 21,
+                  "coverage_value": 22,
                   "value": 0
                 },
                 "team_id": 10,
@@ -14143,35 +14129,526 @@
                 },
                 "team_points": {
                   "coverage_type": "week",
-                  "total": 182.3,
+                  "total": 208.0,
                   "week": 21
                 },
                 "team_projected_points": {
                   "coverage_type": "week",
-                  "total": 204.66,
+                  "total": 204.32,
                   "week": 21
                 },
                 "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/10",
                 "waiver_priority": 1,
                 "initial_projection": 219.29,
-                "new_projected_total": 224.04,
-                "games_remaining": 13,
-                "games_remaining_skaters": 12,
-                "games_remaining_goalies": 1
+                "new_projected_total": 224.04
               }
             }
           ],
           "week": 21,
           "week_end": "2026-03-22",
-          "week_start": "2026-03-16"
+          "week_start": "2026-03-16",
+          "winner_team_key": "465.l.13153.t.10"
         }
       ]
     },
     "22": {
       "week": 22,
-      "matchups": [],
-      "week_start": "2026-03-23",
-      "week_end": "2026-03-29"
+      "matchups": [
+        {
+          "is_consolation": 0,
+          "is_playoffs": 1,
+          "status": "midevent",
+          "teams": [
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 1,
+                "faab_balance": 33,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "andrew.benzer@gmail.com",
+                    "felo_score": 720,
+                    "felo_tier": "gold",
+                    "guid": "4GMXAN2TTUMJ6TTXJC4JEP3XFM",
+                    "image_url": "https://s.yimg.com/ag/images/4531/27273881469_5e44f2_64sq.jpg",
+                    "is_commissioner": 0,
+                    "manager_id": 1,
+                    "nickname": "Andrew B"
+                  }
+                },
+                "name": "Straight Bussi'n",
+                "number_of_moves": 56,
+                "number_of_trades": 3,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 1,
+                "team_key": "465.l.13153.t.1",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://s.yimg.com/ep/cx/blendr/v2/image-goalie-masks-png_1721255049942.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 116.32,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/1",
+                "waiver_priority": 5,
+                "initial_projection": 149.03,
+                "new_projected_total": 149.03,
+                "games_remaining": 47,
+                "games_remaining_skaters": 43,
+                "games_remaining_goalies": 4
+              }
+            },
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 1,
+                "faab_balance": 61,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": [
+                  {
+                    "manager": {
+                      "email": "lindsey.getches@gmail.com",
+                      "felo_score": 559,
+                      "felo_tier": "bronze",
+                      "guid": "HIRMHH64PVJ4W5IBA4G2ZLELQY",
+                      "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                      "manager_id": 5,
+                      "nickname": "Lindsey"
+                    }
+                  },
+                  {
+                    "manager": {
+                      "email": "nah52@georgetown.edu",
+                      "felo_score": 594,
+                      "felo_tier": "bronze",
+                      "guid": "M3J3EMXAQXI5VMLIX6OO2ZKLI4",
+                      "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                      "is_comanager": 1,
+                      "manager_id": 14,
+                      "nickname": "Nathan"
+                    }
+                  }
+                ],
+                "name": "Goon Squad",
+                "number_of_moves": 47,
+                "number_of_trades": 0,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 5,
+                "team_key": "465.l.13153.t.5",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://s.yimg.com/cv/apiv2/default/nhl/nhl_6.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 88.47,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/5",
+                "waiver_priority": 9,
+                "initial_projection": 154.53,
+                "new_projected_total": 154.53,
+                "games_remaining": 53,
+                "games_remaining_skaters": 47,
+                "games_remaining_goalies": 6
+              }
+            }
+          ],
+          "week": 22,
+          "week_end": "2026-03-29",
+          "week_start": "2026-03-23"
+        },
+        {
+          "is_consolation": 0,
+          "is_playoffs": 1,
+          "status": "midevent",
+          "teams": [
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 2,
+                "faab_balance": 38,
+                "has_draft_grade": 0,
+                "is_owned_by_current_login": 1,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "corvettes13@hotmail.com",
+                    "felo_score": 794,
+                    "felo_tier": "gold",
+                    "guid": "MSDUO7HZU3LEOKYHCKHQQ2RYRQ",
+                    "image_url": "https://s.yimg.com/ag/images/4554/37452483213_7fb234_64sq.jpg",
+                    "is_current_login": 1,
+                    "manager_id": 2,
+                    "nickname": "Paul"
+                  }
+                },
+                "name": "Blips and Hintz",
+                "number_of_moves": 71,
+                "number_of_trades": 0,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 2
+                },
+                "team_id": 2,
+                "team_key": "465.l.13153.t.2",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/89e98aa7b01e6b75442ce6c4f4bfcd58fe449da68a638213dae9d2f9d841f168.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 128.85,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/2",
+                "waiver_priority": 11,
+                "initial_projection": 152.3,
+                "new_projected_total": 152.3,
+                "games_remaining": 56,
+                "games_remaining_skaters": 51,
+                "games_remaining_goalies": 5
+              }
+            },
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 1,
+                "faab_balance": 35,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "bradfordmilesneumann@gmail.com",
+                    "felo_score": 657,
+                    "felo_tier": "silver",
+                    "guid": "UR22XJ5DF3CWLRL2JRNA6OJVAM",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "manager_id": 7,
+                    "nickname": "Hype"
+                  }
+                },
+                "name": "Hype Machine",
+                "number_of_moves": 62,
+                "number_of_trades": 2,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 1
+                },
+                "team_id": 7,
+                "team_key": "465.l.13153.t.7",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/87391dcde4363ccaaec4fd843d2a32d931f612b0dbf3deadd79e53c42ce004c3.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 115.15,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/7",
+                "waiver_priority": 10,
+                "initial_projection": 158.18,
+                "new_projected_total": 158.18,
+                "games_remaining": 58,
+                "games_remaining_skaters": 55,
+                "games_remaining_goalies": 3
+              }
+            }
+          ],
+          "week": 22,
+          "week_end": "2026-03-29",
+          "week_start": "2026-03-23"
+        },
+        {
+          "is_consolation": 0,
+          "is_playoffs": 1,
+          "status": "midevent",
+          "teams": [
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 1,
+                "faab_balance": 28,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "rossermcleod@gmail.com",
+                    "felo_score": 642,
+                    "felo_tier": "silver",
+                    "guid": "XGOHH3GGZM7JVETYOOCFZZYOXU",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "manager_id": 3,
+                    "nickname": "Morgan"
+                  }
+                },
+                "name": "District 5",
+                "number_of_moves": 63,
+                "number_of_trades": 1,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 3,
+                "team_key": "465.l.13153.t.3",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/cd5fe5bbcf8efc31a97bb769ab8872821700e3f5b32bcc80140d38ccc0eea70b.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 134.31,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/3",
+                "waiver_priority": 12,
+                "initial_projection": 138.42,
+                "new_projected_total": 138.42,
+                "games_remaining": 46,
+                "games_remaining_skaters": 42,
+                "games_remaining_goalies": 4
+              }
+            },
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 2,
+                "faab_balance": 60,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": [
+                  {
+                    "manager": {
+                      "felo_score": 858,
+                      "felo_tier": "platinum",
+                      "guid": "JBWMEDA2CMV6YEU36KLOLETIHM",
+                      "image_url": "https://s.yimg.com/ag/images/4534/24384625807_5f715f_64sq.jpg",
+                      "manager_id": 10,
+                      "nickname": "Brett S"
+                    }
+                  },
+                  {
+                    "manager": {
+                      "email": "spencer.langrock@gmail.com",
+                      "felo_score": 594,
+                      "felo_tier": "bronze",
+                      "guid": "DCIS3AWFKISXAASXD3YBDUPKII",
+                      "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                      "is_comanager": 1,
+                      "manager_id": 13,
+                      "nickname": "Spencer"
+                    }
+                  }
+                ],
+                "name": "Parekhleless Rick",
+                "number_of_moves": 10,
+                "number_of_trades": 2,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 10,
+                "team_key": "465.l.13153.t.10",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/a2e59ad955f28b3596fa646d5254416d02625619c72073496e8a9433ed291b9c.jpg"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 126.45,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/10",
+                "waiver_priority": 1,
+                "initial_projection": 171.27,
+                "new_projected_total": 171.27,
+                "games_remaining": 50,
+                "games_remaining_skaters": 46,
+                "games_remaining_goalies": 4
+              }
+            }
+          ],
+          "week": 22,
+          "week_end": "2026-03-29",
+          "week_start": "2026-03-23"
+        },
+        {
+          "is_consolation": 0,
+          "is_playoffs": 1,
+          "status": "midevent",
+          "teams": [
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 2,
+                "faab_balance": 12,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "wweiler00@gmail.com",
+                    "felo_score": 922,
+                    "felo_tier": "diamond",
+                    "guid": "FQGLP6OXPOUPNREEX7S6INFY3E",
+                    "image_url": "https://s.yimg.com/ag/images/default_user_profile_pic_64sq.jpg",
+                    "manager_id": 4,
+                    "nickname": "Will"
+                  }
+                },
+                "name": "Hype Hop Anonymous",
+                "number_of_moves": 88,
+                "number_of_trades": 2,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 4,
+                "team_key": "465.l.13153.t.4",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/22a402ad27449786441e05e7379ca5deb516db0d12fbd59bce218e407607bb25.jpg"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 115.31,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/4",
+                "waiver_priority": 8,
+                "initial_projection": 154.61,
+                "new_projected_total": 154.61,
+                "games_remaining": 52,
+                "games_remaining_skaters": 48,
+                "games_remaining_goalies": 4
+              }
+            },
+            {
+              "team": {
+                "clinched_playoffs": 1,
+                "division_id": 1,
+                "faab_balance": 16,
+                "has_draft_grade": 0,
+                "league_scoring_type": "headpoint",
+                "managers": {
+                  "manager": {
+                    "email": "kaseyfkirby@yahoo.com",
+                    "felo_score": 577,
+                    "felo_tier": "bronze",
+                    "guid": "EL4RIVA7EABT6TCHON2V4ZYJIY",
+                    "image_url": "https://s.yimg.com/ag/images/4562/37915101540_b8ecff_64sq.jpg",
+                    "manager_id": 9,
+                    "nickname": "Kasey"
+                  }
+                },
+                "name": "Return of the Whackwood",
+                "number_of_moves": 79,
+                "number_of_trades": 0,
+                "roster_adds": {
+                  "coverage_type": "week",
+                  "coverage_value": 22,
+                  "value": 0
+                },
+                "team_id": 9,
+                "team_key": "465.l.13153.t.9",
+                "team_logos": {
+                  "team_logo": {
+                    "size": "large",
+                    "url": "https://s.yimg.com/ba/images/c38af1b72fd2ed31643b55b0f9bc066fc71460149c7dd0b3bbdf9858f784e7e5.png"
+                  }
+                },
+                "team_points": {
+                  "coverage_type": "week",
+                  "total": 0.0,
+                  "week": 22
+                },
+                "team_projected_points": {
+                  "coverage_type": "week",
+                  "total": 92.89,
+                  "week": 22
+                },
+                "url": "https://hockey.fantasysports.yahoo.com/hockey/13153/9",
+                "waiver_priority": 7,
+                "initial_projection": 139.95,
+                "new_projected_total": 139.95,
+                "games_remaining": 51,
+                "games_remaining_skaters": 48,
+                "games_remaining_goalies": 3
+              }
+            }
+          ],
+          "week": 22,
+          "week_end": "2026-03-29",
+          "week_start": "2026-03-23"
+        }
+      ]
     },
     "23": {
       "week": 23,
