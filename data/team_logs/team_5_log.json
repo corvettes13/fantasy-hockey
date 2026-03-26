@@ -32906,13 +32906,31 @@
           "player_id": 6748,
           "player_name": "Pavel Zacha",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 1.0,
+            "2": 1.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 1.0,
+            "14": 1.0,
+            "31": 3.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 5032,
           "player_name": "Jason Zucker",
           "position_status": "LW",
-          "stats": {}
+          "stats": {
+            "1": 2.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 4.0,
+            "31": 0.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 7114,
@@ -32924,7 +32942,16 @@
           "player_id": 5367,
           "player_name": "Mika Zibanejad",
           "position_status": "RW",
-          "stats": {}
+          "stats": {
+            "1": 2.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 10.0,
+            "31": 2.0,
+            "32": 0.0
+          }
         },
         {
           "player_id": 3358,
@@ -32942,7 +32969,16 @@
           "player_id": 8877,
           "player_name": "Owen Power",
           "position_status": "D",
-          "stats": {}
+          "stats": {
+            "1": 0.0,
+            "2": 0.0,
+            "5": 0.0,
+            "9": 0.0,
+            "12": 0.0,
+            "14": 1.0,
+            "31": 0.0,
+            "32": 3.0
+          }
         },
         {
           "player_id": 7927,
@@ -32995,6 +33031,124 @@
         {
           "player_id": 4901,
           "player_name": "Sergei Bobrovsky",
+          "position_status": "BN",
+          "stats": {}
+        }
+      ]
+    },
+    "2026-03-26": {
+      "players": [
+        {
+          "player_id": 4990,
+          "player_name": "Brock Nelson",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 30832,
+          "player_name": "Logan Cooley",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 8310,
+          "player_name": "Shane Pinto",
+          "position_status": "C",
+          "stats": {}
+        },
+        {
+          "player_id": 30139,
+          "player_name": "Alex Laferriere",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 8279,
+          "player_name": "Jack Hughes",
+          "position_status": "LW",
+          "stats": {}
+        },
+        {
+          "player_id": 7114,
+          "player_name": "Matthew Tkachuk",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 5696,
+          "player_name": "Tom Wilson",
+          "position_status": "RW",
+          "stats": {}
+        },
+        {
+          "player_id": 3358,
+          "player_name": "Brent Burns",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 4503,
+          "player_name": "John Carlson",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 8877,
+          "player_name": "Owen Power",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 7927,
+          "player_name": "Rasmus Sandin",
+          "position_status": "D",
+          "stats": {}
+        },
+        {
+          "player_id": 8642,
+          "player_name": "Quinton Byfield",
+          "position_status": "Util",
+          "stats": {}
+        },
+        {
+          "player_id": 6748,
+          "player_name": "Pavel Zacha",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5032,
+          "player_name": "Jason Zucker",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 5367,
+          "player_name": "Mika Zibanejad",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 3737,
+          "player_name": "Sidney Crosby",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 6055,
+          "player_name": "Pavel Buchnevich",
+          "position_status": "BN",
+          "stats": {}
+        },
+        {
+          "player_id": 4901,
+          "player_name": "Sergei Bobrovsky",
+          "position_status": "G",
+          "stats": {}
+        },
+        {
+          "player_id": 7089,
+          "player_name": "Alex Lyon",
           "position_status": "BN",
           "stats": {}
         }
