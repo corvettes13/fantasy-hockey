@@ -18378,5 +18378,24 @@
         "team_key": "465.l.13153.t.10"
       }
     ]
+  },
+  {
+    "transaction_id": 1057,
+    "datetime": "2026-04-03T07:59:54+00:00",
+    "type": "add/drop",
+    "players": [
+      {
+        "player_id": 6427,
+        "type": "add",
+        "cost": 0,
+        "team_key": "465.l.13153.t.10"
+      },
+      {
+        "player_id": 5152,
+        "type": "drop",
+        "cost": 0,
+        "team_key": "free_agent"
+      }
+    ]
   }
 ]
