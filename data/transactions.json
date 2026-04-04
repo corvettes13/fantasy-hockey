@@ -18397,5 +18397,24 @@
         "team_key": "free_agent"
       }
     ]
+  },
+  {
+    "transaction_id": 1058,
+    "datetime": "2026-04-04T07:57:48+00:00",
+    "type": "add/drop",
+    "players": [
+      {
+        "player_id": 31161,
+        "type": "add",
+        "cost": 0,
+        "team_key": "465.l.13153.t.10"
+      },
+      {
+        "player_id": 30024,
+        "type": "drop",
+        "cost": 0,
+        "team_key": "free_agent"
+      }
+    ]
   }
 ]
