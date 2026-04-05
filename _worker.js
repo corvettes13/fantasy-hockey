@@ -24,7 +24,7 @@ export default {
     if (teamNumber) {
       // If they hit the main site, send them to their team file
       if (url.pathname === "/") {
-        return Response.redirect(`${url.origin}/team${teamNumber}.html`, 302);
+        return Response.redirect(`${url.origin}/teams/team${teamNumber}.html`, 302);
       }
       return env.ASSETS.fetch(request);
     }
