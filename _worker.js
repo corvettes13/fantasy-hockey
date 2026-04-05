@@ -3,15 +3,18 @@ export default {
     const userEmail = request.headers.get("Cf-Access-Authenticated-User-Email");
     const url = new URL(request.url);
 
+    console.log(`Worker is running! User: ${userEmail}`);
+    
     // 1. Let images and CSS load automatically
     if (url.pathname.includes(".")) {
       return env.ASSETS.fetch(request);
     }
+   
 
     // 2. Map your 12 teams
     const teamMapping = {
       "pfajman1@gmail.com": 1,
-      "corvettes13@hotmail.com": 2,
+      "corvettes13@hotmail.com": 2
       // ... add the others
     };
 
