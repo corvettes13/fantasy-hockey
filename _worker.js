@@ -10,8 +10,8 @@ export default {
 
     // 2. Map your 12 teams
     const teamMapping = {
-      "pfajman1": 1,
-      "manager2@gmail.com": 2,
+      "pfajman1@gmail.com": 1,
+      "corvettes13@hotmail.com": 2,
       // ... add the others
     };
 
