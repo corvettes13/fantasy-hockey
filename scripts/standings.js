@@ -64,8 +64,8 @@ function renderTable(data, tbodyId) {
 
     // Badge HTML
     const badges = `
-      ${teams.currentChampion ? `<img src="images/champion_2025.png" alt="Champion" class="inline-badge">` : ''}
-      ${teams.presidentTrophy ? `<img src="images/presidentstrophy_2025.png" alt="Presidents' Trophy" class="inline-badge">` : ''}
+      ${teams.currentChampion ? `<img src="images/champion_2026.png" alt="Champion" class="inline-badge">` : ''}
+      ${teams.presidentTrophy ? `<img src="images/presidentstrophy_2026.png" alt="Presidents' Trophy" class="inline-badge">` : ''}
     `;
 
     const row = document.createElement('tr');

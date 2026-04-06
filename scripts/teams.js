@@ -259,12 +259,12 @@ function renderTeamPage(teams, standings, skaterMap, goalieMap) {
         </div>
         ${standingsInfo?.currentChampion ? `
           <div class="champion-badge">
-            <img src="../images/champion_2025.png" alt="League Champion" />
+            <img src="../images/champion_2026.png" alt="League Champion" />
           </div>
         ` : ''}
         ${standingsInfo?.presidentTrophy ? `
           <div class="trophy-badge">
-            <img src="../images/presidentstrophy_2025.png" alt="Presidents' Trophy Winner" />
+            <img src="../images/presidentstrophy_2026.png" alt="Presidents' Trophy Winner" />
           </div>
         ` : ''}
       </div>
