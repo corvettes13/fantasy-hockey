@@ -22,7 +22,7 @@
       "number_of_trades": "3",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -326,7 +326,7 @@
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -661,7 +661,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -963,7 +963,7 @@
       "number_of_trades": "2",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -1264,7 +1264,7 @@
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -1513,8 +1513,7 @@
           "C",
           "LW",
           "RW",
-          "Util",
-          "IR+"
+          "Util"
         ],
         "selected_position": "BN",
         "cost": 3,
@@ -1584,7 +1583,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -1889,8 +1888,8 @@
       "number_of_trades": "2",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
-        "value": "5"
+        "coverage_value": 24,
+        "value": "0"
       },
       "clinched_playoffs": 1,
       "league_scoring_type": "headpoint",
@@ -1956,6 +1955,21 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.8666",
+        "player_name": "Jake Neighbours",
+        "team_abbr": "STL",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "LW",
+        "cost": 2,
+        "can_keep": false,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.5989",
         "player_name": "Valeri Nichushkin",
         "team_abbr": "COL",
@@ -1963,24 +1977,11 @@
         "positions": [
           "LW",
           "RW",
-          "Util"
+          "Util",
+          "IR+"
         ],
         "selected_position": "LW",
         "cost": 1,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8641",
-        "player_name": "Alexis Lafreniere",
-        "team_abbr": "NYR",
-        "primary_position": "LW",
-        "positions": [
-          "LW",
-          "RW",
-          "Util"
-        ],
-        "selected_position": "LW",
-        "cost": 0,
         "contract_year": 0
       },
       {
@@ -2079,6 +2080,20 @@
         "contract_year": 0
       },
       {
+        "player_key": "465.p.8641",
+        "player_name": "Alexis Lafreniere",
+        "team_abbr": "NYR",
+        "primary_position": "LW",
+        "positions": [
+          "LW",
+          "RW",
+          "Util"
+        ],
+        "selected_position": "BN",
+        "cost": 0,
+        "contract_year": 0
+      },
+      {
         "player_key": "465.p.30569",
         "player_name": "Calum Ritchie",
         "team_abbr": "NYI",
@@ -2136,17 +2151,15 @@
         "contract_year": 0
       },
       {
-        "player_key": "465.p.8666",
-        "player_name": "Jake Neighbours",
-        "team_abbr": "STL",
-        "primary_position": "LW",
+        "player_key": "465.p.8433",
+        "player_name": "Arturs Silovs",
+        "team_abbr": "PIT",
+        "primary_position": "G",
         "positions": [
-          "LW",
-          "RW",
-          "Util"
+          "G"
         ],
-        "selected_position": "BN",
-        "cost": 2,
+        "selected_position": "G",
+        "cost": 6,
         "can_keep": false,
         "contract_year": 0
       },
@@ -2156,23 +2169,11 @@
         "team_abbr": "PIT",
         "primary_position": "G",
         "positions": [
-          "G"
-        ],
-        "selected_position": "G",
-        "cost": 9,
-        "contract_year": 0
-      },
-      {
-        "player_key": "465.p.8433",
-        "player_name": "Arturs Silovs",
-        "team_abbr": "PIT",
-        "primary_position": "G",
-        "positions": [
-          "G"
+          "G",
+          "IR+"
         ],
         "selected_position": "BN",
-        "cost": 6,
-        "can_keep": false,
+        "cost": 9,
         "contract_year": 0
       },
       {
@@ -2229,7 +2230,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -2529,7 +2530,7 @@
       "number_of_trades": 0,
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "clinched_playoffs": 1,
@@ -2849,8 +2850,8 @@
       "number_of_trades": "2",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
-        "value": "5"
+        "coverage_value": 24,
+        "value": "0"
       },
       "clinched_playoffs": 1,
       "league_scoring_type": "headpoint",
@@ -3192,7 +3193,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
@@ -3508,7 +3509,7 @@
       "number_of_trades": "1",
       "roster_adds": {
         "coverage_type": "week",
-        "coverage_value": 23,
+        "coverage_value": 24,
         "value": "0"
       },
       "league_scoring_type": "headpoint",
