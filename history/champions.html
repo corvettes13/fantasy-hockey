@@ -23,44 +23,63 @@
     </script>
 
     <div class="container">
-      <h1>League Champions History</h1>
-      <table id="champions-table">
-        <thead>
-          <tr>
-            <th>Season</th>
-            <th>Champion</th>
-            <th>Team Name</th>
-            <th>Runner-Up</th>
-            <th>Team Name</th>
-            <th>Score</th>
-            <th>President's Trophy</th>
-            <th>Team Name</th>
-            <th>Record</th>
-          </tr>
-        </thead>
-        <tbody id="champions-body">
-          <!-- Rows injected by JS -->
-        </tbody>
-      </table>
-      <hr />
-      <h1>Playoff Pool Champions</h1>
-      <table id="playoff-table">
-        <thead>
-        <tr>
-          <th>Year</th>
-          <th>Manager</th>
-          <th>Points</th>
-          <th>Margin</th>
-          <th>Cup Winner</th>
-          <th>Stanley Cup Winner</th>
-        </tr>
-        </thead>
-        <tbody id="playoff-body">
-        <!-- Rows injected by JS -->
-        </tbody>
-      </table>
+      <section class="latest-champion-card">
+        <div class="hero-content">
+          <img src="/fantasy-hockey/images/champion.png" alt="League Trophy" class="hero-trophy">
+          <div class="hero-text">
+            <p class="season-label">2025-26 CHAMPIONS</p>
+            <h2 class="hero-team-name">The Hype Machine</h2>
+            <p class="hero-manager">Manager: Bradford Neumann</p>
+          </div>
+          <img src="https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/87391dcde4363ccaaec4fd843d2a32d931f612b0dbf3deadd79e53c42ce004c3.png" alt="Team Logo" class="hero-team-logo">
+        </div>
+      </section>
+
+      <div class="history-grid">
+        <div class="history-section">
+          <div class="section-header">
+            <img src="/fantasy-hockey/images/champion.png" class="small-icon">
+            <h2>Stanley Cup History</h2>
+          </div>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Champion</th>
+                <th>Runner-Up</th>
+              </tr>
+            </thead>
+            <tbody id="champions-body">
+              </tbody>
+          </table>
+        </div>
+
+        <div class="history-section">
+          <div class="section-header">
+            <img src="/fantasy-hockey/images/presidentstrophy.png" class="small-icon">
+            <h2>Presidents' Trophy</h2>
+          </div>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Winner</th>
+                <th>Record</th>
+              </tr>
+            </thead>
+            <tbody id="presidents-body">
+              </tbody>
+          </table>
+        </div>
+      </div>
+
+      <hr class="section-divider">
+      <div class="history-section">
+        <h2>Playoff Pool Champions</h2>
+        <table id="playoff-table">
+          </table>
+      </div>
     </div>
-  </div>
   <script src="../scripts/champions.js"></script>
 </body>
 </html>

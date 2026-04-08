@@ -34,7 +34,25 @@ Promise.all([
         }
     });
 
+    // Fallback if no active week found (Season over)
+    if (currentWeek === null || Number(currentWeek) >= 23) {
+        currentWeek = "23";
+    }
+
+    // Set the default week based on standings or current detection
     let defaultWeek = currentWeek || (standingsData.teams[0].current_week).toString();
+
+    // ADD FINALE OPTION & OVERRIDE DEFAULT
+    // If we are at week 23 or beyond, add the finale to the dropdown and make it the default
+    if (Number(currentWeek) >= 23) {
+        const finaleOption = document.createElement('option');
+        finaleOption.value = "finale"; 
+        finaleOption.textContent = "🏆 Season Finale";
+        weekSelect.appendChild(finaleOption);
+        
+        // This ensures the page loads the Finale summary immediately
+        defaultWeek = "finale";
+    }
 
     // Helper functions for Top Scorers
     function getPreviousWeekTopScorer(weekNumber) {
@@ -88,21 +106,25 @@ Promise.all([
         const weekData = data.weeks[weekNumber];
         container.innerHTML = '';
         
-        // Handle Header Title for Playoffs
+        // 1. Check if season is completed (Week > 23)
+        const isSeasonOver = Number(currentWeek) >= 23; 
+        // Or use a specific flag if you prefer
+
+        if (weekNumber === "finale") {
+          renderChampionshipSummary();
+          return; // Exit here so it doesn't try to render standard matchups
+        }
+        
+        if (!weekData) {
+            container.innerHTML = `<p style="text-align:center; padding:20px;">Week ${weekNumber} data not found.</p>`;
+            return;
+        }
+
+        // Standard Header Logic
         if (weekNumber == "21") weekTitle.textContent = `Round 1: Quarterfinals`;
         else if (weekNumber == "22") weekTitle.textContent = `Round 2: Semifinals`;
         else if (weekNumber == "23") weekTitle.textContent = `Round 3: Championship`;
         else weekTitle.textContent = `Week ${weekNumber} Matchups`;
-
-        // Handle Empty Weeks (Round 2 & 3 TBD)
-        if (!weekData.matchups || weekData.matchups.length === 0) {
-            container.innerHTML = `
-                <div class="playoff-placeholder" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; border: 2px dashed #444; border-radius: 12px; margin: 20px auto; max-width: 600px;">
-                    <h3 style="margin: 0; font-size: 1.5rem;">🏆 Championship Bracket</h3>
-                    <p style="margin-top: 10px; opacity: 0.7;">Matchups TBD. Winners will be updated after the previous round.</p>
-                </div>`;
-            return;
-        }
 
         weekData.matchups.forEach(matchup => {
             const [teamA, teamB] = matchup.teams.map(t => t.team);
@@ -163,13 +185,21 @@ Promise.all([
 
         // Top Scorer Highlights
         let top, label;
-        if (Number(weekNumber) === Number(currentWeek)) {
+        const selectedWeekNum = Number(weekNumber);
+        const currentWeekNum = Number(currentWeek);
+        
+        // 1. Logic for the active week
+        if (selectedWeekNum === currentWeekNum) {
             top = getPreviousWeekTopScorer(weekNumber);
             label = "Top Scorer Last Week";
-        } else if (Number(weekNumber) > Number(currentWeek)) {
+        } 
+        // 2. Logic for FUTURE weeks (ONLY if the season isn't over)
+        else if (selectedWeekNum > currentWeekNum && currentWeekNum < 23) {
             top = getWeekTopProjection(weekNumber);
             label = `Top Projected Team Week ${weekNumber}`;
-        } else {
+        } 
+        // 3. Logic for PAST weeks (or final week once season ends)
+        else {
             top = getWeekTopScorer(weekNumber);
             label = `Top Scorer Week ${weekNumber}`;
         }
@@ -189,22 +219,63 @@ Promise.all([
             container.appendChild(highlight);
         }
     }
+    
+    function renderChampionshipSummary() {
+        weekTitle.textContent = "2025-26 League Champion";
+        
+        // Get the Championship Matchup (Week 23, Matchup 0)
+        const finalMatch = data.weeks["23"]?.matchups[0];
+        if (!finalMatch) {
+            container.innerHTML = "<div style='text-align:center; padding:50px;'><h3>Finale results pending...</h3></div>";
+            return;
+        }
+
+        const [tA, tB] = finalMatch.teams.map(wrapper => wrapper.team);
+        const scoreA = tA.team_points?.total ?? 0;
+        const scoreB = tB.team_points?.total ?? 0;
+
+        const winner = scoreA > scoreB ? tA : tB;
+        const loser = scoreA > scoreB ? tB : tA;
+        const winScore = Math.max(scoreA, scoreB);
+        const loseScore = Math.min(scoreA, scoreB);
+
+        container.innerHTML = `
+            <div class="championship-container" style="text-align: center; padding: 10px;">
+                <div class="winner-display">
+                    <h2 style="color: #ffd700; font-size: 2.2rem; margin: 0 0 10px 0;">🏆 CHAMPION 🏆</h2>
+                    <img src="${winner.team_logos.team_logo.url}" style="width: 130px; height: 130px; border-radius: 50%; border: 4px solid #ffd700; display: block; margin: 0 auto;">
+                    <h1 style="margin: 5px 0 5px 0; font-size: 2.5rem;">${winner.name}</h1>
+                    <p style="font-size: 1.4rem; font-weight: bold; margin: 0;">${winScore.toFixed(2)} pts</p>
+                </div>
+
+                <div style="font-style: italic; margin: 10px 0;">defeated</div>
+
+                <div class="loser-display" style="opacity: 0.8;">
+                    <img src="${loser.team_logos.team_logo.url}" style="width: 70px; height: 70px; border-radius: 50%; border: 2px solid #666; display: block; margin: 0 auto;">
+                    <h3 style="margin: 5px 0 0 0;">${loser.name}</h3>
+                    <p style="margin: 0;">${loseScore.toFixed(2)} pts</p>
+                </div>
+
+                <div class="custom-celebration-image">
+                    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+                    <img src="images/hype_machine_wins.png" alt="Champion Image" style="max-width: 90%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+                </div>
+            </div>
+        `;
+        }
 
     // Nav Controls and Listeners
     weekSelect.value = defaultWeek;
     renderWeek(defaultWeek);
 
     weekSelect.addEventListener('change', () => renderWeek(weekSelect.value));
-    weekPrev.addEventListener('click', () => {
-        const index = weeks.indexOf(weekSelect.value);
-        if (index > 0) {
-            weekSelect.value = weeks[index - 1];
-            renderWeek(weekSelect.value);
-        }
-    });
     weekNext.addEventListener('click', () => {
         const index = weeks.indexOf(weekSelect.value);
-        if (index < weeks.length - 1) {
+        // If we are at the last week (23), and the Finale option exists, go to Finale
+        if (index === weeks.length - 1 && Number(weeks[index]) === 23) {
+            weekSelect.value = "finale";
+            renderWeek("finale");
+        } else if (index < weeks.length - 1) {
             weekSelect.value = weeks[index + 1];
             renderWeek(weekSelect.value);
         }
