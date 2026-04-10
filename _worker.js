@@ -3,35 +3,34 @@ export default {
     const url = new URL(request.url);
     const userEmail = (request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
 
-    // 1. THE PATH PROXY (Crucial for CSS/Images/Shared files)
-    // If the browser asks for /fantasy-hockey/css/style.css, 
-    // we internally look for /css/style.css
+    // 1. THE PATH PROXY (Fixes CSS/JS/Shared 404s)
     let internalPath = url.pathname;
     if (internalPath.startsWith("/fantasy-hockey/")) {
       internalPath = internalPath.replace("/fantasy-hockey/", "/");
     }
 
     // 2. DATA ROUTES (KV)
-    if (internalPath === "/get-roster") {
+    if (internalPath.includes("/get-roster")) {
       const data = await env.PLAYOFF_DATA.get(userEmail);
       return new Response(data || "{}", { headers: { "Content-Type": "application/json" } });
     }
-
-    if (internalPath === "/submit-roster" && request.method === "POST") {
+    if (internalPath.includes("/submit-roster") && request.method === "POST") {
       const body = await request.text();
       await env.PLAYOFF_DATA.put(userEmail, body);
       return new Response("Saved", { status: 200 });
     }
 
-    // 3. THE REDIRECT LOGIC
+    // 3. REFINED REDIRECT LOGIC
     const teamMapping = { "pfajman1@gmail.com": 1, "corvettes13@hotmail.com": 2 };
     const userTeamNumber = teamMapping[userEmail];
 
-    if ((internalPath === "/" || internalPath === "/index.html") && userTeamNumber) {
+    // ONLY redirect if they hit the absolute root "/"
+    // If they hit "/index.html" or "/fantasy-hockey/index.html", let them stay!
+    if ((url.pathname === "/" || url.pathname === "/fantasy-hockey/") && userTeamNumber) {
       return Response.redirect(`${url.origin}/fantasy-hockey/teams/team.html?team=${userTeamNumber}`, 302);
     }
 
-    // 4. THE GATEKEEPER
+    // 4. THE GATEKEEPER (Security for team pages)
     if (internalPath.includes("/teams/team.html")) {
       const requestedTeam = url.searchParams.get("team");
       if (userEmail !== "pfajman1@gmail.com" && requestedTeam && parseInt(requestedTeam) !== userTeamNumber) {
@@ -39,12 +38,10 @@ export default {
       }
     }
 
-    // 5. FINAL ASSET DELIVERY
-    // We create a new Request with the "internalPath" so Cloudflare finds the file
+    // 5. ASSET DELIVERY
     const newUrl = new URL(url.origin);
     newUrl.pathname = internalPath;
-    newUrl.search = url.search; // Keep ?team=2 intact
-
+    newUrl.search = url.search;
     return env.ASSETS.fetch(new Request(newUrl, request));
   }
 };
