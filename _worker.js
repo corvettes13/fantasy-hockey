@@ -2,6 +2,13 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const userEmail = (request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
+    
+    // Add this near your other routes in the fetch function
+    if (url.pathname === "/test-kv") {
+      await env.PLAYOFF_DATA.put("test_key", "It Works!");
+      const value = await env.PLAYOFF_DATA.get("test_key");
+      return new Response(`KV Status: ${value}`);
+    }
 
     // 1. DUAL-COMPATIBILITY REWRITE (Keep your GitHub links working)
     let internalPath = url.pathname;
@@ -42,5 +49,20 @@ export default {
     newUrl.search = url.search;
 
     return env.ASSETS.fetch(new Request(newUrl, request));
+  }
+  
+  if (internalPath === "/get-roster") {
+      const data = await env.LEAGUE_DATA.get(userEmail);
+      return new Response(data || "{}", { 
+          headers: { "Content-Type": "application/json" } 
+      });
+  }
+
+  // ROUTE: SAVE DATA
+  if (internalPath === "/submit-roster" && request.method === "POST") {
+      const body = await request.text();
+      // Use the email as the unique key to store their specific JSON
+      await env.LEAGUE_DATA.put(userEmail, body);
+      return new Response("Saved", { status: 200 });
   }
 };

@@ -6,3 +6,7 @@ compatibility_date = "2026-04-04"
 directory = "."
 binding = "ASSETS"
 run_worker_first = true
+
+[[kv_namespaces]]
+binding = "PLAYOFF_DATA"
+id = "2f1bdd1dcae347439ba78507e522b6f1"

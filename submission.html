@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Fantasy Hockey Roster</h2>
+    <form id="rosterForm">
+        <p>Center: <input type="text" name="center" id="center"></p>
+        <p>Winger: <input type="text" name="winger" id="winger"></p>
+        <button type="submit">Save Selection</button>
+    </form>
+
+    <script>
+        // On Page Load: Check for existing data
+        window.onload = async () => {
+            const res = await fetch('/get-roster');
+            if (res.ok) {
+                const data = await res.json();
+                document.getElementById('center').value = data.center || '';
+                document.getElementById('winger').value = data.winger || '';
+            }
+        };
+
+        // On Submit: Save the data
+        document.getElementById('rosterForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target));
+            const res = await fetch('/submit-roster', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            if (res.ok) alert('Roster Saved!');
+        };
+    </script>
+</body>
+</html>
