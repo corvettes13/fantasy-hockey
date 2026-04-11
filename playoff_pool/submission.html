@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <h2>Fantasy Hockey Roster</h2>
-    <form id="rosterForm">
-        <p>Center: <input type="text" name="center" id="center"></p>
-        <p>Winger: <input type="text" name="winger" id="winger"></p>
-        <button type="submit">Save Selection</button>
-    </form>
+<form id="poolForm">
+    <label>Who is winning the Cup?</label>
+    <input type="text" name="cup_winner" required>
+    
+    <label>Leading Scorer:</label>
+    <input type="text" name="top_scorer" required>
+    
+    <button type="submit" id="saveBtn">Save My Picks</button>
+</form>
 
-    <script>
-        // On Page Load: Check for existing data
-        window.onload = async () => {
-            const res = await fetch('/get-roster');
-            if (res.ok) {
-                const data = await res.json();
-                document.getElementById('center').value = data.center || '';
-                document.getElementById('winger').value = data.winger || '';
-            }
-        };
+<script>
+    const form = document.getElementById('poolForm');
 
-        // On Submit: Save the data
-        document.getElementById('rosterForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const data = Object.fromEntries(new FormData(e.target));
-            const res = await fetch('/submit-roster', {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-            if (res.ok) alert('Roster Saved!');
-        };
-    </script>
+    // 1. Load existing data on start
+    window.addEventListener('load', async () => {
+        const response = await fetch('/playoff-get');
+        const data = await response.json();
+        if (data.cup_winner) {
+            form.elements['cup_winner'].value = data.cup_winner;
+            form.elements['top_scorer'].value = data.top_scorer;
+        }
+    });
+
+    // 2. Submit data
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('saveBtn');
+        btn.disabled = true;
+        btn.innerText = "Saving...";
+
+        const formData = Object.fromEntries(new FormData(form));
+
+        const response = await fetch('/playoff-submit', {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.ok) {
+            alert("Roster saved to the edge!");
+        } else {
+            alert("Save failed. Check the console.");
+        }
+        btn.disabled = false;
+        btn.innerText = "Save My Picks";
+    };
+</script>
 </body>
 </html>

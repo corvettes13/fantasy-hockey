@@ -36,12 +36,35 @@ export default {
       if (userEmail !== "pfajman1@gmail.com" && requestedTeam && parseInt(requestedTeam) !== userTeamNumber) {
         return new Response("Access Denied: You can only manage your own team.", { status: 403 });
       }
-    }
-
+    
     // 5. ASSET DELIVERY
     const newUrl = new URL(url.origin);
     newUrl.pathname = internalPath;
     newUrl.search = url.search;
     return env.ASSETS.fetch(new Request(newUrl, request));
+  }
+  
+  if (internalPath === "/playoff-submit" && request.method === "POST") {
+      try {
+          const formData = await request.json();
+          // Tag the data with a timestamp so you know when they picked
+          formData.submittedAt = new Date().toISOString();
+          
+          await env.PLAYOFF_DATA.put(userEmail, JSON.stringify(formData));
+          return new Response(JSON.stringify({ success: true }), { 
+              status: 200, 
+              headers: { "Content-Type": "application/json" } 
+          });
+      } catch (err) {
+          return new Response("Save Failed", { status: 500 });
+      }
+  }
+
+  // THE LOAD ROUTE
+  if (internalPath === "/playoff-get") {
+      const data = await env.PLAYOFF_DATA.get(userEmail);
+      return new Response(data || "{}", { 
+          headers: { "Content-Type": "application/json" } 
+    });
   }
 };
