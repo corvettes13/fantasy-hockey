@@ -10,11 +10,12 @@ export default {
     }
 
     // 2. DATA ROUTES (KV)
-    // Original roster routes
+    // Roster routes for the main site
     if (internalPath.includes("/get-roster")) {
       const data = await env.PLAYOFF_DATA.get(userEmail);
       return new Response(data || "{}", { headers: { "Content-Type": "application/json" } });
     }
+    
     if (internalPath.includes("/submit-roster") && request.method === "POST") {
       const body = await request.text();
       await env.PLAYOFF_DATA.put(userEmail, body);
