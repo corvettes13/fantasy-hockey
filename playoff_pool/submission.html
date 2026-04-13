@@ -1,52 +1,113 @@
 <!DOCTYPE html>
-<html>
-<body>
-<form id="poolForm">
-    <label>Who is winning the Cup?</label>
-    <input type="text" name="cup_winner" required>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playoff Pool Entry</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
+  <style>
+    /* Side-by-side layout within your existing container */
+    .pool-wrapper {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-top: 10px;
+    }
     
-    <label>Leading Scorer:</label>
-    <input type="text" name="top_scorer" required>
+    .main-content {
+      flex: 1;
+      min-width: 0; /* Prevents flex items from overflowing */
+    }
+
+    .roster-sidebar {
+      flex: 0 0 300px;
+      position: sticky;
+      top: 10px;
+      background: #fdfdfd;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Keep the sidebar text crisp and matching your 0.8rem table font */
+    .roster-sidebar h2 { font-size: 1.1rem; color: #0055a5; margin-top: 0; }
+    .roster-sidebar h3 { font-size: 0.9rem; margin: 15px 0 5px; border-bottom: 1px solid #eee; }
+    .pos-count { font-size: 0.85rem; font-weight: bold; margin: 5px 0; }
     
-    <button type="submit" id="saveBtn">Save My Picks</button>
-</form>
+    .save-btn {
+      width: 100%;
+      padding: 10px;
+      background: #0055a5;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    .save-btn:disabled { background: #ccc; cursor: not-allowed; }
+    
+    /* Highlight for selected players in the table */
+    .selected-row { background-color: #f0f8ff !important; }
+  </style>
+</head>
+<body class="players-page">
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
 
-<script>
-    const form = document.getElementById('poolForm');
-
-    // 1. Load existing data on start
-    window.addEventListener('load', async () => {
-        const response = await fetch('/playoff-get');
-        const data = await response.json();
-        if (data.cup_winner) {
-            form.elements['cup_winner'].value = data.cup_winner;
-            form.elements['top_scorer'].value = data.top_scorer;
-        }
-    });
-
-    // 2. Submit data
-    form.onsubmit = async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('saveBtn');
-        btn.disabled = true;
-        btn.innerText = "Saving...";
-
-        const formData = Object.fromEntries(new FormData(form));
-
-        const response = await fetch('/playoff-submit', {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: { 'Content-Type': 'application/json' }
+    <script>
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => {
+          document.querySelector('.site-header').innerHTML = html;
         });
+    </script>
 
-        if (response.ok) {
-            alert("Roster saved to the edge!");
-        } else {
-            alert("Save failed. Check the console.");
-        }
-        btn.disabled = false;
-        btn.innerText = "Save My Picks";
-    };
-</script>
+    <div class="container">
+      <h1>Playoff Pool Entry</h1>
+
+      <div class="pool-wrapper">
+        <div class="main-content">
+          <div class="filters">
+            <input type="text" id="name-filter" placeholder="Filter by name..." />
+            <select id="pos-filter">
+              <option value="">All Positions</option>
+              <option value="F">Forwards</option>
+              <option value="D">Defense</option>
+              <option value="G">Goalie</option>
+            </select>
+          </div>
+
+          <div class="table-wrapper">
+            <table id="players-table">
+              <thead id="players-head">
+                </thead>
+              <tbody id="players-body">
+                </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="roster-sidebar">
+          <h2>Your Entry</h2>
+          <div class="pos-count">Forwards: <span id="count-F">0</span> / 12</div>
+          <div class="pos-count">Defense: <span id="count-D">0</span> / 5</div>
+          <div class="pos-count">Goalies: <span id="count-G">0</span> / 3</div>
+          
+          <h3>Series Predictions</h3>
+          <div id="bracket-inputs" style="font-size: 0.75rem;">
+            </div>
+
+          <button id="save-entry" class="save-btn" disabled onclick="saveEntry()">Save Roster</button>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="/fantasy-hockey/scripts/playoff_pool.js"></script>
 </body>
 </html>
