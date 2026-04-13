@@ -284,6 +284,13 @@ function isAlreadyInRoster(id) {
 }
 
 window.saveEntry = async function() {
+    // Capture the name from the input field right before saving
+    myEntry.managerName = document.getElementById('manager-name').value;
+
+    if (!myEntry.managerName) {
+        return alert("Please enter a Manager Name before saving.");
+    }
+
     try {
         await fetch('/playoff-submit', { 
             method: 'POST', 
@@ -295,6 +302,9 @@ window.saveEntry = async function() {
 };
 
 async function loadExistingEntry() {
+    if (myEntry.managerName) {
+        document.getElementById('manager-name').value = myEntry.managerName;
+    }  
     try {
         const res = await fetch('/playoff-get');
         const data = await res.json();

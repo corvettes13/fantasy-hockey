@@ -92,15 +92,97 @@
           </div>
         </div>
 
-        <aside class="roster-sidebar">
+      <aside class="roster-sidebar">
           <h2>Your Entry</h2>
+          <div style="margin-bottom: 15px;">
+              <label for="manager-name" style="font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 4px;">Manager Name:</label>
+              <input type="text" id="manager-name" placeholder="Enter name or nickname" style="width: 100%; box-sizing: border-box; padding: 5px; font-size: 0.8rem;">
+          </div>
+
           <div class="pos-count">Forwards: <span id="count-F">0</span> / 12</div>
           <div class="pos-count">Defense: <span id="count-D">0</span> / 5</div>
           <div class="pos-count">Goalies: <span id="count-G">0</span> / 3</div>
-          
-          <h3>Series Predictions</h3>
-          <div id="bracket-inputs" style="font-size: 0.75rem;">
-            </div>
+
+          <div class="bracket-section">
+              <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1: Western Conference</h3>
+              
+              <div class="matchup-box">
+                  <div class="matchup-label">Colorado vs Nashville</div>
+                  <label><input type="radio" name="r1w1" value="COL" onclick="updateBracket('r1w1', 'COL')"> COL</label>
+                  <label><input type="radio" name="r1w1" value="NSH" onclick="updateBracket('r1w1', 'NSH')"> NSH</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Dallas vs Minnesota</div>
+                  <label><input type="radio" name="r1w2" value="DAL" onclick="updateBracket('r1w2', 'DAL')"> DAL</label>
+                  <label><input type="radio" name="r1w2" value="MIN" onclick="updateBracket('r1w2', 'MIN')"> MIN</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Edmonton vs Utah</div>
+                  <label><input type="radio" name="r1w3" value="EDM" onclick="updateBracket('r1w3', 'EDM')"> EDM</label>
+                  <label><input type="radio" name="r1w3" value="UTA" onclick="updateBracket('r1w3', 'UTA')"> UTA</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Vegas vs Anaheim</div>
+                  <label><input type="radio" name="r1w4" value="VGK" onclick="updateBracket('r1w4', 'VGK')"> VGK</label>
+                  <label><input type="radio" name="r1w4" value="ANA" onclick="updateBracket('r1w4', 'ANA')"> ANA</label>
+              </div>
+          </div>
+
+          <div class="bracket-section">
+              <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1: Eastern Conference</h3>
+              
+              <div class="matchup-box">
+                  <div class="matchup-label">Carolina vs Ottawa</div>
+                  <label><input type="radio" name="r1e1" value="CAR" onclick="updateBracket('r1e1', 'CAR')"> CAR</label>
+                  <label><input type="radio" name="r1e1" value="OTT" onclick="updateBracket('r1e1', 'OTT')"> OTT</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Buffalo vs Boston</div>
+                  <label><input type="radio" name="r1e2" value="BUF" onclick="updateBracket('r1e2', 'BUF')"> BUF</label>
+                  <label><input type="radio" name="r1e2" value="BOS" onclick="updateBracket('r1e2', 'BOS')"> BOS</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Tampa Bay vs Montreal</div>
+                  <label><input type="radio" name="r1e3" value="TBL" onclick="updateBracket('r1e3', 'TBL')"> TBL</label>
+                  <label><input type="radio" name="r1e3" value="MTL" onclick="updateBracket('r1e3', 'MTL')"> MTL</label>
+              </div>
+
+              <div class="matchup-box">
+                  <div class="matchup-label">Pittsburgh vs Philadelphia</div>
+                  <label><input type="radio" name="r1e4" value="PIT" onclick="updateBracket('r1e4', 'PIT')"> PIT</label>
+                  <label><input type="radio" name="r1e4" value="PHI" onclick="updateBracket('r1e4', 'PHI')"> PHI</label>
+              </div>
+          </div>
+
+          <div class="bracket-section" style="margin-top: 15px;">
+            <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Stanley Cup Winner</h3>
+            <select id="cup-winner" onchange="updateCupWinner(this.value)" style="width: 100%; font-size: 0.8rem;">
+              <option value="">Select Champion...</option>
+              <option value="COL">Colorado (50 pts)</option>
+              <option value="TBL">Tampa Bay (61 pts)</option>              
+              <option value="CAR">Carolina (74 pts)</option>
+              <option value="DAL">Dallas (163 pts)</option>
+              <option value="VEG">Vegas (163 pts)</option>              
+              <option value="EDM">Edmonton (200 pts)</option>
+              <option value="OTT">Ottawa (213 pts)</option>
+              <option value="MIN">Minnesota (213 pts)</option>              
+              <option value="BUF">Buffalo (263 pts)</option>
+              <option value="UTA">Utah (413 pts)</option>
+              <option value="MTL">Montreal (450 pts)</option>              
+              <option value="PIT">Pittsburgh (513 pts)</option>
+              <option value="ANA">Anaheim (825 pts)</option>
+              <option value="LAK">Los Angeles (825 pts)</option>              
+              <option value="BOS">Boston (888 pts)</option>
+              <option value="PHI">Philadelphia (950 pts)</option>
+              <option value="WSH">Washington (3763 pts)</option>              
+              <option value="CBJ">Columbus (3763 pts)</option>
+            </select>
+          </div>
 
           <button id="save-entry" class="save-btn" disabled onclick="saveEntry()">Save Roster</button>
         </aside>
