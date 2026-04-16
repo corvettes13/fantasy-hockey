@@ -1,5 +1,5 @@
 // 1. CONFIGURATION & STATE
-const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'BOS', 'OTT', 'CAR', 'PIT', 'PHI', 'WSH', 'COL', 'DAL', 'MIN', 'UTA', 'VEG', 'EDM', 'NSH', 'ANA', 'LAK'];
+const PLAYOFF_TEAMS = ['CAR','PIT','PHI','BUF','MTL','TBL','BOS','OTT','COL','DAL','MIN','VEG','EDM','ANA','UTA','LAK'];
 
 const skaterStatIdMap = {
     0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
@@ -12,7 +12,14 @@ const goalieStatIdMap = {
 
 let allPlayers = [], skaterStatsMap = {}, goalieStatsMap = {}, teamMap = {};
 let currentSortKey = "FPG", sortDirection = -1, statsMap = {};
-let myEntry = { roster: { F: [], D: [], G: [] }, bracket: {} };
+
+// Initial state object
+let myEntry = { 
+    managerName: "",
+    roster: { F: [], D: [], G: [] }, 
+    bracket: {}, 
+    cupWinner: "" 
+};
 
 // 2. INITIALIZATION
 document.addEventListener('DOMContentLoaded', async () => {
@@ -55,7 +62,7 @@ async function initData() {
     }
 }
 
-// 3. STATS LOGIC (Reused from players.js)
+// 3. STATS LOGIC
 function buildStatsMap(statsArray, type) {
     const map = {};
     const idMap = (type === "goalie") ? goalieStatIdMap : skaterStatIdMap;
@@ -67,12 +74,9 @@ function buildStatsMap(statsArray, type) {
             const key = idMap[statId];
             let value = s._extracted_data?.value ?? s.value;
 
-            if (value === '-' || value === '–' || value === undefined || value === null) {
-                value = 0;
-            }
+            if (value === '-' || value === '–' || value === undefined || value === null) value = 0;
 
             if (key) {
-                // Keep strings for ATOI/Time, floats for GAA/SV%, and numbers for counting stats
                 if (key === 'ATOI') {
                     obj[key] = value;
                 } else {
@@ -89,42 +93,19 @@ function calculateFantasyPoints(map, players, type) {
     players.forEach(p => {
         const s = map[p.player_id];
         if (!s) return;
-
         const gp = parseFloat(s.GP) || 0;
         let fp = 0;
-
         if (type === "goalie") {
-            // Full Goalie Equation from players.js
-            fp = (
-                (parseFloat(s.GS) || 0) * 1 +
-                (parseFloat(s.W) || 0) * 3 +
-                (parseFloat(s.L) || 0) * -1 +
-                (parseFloat(s.SV) || 0) * 0.2 +
-                (parseFloat(s.GA) || 0) * -1 +
-                (parseFloat(s.SHO) || 0) * 5
-            );
+            fp = ((parseFloat(s.GS)||0)*1) + ((parseFloat(s.W)||0)*3) + ((parseFloat(s.L)||0)*-1) + ((parseFloat(s.SV)||0)*0.2) + ((parseFloat(s.GA)||0)*-1) + ((parseFloat(s.SHO)||0)*5);
         } else {
-            // Full Skater Equation from players.js
-            fp = (
-                (parseFloat(s.G) || 0) * 3 +
-                (parseFloat(s.A) || 0) * 2 +
-                (parseFloat(s.PIM) || 0) * 0.2 +
-                (parseFloat(s.SHG) || 0) * 2 +
-                (parseFloat(s.GWG) || 0) * 0.5 +
-                (parseFloat(s.SOG) || 0) * 0.2 +
-                (parseFloat(s.HIT) || 0) * 0.1 +
-                (parseFloat(s.BLK) || 0) * 0.3
-            );
+            fp = ((parseFloat(s.G)||0)*3) + ((parseFloat(s.A)||0)*2) + ((parseFloat(s.PIM)||0)*0.2) + ((parseFloat(s.SHG)||0)*2) + ((parseFloat(s.GWG)||0)*0.5) + ((parseFloat(s.SOG)||0)*0.2) + ((parseFloat(s.HIT)||0)*0.1) + ((parseFloat(s.BLK)||0)*0.3);
         }
-        
-        // Format FP to 1 decimal place (e.g., 12.0)
         s.FP = fp.toFixed(1); 
-        // Format FPG to 2 decimal places (e.g., 1.50)
         s.FPG = gp > 0 ? (fp / gp).toFixed(2) : "0.00";
     });
 }
 
-// 4. SORTING ENGINE (Reused from players.js)
+// 4. SORTING ENGINE
 function bindHeaderSortEvents() {
     document.querySelectorAll('th[data-sort]').forEach(th => {
         th.addEventListener('click', () => {
@@ -141,18 +122,13 @@ function sortBy(key) {
         sortDirection = -1;
         currentSortKey = key;
     }
-    
-    // Ensure numeric columns are parsed as floats during sorting
     allPlayers.sort((a, b) => {
         const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
         const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
-        
         let aVal = parseFloat(aS[currentSortKey]) || 0;
         let bVal = parseFloat(bS[currentSortKey]) || 0;
-        
         return (aVal - bVal) * sortDirection;
     });
-
     renderTable();
 }
 
@@ -178,7 +154,6 @@ function renderTable() {
 
     statsMap = isG ? goalieStatsMap : skaterStatsMap;
 
-    // Generate Headers with data-sort attributes
     thead.innerHTML = `
         <tr>
             <th>Action</th>
@@ -202,116 +177,4 @@ function renderTable() {
         const s = statsMap[p.player_id] || {};
         const gp = parseFloat(s.GP) || 0;
         const matchesName = p.full_name.toLowerCase().includes(nameFilter);
-        const matchesPos = !posFilter ? true : (posFilter === 'F' ? ['C', 'LW', 'RW'].includes(p.position) : p.position === posFilter);
-        return matchesName && matchesPos && gp >= minGP;
-    });
-
-    // Advanced Sort Logic
-    filtered.sort((a, b) => {
-        let aStat, bStat;
-        const aS = statsMap[a.player_id] || {};
-        const bS = statsMap[b.player_id] || {};
-
-        if (currentSortKey === 'ATOI') {
-            aStat = atoiToSeconds(aS.ATOI || '00:00');
-            bStat = atoiToSeconds(bS.ATOI || '00:00');
-        } else {
-            aStat = parseFloat(aS[currentSortKey] || 0);
-            bStat = parseFloat(bS[currentSortKey] || 0);
-        }
-        return (aStat - bStat) * sortDirection;
-    });
-
-    tbody.innerHTML = '';
-    filtered.forEach(p => {
-        const s = statsMap[p.player_id] || {};
-        const isSelected = isAlreadyInRoster(p.player_id);
-        const row = document.createElement('tr');
-        if (isSelected) row.className = 'selected-row';
-
-        row.innerHTML = `
-            <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
-            <td class="player-cell">
-                <img src="${teamMap[p.team_abbr] || ''}" alt="logo">
-                <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
-                <span class="team-abbr">${p.team_abbr}</span>
-            </td>
-            <td class="position-cell">${p.position}</td>
-            <td>${s.GP || 0}</td>
-            ${p.position === 'G' ? `
-                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
-                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
-            ` : `
-                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
-                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
-            `}
-            <td>${s.FP || '0.0'}</td>
-            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
-        `;
-        tbody.appendChild(row);
-    });
-}
-
-// 6. UTILITIES
-window.togglePlayer = function(id) {
-    const p = allPlayers.find(x => x.player_id == id);
-    if (!p) return;
-    const cat = p.position === 'G' ? 'G' : (p.position === 'D' ? 'D' : 'F');
-    if (isAlreadyInRoster(id)) {
-        myEntry.roster[cat] = myEntry.roster[cat].filter(x => x != id);
-    } else {
-        if (cat === 'F' && myEntry.roster.F.length >= 12) return alert("12 Forwards Max");
-        if (cat === 'D' && myEntry.roster.D.length >= 5) return alert("5 Defense Max");
-        if (cat === 'G' && myEntry.roster.G.length >= 3) return alert("3 Goalies Max");
-        myEntry.roster[cat].push(id);
-    }
-    updateCounts();
-    renderTable();
-};
-
-function updateCounts() {
-    ['F', 'D', 'G'].forEach(c => {
-        const el = document.getElementById(`count-${c}`);
-        if (el) el.innerText = myEntry.roster[c].length;
-    });
-    const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
-    const saveBtn = document.getElementById('save-entry');
-    if (saveBtn) saveBtn.disabled = (total !== 20);
-}
-
-function isAlreadyInRoster(id) {
-    return [...myEntry.roster.F, ...myEntry.roster.D, ...myEntry.roster.G].includes(id);
-}
-
-window.saveEntry = async function() {
-    // Capture the name from the input field right before saving
-    myEntry.managerName = document.getElementById('manager-name').value;
-
-    if (!myEntry.managerName) {
-        return alert("Please enter a Manager Name before saving.");
-    }
-
-    try {
-        await fetch('/playoff-submit', { 
-            method: 'POST', 
-            body: JSON.stringify(myEntry),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        alert("Entry Saved!");
-    } catch (err) { alert("Save failed."); }
-};
-
-async function loadExistingEntry() {
-    if (myEntry.managerName) {
-        document.getElementById('manager-name').value = myEntry.managerName;
-    }  
-    try {
-        const res = await fetch('/playoff-get');
-        const data = await res.json();
-        if (data && data.roster) {
-            myEntry = data;
-            updateCounts();
-            renderTable();
-        }
-    } catch (err) { console.log("No entry found."); }
-}
+        const matchesPos = !posFilter ? true : (posFilter === 'F'

@@ -107,9 +107,9 @@
               <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1: Western Conference</h3>
               
               <div class="matchup-box">
-                  <div class="matchup-label">Colorado vs Nashville</div>
+                  <div class="matchup-label">Colorado vs Los Angeles</div>
                   <label><input type="radio" name="r1w1" value="COL" onclick="updateBracket('r1w1', 'COL')"> COL</label>
-                  <label><input type="radio" name="r1w1" value="NSH" onclick="updateBracket('r1w1', 'NSH')"> NSH</label>
+                  <label><input type="radio" name="r1w1" value="NSH" onclick="updateBracket('r1w1', 'LAK')"> NSH</label>
               </div>
 
               <div class="matchup-box">
@@ -120,13 +120,13 @@
 
               <div class="matchup-box">
                   <div class="matchup-label">Edmonton vs Utah</div>
-                  <label><input type="radio" name="r1w3" value="EDM" onclick="updateBracket('r1w3', 'EDM')"> EDM</label>
+                  <label><input type="radio" name="r1w3" value="VGK" onclick="updateBracket('r1w3', 'EDM')"> EDM</label>
                   <label><input type="radio" name="r1w3" value="UTA" onclick="updateBracket('r1w3', 'UTA')"> UTA</label>
               </div>
 
               <div class="matchup-box">
                   <div class="matchup-label">Vegas vs Anaheim</div>
-                  <label><input type="radio" name="r1w4" value="VGK" onclick="updateBracket('r1w4', 'VGK')"> VGK</label>
+                  <label><input type="radio" name="r1w4" value="EDM" onclick="updateBracket('r1w4', 'VGK')"> VGK</label>
                   <label><input type="radio" name="r1w4" value="ANA" onclick="updateBracket('r1w4', 'ANA')"> ANA</label>
               </div>
           </div>
@@ -163,24 +163,22 @@
             <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Stanley Cup Winner</h3>
             <select id="cup-winner" onchange="updateCupWinner(this.value)" style="width: 100%; font-size: 0.8rem;">
               <option value="">Select Champion...</option>
-              <option value="COL">Colorado (50 pts)</option>
-              <option value="TBL">Tampa Bay (61 pts)</option>              
-              <option value="CAR">Carolina (74 pts)</option>
-              <option value="DAL">Dallas (163 pts)</option>
-              <option value="VEG">Vegas (163 pts)</option>              
-              <option value="EDM">Edmonton (200 pts)</option>
-              <option value="OTT">Ottawa (213 pts)</option>
-              <option value="MIN">Minnesota (213 pts)</option>              
-              <option value="BUF">Buffalo (263 pts)</option>
-              <option value="UTA">Utah (413 pts)</option>
-              <option value="MTL">Montreal (450 pts)</option>              
-              <option value="PIT">Pittsburgh (513 pts)</option>
-              <option value="ANA">Anaheim (825 pts)</option>
-              <option value="LAK">Los Angeles (825 pts)</option>              
-              <option value="BOS">Boston (888 pts)</option>
-              <option value="PHI">Philadelphia (950 pts)</option>
-              <option value="WSH">Washington (3763 pts)</option>              
-              <option value="CBJ">Columbus (3763 pts)</option>
+              <option value="COL">Colorado +300 (50 pts)</option>
+              <option value="TBL">Tampa Bay +370 (59 pts)</option>              
+              <option value="CAR">Carolina +500 (75 pts)</option>
+              <option value="DAL">Dallas +100 (150 pts)</option>
+              <option value="VEG">Vegas +1200 (150 pts)</option>              
+              <option value="EDM">Edmonton +1400 (188 pts)</option>
+              <option value="OTT">Minnesota +1600 (213 pts)</option>
+              <option value="MIN">Buffalo +1700 (225 pts)</option>              
+              <option value="BUF">Ottawa +1700 (225 pts)</option>
+              <option value="UTA">Utah +3300 (425 pts)</option>
+              <option value="MTL">Montreal +3500 (450 pts)</option>              
+              <option value="PIT">Pittsburgh +4000 (513 pts)</option>
+              <option value="ANA">Anaheim +5500 (700 pts)</option>            
+              <option value="PHI">Philadelphia +6000 (763 pts)</option>
+              <option value="WSH">Boston +6500 (763 pts)</option>              
+              <option value="CBJ">Los Angeles +6500 (825 pts)</option>
             </select>
           </div>
 
