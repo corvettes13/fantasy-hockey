@@ -282,24 +282,31 @@ window.saveEntry = async function() {
     if (total !== 20) return alert("Roster must have 20 players.");
 
     try {
-        const res = await fetch('/playoff-submit', { 
-            method: 'POST', 
-            body: JSON.stringify(myEntry),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        
-        const result = await res.json();
-        
-        if (res.status === 401) {
-            alert("Incorrect League Password!");
-        } else if (res.ok) {
-            const shareLink = `${window.location.origin}/view-entry?id=${result.entryId}`;
-            alert(`Entry Saved! Your unique Entry ID is ${result.entryId}.\n\nShare link: ${shareLink}`);
-            console.log("Share link:", shareLink);
-        } else {
-            alert("Save failed. Please try again.");
+            const res = await fetch('/playoff-submit', { 
+                method: 'POST', 
+                body: JSON.stringify(myEntry),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            
+            if (res.status === 401) {
+                return alert("Incorrect League Password!");
+            }
+
+            if (res.ok) {
+                // THIS IS THE KEY FIX:
+                const result = await res.json(); 
+                const entryId = result.entryId; 
+                
+                alert(`Entry Saved! Your unique Entry ID is: ${entryId}`);
+                
+                // Optional: Print the full link to the console for them
+                console.log("Share Link:", `${window.location.origin}/view-entry?id=${entryId}`);
+            } else {
+                alert("Save failed.");
+            }
+        } catch (err) { 
+            alert("Network error."); 
         }
-    } catch (err) { alert("Network error."); }
 };
 
 async function loadExistingEntry() {
