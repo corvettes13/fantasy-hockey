@@ -150,7 +150,7 @@ function renderTable() {
     const posFilter = posEl.value;
     const nameFilter = (nameEl ? nameEl.value.toLowerCase() : "");
     const isG = posFilter === 'G';
-    const minGP = 20;
+    const minGP = 10;
 
     statsMap = isG ? goalieStatsMap : skaterStatsMap;
 
@@ -177,7 +177,11 @@ function renderTable() {
         const s = statsMap[p.player_id] || {};
         const gp = parseFloat(s.GP) || 0;
         const matchesName = p.full_name.toLowerCase().includes(nameFilter);
-        const matchesPos = !posFilter ? true : (posFilter === 'F' ? ['C', 'LW', 'RW'].includes(p.position) : p.position === posFilter);
+        const matchesPos = !posFilter ? true : (
+            posFilter === 'F' 
+            ? (p.position.includes('C') || p.position.includes('LW') || p.position.includes('RW')) 
+            : p.position.includes(posFilter)
+        );
         return matchesName && matchesPos && gp >= minGP;
     });
 
