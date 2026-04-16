@@ -261,24 +261,37 @@ function isAlreadyInRoster(id) {
 }
 
 window.saveEntry = async function() {
+    // Capture data from UI
     myEntry.managerName = document.getElementById('manager-name').value.trim();
+    myEntry.email = document.getElementById('user-email').value.toLowerCase().trim();
+    myEntry.password = document.getElementById('league-pass').value; // Don't trim passwords
+    
     const cupSelect = document.getElementById('cup-winner');
     if (cupSelect) myEntry.cupWinner = cupSelect.value;
 
-    if (!myEntry.managerName) return alert("Please enter a Manager Name.");
-    if (!myEntry.cupWinner) return alert("Please select a Stanley Cup winner.");
+    // Validation
+    if (!myEntry.managerName || !myEntry.email || !myEntry.password) {
+        return alert("Name, Email, and Password are required!");
+    }
     
     const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
-    if (total !== 20) return alert("Roster must have exactly 20 players.");
+    if (total !== 20) return alert("Roster must have 20 players.");
 
     try {
-        await fetch('/playoff-submit', { 
+        const res = await fetch('/playoff-submit', { 
             method: 'POST', 
             body: JSON.stringify(myEntry),
             headers: { 'Content-Type': 'application/json' }
         });
-        alert("Entry Saved!");
-    } catch (err) { alert("Save failed."); }
+        
+        if (res.status === 401) {
+            alert("Incorrect League Password!");
+        } else if (res.ok) {
+            alert("Entry Saved Successfully!");
+        } else {
+            alert("Save failed. Please try again.");
+        }
+    } catch (err) { alert("Network error."); }
 };
 
 async function loadExistingEntry() {

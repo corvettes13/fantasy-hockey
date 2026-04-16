@@ -37,11 +37,38 @@ export default {
       }
     }
 
-    if (internalPath === "/playoff-get") {
-      const data = await env.PLAYOFF_DATA.get(userEmail);
-      return new Response(data || "{}", {
-        headers: { "Content-Type": "application/json" }
-      });
+    // Inside your export default { async fetch(request, env) { ...
+
+    // 1. Get the internal path as before
+    let internalPath = url.pathname;
+    if (internalPath.startsWith("/fantasy-hockey/")) {
+        internalPath = internalPath.replace("/fantasy-hockey/", "/");
+    }
+
+    // 2. Updated Submit Route
+    if (internalPath === "/playoff-submit" && request.method === "POST") {
+        try {
+            const formData = await request.json();
+            
+            // CHECK THE PASSWORD
+            // Replace 'Broomball2026' with your actual secret password
+            if (formData.password !== "Broomball2026") {
+                return new Response("Unauthorized", { status: 401 });
+            }
+
+            // Use the submitted email as the KV key (sanitized)
+            const storageKey = formData.email.replace(/[^a-z0-9@._-]/gi, '');
+            
+            formData.submittedAt = new Date().toISOString();
+            // Remove the password before storing so it's not sitting in your database
+            delete formData.password; 
+
+            await env.PLAYOFF_DATA.put(storageKey, JSON.stringify(formData));
+            
+            return new Response(JSON.stringify({ success: true }), { status: 200 });
+        } catch (err) {
+            return new Response("Error", { status: 500 });
+        }
     }
 
     // 3. REFINED REDIRECT LOGIC
