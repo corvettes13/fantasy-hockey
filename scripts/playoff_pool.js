@@ -288,10 +288,14 @@ window.saveEntry = async function() {
             headers: { 'Content-Type': 'application/json' }
         });
         
+        const result = await res.json();
+        
         if (res.status === 401) {
             alert("Incorrect League Password!");
         } else if (res.ok) {
-            alert("Entry Saved Successfully!");
+            const shareLink = `${window.location.origin}/view-entry?id=${result.entryId}`;
+            alert(`Entry Saved! Your unique Entry ID is ${result.entryId}.\n\nShare link: ${shareLink}`);
+            console.log("Share link:", shareLink);
         } else {
             alert("Save failed. Please try again.");
         }

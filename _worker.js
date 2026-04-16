@@ -24,32 +24,50 @@ export default {
       });
     }
 
-    // SUBMIT Route for Playoff Pool (The Password Bouncer)
+    // Inside the /playoff-submit POST block in _worker.js
     if (internalPath === "/playoff-submit" && request.method === "POST") {
-      try {
-        const formData = await request.json();
+        try {
+            const formData = await request.json();
 
-        // CHECK THE LEAGUE PASSWORD
-        if (formData.password !== "Broomball2026") {
-          return new Response("Unauthorized: Incorrect League Password", { status: 401 });
+            // 1. Password Check
+            if (formData.password !== "Broomball2026") {
+                return new Response("Unauthorized", { status: 401 });
+            }
+
+            const emailKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
+            
+            // 2. ID Generation Logic
+            // Check if this email already has a saved entry
+            let existing = await env.PLAYOFF_DATA.get(emailKey);
+            let entryId;
+
+            if (existing) {
+                const parsed = JSON.parse(existing);
+                entryId = parsed.entryId; // Reuse their existing ID
+            } else {
+                // Generate a random 5-digit string
+                entryId = Math.floor(10000 + Math.random() * 90000).toString();
+            }
+
+            formData.entryId = entryId;
+            formData.submittedAt = new Date().toISOString();
+            delete formData.password;
+
+            const jsonString = JSON.stringify(formData);
+
+            // 3. Dual-Storage
+            // Store by email for the "Manager" to load/edit
+            await env.PLAYOFF_DATA.put(emailKey, jsonString);
+            // Store by ID for public viewing
+            await env.PLAYOFF_DATA.put(`id_${entryId}`, jsonString);
+
+            return new Response(JSON.stringify({ success: true, entryId: entryId }), {
+                status: 200,
+                headers: { "Content-Type": "application/json" }
+            });
+        } catch (err) {
+            return new Response("Save Failed", { status: 500 });
         }
-
-        // Use the email from the FORM as the storage key
-        const storageKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
-        formData.submittedAt = new Date().toISOString();
-        
-        // Security: Remove password before saving to database
-        delete formData.password;
-
-        await env.PLAYOFF_DATA.put(storageKey, JSON.stringify(formData));
-
-        return new Response(JSON.stringify({ success: true }), {
-          status: 200,
-          headers: { "Content-Type": "application/json" }
-        });
-      } catch (err) {
-        return new Response("Save Failed", { status: 500 });
-      }
     }
 
     // Original roster routes (Legacy/Main Site)
@@ -78,6 +96,19 @@ export default {
       if (userEmailHeader !== "pfajman1@gmail.com" && requestedTeam && parseInt(requestedTeam) !== userTeamNumber) {
         return new Response("Access Denied: You can only manage your own team.", { status: 403 });
       }
+    }
+
+    // NEW: Public viewing route
+    if (internalPath === "/view-entry") {
+        const id = url.searchParams.get("id");
+        if (!id) return new Response("Missing ID", { status: 400 });
+
+        const data = await env.PLAYOFF_DATA.get(`id_${id}`);
+        if (!data) return new Response("Entry not found", { status: 404 });
+
+        return new Response(data, {
+            headers: { "Content-Type": "application/json" }
+        });
     }
 
     // 5. ASSET DELIVERY (Final Fallback)
