@@ -1,20 +1,23 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // Get the Cloudflare Access email if it exists
     const userEmailHeader = (request.headers.get("Cf-Access-Authenticated-User-Email") || "").toLowerCase();
 
-    // 1. THE PATH PROXY (Fixes CSS/JS/Shared 404s)
+    // 1. THE PATH PROXY
     let internalPath = url.pathname;
+    
+    // Strip the project name prefix if present
     if (internalPath.startsWith("/fantasy-hockey/")) {
       internalPath = internalPath.replace("/fantasy-hockey/", "/");
     }
 
     // 2. DATA ROUTES (KV)
-    
+
     // GET Route for Playoff Pool
     if (internalPath === "/playoff-get") {
-      // Note: This still uses the Header email for loading. 
-      // If you turn off Cloudflare Access, we'll need to update how this loads.
+      // If Cloudflare Access is OFF, this header is empty. 
+      // For now, we fetch based on the header, but we may want to change this to a query param later.
       const data = await env.PLAYOFF_DATA.get(userEmailHeader);
       return new Response(data || "{}", {
         headers: { "Content-Type": "application/json" }
@@ -22,7 +25,6 @@ export default {
     }
 
     // SUBMIT Route for Playoff Pool (The Password Bouncer)
-    
     if (internalPath === "/playoff-submit" && request.method === "POST") {
       try {
         const formData = await request.json();
@@ -32,12 +34,11 @@ export default {
           return new Response("Unauthorized: Incorrect League Password", { status: 401 });
         }
 
-        // Use the email from the FORM as the storage key (sanitized)
+        // Use the email from the FORM as the storage key
         const storageKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
-        
         formData.submittedAt = new Date().toISOString();
         
-        // Remove the password before storing in KV for security
+        // Security: Remove password before saving to database
         delete formData.password;
 
         await env.PLAYOFF_DATA.put(storageKey, JSON.stringify(formData));
@@ -51,7 +52,7 @@ export default {
       }
     }
 
-    // Original roster routes (for the main fantasy site)
+    // Original roster routes (Legacy/Main Site)
     if (internalPath.includes("/get-roster")) {
       const data = await env.PLAYOFF_DATA.get(userEmailHeader);
       return new Response(data || "{}", { headers: { "Content-Type": "application/json" } });
@@ -79,7 +80,7 @@ export default {
       }
     }
 
-    // 5. ASSET DELIVERY
+    // 5. ASSET DELIVERY (Final Fallback)
     const newUrl = new URL(url.origin);
     newUrl.pathname = internalPath;
     newUrl.search = url.search;
