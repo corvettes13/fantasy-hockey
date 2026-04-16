@@ -1,5 +1,5 @@
 // 1. CONFIGURATION & STATE
-const PLAYOFF_TEAMS = ['CAR','PIT','PHI','BUF','MTL','TBL','BOS','OTT','COL','DAL','MIN','VEG','EDM','ANA','UTA','LAK'];
+const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'BOS', 'OTT', 'CAR', 'PIT', 'PHI', 'WSH', 'COL', 'DAL', 'MIN', 'UTA', 'VEG', 'EDM', 'NSH', 'ANA', 'LAK'];
 
 const skaterStatIdMap = {
     0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
@@ -177,4 +177,132 @@ function renderTable() {
         const s = statsMap[p.player_id] || {};
         const gp = parseFloat(s.GP) || 0;
         const matchesName = p.full_name.toLowerCase().includes(nameFilter);
-        const matchesPos = !posFilter ? true : (posFilter === 'F'
+        const matchesPos = !posFilter ? true : (posFilter === 'F' ? ['C', 'LW', 'RW'].includes(p.position) : p.position === posFilter);
+        return matchesName && matchesPos && gp >= minGP;
+    });
+
+    filtered.sort((a, b) => {
+        const aS = statsMap[a.player_id] || {};
+        const bS = statsMap[b.player_id] || {};
+        let aVal = (currentSortKey === 'ATOI') ? atoiToSeconds(aS.ATOI) : parseFloat(aS[currentSortKey] || 0);
+        let bVal = (currentSortKey === 'ATOI') ? atoiToSeconds(bS.ATOI) : parseFloat(bS[currentSortKey] || 0);
+        return (aVal - bVal) * sortDirection;
+    });
+
+    tbody.innerHTML = '';
+    filtered.forEach(p => {
+        const s = statsMap[p.player_id] || {};
+        const isSelected = isAlreadyInRoster(p.player_id);
+        const row = document.createElement('tr');
+        if (isSelected) row.className = 'selected-row';
+
+        row.innerHTML = `
+            <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
+            <td class="player-cell">
+                <img src="${teamMap[p.team_abbr] || ''}" alt="logo">
+                <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
+                <span class="team-abbr">${p.team_abbr}</span>
+            </td>
+            <td>${p.position}</td>
+            <td>${s.GP || 0}</td>
+            ${p.position === 'G' ? `
+                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
+                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
+            ` : `
+                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
+                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
+            `}
+            <td>${s.FP || '0.0'}</td>
+            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// 6. BRACKET & CUP LOGIC
+window.updateBracket = function(seriesId, winner) {
+    if (!myEntry.bracket) myEntry.bracket = {};
+    myEntry.bracket[seriesId] = winner;
+};
+
+window.updateCupWinner = function(team) {
+    myEntry.cupWinner = team;
+};
+
+// 7. UTILITIES
+window.togglePlayer = function(id) {
+    const p = allPlayers.find(x => x.player_id == id);
+    if (!p) return;
+    const cat = p.position === 'G' ? 'G' : (p.position === 'D' ? 'D' : 'F');
+    if (isAlreadyInRoster(id)) {
+        myEntry.roster[cat] = myEntry.roster[cat].filter(x => x != id);
+    } else {
+        if (cat === 'F' && myEntry.roster.F.length >= 12) return alert("12 Forwards Max");
+        if (cat === 'D' && myEntry.roster.D.length >= 5) return alert("5 Defense Max");
+        if (cat === 'G' && myEntry.roster.G.length >= 3) return alert("3 Goalies Max");
+        myEntry.roster[cat].push(id);
+    }
+    updateCounts();
+    renderTable();
+};
+
+function updateCounts() {
+    ['F', 'D', 'G'].forEach(c => {
+        const el = document.getElementById(`count-${c}`);
+        if (el) el.innerText = myEntry.roster[c].length;
+    });
+    const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
+    const saveBtn = document.getElementById('save-entry');
+    if (saveBtn) saveBtn.disabled = (total !== 20);
+}
+
+function isAlreadyInRoster(id) {
+    return [...myEntry.roster.F, ...myEntry.roster.D, ...myEntry.roster.G].includes(id);
+}
+
+window.saveEntry = async function() {
+    myEntry.managerName = document.getElementById('manager-name').value.trim();
+    const cupSelect = document.getElementById('cup-winner');
+    if (cupSelect) myEntry.cupWinner = cupSelect.value;
+
+    if (!myEntry.managerName) return alert("Please enter a Manager Name.");
+    if (!myEntry.cupWinner) return alert("Please select a Stanley Cup winner.");
+    
+    const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
+    if (total !== 20) return alert("Roster must have exactly 20 players.");
+
+    try {
+        await fetch('/playoff-submit', { 
+            method: 'POST', 
+            body: JSON.stringify(myEntry),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        alert("Entry Saved!");
+    } catch (err) { alert("Save failed."); }
+};
+
+async function loadExistingEntry() {
+    try {
+        const res = await fetch('/playoff-get');
+        const data = await res.json();
+        if (data && data.roster) {
+            myEntry = data;
+            
+            // Populate UI
+            if (myEntry.managerName) document.getElementById('manager-name').value = myEntry.managerName;
+            if (myEntry.cupWinner) document.getElementById('cup-winner').value = myEntry.cupWinner;
+            
+            // Re-check radio buttons
+            if (myEntry.bracket) {
+                Object.keys(myEntry.bracket).forEach(seriesId => {
+                    const winner = myEntry.bracket[seriesId];
+                    const radio = document.querySelector(`input[name="${seriesId}"][value="${winner}"]`);
+                    if (radio) radio.checked = true;
+                });
+            }
+
+            updateCounts();
+            renderTable();
+        }
+    } catch (err) { console.log("No entry found."); }
+}
