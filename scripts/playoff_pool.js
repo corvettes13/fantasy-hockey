@@ -265,15 +265,13 @@ function isAlreadyInRoster(id) {
 }
 
 window.saveEntry = async function() {
-    // Capture data from UI
     myEntry.managerName = document.getElementById('manager-name').value.trim();
     myEntry.email = document.getElementById('user-email').value.toLowerCase().trim();
-    myEntry.password = document.getElementById('league-pass').value; // Don't trim passwords
+    myEntry.password = document.getElementById('league-pass').value;
     
     const cupSelect = document.getElementById('cup-winner');
     if (cupSelect) myEntry.cupWinner = cupSelect.value;
 
-    // Validation
     if (!myEntry.managerName || !myEntry.email || !myEntry.password) {
         return alert("Name, Email, and Password are required!");
     }
@@ -282,45 +280,47 @@ window.saveEntry = async function() {
     if (total !== 20) return alert("Roster must have 20 players.");
 
     try {
-            const res = await fetch('/playoff-submit', { 
-                method: 'POST', 
-                body: JSON.stringify(myEntry),
-                headers: { 'Content-Type': 'application/json' }
-            });
-            
-            if (res.status === 401) {
-                return alert("Incorrect League Password!");
-            }
+        const res = await fetch('/playoff-submit', { 
+            method: 'POST', 
+            body: JSON.stringify(myEntry),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        if (res.status === 401) return alert("Incorrect League Password!");
 
-            if (res.ok) {
-                // THIS IS THE KEY FIX:
-                const result = await res.json(); 
-                const entryId = result.entryId; 
-                
-                alert(`Entry Saved! Your unique Entry ID is: ${entryId}`);
-                
-                // Optional: Print the full link to the console for them
-                console.log("Share Link:", `${window.location.origin}/view-entry?id=${entryId}`);
-            } else {
-                alert("Save failed.");
-            }
-        } catch (err) { 
-            alert("Network error."); 
+        if (res.ok) {
+            const result = await res.json();
+            // Store email locally so the page remembers them
+            localStorage.setItem('savedEmail', myEntry.email);
+            
+            alert(`Entry Saved! Your unique Entry ID is: ${result.entryId}`);
+        } else {
+            alert("Save failed.");
         }
+    } catch (err) { alert("Network error."); }
 };
 
 async function loadExistingEntry() {
+    // 1. Check if we have a "remembered" email
+    let email = localStorage.getItem('savedEmail');
+
+    // 2. If no email in storage, don't try to fetch (keeps page clean for new users)
+    if (!email) return;
+
     try {
-        const res = await fetch('/playoff-get');
+        // We pass the email as a query parameter to the worker
+        const res = await fetch(`/playoff-get?email=${encodeURIComponent(email)}`);
         const data = await res.json();
+        
         if (data && data.roster) {
             myEntry = data;
             
-            // Populate UI
+            // Populate UI fields
             if (myEntry.managerName) document.getElementById('manager-name').value = myEntry.managerName;
+            if (myEntry.email) document.getElementById('user-email').value = myEntry.email;
             if (myEntry.cupWinner) document.getElementById('cup-winner').value = myEntry.cupWinner;
             
-            // Re-check radio buttons
+            // Re-check radio buttons for the bracket
             if (myEntry.bracket) {
                 Object.keys(myEntry.bracket).forEach(seriesId => {
                     const winner = myEntry.bracket[seriesId];
@@ -331,6 +331,9 @@ async function loadExistingEntry() {
 
             updateCounts();
             renderTable();
+            console.log("Welcome back! Your entry has been loaded.");
         }
-    } catch (err) { console.log("No entry found."); }
+    } catch (err) { 
+        console.log("No existing entry found for this user."); 
+    }
 }

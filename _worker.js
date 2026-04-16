@@ -58,10 +58,12 @@ export default {
             // 3. Dual-Storage
             // Store by email for the "Manager" to load/edit
             await env.PLAYOFF_DATA.put(emailKey, jsonString);
-            // Store by ID for public viewing
             await env.PLAYOFF_DATA.put(`id_${entryId}`, jsonString);
 
-            return new Response(JSON.stringify({ success: true, entryId: entryId }), {
+            return new Response(JSON.stringify({ 
+                success: true, 
+                entryId: entryId 
+            }), {
                 status: 200,
                 headers: { "Content-Type": "application/json" }
             });
