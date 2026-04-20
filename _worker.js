@@ -113,7 +113,28 @@ export default {
         });
     }
 
-    // 5. ASSET DELIVERY (Final Fallback)
+    if (internalPath === "/view-entry") {
+        const id = url.searchParams.get("id");
+        if (!id) return new Response("Missing ID", { status: 400 });
+
+        // Fetching the 'id_XXXXX' key you created in dual-storage
+        const data = await env.PLAYOFF_DATA.get(`id_${id}`);
+        
+        if (!data) return new Response("Entry not found", { status: 404 });
+
+        return new Response(data, {
+            headers: { 
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*" // Allows the JS fetch to work
+            }
+        });
+    }
+
+    // 5. ASSET DELIVERY
+    // Ensure that requests to /playoff_pool/ are routed to the static files
+    // If you are using a single entry.html template, we need to make sure 
+    // Cloudflare doesn't try to find a folder named '84831'
+    
     const newUrl = new URL(url.origin);
     newUrl.pathname = internalPath;
     newUrl.search = url.search;

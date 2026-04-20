@@ -311,3 +311,49 @@ tbody tr:hover {
   border-left: 4px solid #cc0000;
 }
 
+/* Styling for the combined Player Card cell */
+.player-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+    padding: 4px 8px;
+}
+
+.player-info-stack {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.player-info-stack a {
+    font-weight: bold;
+    color: #0055a5;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.player-info-stack .team-abbr {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+/* Ensure the table matches your layout request */
+.playoff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+}
+
+.playoff-table th {
+    background-color: #eaf0f6;
+    padding: 8px;
+    font-size: 0.8rem;
+    border-bottom: 2px solid #ddd;
+}
+
+.playoff-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
