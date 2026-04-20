@@ -7,7 +7,8 @@ async function init() {
     const entryId = params.get('id');
     
     if (!entryId) {
-        document.getElementById('roster-body').innerHTML = '<tr><td colspan="6">No Entry ID found.</td></tr>';
+        // Updated colspan to 7 to match your new table structure
+        document.getElementById('roster-body').innerHTML = '<tr><td colspan="7">No Entry ID found.</td></tr>';
         return;
     }
 
@@ -27,7 +28,8 @@ async function init() {
         renderEntry(entryData, playerMap, nhlTeamMap);
     } catch (err) {
         console.error(err);
-        document.getElementById('roster-body').innerHTML = `<tr><td colspan="6">Error: ${err.message}</td></tr>`;
+        // Updated colspan to 7
+        document.getElementById('roster-body').innerHTML = `<tr><td colspan="7">Error: ${err.message}</td></tr>`;
     }
 }
 
@@ -39,7 +41,7 @@ function renderEntry(data, playerMap, nhlTeamMap) {
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
 
     // Stanley Cup Pick + Logo
-    const cupWinnerAbbr = data.cupWinner; // e.g., "COL" or "OTT"
+    const cupWinnerAbbr = data.cupWinner;
     const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
     
     document.getElementById('display-cup').textContent = cupWinnerAbbr;
@@ -49,11 +51,11 @@ function renderEntry(data, playerMap, nhlTeamMap) {
         `;
     }
 
-    // Roster Table Rendering (Same as before)
+    // 1. Render Player Rows
     const rosterBody = document.getElementById('roster-body');
     rosterBody.innerHTML = ''; 
+    
     const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
-
     allIds.forEach(id => {
         const p = playerMap[id];
         const logo = p ? (nhlTeamMap[p.team_abbr] || '') : '';
@@ -69,14 +71,25 @@ function renderEntry(data, playerMap, nhlTeamMap) {
                     </div>
                 </td>
                 <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td style="color: #999;">—</td> 
                 <td><strong>0</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
     });
 
-    // Matchup Grid Rendering (Same as before)
+    // 2. Add Matchup Points Summary Row
+    const matchupRow = `
+        <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
+            <td style="text-align: left; padding-left: 10px; font-weight: bold;">Bracket Matchup Total</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td>
+            <td style="font-weight: bold; color: #0055a5;">0</td> 
+            <td style="background-color: #eaf0f6;"><strong>0</strong></td>
+        </tr>`;
+    rosterBody.insertAdjacentHTML('beforeend', matchupRow);
+
+    // 3. Matchup Grid
     const matchupContainer = document.getElementById('matchup-container');
-    matchupContainer.innerHTML = ''; // Clear previous
+    matchupContainer.innerHTML = '';
     const labels = {
         r1w1: "COL vs LAK", r1w2: "DAL vs MIN", r1w3: "VGK vs UTA", r1w4: "EDM vs ANA",
         r1e1: "CAR vs OTT", r1e2: "BUF vs BOS", r1e3: "TBL vs MTL", r1e4: "PIT vs PHI"
@@ -90,4 +103,5 @@ function renderEntry(data, playerMap, nhlTeamMap) {
     });
 }
 
+// Start the process
 init();
