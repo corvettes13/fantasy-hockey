@@ -35,12 +35,21 @@ function renderEntry(data, playerMap, nhlTeamMap) {
     // Sidebar & Header Info
     document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
     document.getElementById('display-manager').textContent = data.managerName;
-    document.getElementById('display-email').textContent = data.email;
-    document.getElementById('display-cup').textContent = data.cupWinner;
     document.getElementById('display-id').textContent = data.entryId;
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
 
-    // Roster Table
+    // Stanley Cup Pick + Logo
+    const cupWinnerAbbr = data.cupWinner; // e.g., "COL" or "OTT"
+    const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
+    
+    document.getElementById('display-cup').textContent = cupWinnerAbbr;
+    if (cupLogoUrl) {
+        document.getElementById('cup-logo-container').innerHTML = `
+            <img src="${cupLogoUrl}" alt="${cupWinnerAbbr}" style="width: 60px; height: auto; display: block; margin: 0 auto;">
+        `;
+    }
+
+    // Roster Table Rendering (Same as before)
     const rosterBody = document.getElementById('roster-body');
     rosterBody.innerHTML = ''; 
     const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
@@ -65,8 +74,9 @@ function renderEntry(data, playerMap, nhlTeamMap) {
         rosterBody.insertAdjacentHTML('beforeend', row);
     });
 
-    // Matchup Grid
+    // Matchup Grid Rendering (Same as before)
     const matchupContainer = document.getElementById('matchup-container');
+    matchupContainer.innerHTML = ''; // Clear previous
     const labels = {
         r1w1: "COL vs LAK", r1w2: "DAL vs MIN", r1w3: "VGK vs UTA", r1w4: "EDM vs ANA",
         r1e1: "CAR vs OTT", r1e2: "BUF vs BOS", r1e3: "TBL vs MTL", r1e4: "PIT vs PHI"
