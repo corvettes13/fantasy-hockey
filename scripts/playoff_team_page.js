@@ -36,6 +36,7 @@ async function init() {
         });
         
         renderEntry(entryData, playerMap, nhlTeamMap, statsMap);
+        makeTableSortable();
     } catch (err) {
         console.error(err);
         document.getElementById('roster-body').innerHTML = `<tr><td colspan="7">Error loading data: ${err.message}</td></tr>`;
@@ -85,12 +86,12 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
                         <span style="font-size:0.7rem; color:#666;">${p?.team_abbr || '---'} | ${p?.position || '---'}</span>
                     </div>
                 </td>
-                <td>${pts.r1}</td>
-                <td>${pts.r2}</td>
-                <td>${pts.r3}</td>
-                <td>${pts.r4}</td>
-                <td style="color: #999;">—</td> 
-                <td><strong>${pts.total}</strong></td>
+                  <td>${pts.r1.toFixed(1)}</td>
+                  <td>${pts.r2.toFixed(1)}</td>
+                  <td>${pts.r3.toFixed(1)}</td>
+                  <td>${pts.r4.toFixed(1)}</td>
+                  <td style="color: #999;">—</td> 
+                  <td><strong>${pts.total.toFixed(1)}</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
     });

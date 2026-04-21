@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (posFilter) posFilter.addEventListener('change', renderTable);
     if (nameFilter) nameFilter.addEventListener('input', renderTable);
+
 });
 
 async function initData() {
@@ -262,6 +263,51 @@ function updateCounts() {
 
 function isAlreadyInRoster(id) {
     return [...myEntry.roster.F, ...myEntry.roster.D, ...myEntry.roster.G].includes(id);
+}
+
+function makeTableSortable() {
+    const table = document.querySelector('table');
+    const headers = table.querySelectorAll('th');
+    const tbody = table.querySelector('tbody');
+
+    headers.forEach((header, index) => {
+        // Only allow sorting on columns that aren't empty (skip the spacer column)
+        if (header.textContent.trim() === "" || header.textContent.includes("—")) return;
+
+        header.style.cursor = 'pointer';
+        header.title = "Click to sort";
+
+        header.addEventListener('click', () => {
+            const rows = Array.from(tbody.querySelectorAll('tr:not(.summary-row)')); // Don't sort the total row at the bottom
+            const isAscending = header.classList.contains('sort-asc');
+            
+            // Remove sort classes from all headers
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+
+            rows.sort((a, b) => {
+                let cellA = a.children[index].textContent.trim();
+                let cellB = b.children[index].textContent.trim();
+
+                // Convert to numbers for points columns
+                const valA = isNaN(cellA) ? cellA.toLowerCase() : parseFloat(cellA);
+                const valB = isNaN(cellB) ? cellB.toLowerCase() : parseFloat(cellB);
+
+                if (valA < valB) return isAscending ? 1 : -1;
+                if (valA > valB) return isAscending ? -1 : 1;
+                return 0;
+            });
+
+            // Update classes for next click
+            header.classList.add(isAscending ? 'sort-desc' : 'sort-asc');
+
+            // Re-append rows in new order
+            rows.forEach(row => tbody.appendChild(row));
+            
+            // Keep the summary row at the very bottom
+            const summaryRow = tbody.querySelector('tr[style*="border-top"]');
+            if (summaryRow) tbody.appendChild(summaryRow);
+        });
+    });
 }
 
 window.saveEntry = async function() {

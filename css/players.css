@@ -357,3 +357,15 @@ tbody tr:hover {
     border-bottom: 1px solid #eee;
     text-align: center;
 }
+
+th.sort-asc::after {
+    content: " ▲";
+    font-size: 0.7rem;
+}
+th.sort-desc::after {
+    content: " ▼";
+    font-size: 0.7rem;
+}
+th:hover {
+    background-color: #f1f1f1;
+}
