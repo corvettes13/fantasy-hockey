@@ -38,13 +38,12 @@ async function initStandings() {
         const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         const statsMap = {};
-        [...skatersRes, ...goaliesRes].forEach(p => { 
-            statsMap[p.Player] = p.fantasy_points; 
-        });
+        [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
 
-        const teamPickCounts = {};
+        // NEW: Track Stanley Cup Winner Pick frequency
+        const cupPickCounts = {};
         const playerPickCounts = {};
-        const eliminatedTeams = []; // Add abbreviations here when teams lose
+        const eliminatedTeams = [];
 
         const standings = entriesRes.map(entry => {
             let rPoints = { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
@@ -55,29 +54,23 @@ async function initStandings() {
                 const pInfo = playerInfoMap[id];
                 const pts = statsMap[pInfo?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
                 
-                rPoints.r1 += pts.r1; 
-                rPoints.r2 += pts.r2; 
-                rPoints.r3 += pts.r3; 
-                rPoints.r4 += pts.r4;
+                rPoints.r1 += pts.r1; rPoints.r2 += pts.r2; rPoints.r3 += pts.r3; rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
-                // Count as Alive if team not eliminated
-                if (pInfo && !eliminatedTeams.includes(pInfo.team_abbr)) {
-                    aliveCount++;
-                }
-
-                // Track team popularity (only for the rostered players)
-                if (pInfo?.team_abbr) {
-                    teamPickCounts[pInfo.team_abbr] = (teamPickCounts[pInfo.team_abbr] || 0) + 1;
-                }
-                // Track individual player frequency
+                if (pInfo && !eliminatedTeams.includes(pInfo.team_abbr)) aliveCount++;
+                
+                // Keep tracking player popularity
                 if (id) {
                     playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
                 }
             });
 
-            // Handle Cup Bonus
+            // TRACK CUP WINNER POPULARITY HERE
             const cupAbbr = entry.cupWinner;
+            if (cupAbbr) {
+                cupPickCounts[cupAbbr] = (cupPickCounts[cupAbbr] || 0) + 1;
+            }
+
             const cupData = CUP_VALUES[cupAbbr] || { name: cupAbbr, pts: 0 };
             let cupBonus = (CHAMPION_DETERMINED === cupAbbr) ? cupData.pts : 0;
 
@@ -86,46 +79,20 @@ async function initStandings() {
                 id: entry.entryId,
                 grandTotal: rPoints.total + cupBonus,
                 active: aliveCount,
-                r1: rPoints.r1, 
-                r2: rPoints.r2, 
-                r3: rPoints.r3, 
-                r4: rPoints.r4,
+                r1: rPoints.r1, r2: rPoints.r2, r3: rPoints.r3, r4: rPoints.r4,
                 cupWinnerStr: `${cupData.name} (${cupData.pts} pts)`
             };
         });
 
-        // Sort by Grand Total
         standings.sort((a, b) => b.grandTotal - a.grandTotal);
         
         renderTable(standings);
-        renderPopularTeams(teamPickCounts, nhlTeamMap);
+        renderPopularTeams(cupPickCounts, nhlTeamMap); // Now passing cup winner counts
         renderPopularPlayers(playerPickCounts, playerInfoMap);
 
     } catch (err) {
-        console.error("Error in initStandings:", err);
-        const tbody = document.getElementById('standings-body');
-        if (tbody) tbody.innerHTML = `<tr><td colspan="10" style="color:red;">Error: ${err.message}</td></tr>`;
+        console.error(err);
     }
-}
-
-function renderPopularPlayers(counts, infoMap) {
-    const body = document.getElementById('popular-players-body');
-    if (!body) return;
-
-    const sortedPlayers = Object.entries(counts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 20);
-    
-    body.innerHTML = sortedPlayers.map(([id, count]) => {
-        const p = infoMap[id];
-        return `
-            <tr>
-                <td style="text-align: left; font-weight: bold; font-size: 0.85rem;">${p?.full_name || 'Unknown'}</td>
-                <td style="text-align: left; font-size: 0.75rem; color: #666;">${p?.team_abbr || '---'} | ${p?.position || '---'}</td>
-                <td style="font-weight: bold;">${count}</td>
-            </tr>
-        `;
-    }).join('');
 }
 
 function renderPopularTeams(counts, logoMap) {
@@ -136,14 +103,40 @@ function renderPopularTeams(counts, logoMap) {
     
     body.innerHTML = sortedTeams.map(([teamAbbr, count]) => {
         const logoUrl = logoMap[teamAbbr] || '';
+        const teamName = CUP_VALUES[teamAbbr]?.name || teamAbbr;
         return `
             <tr>
-                <td style="text-align: left; display: flex; align-items: center; gap: 10px; font-weight: bold;">
-                    <img src="${logoUrl}" alt="${teamAbbr}" style="width: 25px; height: auto;">
-                    ${teamAbbr}
+                <td style="text-align: left; display: flex; align-items: center; gap: 15px; font-weight: bold;">
+                    <img src="${logoUrl}" alt="${teamAbbr}" style="width: 40px; height: auto;">
+                    ${teamName}
                 </td>
-                <td style="font-weight: bold;">${count}</td>
+                <td style="font-weight: bold; font-size: 1.2rem;">${count}</td>
             </tr>
+        `;
+    }).join('');
+}
+
+function renderPopularPlayers(counts, infoMap, logoMap) {
+    const grid = document.getElementById('popular-players-grid');
+    if (!grid) return;
+
+    const sortedPlayers = Object.entries(counts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 20);
+    
+    grid.innerHTML = sortedPlayers.map(([id, count]) => {
+        const p = infoMap[id];
+        const teamLogo = logoMap[p?.team_abbr] || '';
+        
+        return `
+            <div class="popular-player-card">
+                <div class="pick-count-badge">${count}</div>
+                <img src="${teamLogo}" class="team-logo" alt="${p?.team_abbr}">
+                <div class="player-info">
+                    <span class="player-name">${p?.full_name || 'Unknown'}</span>
+                    <span class="player-meta">${p?.team_abbr || '---'} | ${p?.position || '---'}</span>
+                </div>
+            </div>
         `;
     }).join('');
 }

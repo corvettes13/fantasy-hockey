@@ -24,6 +24,76 @@
     /* Sorting Indicators */
     th.sort-asc::after { content: " ▲"; font-size: 0.7rem; }
     th.sort-desc::after { content: " ▼"; font-size: 0.7rem; }
+    
+    /* Make the Stanley Cup Picks table rows larger and clearer */
+    #popular-picks-body tr {
+        height: 60px; /* Much taller than standard rows */
+    }
+
+    #popular-picks-body td {
+        font-size: 1.1rem;
+        vertical-align: middle;
+    }
+
+    /* Player Card Container Grid */
+    #popular-players-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 15px;
+        margin-top: 10px;
+    }
+
+    /* Player Card Styling (Matching your team entry pages) */
+    .popular-player-card {
+        display: flex;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 10px;
+        position: relative;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .popular-player-card img.team-logo {
+        width: 35px;
+        height: auto;
+        margin-right: 12px;
+    }
+
+    .popular-player-card .player-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+    }
+
+    .popular-player-card .player-name {
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: #0055a5;
+    }
+
+    .popular-player-card .player-meta {
+        font-size: 0.75rem;
+        color: #666;
+    }
+
+    .popular-player-card .pick-count-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #0055a5;
+        color: white;
+        font-size: 0.75rem;
+        font-weight: bold;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+    }
   </style>
 </head>
 <body class="players-page">
@@ -61,11 +131,11 @@
           </tbody>
         </table>
       </div>
-      <div class="summary-tables" style="display: flex; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
+      <div class="summary-tables" style="display: flex; gap: 40px; margin-bottom: 30px; flex-wrap: wrap; align-items: flex-start;">
         
-        <div id="popular-teams-section">
+        <div id="popular-teams-section" style="flex: 0 0 350px;">
           <h2>Stanley Cup Picks</h2>
-          <table class="players-table" style="width: auto; min-width: 250px;">
+          <table class="players-table">
             <thead>
               <tr>
                 <th style="text-align: left;">Team</th>
@@ -76,20 +146,11 @@
           </table>
         </div>
 
-        <div id="popular-players-section">
-          <h2>Top 20 Players</h2>
-          <table class="players-table" style="width: auto; min-width: 400px;">
-            <thead>
-              <tr>
-                <th style="text-align: left;">Player</th>
-                <th style="text-align: left;">Team | Pos</th>
-                <th>Picks</th>
-              </tr>
-            </thead>
-            <tbody id="popular-players-body"></tbody>
-          </table>
-        </div>
-      </div>   
+        <div id="popular-players-section" style="flex: 1; min-width: 400px;">
+          <h2>Top 20 Rostered Players</h2>
+          <div id="popular-players-grid"></div> </div>
+
+      </div>
     </div>
   </div>
 
