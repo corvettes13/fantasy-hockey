@@ -4,6 +4,11 @@ const GOALIE_STATS = '/fantasy-hockey/data/2026_playoff_goalie_stats.json';
 const PLAYERS_JSON = '/fantasy-hockey/data/players.json';
 const TEAMS_JSON = '/fantasy-hockey/teams/nhl_teams.json';
 
+function normalizeName(name) {
+    if (!name) return "";
+    return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 const CUP_VALUES = {
     "COL": { name: "Colorado", pts: 50 },
     "TBL": { name: "Tampa Bay", pts: 59 },
@@ -25,8 +30,6 @@ const CUP_VALUES = {
 
 const CHAMPION_DETERMINED = null; 
 
-// ... (Keep your constants and CUP_VALUES at the top)
-
 async function initStandings() {
     try {
         const [entriesRes, skatersRes, goaliesRes, playersRes, nhlTeamsRes] = await Promise.all([
@@ -39,6 +42,7 @@ async function initStandings() {
 
         const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
+        
         const statsMap = {};
         [...skatersRes, ...goaliesRes].forEach(p => { 
             statsMap[p.Player] = p.fantasy_points; 
@@ -55,34 +59,33 @@ async function initStandings() {
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             allIds.forEach(id => {
                 let pts;
-                let teamAbbr; // Define this at the top of the loop so it's available to everyone
+                let teamAbbr;
+                let lookupName;
 
                 const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
 
                 if (isGoalieTeam) {
-                    // GOALIE LOGIC
                     teamAbbr = id.split('_')[1]; 
-                    pts = statsMap[id] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                    lookupName = id; // e.g. "G_COL"
                 } else {
-                    // SKATER LOGIC
-                    const pInfo = playerInfoMap[id]; // pInfo is only defined here...
-                    teamAbbr = pInfo?.team_abbr;    // ...but we save the team_abbr to our shared variable
-                    pts = statsMap[pInfo?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                    const pInfo = playerInfoMap[id];
+                    teamAbbr = pInfo?.team_abbr;
+                    // Normalize the name from the players.json to match the stats file
+                    lookupName = pInfo?.full_name ? normalizeName(pInfo.full_name) : 'Unknown';
                 }
 
-                // SCORING
+                pts = statsMap[lookupName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                
                 rPoints.r1 += pts.r1; 
                 rPoints.r2 += pts.r2; 
                 rPoints.r3 += pts.r3; 
                 rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
-                // ALIVE COUNT (Now uses the shared 'teamAbbr' variable)
                 if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
                     aliveCount++;
                 }
 
-                // POPULARITY
                 if (id) {
                     playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
                 }
@@ -108,11 +111,40 @@ async function initStandings() {
         
         renderTable(standings);
         renderPopularTeams(cupPickCounts, nhlTeamMap); 
-        renderPopularPlayers(playerPickCounts, playerInfoMap, nhlTeamMap); // Pass nhlTeamMap here
+        renderPopularPlayers(playerPickCounts, playerInfoMap, nhlTeamMap);
 
     } catch (err) {
         console.error(err);
     }
+}
+
+// Ensure normalizeName is also used in the grid display
+function renderPopularPlayers(counts, infoMap, logoMap) {
+    const grid = document.getElementById('popular-players-grid');
+    if (!grid) return;
+
+    const sortedPlayers = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 20);
+    
+    grid.innerHTML = sortedPlayers.map(([id, count]) => {
+        const isGoalieTeam = id.startsWith('G_');
+        const p = infoMap[id];
+        
+        // Use normalized name for display as well so it looks consistent
+        const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : normalizeName(p?.full_name || 'Unknown');
+        const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '');
+        const teamLogo = logoMap[teamAbbr] || '';
+        
+        return `
+            <div class="popular-player-card">
+                <div class="pick-count-badge">${count}</div>
+                <img src="${teamLogo}" class="team-logo" alt="${teamAbbr}">
+                <div class="player-info">
+                    <span class="player-name">${displayName}</span>
+                    <span class="player-meta">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function renderPopularTeams(counts, logoMap) {
@@ -134,33 +166,6 @@ function renderPopularTeams(counts, logoMap) {
                 </td>
                 <td style="font-weight: bold; font-size: 1.2rem; vertical-align: middle;">${count}</td>
             </tr>
-        `;
-    }).join('');
-}
-
-function renderPopularPlayers(counts, infoMap, logoMap) {
-    const grid = document.getElementById('popular-players-grid');
-    if (!grid) return;
-
-    const sortedPlayers = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 20);
-    
-    grid.innerHTML = sortedPlayers.map(([id, count]) => {
-        const isGoalieTeam = id.startsWith('G_');
-        const p = infoMap[id];
-        
-        const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : (p?.full_name || 'Unknown');
-        const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '');
-        const teamLogo = logoMap[teamAbbr] || '';
-        
-        return `
-            <div class="popular-player-card">
-                <div class="pick-count-badge">${count}</div>
-                <img src="${teamLogo}" class="team-logo" alt="${teamAbbr}">
-                <div class="player-info">
-                    <span class="player-name">${displayName}</span>
-                    <span class="player-meta">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
-                </div>
-            </div>
         `;
     }).join('');
 }
