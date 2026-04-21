@@ -31,8 +31,12 @@
     }
 
     #popular-picks-body td {
+        height: auto !important;      /* Reset the 0 height */
+        max-height: none !important;  /* Reset the 0 max-height */
+        overflow: visible !important; /* Ensure logos/text aren't clipped */
+        padding: 10px 15px !important; 
+        vertical-align: middle !important;
         font-size: 1.1rem;
-        vertical-align: middle;
     }
 
     /* Player Card Container Grid */
@@ -98,10 +102,9 @@
       height: 70px !important; /* Increased for better visibility */
     }
 
-    #popular-picks-body td {
-        padding: 10px 15px !important; /* Force padding to create space */
-        vertical-align: middle !important;
-        font-size: 1.1rem;
+    #popular-picks-body td style*="display: flex" {
+        align-items: center !important;
+        height: 100%;
     }
 
     #popular-picks-body img {
