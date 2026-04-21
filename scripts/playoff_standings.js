@@ -99,15 +99,16 @@ function renderPopularTeams(counts, logoMap) {
     
     body.innerHTML = sortedTeams.map(([teamAbbr, count]) => {
         const logoUrl = logoMap[teamAbbr] || '';
-        // Safe check for name in CUP_VALUES
         const teamName = CUP_VALUES[teamAbbr] ? CUP_VALUES[teamAbbr].name : teamAbbr;
         return `
             <tr>
-                <td style="text-align: left; display: flex; align-items: center; gap: 15px; font-weight: bold;">
-                    <img src="${logoUrl}" alt="${teamAbbr}">
-                    ${teamName}
+                <td style="text-align: left;">
+                    <div style="display: flex; align-items: center; gap: 15px; font-weight: bold; min-height: 50px;">
+                        <img src="${logoUrl}" alt="${teamAbbr}" style="width: 45px; height: auto;">
+                        <span>${teamName}</span>
+                    </div>
                 </td>
-                <td style="font-weight: bold; font-size: 1.2rem;">${count}</td>
+                <td style="font-weight: bold; font-size: 1.2rem; vertical-align: middle;">${count}</td>
             </tr>
         `;
     }).join('');
