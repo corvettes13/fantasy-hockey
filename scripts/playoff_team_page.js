@@ -1,22 +1,25 @@
 const WORKER_ENDPOINT = '/view-entry';
 const PLAYERS_JSON = '/fantasy-hockey/data/players.json';
 const TEAMS_JSON = '/fantasy-hockey/teams/nhl_teams.json';
+const SKATER_STATS_JSON = '/fantasy-hockey/data/2026_playoff_skater_stats.json';
+const GOALIE_STATS_JSON = '/fantasy-hockey/data/2026_playoff_goalie_stats.json';
 
 async function init() {
     const params = new URLSearchParams(window.location.search);
     const entryId = params.get('id');
     
     if (!entryId) {
-        // Updated colspan to 7 to match your new table structure
         document.getElementById('roster-body').innerHTML = '<tr><td colspan="7">No Entry ID found.</td></tr>';
         return;
     }
 
     try {
-        const [entryRes, playersRes, nhlTeamsRes] = await Promise.all([
+        const [entryRes, playersRes, nhlTeamsRes, skaterStatsRes, goalieStatsRes] = await Promise.all([
             fetch(`${WORKER_ENDPOINT}?id=${entryId}`),
             fetch(PLAYERS_JSON).then(res => res.json()),
-            fetch(TEAMS_JSON).then(res => res.json())
+            fetch(TEAMS_JSON).then(res => res.json()),
+            fetch(SKATER_STATS_JSON).then(res => res.json()),
+            fetch(GOALIE_STATS_JSON).then(res => res.json())
         ]);
 
         if (!entryRes.ok) throw new Error("Entry not found.");
@@ -25,11 +28,17 @@ async function init() {
         const playerMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
 
-        renderEntry(entryData, playerMap, nhlTeamMap);
+        // Combine Skaters and Goalies into one map indexed by Name
+        // This is where we get the .fantasy_points object we created in Python
+        const statsMap = {};
+        [...skaterStatsRes, ...goalieStatsRes].forEach(p => {
+            statsMap[p.Player] = p.fantasy_points;
+        });
+
+        renderEntry(entryData, playerMap, nhlTeamMap, statsMap);
     } catch (err) {
         console.error(err);
-        // Updated colspan to 7
-        document.getElementById('roster-body').innerHTML = `<tr><td colspan="7">Error: ${err.message}</td></tr>`;
+        document.getElementById('roster-body').innerHTML = `<tr><td colspan="7">Error loading data: ${err.message}</td></tr>`;
     }
 }
 
@@ -58,6 +67,10 @@ function renderEntry(data, playerMap, nhlTeamMap) {
     const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
     allIds.forEach(id => {
         const p = playerMap[id];
+        
+        // Find points in the statsMap using the player's full name
+        const pts = statsMap[p?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        
         const logo = p ? (nhlTeamMap[p.team_abbr] || '') : '';
         const row = `
             <tr>
@@ -70,9 +83,12 @@ function renderEntry(data, playerMap, nhlTeamMap) {
                         <span style="font-size:0.7rem; color:#666;">${p?.team_abbr || '---'} | ${p?.position || '---'}</span>
                     </div>
                 </td>
-                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td>${pts.r1}</td>
+                <td>${pts.r2}</td>
+                <td>${pts.r3}</td>
+                <td>${pts.r4}</td>
                 <td style="color: #999;">—</td> 
-                <td><strong>0</strong></td>
+                <td><strong>${pts.total}</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
     });
