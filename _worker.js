@@ -99,6 +99,25 @@ export default {
         return new Response("Access Denied: You can only manage your own team.", { status: 403 });
       }
     }
+    
+    // Inside your Worker's fetch handler
+    if (url.pathname === '/list-entries') {
+      // 1. Get all keys in your KV namespace
+      const list = await env.PLAYOFF_DATA.list();
+      
+      // 2. Fetch the actual data for each key
+      const entries = await Promise.all(
+        list.keys.map(async (key) => {
+          const data = await env.PLAYOFF_DATA.get(key.name);
+          return JSON.parse(data);
+        })
+      );
+
+      // 3. Return the array to your standings page
+      return new Response(JSON.stringify(entries), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
     // NEW: Public viewing route
     if (internalPath === "/view-entry") {
