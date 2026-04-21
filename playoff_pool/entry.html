@@ -7,13 +7,55 @@
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
   <style>
-    .pool-wrapper { display: flex; gap: 20px; align-items: flex-start; margin-top: 10px; }
-    .main-content { flex: 1; min-width: 0; }
-    .roster-sidebar { 
-      flex: 0 0 300px; position: sticky; top: 10px; 
-      background: #fdfdfd; padding: 15px; border: 1px solid #ddd; 
-      border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    /* Base Layout */
+    .pool-wrapper { 
+      display: flex; 
+      gap: 20px; 
+      align-items: flex-start; 
+      margin-top: 10px; 
     }
+
+    .main-content { 
+      flex: 1; 
+      min-width: 0; 
+      width: 100%; /* Ensure it takes full width */
+    }
+
+    .roster-sidebar { 
+      flex: 0 0 300px; 
+      position: sticky; 
+      top: 10px; 
+      background: #fdfdfd; 
+      padding: 15px; 
+      border: 1px solid #ddd; 
+      border-radius: 4px; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .pool-wrapper {
+        flex-direction: column-reverse; /* Moves Sidebar to top, Table to bottom */
+      }
+
+      .roster-sidebar {
+        flex: none;
+        width: 100%;
+        position: static; /* Sticky doesn't work well in column flow on mobile */
+        box-sizing: border-box;
+      }
+
+      .table-wrapper {
+        overflow-x: auto; /* Adds horizontal scroll if table is too wide */
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        min-width: 600px; /* Prevents the columns from getting "squished" */
+      }
+    }
+
+    /* Styling remains the same */
     .roster-sidebar h2 { font-size: 1.1rem; color: #0055a5; margin-top: 0; }
     .info-label { font-size: 0.75rem; font-weight: bold; color: #666; display: block; margin-bottom: 2px; }
     .info-value { font-size: 0.9rem; margin-bottom: 15px; color: #222; word-break: break-all; }
