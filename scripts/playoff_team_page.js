@@ -76,43 +76,43 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
         
         allIds.forEach(id => {
-            const p = playerMap[id];
-            const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
-            
-            // Normalize the name from playerMap before looking it up in statsMap
-            const cleanPlayerName = p?.full_name ? normalizeName(p.full_name) : 'Unknown';
-            
-            const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
-            const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
-            const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
-            
-            // --- UPDATED STATS LOOKUP ---
-            // We use the normalized cleanPlayerName to match the Python-generated stats
-            const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+          const p = playerMap[id];
+          const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
+          
+          // Normalize the name from playerMap before looking it up in statsMap
+          const cleanPlayerName = p?.full_name ? normalizeName(p.full_name) : 'Unknown';
+          
+          const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
+          const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
+          const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
+          
+          // --- UPDATED STATS LOOKUP ---
+          // We use the normalized cleanPlayerName to match the Python-generated stats
+          const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
 
-            rosterTotal += pts.total;
-            const logo = nhlTeamMap[teamAbbr] || '';
-            
-            const row = `
-                <tr>
-                  <td class="player-cell">
-                      <img src="${logo}" alt="logo" style="width:28px; height:28px;" />
-                      <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
-                          <a href="${displayLink}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
-                              ${displayName}
-                          </a>
-                          <span style="font-size:0.7rem; color:#666;">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
-                      </div>
-                  </td>
-                  <td>${pts.r1.toFixed(1)}</td>
-                  <td>${pts.r2.toFixed(1)}</td>
-                  <td>${pts.r3.toFixed(1)}</td>
-                  <td>${pts.r4.toFixed(1)}</td>
-                  <td style="color: #999;">—</td> 
-                  <td><strong>${pts.total.toFixed(1)}</strong></td>
-                </tr>`;
-            rosterBody.insertAdjacentHTML('beforeend', row);
-        });
+          rosterTotal += pts.total;
+          const logo = nhlTeamMap[teamAbbr] || '';
+          
+          const row = `
+            <tr>
+              <td class="player-cell">
+                  <img src="${logo}" alt="logo" style="width:28px; height:28px;" />
+                  <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
+                      <a href="${displayLink}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
+                          ${displayName}
+                      </a>
+                      <span style="font-size:0.7rem; color:#666;">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
+                  </div>
+              </td>
+              <td>${pts.r1.toFixed(1)}</td>
+              <td>${pts.r2.toFixed(1)}</td>
+              <td>${pts.r3.toFixed(1)}</td>
+              <td>${pts.r4.toFixed(1)}</td>
+              <td style="color: #999;">—</td> 
+              <td><strong>${pts.total.toFixed(1)}</strong></td>
+            </tr>`;
+        rosterBody.insertAdjacentHTML('beforeend', row);
+      });
 
     // 4. Add Matchup Points Summary Row
     const bracketTotal = 0;
