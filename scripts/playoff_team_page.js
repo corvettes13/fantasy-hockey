@@ -96,7 +96,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     // 2. Add Matchup Points Summary Row
     const matchupRow = `
         <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
-            <td style="text-align: left; padding-left: 10px; font-weight: bold;">Bracket Matchup Total</td>
+            <td style="text-align: left; padding-left: 10px; font-weight: bold;">Matchup Picks Total</td>
             <td>-</td><td>-</td><td>-</td><td>-</td>
             <td style="font-weight: bold; color: #0055a5;">0</td> 
             <td style="background-color: #eaf0f6;"><strong>0</strong></td>
