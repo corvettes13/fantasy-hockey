@@ -55,26 +55,36 @@ async function initStandings() {
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             allIds.forEach(id => {
                 let pts;
-                let teamAbbr;
+                let teamAbbr; // Define this at the top of the loop so it's available to everyone
 
-                // --- APPLY CHANGE HERE ---
                 const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
 
                 if (isGoalieTeam) {
+                    // GOALIE LOGIC
                     teamAbbr = id.split('_')[1]; 
                     pts = statsMap[id] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
                 } else {
-                    const pInfo = playerInfoMap[id];
-                    teamAbbr = pInfo?.team_abbr;
+                    // SKATER LOGIC
+                    const pInfo = playerInfoMap[id]; // pInfo is only defined here...
+                    teamAbbr = pInfo?.team_abbr;    // ...but we save the team_abbr to our shared variable
                     pts = statsMap[pInfo?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
                 }
-                
-                rPoints.r1 += pts.r1; rPoints.r2 += pts.r2; rPoints.r3 += pts.r3; rPoints.r4 += pts.r4;
+
+                // SCORING
+                rPoints.r1 += pts.r1; 
+                rPoints.r2 += pts.r2; 
+                rPoints.r3 += pts.r3; 
+                rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
-                if (pInfo && !eliminatedTeams.includes(pInfo.team_abbr)) aliveCount++;
+                // ALIVE COUNT (Now uses the shared 'teamAbbr' variable)
+                if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
+                    aliveCount++;
+                }
+
+                // POPULARITY
                 if (id) {
-                  playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
+                    playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
                 }
             });
 
