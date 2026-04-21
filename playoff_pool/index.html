@@ -98,13 +98,17 @@
         justify-content: center;
         border: 2px solid white;
     }
-    #popular-picks-body tr {
-      height: 70px !important; /* Increased for better visibility */
+    #popular-picks-body td {
+        height: auto !important;          /* Reset the 0 height from players.css */
+        max-height: none !important;      /* Reset the max-height */
+        padding: 10px 15px !important;    /* Add breathing room */
+        vertical-align: middle !important; /* Centers the 'Picks' number */
+        border-bottom: 1px solid #ddd;
+        overflow: visible !important;
     }
 
-    #popular-picks-body td style*="display: flex" {
-        align-items: center !important;
-        height: 100%;
+    #popular-picks-body tr {
+        height: 70px !important;          /* Explicit row height */
     }
 
     #popular-picks-body img {
