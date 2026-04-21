@@ -27,19 +27,21 @@ const CHAMPION_DETERMINED = null; // Set to "COL" etc.
 
 async function initStandings() {
     try {
-        const [entriesRes, skatersRes, goaliesRes, playersRes] = await Promise.all([
+        const [entriesRes, skatersRes, goaliesRes, playersRes, nhlTeamsRes] = await Promise.all([
             fetch('/list-entries').then(res => res.json()),
             fetch('../data/2026_playoff_skater_stats.json').then(res => res.json()),
             fetch('../data/2026_playoff_goalie_stats.json').then(res => res.json()),
-            fetch('../data/players.json').then(res => res.json())
+            fetch('../data/players.json').then(res => res.json()),
+            fetch('../teams/nhl_teams.json').then(res => res.json()) // Fetch teams for logos
         ]);
 
         const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
+        const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         const statsMap = {};
         [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
 
         const teamPickCounts = {};
-        const playerPickCounts = {}; // Track individual player frequency
+        const playerPickCounts = {};
 
         const standings = entriesRes.map(entry => {
             let rPoints = { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
@@ -54,12 +56,9 @@ async function initStandings() {
                 rPoints.total += pts.total;
                 if (pts.total > 0) activeCount++;
 
-                // Track team popularity
                 if (pInfo?.team_abbr) {
                     teamPickCounts[pInfo.team_abbr] = (teamPickCounts[pInfo.team_abbr] || 0) + 1;
                 }
-
-                // Track player popularity
                 if (id) {
                     playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
                 }
@@ -82,8 +81,8 @@ async function initStandings() {
         standings.sort((a, b) => b.grandTotal - a.grandTotal);
         
         renderTable(standings);
-        renderPopularTeams(teamPickCounts);
-        renderPopularPlayers(playerPickCounts, playerInfoMap); // New Call
+        renderPopularTeams(teamPickCounts, nhlTeamMap); // Pass the logo map
+        renderPopularPlayers(playerPickCounts, playerInfoMap);
 
     } catch (err) {
         console.error(err);
@@ -115,16 +114,25 @@ function renderPopularPlayers(counts, infoMap) {
     }).join('');
 }
 
-function renderPopularTeams(counts) {
+function renderPopularTeams(counts, logoMap) {
     const body = document.getElementById('popular-picks-body');
-    const sortedTeams = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    if (!body) return;
+
+    // Remove .slice(0, 5) to show all teams
+    const sortedTeams = Object.entries(counts).sort((a, b) => b[1] - a[1]);
     
-    body.innerHTML = sortedTeams.map(([team, count]) => `
-        <tr>
-            <td style="text-align: left; font-weight: bold;">${team}</td>
-            <td>${count}</td>
-        </tr>
-    `).join('');
+    body.innerHTML = sortedTeams.map(([teamAbbr, count]) => {
+        const logoUrl = logoMap[teamAbbr] || '';
+        return `
+            <tr>
+                <td style="text-align: left; display: flex; align-items: center; gap: 10px; font-weight: bold;">
+                    <img src="${logoUrl}" alt="${teamAbbr}" style="width: 25px; height: auto;">
+                    ${teamAbbr}
+                </td>
+                <td style="font-weight: bold;">${count}</td>
+            </tr>
+        `;
+    }).join('');
 }
 
 function renderTable(standings) {
@@ -163,12 +171,14 @@ async function initStandings() {
         [...skatersRes, ...goaliesRes].forEach(p => {
             statsMap[p.Player] = p.fantasy_points;
         });
-
+        
+        const eliminatedTeams = [];
         // Calculate data for each manager
         const standings = entriesRes.map(entry => {
             let r1 = 0, r2 = 0, r3 = 0, r4 = 0, totalRoster = 0;
             let activePlayersCount = 0;
-            const eliminatedTeams = [];
+            
+            let aliveCount = 0;
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             
             allIds.forEach(id => {
