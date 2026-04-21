@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NHL Playoff Pool Standings</title>
+  <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
+  <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
+  <style>
+    .pool-wrapper { display: flex; gap: 20px; align-items: flex-start; margin-top: 10px; }
+    .main-content { flex: 1; min-width: 0; }
+    .roster-sidebar { 
+      flex: 0 0 280px; position: sticky; top: 10px; 
+      background: #fdfdfd; padding: 15px; border: 1px solid #ddd; 
+      border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    }
+    /* Table specific overrides for standings */
+    .players-table th { background-color: #0055a5; color: white; cursor: pointer; white-space: nowrap; }
+    .players-table th:hover { background-color: #004488; }
+    .manager-link { font-weight: bold; text-decoration: none; color: #0055a5; }
+    .manager-link:hover { text-decoration: underline; }
+    .pos-rank { font-weight: bold; color: #666; width: 40px; }
+    
+    /* Sorting Indicators */
+    th.sort-asc::after { content: " ▲"; font-size: 0.7rem; }
+    th.sort-desc::after { content: " ▼"; font-size: 0.7rem; }
+  </style>
+</head>
+<body class="players-page">
+  <div class="layout-shell">
+    <div class="header-inner">
+      <header class="site-header"></header>
+    </div>
+
+    <script>
+      fetch('/fantasy-hockey/shared/header.html')
+        .then(res => res.text())
+        .then(html => { document.querySelector('.site-header').innerHTML = html; });
+    </script>
+
+    <div class="container">
+      <h1 id="page-title">NHL Playoffs 2026 Standings</h1>
+
+      <div class="pool-wrapper">
+        <div class="main-content">
+          <table class="players-table">
+            <thead>
+              <tr>
+                <th class="pos-rank">#</th>
+                <th style="text-align: left;">Manager</th>
+                <th>Total</th>
+                <th>Active</th>
+                <th>R1</th>
+                <th>R2</th>
+                <th>R3</th>
+                <th>R4</th>
+                <th>Picks</th>
+                <th style="text-align: left;">Cup Winner</th>
+              </tr>
+            </thead>
+            <tbody id="standings-body">
+              <tr><td colspan="10">Gathering latest stats...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="roster-sidebar">
+          <h2>Pool Summary</h2>
+          
+          <div class="info-label">POT TOTAL</div>
+          <div class="info-value" id="display-pot" style="font-size: 1.4rem; font-weight: bold; color: #28a745;">50 pts</div>
+
+          <div class="info-label">SCORING STATUS</div>
+          <div class="info-value" id="display-status">Live (Round 1)</div>
+
+          <div class="info-label">ENTRIES</div>
+          <div class="info-value" id="display-entry-count">--</div>
+
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+          
+          <p style="font-size: 0.8rem; color: #666; line-height: 1.4;">
+            Table is sortable. Click column headers to toggle between ascending and descending.
+          </p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script src="/fantasy-hockey/scripts/playoff_standings.js"></script>
+</body>
+</html>
