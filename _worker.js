@@ -101,22 +101,36 @@ export default {
     }
     
     // Inside your Worker's fetch handler
-    if (url.pathname === '/list-entries') {
-      // 1. Get all keys in your KV namespace
-      const list = await env.PLAYOFF_DATA.list();
-      
-      // 2. Fetch the actual data for each key
-      const entries = await Promise.all(
-        list.keys.map(async (key) => {
-          const data = await env.PLAYOFF_DATA.get(key.name);
-          return JSON.parse(data);
-        })
-      );
+    if (internalPath === '/list-entries') {
+      try {
+        // 1. Get all keys in your KV namespace
+        const list = await env.PLAYOFF_DATA.list();
+        
+        // 2. Filter to ONLY include keys starting with 'id_' 
+        // This avoids duplicates from the email-based keys
+        const idKeys = list.keys.filter(k => k.name.startsWith('id_'));
+        
+        // 3. Fetch the actual data for each filtered key
+        const entries = await Promise.all(
+          idKeys.map(async (key) => {
+            const data = await env.PLAYOFF_DATA.get(key.name);
+            return JSON.parse(data);
+          })
+        );
 
-      // 3. Return the array to your standings page
-      return new Response(JSON.stringify(entries), {
-        headers: { 'Content-Type': 'application/json' }
-      });
+        // 4. Return the array to your standings page
+        return new Response(JSON.stringify(entries), {
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' // Crucial for your GitHub Pages fetch
+          }
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { 
+          status: 500, 
+          headers: { 'Content-Type': 'application/json' } 
+        });
+      }
     }
 
     // NEW: Public viewing route
