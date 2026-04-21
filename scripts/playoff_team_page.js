@@ -34,7 +34,7 @@ async function init() {
         [...skaterStatsRes, ...goalieStatsRes].forEach(p => {
             statsMap[p.Player] = p.fantasy_points;
         });
-
+        
         renderEntry(entryData, playerMap, nhlTeamMap, statsMap);
     } catch (err) {
         console.error(err);
@@ -42,7 +42,7 @@ async function init() {
     }
 }
 
-function renderEntry(data, playerMap, nhlTeamMap) {
+function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     // Sidebar & Header Info
     document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
     document.getElementById('display-manager').textContent = data.managerName;
