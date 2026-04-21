@@ -6,9 +6,9 @@ const GOALIE_STATS_JSON = '/fantasy-hockey/data/2026_playoff_goalie_stats.json';
 
 function normalizeName(name) {
     if (!name) return "";
-    // This splits accented characters into their base letter + accent, 
-    // then removes the accent marks (diacritics).
-    return name.n
+    // Normalizes accents/diacritics (e.g., Nečas -> Necas)
+    return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 async function init() {
     const params = new URLSearchParams(window.location.search);
