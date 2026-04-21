@@ -25,6 +25,8 @@ const CUP_VALUES = {
 
 const CHAMPION_DETERMINED = null; 
 
+// ... (Keep your constants and CUP_VALUES at the top)
+
 async function initStandings() {
     try {
         const [entriesRes, skatersRes, goaliesRes, playersRes, nhlTeamsRes] = await Promise.all([
@@ -38,12 +40,13 @@ async function initStandings() {
         const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         const statsMap = {};
-        [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
+        [...skatersRes, ...goaliesRes].forEach(p => { 
+            statsMap[p.Player] = p.fantasy_points; 
+        });
 
-        // NEW: Track Stanley Cup Winner Pick frequency
         const cupPickCounts = {};
         const playerPickCounts = {};
-        const eliminatedTeams = [];
+        const eliminatedTeams = []; 
 
         const standings = entriesRes.map(entry => {
             let rPoints = { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
@@ -58,18 +61,11 @@ async function initStandings() {
                 rPoints.total += pts.total;
 
                 if (pInfo && !eliminatedTeams.includes(pInfo.team_abbr)) aliveCount++;
-                
-                // Keep tracking player popularity
-                if (id) {
-                    playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
-                }
+                if (id) playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
             });
 
-            // TRACK CUP WINNER POPULARITY HERE
             const cupAbbr = entry.cupWinner;
-            if (cupAbbr) {
-                cupPickCounts[cupAbbr] = (cupPickCounts[cupAbbr] || 0) + 1;
-            }
+            if (cupAbbr) cupPickCounts[cupAbbr] = (cupPickCounts[cupAbbr] || 0) + 1;
 
             const cupData = CUP_VALUES[cupAbbr] || { name: cupAbbr, pts: 0 };
             let cupBonus = (CHAMPION_DETERMINED === cupAbbr) ? cupData.pts : 0;
@@ -87,8 +83,8 @@ async function initStandings() {
         standings.sort((a, b) => b.grandTotal - a.grandTotal);
         
         renderTable(standings);
-        renderPopularTeams(cupPickCounts, nhlTeamMap); // Now passing cup winner counts
-        renderPopularPlayers(playerPickCounts, playerInfoMap);
+        renderPopularTeams(cupPickCounts, nhlTeamMap); 
+        renderPopularPlayers(playerPickCounts, playerInfoMap, nhlTeamMap); // Pass nhlTeamMap here
 
     } catch (err) {
         console.error(err);
@@ -103,11 +99,12 @@ function renderPopularTeams(counts, logoMap) {
     
     body.innerHTML = sortedTeams.map(([teamAbbr, count]) => {
         const logoUrl = logoMap[teamAbbr] || '';
-        const teamName = CUP_VALUES[teamAbbr]?.name || teamAbbr;
+        // Safe check for name in CUP_VALUES
+        const teamName = CUP_VALUES[teamAbbr] ? CUP_VALUES[teamAbbr].name : teamAbbr;
         return `
             <tr>
                 <td style="text-align: left; display: flex; align-items: center; gap: 15px; font-weight: bold;">
-                    <img src="${logoUrl}" alt="${teamAbbr}" style="width: 40px; height: auto;">
+                    <img src="${logoUrl}" alt="${teamAbbr}">
                     ${teamName}
                 </td>
                 <td style="font-weight: bold; font-size: 1.2rem;">${count}</td>
@@ -126,15 +123,16 @@ function renderPopularPlayers(counts, infoMap, logoMap) {
     
     grid.innerHTML = sortedPlayers.map(([id, count]) => {
         const p = infoMap[id];
-        const teamLogo = logoMap[p?.team_abbr] || '';
+        const teamAbbr = p?.team_abbr || '';
+        const teamLogo = logoMap[teamAbbr] || ''; // Pull logo from nhlTeamMap
         
         return `
             <div class="popular-player-card">
                 <div class="pick-count-badge">${count}</div>
-                <img src="${teamLogo}" class="team-logo" alt="${p?.team_abbr}">
+                <img src="${teamLogo}" class="team-logo" alt="${teamAbbr}">
                 <div class="player-info">
                     <span class="player-name">${p?.full_name || 'Unknown'}</span>
-                    <span class="player-meta">${p?.team_abbr || '---'} | ${p?.position || '---'}</span>
+                    <span class="player-meta">${teamAbbr} | ${p?.position || '---'}</span>
                 </div>
             </div>
         `;
