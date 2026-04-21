@@ -55,18 +55,18 @@ async function initStandings() {
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             allIds.forEach(id => {
                 let pts;
-                let nameKey;
-                let teamKey;
+                let teamAbbr;
 
-                if (id.startsWith('G_')) {
-                    nameKey = id; // e.g., "G_MIN"
-                    teamKey = id.replace('G_', ''); // e.g., "MIN"
+                // --- APPLY CHANGE HERE ---
+                const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
+
+                if (isGoalieTeam) {
+                    teamAbbr = id.split('_')[1]; 
                     pts = statsMap[id] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
                 } else {
                     const pInfo = playerInfoMap[id];
-                    nameKey = pInfo?.full_name;
-                    teamKey = pInfo?.team_abbr;
-                    pts = statsMap[nameKey] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                    teamAbbr = pInfo?.team_abbr;
+                    pts = statsMap[pInfo?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
                 }
                 
                 rPoints.r1 += pts.r1; rPoints.r2 += pts.r2; rPoints.r3 += pts.r3; rPoints.r4 += pts.r4;

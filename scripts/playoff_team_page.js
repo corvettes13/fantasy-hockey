@@ -71,19 +71,16 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     
     allIds.forEach(id => {
         const p = playerMap[id];
-        const isGoalieTeam = id.startsWith('G_');
-        
-        // Define Display properties
-        const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : (p?.full_name || 'Unknown');
-        const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
-        const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '---');
-        const logo = nhlTeamMap[teamAbbr] || '';
 
-        // Fetch Points: Use ID if it's G_TEAM, otherwise use full_name
+        // --- APPLY CHANGE HERE ---
+        const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
+        const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : (p?.full_name || 'Unknown');
+        const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
+        const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
         const pts = statsMap[isGoalieTeam ? id : p?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
-        
-        // Accumulate grand total for the sidebar
+
         rosterTotal += pts.total;
+        const logo = nhlTeamMap[teamAbbr] || '';
         
         const row = `
             <tr>
