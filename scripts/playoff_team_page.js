@@ -43,6 +43,7 @@ async function init() {
 }
 
 function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
+    let rosterTotal = 0;
     // Sidebar & Header Info
     document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
     document.getElementById('display-manager').textContent = data.managerName;
@@ -70,6 +71,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
         
         // Find points in the statsMap using the player's full name
         const pts = statsMap[p?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        rosterTotal += pts.total;
         
         const logo = p ? (nhlTeamMap[p.team_abbr] || '') : '';
         const row = `
@@ -94,6 +96,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     });
 
     // 2. Add Matchup Points Summary Row
+    const bracketTotal = 0;
     const matchupRow = `
         <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
             <td style="text-align: left; padding-left: 10px; font-weight: bold;">Matchup Picks Total</td>
@@ -104,6 +107,12 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     rosterBody.insertAdjacentHTML('beforeend', matchupRow);
 
     // 3. Matchup Grid
+    const grandTotal = (rosterTotal + bracketTotal).toFixed(1);
+    
+    const totalEl = document.getElementById('display-total');
+    if (totalEl) {
+        totalEl.textContent = grandTotal;
+    }
     const matchupContainer = document.getElementById('matchup-container');
     matchupContainer.innerHTML = '';
     const labels = {
