@@ -25,11 +25,12 @@ async function init() {
         if (!entryRes.ok) throw new Error("Entry not found.");
         
         const entryData = await entryRes.json();
+        // Map player IDs to their info
         const playerMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
+        // Map team abbreviations to logos
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
 
-        // Combine Skaters and Goalies into one map indexed by Name
-        // This is where we get the .fantasy_points object we created in Python
+        // Create a single map for all stats
         const statsMap = {};
         [...skaterStatsRes, ...goalieStatsRes].forEach(p => {
             statsMap[p.Player] = p.fantasy_points;
@@ -45,16 +46,16 @@ async function init() {
 
 function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
     let rosterTotal = 0;
-    // Sidebar & Header Info
+
+    // 1. Sidebar & Header Info
     document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
     document.getElementById('display-manager').textContent = data.managerName;
     document.getElementById('display-id').textContent = data.entryId;
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
 
-    // Stanley Cup Pick + Logo
+    // 2. Stanley Cup Pick + Logo
     const cupWinnerAbbr = data.cupWinner;
     const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
-    
     document.getElementById('display-cup').textContent = cupWinnerAbbr;
     if (cupLogoUrl) {
         document.getElementById('cup-logo-container').innerHTML = `
@@ -62,41 +63,50 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
         `;
     }
 
-    // 1. Render Player Rows
+    // 3. Render Player Rows
     const rosterBody = document.getElementById('roster-body');
     rosterBody.innerHTML = ''; 
     
     const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+    
     allIds.forEach(id => {
         const p = playerMap[id];
+        const isGoalieTeam = id.startsWith('G_');
         
-        // Find points in the statsMap using the player's full name
-        const pts = statsMap[p?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        // Define Display properties
+        const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : (p?.full_name || 'Unknown');
+        const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
+        const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '---');
+        const logo = nhlTeamMap[teamAbbr] || '';
+
+        // Fetch Points: Use ID if it's G_TEAM, otherwise use full_name
+        const pts = statsMap[isGoalieTeam ? id : p?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        
+        // Accumulate grand total for the sidebar
         rosterTotal += pts.total;
         
-        const logo = p ? (nhlTeamMap[p.team_abbr] || '') : '';
         const row = `
             <tr>
-                <td class="player-cell">
-                    <img src="${logo}" alt="logo" />
-                    <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
-                        <a href="${p?.url || '#'}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
-                            ${p?.full_name || 'Unknown'}
-                        </a>
-                        <span style="font-size:0.7rem; color:#666;">${p?.team_abbr || '---'} | ${p?.position || '---'}</span>
-                    </div>
-                </td>
-                  <td>${pts.r1.toFixed(1)}</td>
-                  <td>${pts.r2.toFixed(1)}</td>
-                  <td>${pts.r3.toFixed(1)}</td>
-                  <td>${pts.r4.toFixed(1)}</td>
-                  <td style="color: #999;">—</td> 
-                  <td><strong>${pts.total.toFixed(1)}</strong></td>
+              <td class="player-cell">
+                  <img src="${logo}" alt="logo" style="width:28px; height:28px;" />
+                  <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
+                      <a href="${displayLink}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
+                          ${displayName}
+                      </a>
+                      <span style="font-size:0.7rem; color:#666;">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
+                  </div>
+              </td>
+              <td>${pts.r1.toFixed(1)}</td>
+              <td>${pts.r2.toFixed(1)}</td>
+              <td>${pts.r3.toFixed(1)}</td>
+              <td>${pts.r4.toFixed(1)}</td>
+              <td style="color: #999;">—</td> 
+              <td><strong>${pts.total.toFixed(1)}</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
     });
 
-    // 2. Add Matchup Points Summary Row
+    // 4. Add Matchup Points Summary Row
     const bracketTotal = 0;
     const matchupRow = `
         <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
@@ -107,13 +117,14 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
         </tr>`;
     rosterBody.insertAdjacentHTML('beforeend', matchupRow);
 
-    // 3. Matchup Grid
+    // 5. Update Sidebar Grand Total
     const grandTotal = (rosterTotal + bracketTotal).toFixed(1);
-    
     const totalEl = document.getElementById('display-total');
     if (totalEl) {
         totalEl.textContent = grandTotal;
     }
+
+    // 6. Matchup Grid
     const matchupContainer = document.getElementById('matchup-container');
     matchupContainer.innerHTML = '';
     const labels = {
@@ -131,48 +142,38 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
 
 function makeTableSortable() {
     const table = document.querySelector('table');
+    if (!table) return;
     const headers = table.querySelectorAll('th');
     const tbody = table.querySelector('tbody');
 
     headers.forEach((header, index) => {
-        // Only allow sorting on columns that aren't empty (skip the spacer column)
         if (header.textContent.trim() === "" || header.textContent.includes("—")) return;
 
         header.style.cursor = 'pointer';
         header.title = "Click to sort";
 
         header.addEventListener('click', () => {
-            const rows = Array.from(tbody.querySelectorAll('tr:not(.summary-row)')); // Don't sort the total row at the bottom
+            const rows = Array.from(tbody.querySelectorAll('tr:not([style*="border-top"])'));
             const isAscending = header.classList.contains('sort-asc');
             
-            // Remove sort classes from all headers
             headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
 
             rows.sort((a, b) => {
                 let cellA = a.children[index].textContent.trim();
                 let cellB = b.children[index].textContent.trim();
-
-                // Convert to numbers for points columns
                 const valA = isNaN(cellA) ? cellA.toLowerCase() : parseFloat(cellA);
                 const valB = isNaN(cellB) ? cellB.toLowerCase() : parseFloat(cellB);
-
                 if (valA < valB) return isAscending ? 1 : -1;
                 if (valA > valB) return isAscending ? -1 : 1;
                 return 0;
             });
 
-            // Update classes for next click
             header.classList.add(isAscending ? 'sort-desc' : 'sort-asc');
-
-            // Re-append rows in new order
             rows.forEach(row => tbody.appendChild(row));
-            
-            // Keep the summary row at the very bottom
             const summaryRow = tbody.querySelector('tr[style*="border-top"]');
             if (summaryRow) tbody.appendChild(summaryRow);
         });
     });
 }
 
-// Start the process
 init();

@@ -54,14 +54,28 @@ async function initStandings() {
 
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             allIds.forEach(id => {
-                const pInfo = playerInfoMap[id];
-                const pts = statsMap[pInfo?.full_name] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                let pts;
+                let nameKey;
+                let teamKey;
+
+                if (id.startsWith('G_')) {
+                    nameKey = id; // e.g., "G_MIN"
+                    teamKey = id.replace('G_', ''); // e.g., "MIN"
+                    pts = statsMap[id] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                } else {
+                    const pInfo = playerInfoMap[id];
+                    nameKey = pInfo?.full_name;
+                    teamKey = pInfo?.team_abbr;
+                    pts = statsMap[nameKey] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+                }
                 
                 rPoints.r1 += pts.r1; rPoints.r2 += pts.r2; rPoints.r3 += pts.r3; rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
                 if (pInfo && !eliminatedTeams.includes(pInfo.team_abbr)) aliveCount++;
-                if (id) playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
+                if (id) {
+                  playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
+                }
             });
 
             const cupAbbr = entry.cupWinner;
@@ -118,22 +132,23 @@ function renderPopularPlayers(counts, infoMap, logoMap) {
     const grid = document.getElementById('popular-players-grid');
     if (!grid) return;
 
-    const sortedPlayers = Object.entries(counts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 20);
+    const sortedPlayers = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 20);
     
     grid.innerHTML = sortedPlayers.map(([id, count]) => {
+        const isGoalieTeam = id.startsWith('G_');
         const p = infoMap[id];
-        const teamAbbr = p?.team_abbr || '';
-        const teamLogo = logoMap[teamAbbr] || ''; // Pull logo from nhlTeamMap
+        
+        const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : (p?.full_name || 'Unknown');
+        const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '');
+        const teamLogo = logoMap[teamAbbr] || '';
         
         return `
             <div class="popular-player-card">
                 <div class="pick-count-badge">${count}</div>
                 <img src="${teamLogo}" class="team-logo" alt="${teamAbbr}">
                 <div class="player-info">
-                    <span class="player-name">${p?.full_name || 'Unknown'}</span>
-                    <span class="player-meta">${teamAbbr} | ${p?.position || '---'}</span>
+                    <span class="player-name">${displayName}</span>
+                    <span class="player-meta">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
                 </div>
             </div>
         `;
