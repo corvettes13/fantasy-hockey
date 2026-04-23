@@ -48,7 +48,8 @@ async function initStandings() {
         const statsMap = {};
         [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
         // -----------------------------
-
+        const cupPickCounts = {};
+        const playerPickCounts = {};
         const eliminatedTeams = Object.keys(CUP_VALUES).filter(team => !matchupData.active_teams.includes(team));
 
         const standings = entriesRes.map(entry => {
