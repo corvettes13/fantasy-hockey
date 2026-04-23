@@ -3,10 +3,10 @@ const PLAYERS_JSON = '/fantasy-hockey/data/players.json';
 const TEAMS_JSON = '/fantasy-hockey/teams/nhl_teams.json';
 const SKATER_STATS_JSON = '/fantasy-hockey/data/2026_playoff_skater_stats.json';
 const GOALIE_STATS_JSON = '/fantasy-hockey/data/2026_playoff_goalie_stats.json';
+const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json'; // New source
 
 function normalizeName(name) {
     if (!name) return "";
-    // Normalizes accents/diacritics (e.g., Nečas -> Necas)
     return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
@@ -20,29 +20,30 @@ async function init() {
     }
 
     try {
-        const [entryRes, playersRes, nhlTeamsRes, skaterStatsRes, goalieStatsRes] = await Promise.all([
+        // Added matchupData to the fetch
+        const [entryRes, playersRes, nhlTeamsRes, skaterStatsRes, goalieStatsRes, matchupRes] = await Promise.all([
             fetch(`${WORKER_ENDPOINT}?id=${entryId}`),
             fetch(PLAYERS_JSON).then(res => res.json()),
             fetch(TEAMS_JSON).then(res => res.json()),
             fetch(SKATER_STATS_JSON).then(res => res.json()),
-            fetch(GOALIE_STATS_JSON).then(res => res.json())
+            fetch(GOALIE_STATS_JSON).then(res => res.json()),
+            fetch(MATCHUPS_JSON).then(res => res.json())
         ]);
 
         if (!entryRes.ok) throw new Error("Entry not found.");
         
         const entryData = await entryRes.json();
-        // Map player IDs to their info
         const playerMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
-        // Map team abbreviations to logos
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
+        const matchupData = matchupRes; // Contains active_teams array
 
-        // Create a single map for all stats
         const statsMap = {};
         [...skaterStatsRes, ...goalieStatsRes].forEach(p => {
             statsMap[p.Player] = p.fantasy_points;
         });
         
-        renderEntry(entryData, playerMap, nhlTeamMap, statsMap);
+        // Pass matchupData to the render function
+        renderEntry(entryData, playerMap, nhlTeamMap, statsMap, matchupData);
         makeTableSortable();
     } catch (err) {
         console.error(err);
@@ -50,16 +51,15 @@ async function init() {
     }
 }
 
-function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
+function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
     let rosterTotal = 0;
-
-    // 1. Sidebar & Header Info
+    let bracketTotal = 0;
+    
     document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
     document.getElementById('display-manager').textContent = data.managerName;
     document.getElementById('display-id').textContent = data.entryId;
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
 
-    // 2. Stanley Cup Pick + Logo
     const cupWinnerAbbr = data.cupWinner;
     const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
     document.getElementById('display-cup').textContent = cupWinnerAbbr;
@@ -69,32 +69,32 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
         `;
     }
 
-    // 3. Render Player Rows
     const rosterBody = document.getElementById('roster-body');
     rosterBody.innerHTML = ''; 
     
-    const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+    const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G]; 
+     
+    allIds.forEach(id => {
+        const p = playerMap[id];
+        const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
         
-        allIds.forEach(id => {
-          const p = playerMap[id];
-          const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
-          
-          // Normalize the name from playerMap before looking it up in statsMap
-          const cleanPlayerName = p?.full_name ? normalizeName(p.full_name) : 'Unknown';
-          
-          const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
-          const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
-          const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
-          
-          // --- UPDATED STATS LOOKUP ---
-          // We use the normalized cleanPlayerName to match the Python-generated stats
-          const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        const cleanPlayerName = p?.full_name ? normalizeName(p.full_name) : 'Unknown';
+        const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
+        const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
+        const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
+        
+        const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
 
-          rosterTotal += pts.total;
-          const logo = nhlTeamMap[teamAbbr] || '';
-          
-          const row = `
-            <tr>
+        rosterTotal += pts.total;
+        const logo = nhlTeamMap[teamAbbr] || '';
+
+        // --- ELIMINATION LOGIC ---
+        // Check if the teamAbbr is in the active_teams list
+        const isEliminated = !matchupData.active_teams.includes(teamAbbr);
+        const rowClass = isEliminated ? 'class="contract-red"' : '';
+        
+        const row = `
+            <tr ${rowClass}>
               <td class="player-cell">
                   <img src="${logo}" alt="logo" style="width:28px; height:28px;" />
                   <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
@@ -112,40 +112,58 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap) {
               <td><strong>${pts.total.toFixed(1)}</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
-      });
+    });
+    
+    const matchupContainer = document.getElementById('matchup-container');
+    matchupContainer.innerHTML = '';
 
-    // 4. Add Matchup Points Summary Row
-    const bracketTotal = 0;
+    Object.entries(matchupData.rounds).forEach(([roundKey, roundData]) => {
+        Object.entries(roundData.matchups).forEach(([matchupId, status]) => {
+            const userPick = data.bracket[matchupId];
+            const winner = status.winner;
+            const matchupLabel = status.label || matchupId; // Falls back to key if label is missing
+            const ptsWorth = roundData.points_per_pick;
+            
+            let statusClass = '';
+            let ptsDisplay = '';
+
+            if (winner) {
+                if (userPick === winner) {
+                    statusClass = 'correct';
+                    ptsDisplay = `<span class="pts-badge plus">+${ptsWorth} pts</span>`;
+                    bracketTotal += ptsWorth;
+                } else {
+                    statusClass = 'incorrect';
+                    ptsDisplay = `<span class="pts-badge zero">+0 pts</span>`;
+                }
+            }
+
+            const item = document.createElement('div');
+            item.className = `matchup-item ${statusClass}`;
+            item.innerHTML = `
+                <div style="font-size: 0.7rem; color: #666;">${matchupLabel}</div>
+                <strong style="font-size: 0.9rem;">${userPick || 'No Pick'}</strong>
+                ${ptsDisplay}
+            `;
+            matchupContainer.appendChild(item);
+        });
+    });
+
     const matchupRow = `
-        <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
-            <td style="text-align: left; padding-left: 10px; font-weight: bold;">Matchup Picks Total</td>
-            <td>-</td><td>-</td><td>-</td><td>-</td>
-            <td style="font-weight: bold; color: #0055a5;">0</td> 
-            <td style="background-color: #eaf0f6;"><strong>0</strong></td>
-        </tr>`;
+            <tr style="background-color: #f9f9f9; border-top: 2px solid #ddd;">
+                <td style="text-align: left; padding-left: 10px; font-weight: bold;">Matchup Picks Total</td>
+                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td style="font-weight: bold; color: #0055a5;">${bracketTotal}</td> 
+                <td style="background-color: #eaf0f6;"><strong>${bracketTotal}</strong></td>
+            </tr>`;
     rosterBody.insertAdjacentHTML('beforeend', matchupRow);
 
-    // 5. Update Sidebar Grand Total
+    // --- 5. Update Sidebar Grand Total ---
     const grandTotal = (rosterTotal + bracketTotal).toFixed(1);
     const totalEl = document.getElementById('display-total');
     if (totalEl) {
-        totalEl.textContent = grandTotal;
+      totalEl.textContent = grandTotal;
     }
-
-    // 6. Matchup Grid
-    const matchupContainer = document.getElementById('matchup-container');
-    matchupContainer.innerHTML = '';
-    const labels = {
-        r1w1: "COL vs LAK", r1w2: "DAL vs MIN", r1w3: "VGK vs UTA", r1w4: "EDM vs ANA",
-        r1e1: "CAR vs OTT", r1e2: "BUF vs BOS", r1e3: "TBL vs MTL", r1e4: "PIT vs PHI"
-    };
-
-    Object.entries(data.bracket).forEach(([key, pick]) => {
-        const item = document.createElement('div');
-        item.className = 'matchup-item';
-        item.innerHTML = `<strong>${labels[key] || key}:</strong><br>${pick}`;
-        matchupContainer.appendChild(item);
-    });
 }
 
 function makeTableSortable() {

@@ -1,0 +1,21 @@
+{
+  "active_teams": ["COL","LAK","DAL","MIN","VGK","UTA","CAR","OTT","BUF","BOS","TBL","MTL","PIT","PHI"],
+  "rounds": {
+    "r1": {
+      "points_per_pick": 10,
+	"matchups": {
+        "r1w1": { "teams": ["COL", "LAK"], "winner": null, "label": "COL vs LAK" },
+        "r1w2": { "teams": ["DAL", "MIN"], "winner": null, "label": "DAL vs MIN" },
+        "r1w3": { "teams": ["VGK", "UTA"], "winner": null, "label": "VGK vs UTA" },
+        "r1w4": { "teams": ["EDM", "ANA"], "winner": null, "label": "EDM vs ANA" },
+        "r1e1": { "teams": ["CAR", "OTT"], "winner": null, "label": "CAR vs OTT" },
+        "r1e2": { "teams": ["BUF", "BOS"], "winner": null, "label": "BUF vs BOS" },
+        "r1e3": { "teams": ["TBL", "MTL"], "winner": null, "label": "TBL vs MTL" },
+        "r1e4": { "teams": ["PIT", "PHI"], "winner": "PHI", "label": "PIT vs PHI" }
+      }
+    },
+    "r2": { "points_per_pick": 20, "matchups": {} },
+    "r3": { "points_per_pick": 40, "matchups": {} },
+    "r4": { "points_per_pick": 80, "matchups": {} }
+  }
+}

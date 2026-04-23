@@ -29,33 +29,38 @@ const CUP_VALUES = {
 };
 
 const CHAMPION_DETERMINED = null; 
+const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json';
 
 async function initStandings() {
     try {
-        const [entriesRes, skatersRes, goaliesRes, playersRes, nhlTeamsRes] = await Promise.all([
+        const [entriesRes, skatersRes, goaliesRes, playersRes, nhlTeamsRes, matchupData] = await Promise.all([
             fetch(WORKER_ALL_ENTRIES).then(res => res.json()),
             fetch(SKATER_STATS).then(res => res.json()),
             fetch(GOALIE_STATS).then(res => res.json()),
             fetch(PLAYERS_JSON).then(res => res.json()),
-            fetch(TEAMS_JSON).then(res => res.json())
+            fetch(TEAMS_JSON).then(res => res.json()),
+            fetch(MATCHUPS_JSON).then(res => res.json()) // New Fetch
         ]);
 
-        const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
-        const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
-        
-        const statsMap = {};
-        [...skatersRes, ...goaliesRes].forEach(p => { 
-            statsMap[p.Player] = p.fantasy_points; 
-        });
-
-        const cupPickCounts = {};
-        const playerPickCounts = {};
-        const eliminatedTeams = []; 
+        // Use the active_teams from the JSON instead of an empty array
+        const eliminatedTeams = Object.keys(CUP_VALUES).filter(team => !matchupData.active_teams.includes(team));
 
         const standings = entriesRes.map(entry => {
             let rPoints = { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
             let aliveCount = 0;
+            let bracketPoints = 0;
 
+            // --- CALCULATE BRACKET POINTS ---
+            Object.entries(matchupData.rounds).forEach(([roundKey, roundData]) => {
+                Object.entries(roundData.matchups).forEach(([matchupId, status]) => {
+                    // Check if the user's pick for this matchup matches the winner
+                    if (status.winner && entry.bracket[matchupId] === status.winner) {
+                        bracketPoints += roundData.points_per_pick;
+                    }
+                });
+            });
+
+            // --- ROSTER POINTS LOOP ---
             const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             allIds.forEach(id => {
                 let pts;
@@ -83,7 +88,7 @@ async function initStandings() {
                 rPoints.total += pts.total;
 
                 if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
-                    aliveCount++;
+                  aliveCount++;
                 }
 
                 if (id) {
@@ -100,7 +105,8 @@ async function initStandings() {
             return {
                 manager: entry.managerName,
                 id: entry.entryId,
-                grandTotal: rPoints.total + cupBonus,
+                grandTotal: rPoints.total + bracketPoints + cupBonus,
+                bracketPoints: bracketPoints, // Save this for the table
                 active: aliveCount,
                 r1: rPoints.r1, r2: rPoints.r2, r3: rPoints.r3, r4: rPoints.r4,
                 cupWinnerStr: `${cupData.name} (${cupData.pts} pts)`
@@ -184,8 +190,7 @@ function renderTable(standings) {
             <td>${s.r2.toFixed(1)}</td>
             <td>${s.r3.toFixed(1)}</td>
             <td>${s.r4.toFixed(1)}</td>
-            <td>0</td> 
-            <td style="text-align: left;">${s.cupWinnerStr}</td>
+            <td>${s.bracketPoints}</td> <td style="text-align: left;">${s.cupWinnerStr}</td>
         </tr>
     `).join('');
 }
