@@ -39,10 +39,16 @@ async function initStandings() {
             fetch(GOALIE_STATS).then(res => res.json()),
             fetch(PLAYERS_JSON).then(res => res.json()),
             fetch(TEAMS_JSON).then(res => res.json()),
-            fetch(MATCHUPS_JSON).then(res => res.json()) // New Fetch
+            fetch(MATCHUPS_JSON).then(res => res.json())
         ]);
 
-        // Use the active_teams from the JSON instead of an empty array
+        // --- ADD THESE THREE LINES ---
+        const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
+        const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
+        const statsMap = {};
+        [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
+        // -----------------------------
+
         const eliminatedTeams = Object.keys(CUP_VALUES).filter(team => !matchupData.active_teams.includes(team));
 
         const standings = entriesRes.map(entry => {
