@@ -94,6 +94,17 @@
 
     .pts-badge.plus { color: #52c41a; } /* Green text */
     .pts-badge.zero { color: #cf1322; } /* Red text */    
+    
+    /* Ensure the elimination color overrides the default table styling */
+    tr.contract-red td {
+        background-color: #ffe5e5 !important;
+    }
+
+    /* Optional: Add a slight strike-through to eliminated players' names */
+    tr.contract-red .player-name {
+        text-decoration: line-through;
+        color: #888;
+    }    
   </style>
 </head>
 <body class="players-page">
