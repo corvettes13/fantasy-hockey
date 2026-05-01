@@ -52,17 +52,11 @@ function enterRound2Mode(data) {
         if (el) el.disabled = true;
     };
 
-    // 1. Show the R2 section
-    const r2Section = document.getElementById('round-2-bracket');
-    if (r2Section) r2Section.style.display = 'block';
+    const currentRound = matchupData ? matchupData.current_round : 2;
+    renderRoundMatchups(currentRound);
 
-    // 2. Build the matchups
-    renderRoundMatchups();
-
-    // 3. Set existing IDs for validation
     data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
 
-    // 4. Lock original picks safely
     if (document.getElementById('manager-name')) {
         document.getElementById('manager-name').value = data.managerName || "";
     }
@@ -300,14 +294,6 @@ function renderTable() {
             <th data-sort="FPG">FP/G</th>
         </tr>`;
 
-    const playoffData = playoffStatsMap[p.full_name] || { total: 0 };
-    row.innerHTML = `
-        ...
-        <td>${s.FPG || '0.00'}</td>
-        <td style="font-weight:bold; background: #fffdf5;">${playoffData.total.toFixed(1)}</td>
-        <td>${s.GP || 0}</td>
-        ...
-    `;
     bindHeaderSortEvents();
 
     let filtered = allPlayers.filter(p => {
@@ -332,39 +318,33 @@ function renderTable() {
     });
 
     tbody.innerHTML = '';
-    filtered.forEach(p => {
-        const s = statsMap[p.player_id] || {};
-        const isSelected = isAlreadyInRoster(p.player_id);
-        const row = document.createElement('tr');
-        const cleanName = normalizeName(p.full_name);
-        const pStats = playoffStatsMap[cleanName] || { total: 0 };        
-        if (isSelected) row.className = 'selected-row';
+        filtered.forEach(p => { // 'p' is defined here!
+            const s = statsMap[p.player_id] || {};
+            const isSelected = isAlreadyInRoster(p.player_id);
+            const row = document.createElement('tr');
+            
+            // Add the normalization and lookup HERE
+            const cleanName = normalizeName(p.full_name);
+            const pStats = playoffStatsMap[cleanName] || { total: 0 }; 
+            
+            if (isSelected) row.className = 'selected-row';
 
-        row.innerHTML = `
-            <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
-            <td class="player-cell">
-                <img src="${teamMap[p.team_abbr] || ''}" alt="logo">
-                <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
-                <span class="team-abbr">${p.team_abbr}</span>
-            </td>
-            <td>${p.position}</td>
-            <td>${s.GP || 0}</td>
-            ${p.position === 'G' ? `
-                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
-                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
-            ` : `
-                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
-                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
-            `}
-            <td>${s.FPG || '0.00'}</td>
-            <td style="font-weight:bold; background: #fffdf5; color: #d9534f;">
-              ${parseFloat(pStats.total || 0).toFixed(1)}
-            </td>
-            <td>${s.GP || 0}</td>
-            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
-        `;
-        tbody.appendChild(row);
-    });
+            row.innerHTML = `
+                <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
+                <td class="player-cell">
+                    <img src="${teamMap[p.team_abbr] || ''}" alt="logo">
+                    <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
+                    <span class="team-abbr">${p.team_abbr}</span>
+                </td>
+                <td>${p.position}</td>
+                <td style="font-weight:bold; background: #fffdf5; color: #d9534f;">
+                    ${parseFloat(pStats.total || 0).toFixed(1)}
+                </td>
+                <td>${s.GP || 0}</td>
+                <td>${s.FPG || '0.00'}</td>
+                `;
+            tbody.appendChild(row);
+        });
 }
 
 // 6. BRACKET & CUP LOGIC
@@ -500,11 +480,17 @@ async function loadExistingEntry() {
 }
 
 function renderRoundMatchups(roundNum) {
+    if (!matchupData || !matchupData.rounds) return;
+
     const container = document.getElementById(`r${roundNum}-matchups-list`);
     const roundKey = `r${roundNum}`;
-    const roundData = matchupData.rounds[roundKey].matchups;
+    const roundInfo = matchupData.rounds[roundKey];
     
-    container.innerHTML = Object.entries(r2Data).map(([id, match]) => `
+    // Safety check: if the round doesn't exist in JSON yet, exit
+    if (!roundInfo || !roundInfo.matchups) return; 
+
+    // Use roundInfo.matchups instead of r2Data
+    container.innerHTML = Object.entries(roundInfo.matchups).map(([id, match]) => `
         <div class="matchup-box" style="margin-bottom: 10px; padding: 8px; border: 1px solid #eee; border-radius: 4px;">
             <div class="matchup-label" style="font-size: 0.75rem; font-weight: bold; color: #444; margin-bottom: 5px;">
                 ${match.label}
