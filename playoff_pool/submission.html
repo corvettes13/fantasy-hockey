@@ -93,84 +93,33 @@
         </div>
 
         <aside class="roster-sidebar">
-          <h2>Your Entry</h2>
+            <h2>Your Entry</h2>
 
-          <div class="manager-section" style="margin-bottom: 15px;">
-              <label style="font-size: 0.75rem; font-weight: bold; color: #666; display: block; margin-bottom: 4px;">Manager Name</label>
-              <input type="text" id="manager-name" placeholder="Nickname..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-          </div>
+            <div class="manager-section" style="margin-bottom: 15px;">
+                <label class="info-label">Manager Name</label>
+                <input type="text" id="manager-name" placeholder="Nickname..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
 
-          <div class="manager-section" style="margin-bottom: 15px;">
-              <label style="font-size: 0.75rem; font-weight: bold; color: #666; display: block; margin-bottom: 4px;">Email Address</label>
-              <input type="email" id="user-email" placeholder="Required for leaderboard..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-          </div>
+            <div class="manager-section" style="margin-bottom: 15px;">
+                <label class="info-label">Email Address</label>
+                <input type="email" id="user-email" placeholder="Required for leaderboard..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
 
-          <div class="manager-section" style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eaf0f6;">
-              <label style="font-size: 0.75rem; font-weight: bold; color: #666; display: block; margin-bottom: 4px;">League Password</label>
-              <input type="password" id="league-pass" placeholder="Enter password to save..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-          </div>
+            <div class="manager-section" style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eaf0f6;">
+                <label class="info-label">League Password</label>
+                <input type="password" id="league-pass" placeholder="Enter password..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+            </div>
 
-          <div class="pos-count">Forwards: <span id="count-F">0</span> / 12</div>
-          <div class="pos-count">Defense: <span id="count-D">0</span> / 5</div>
-          <div class="pos-count">Goalies: <span id="count-G">0</span> / 3</div>
+            <div class="pos-count">Forwards: <span id="count-F">0</span> / 12</div>
+            <div class="pos-count">Defense: <span id="count-D">0</span> / 5</div>
+            <div class="pos-count">Goalies: <span id="count-G">0</span> / 3</div>
 
-          <div class="bracket-section">
-              <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1: Western Conference</h3>
-              
-              <div class="matchup-box">
-                  <div class="matchup-label">Colorado vs Los Angeles</div>
-                  <label><input type="radio" name="r1w1" value="COL" onclick="updateBracket('r1w1', 'COL')"> COL</label>
-                  <label><input type="radio" name="r1w1" value="LAK" onclick="updateBracket('r1w1', 'LAK')"> LAK</label>
-              </div>
+            <div id="round-1-bracket">
+                <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1 Picks</h3>
+                </div>
 
-              <div class="matchup-box">
-                  <div class="matchup-label">Dallas vs Minnesota</div>
-                  <label><input type="radio" name="r1w2" value="DAL" onclick="updateBracket('r1w2', 'DAL')"> DAL</label>
-                  <label><input type="radio" name="r1w2" value="MIN" onclick="updateBracket('r1w2', 'MIN')"> MIN</label>
-              </div>
-
-              <div class="matchup-box">
-                  <div class="matchup-label">Vegas vs Utah</div>
-                  <label><input type="radio" name="r1w3" value="VGK" onclick="updateBracket('r1w3', 'VGK')"> VGK</label>
-                  <label><input type="radio" name="r1w3" value="UTA" onclick="updateBracket('r1w3', 'UTA')"> UTA</label>
-              </div>
-
-              <div class="matchup-box">
-                  <div class="matchup-label">Edmonton vs Anaheim</div>
-                  <label><input type="radio" name="r1w4" value="EDM" onclick="updateBracket('r1w4', 'EDM')"> EDM</label>
-                  <label><input type="radio" name="r1w4" value="ANA" onclick="updateBracket('r1w4', 'ANA')"> ANA</label>
-              </div>
-          </div>
-
-          <div class="bracket-section">
-              <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 1: Eastern Conference</h3>
-              
-              <div class="matchup-box">
-                  <div class="matchup-label">Carolina vs Ottawa</div>
-                  <label><input type="radio" name="r1e1" value="CAR" onclick="updateBracket('r1e1', 'CAR')"> CAR</label>
-                  <label><input type="radio" name="r1e1" value="OTT" onclick="updateBracket('r1e1', 'OTT')"> OTT</label>
-              </div>
-
-              <div class="matchup-box">
-                  <div class="matchup-label">Buffalo vs Boston</div>
-                  <label><input type="radio" name="r1e2" value="BUF" onclick="updateBracket('r1e2', 'BUF')"> BUF</label>
-                  <label><input type="radio" name="r1e2" value="BOS" onclick="updateBracket('r1e2', 'BOS')"> BOS</label>
-              </div>
-
-              <div class="matchup-box">
-                  <div class="matchup-label">Tampa Bay vs Montreal</div>
-                  <label><input type="radio" name="r1e3" value="TBL" onclick="updateBracket('r1e3', 'TBL')"> TBL</label>
-                  <label><input type="radio" name="r1e3" value="MTL" onclick="updateBracket('r1e3', 'MTL')"> MTL</label>
-              </div>
-
-              <div class="matchup-box">
-                  <div class="matchup-label">Pittsburgh vs Philadelphia</div>
-                  <label><input type="radio" name="r1e4" value="PIT" onclick="updateBracket('r1e4', 'PIT')"> PIT</label>
-                  <label><input type="radio" name="r1e4" value="PHI" onclick="updateBracket('r1e4', 'PHI')"> PHI</label>
-              </div>
-              
-              <div id="round-2-bracket" style="display: none;">
-                <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 2: Western Conference</h3>
+            <div id="round-2-bracket" style="display: none;">
+                <h3 style="font-size: 0.85rem; color: #d9534f; margin-bottom: 8px;">Round 2 Picks</h3>
                 
                 <div class="matchup-box">
                     <div class="matchup-label">Colorado vs Minnesota</div>
@@ -183,8 +132,7 @@
                     <label><input type="radio" name="r2w2" value="VGK/UTA" onclick="updateBracket('r2w2', 'VGK/UTA')"> VGK/UTA</label>
                     <label><input type="radio" name="r2w2" value="ANA" onclick="updateBracket('r2w2', 'ANA')"> ANA</label>
                 </div>
-                <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Round 2: Eastern Conference</h3>
-                
+
                 <div class="matchup-box">
                     <div class="matchup-label">Carolina vs Philadelphia</div>
                     <label><input type="radio" name="r2e1" value="CAR" onclick="updateBracket('r2e1', 'CAR')"> CAR</label>
@@ -192,37 +140,36 @@
                 </div>
 
                 <div class="matchup-box">
-                    <div class="matchup-label">Buffalo/Boston vs Tampa Bay/Montreal</div>
+                    <div class="matchup-label">BUF/BOS vs TBL/MTL</div>
                     <label><input type="radio" name="r2e2" value="BUF/BOS" onclick="updateBracket('r2e2', 'BUF/BOS')"> BUF/BOS</label>
                     <label><input type="radio" name="r2e2" value="TBL/MTL" onclick="updateBracket('r2e2', 'TBL/MTL')"> TBL/MTL</label>
-                </div>                
-              </div>              
-          </div>
+                </div>
+            </div>
 
-          <div class="bracket-section" style="margin-top: 15px;">
-            <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Stanley Cup Winner</h3>
-            <select id="cup-winner" onchange="updateCupWinner(this.value)" style="width: 100%; font-size: 0.8rem;">
-              <option value="">Select Champion...</option>
-              <option value="COL">Colorado +300 (50 pts)</option>
-              <option value="TBL">Tampa Bay +370 (59 pts)</option>              
-              <option value="CAR">Carolina +500 (75 pts)</option>
-              <option value="DAL">Dallas +100 (150 pts)</option>
-              <option value="VEG">Vegas +1200 (150 pts)</option>              
-              <option value="EDM">Edmonton +1400 (188 pts)</option>
-              <option value="OTT">Minnesota +1600 (213 pts)</option>
-              <option value="MIN">Buffalo +1700 (225 pts)</option>              
-              <option value="BUF">Ottawa +1700 (225 pts)</option>
-              <option value="UTA">Utah +3300 (425 pts)</option>
-              <option value="MTL">Montreal +3500 (450 pts)</option>              
-              <option value="PIT">Pittsburgh +4000 (513 pts)</option>
-              <option value="ANA">Anaheim +5500 (700 pts)</option>            
-              <option value="PHI">Philadelphia +6000 (763 pts)</option>
-              <option value="WSH">Boston +6500 (763 pts)</option>              
-              <option value="CBJ">Los Angeles +6500 (825 pts)</option>
-            </select>
-          </div>
+            <div class="bracket-section" style="margin-top: 15px;">
+                <h3 style="font-size: 0.85rem; color: #0055a5; margin-bottom: 8px;">Stanley Cup Winner</h3>
+                <select id="cup-winner" onchange="updateCupWinner(this.value)" style="width: 100%; font-size: 0.8rem;">
+                    <option value="">Select Champion...</option>
+                    <option value="COL">Colorado (50 pts)</option>
+                    <option value="TBL">Tampa Bay (59 pts)</option>
+                    <option value="CAR">Carolina (75 pts)</option>
+                    <option value="DAL">Dallas (150 pts)</option>
+                    <option value="VGK">Vegas (150 pts)</option>
+                    <option value="EDM">Edmonton (188 pts)</option>
+                    <option value="MIN">Minnesota (213 pts)</option>
+                    <option value="BUF">Buffalo (225 pts)</option>
+                    <option value="OTT">Ottawa (225 pts)</option>
+                    <option value="UTA">Utah (425 pts)</option>
+                    <option value="MTL">Montreal (450 pts)</option>
+                    <option value="PIT">Pittsburgh (513 pts)</option>
+                    <option value="ANA">Anaheim (700 pts)</option>
+                    <option value="PHI">Philadelphia (763 pts)</option>
+                    <option value="BOS">Boston (763 pts)</option>
+                    <option value="LAK">Los Angeles (825 pts)</option>
+                </select>
+            </div>
 
-          <button id="save-entry" class="save-btn" disabled onclick="saveEntry()">Save Roster</button>
+            <button id="save-entry" class="save-btn" disabled onclick="saveEntry()">Save Roster</button>
         </aside>
       </div>
     </div>
