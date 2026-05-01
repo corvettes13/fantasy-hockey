@@ -13,15 +13,19 @@ export default {
     }
 
     // 2. DATA ROUTES (KV)
-
     // GET Route for Playoff Pool
     if (internalPath === "/playoff-get") {
-      // If Cloudflare Access is OFF, this header is empty. 
-      // For now, we fetch based on the header, but we may want to change this to a query param later.
-      const data = await env.PLAYOFF_DATA.get(userEmailHeader);
-      return new Response(data || "{}", {
-        headers: { "Content-Type": "application/json" }
-      });
+        // 1. Check Query Param first (sent by your JS), then fallback to Header
+        const urlParams = new URL(request.url).searchParams;
+        const emailQuery = urlParams.get("email");
+        const targetEmail = (emailQuery || userEmailHeader).toLowerCase();
+
+        if (!targetEmail) return new Response("{}", { status: 200 });
+
+        const data = await env.PLAYOFF_DATA.get(targetEmail);
+        return new Response(data || "{}", {
+            headers: { "Content-Type": "application/json" }
+        });
     }
 
     // Inside the /playoff-submit POST block in _worker.js

@@ -25,15 +25,19 @@ let isRound2 = true; // Manual toggle for now
 let existingRoster = null;
 
 async function checkExistingUser(email) {
-    const res = await fetch(`${WORKER_ENDPOINT}/get-entry?email=${email}`);
+    const res = await fetch(`/playoff-get?email=${encodeURIComponent(email)}`);
     if (res.ok) {
         existingRoster = await res.json();
-        enterRound2Mode(existingRoster);
+        // Check if the data returned is actually a roster and not just "{}"
+        if (existingRoster.roster) {
+            enterRound2Mode(existingRoster);
+        }
     }
 }
 
 function enterRound2Mode(data) {
-    // 1. Show the R2 section
+    data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+
     const r2Section = document.getElementById('round-2-bracket');
     if (r2Section) r2Section.style.display = 'block';
 
@@ -74,8 +78,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         const header = document.querySelector('.site-header');
         if (header) header.innerHTML = html;
     });
+    
+    if (isRound2) {
+        const r2Section = document.getElementById('round-2-bracket');
+        if (r2Section) r2Section.style.display = 'block';
+    }
 
-    await initData();
+    await initData();    
     await loadExistingEntry();
 
     const posFilter = document.getElementById('pos-filter');
