@@ -21,6 +21,47 @@ let myEntry = {
     cupWinner: "" 
 };
 
+let isRound2 = true; // Manual toggle for now
+let existingRoster = null;
+
+async function checkExistingUser(email) {
+    const res = await fetch(`${WORKER_ENDPOINT}/get-entry?email=${email}`);
+    if (res.ok) {
+        existingRoster = await res.json();
+        enterRound2Mode(existingRoster);
+    }
+}
+
+function enterRound2Mode(data) {
+    // 1. Lock original picks
+    document.getElementById('manager-name').value = data.managerName;
+    document.getElementById('manager-name').disabled = true;
+    document.getElementById('cup-winner').value = data.cupWinner;
+    document.getElementById('cup-winner').disabled = true;
+    
+    // 2. Disable Round 1 radio buttons
+    document.querySelectorAll('input[type="radio"][name^="r1"]').forEach(rb => rb.disabled = true);
+    
+    // 3. Show Round 2 section
+    document.getElementById('round-2-bracket').style.display = 'block';
+    renderRound2Matchups();
+    
+    // 4. Mark existing players as "Permanent"
+    // In your renderTable loop, add:
+    // if (data.roster.F.includes(p.id)) row.classList.add('already-owned', 'disabled');
+}
+
+function validateRound2() {
+    const newSkaters = selectedSkaters.filter(id => !existingRoster.allIds.includes(id));
+    const newGoalies = selectedGoalies.filter(id => !existingRoster.G.includes(id));
+    
+    const isValid = (newSkaters.length === 2 && newGoalies.length === 0) || 
+                    (newSkaters.length === 0 && newGoalies.length === 1);
+                    
+    document.getElementById('save-entry').disabled = !isValid;
+}
+
+
 // 2. INITIALIZATION
 document.addEventListener('DOMContentLoaded', async () => {
     fetch('/fantasy-hockey/shared/header.html').then(res => res.text()).then(html => {
@@ -336,5 +377,56 @@ async function loadExistingEntry() {
         }
     } catch (err) { 
         console.log("No existing entry found for this user."); 
+    }
+}
+
+function renderRound2Matchups() {
+    const container = document.getElementById('r2-matchups-list');
+    const r2Data = matchupData.rounds.r2.matchups;
+    
+    container.innerHTML = Object.entries(r2Data).map(([id, match]) => `
+        <div class="matchup-box">
+            <div class="matchup-label">${match.label}</div>
+            <label><input type="radio" name="${id}" value="${match.teams[0]}"> ${match.teams[0]}</label>
+            <label><input type="radio" name="${id}" value="${match.teams[1]}"> ${match.teams[1]}</label>
+        </div>
+    `).join('');
+}
+
+async function saveSupplement() {
+    const email = document.getElementById('user-email').value.toLowerCase();
+    const leaguePass = document.getElementById('league-pass').value;
+
+    // Filter out players the user ALREADY had in Round 1
+    const newPlayers = selectedPlayers
+        .filter(p => !existingRoster.allIds.includes(p.id))
+        .map(p => ({ id: p.id, pos: p.pos }));
+
+    // Grab only the Round 2 bracket picks
+    const newMatchups = {};
+    const r2Matchups = matchupData.rounds.r2.matchups; // From playoff_matchups.json
+    Object.keys(r2Matchups).forEach(key => {
+        const selected = document.querySelector(`input[name="${key}"]:checked`);
+        if (selected) newMatchups[key] = selected.value;
+    });
+
+    const payload = {
+        email,
+        leaguePass,
+        newPlayers,
+        newMatchups
+    };
+
+    const res = await fetch('/submit-supplement', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+        alert("Round 2 additions saved successfully!");
+        window.location.href = `/entry.html?id=${existingRoster.entryId}`;
+    } else {
+        const msg = await res.text();
+        alert("Error: " + msg);
     }
 }

@@ -71,6 +71,58 @@ export default {
             return new Response("Save Failed", { status: 500 });
         }
     }
+    
+        // Route: /submit-supplement
+    if (request.method === 'POST' && pathname === '/submit-supplement') {
+        try {
+            const supplement = await request.json(); // { email, leaguePass, newPlayers, newMatchups }
+            const email = supplement.email.toLowerCase();
+
+            // 1. Password Check
+            if (supplement.leaguePass !== env.LEAGUE_PASSWORD) {
+                return new Response("Invalid League Password", { status: 401 });
+            }
+
+            // 2. Fetch existing entry
+            const existingData = await env.PLAYOFF_DATA.get(email);
+            if (!existingData) {
+                return new Response("Existing roster not found for this email.", { status: 404 });
+            }
+
+            let entry = JSON.parse(existingData);
+
+            // 3. Perform the Merge
+            // Add new players to the existing roster arrays
+            if (supplement.newPlayers && supplement.newPlayers.length > 0) {
+                supplement.newPlayers.forEach(p => {
+                    // p = { id: 123, pos: 'F' }
+                    if (!entry.roster[p.pos].includes(p.id)) {
+                        entry.roster[p.pos].push(p.id);
+                    }
+                });
+            }
+
+            // Add Round 2 matchups to the bracket object
+            // This merges r2m1, r2m2, etc., into the existing r1w1, r1w2...
+            entry.bracket = { ...entry.bracket, ...supplement.newMatchups };
+
+            // 4. Update Metadata
+            entry.updatedAt = new Date().toISOString();
+            entry.round2Submitted = true;
+
+            // 5. Atomic Write (Double-write for Email and ID)
+            const updatedJson = JSON.stringify(entry);
+            await env.PLAYOFF_DATA.put(email, updatedJson);
+            await env.PLAYOFF_DATA.put(`id_${entry.entryId}`, updatedJson);
+
+            return new Response(JSON.stringify({ success: true, entryId: entry.entryId }), {
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+        } catch (err) {
+            return new Response(err.message, { status: 500 });
+        }
+    }    
 
     // Original roster routes (Legacy/Main Site)
     if (internalPath.includes("/get-roster")) {
@@ -174,3 +226,4 @@ export default {
     return env.ASSETS.fetch(new Request(newUrl, request));
   }
 };
+
