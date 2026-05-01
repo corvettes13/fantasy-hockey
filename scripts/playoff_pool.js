@@ -33,22 +33,28 @@ async function checkExistingUser(email) {
 }
 
 function enterRound2Mode(data) {
-    // 1. Lock original picks
-    document.getElementById('manager-name').value = data.managerName;
-    document.getElementById('manager-name').disabled = true;
-    document.getElementById('cup-winner').value = data.cupWinner;
-    document.getElementById('cup-winner').disabled = true;
-    
-    // 2. Disable Round 1 radio buttons
-    document.querySelectorAll('input[type="radio"][name^="r1"]').forEach(rb => rb.disabled = true);
-    
-    // 3. Show Round 2 section
-    document.getElementById('round-2-bracket').style.display = 'block';
+    // 1. Show the R2 section
+    const r2Section = document.getElementById('round-2-bracket');
+    if (r2Section) r2Section.style.display = 'block';
+
+    // 2. Build the matchups from JSON
     renderRound2Matchups();
-    
-    // 4. Mark existing players as "Permanent"
-    // In your renderTable loop, add:
-    // if (data.roster.F.includes(p.id)) row.classList.add('already-owned', 'disabled');
+
+    // 3. If the user ALREADY submitted Round 2 picks previously, check those boxes
+    if (data.bracket) {
+        Object.keys(data.bracket).forEach(key => {
+            if (key.startsWith('r2')) {
+                const val = data.bracket[key];
+                const radio = document.querySelector(`input[name="${key}"][value="${val}"]`);
+                if (radio) radio.checked = true;
+            }
+        });
+    }
+
+    // 4. Lock the rest of the UI as discussed before
+    document.getElementById('manager-name').disabled = true;
+    document.getElementById('cup-winner').disabled = true;
+    document.querySelectorAll('#round-1-bracket input').forEach(el => el.disabled = true);
 }
 
 function validateRound2() {
@@ -400,13 +406,25 @@ async function loadExistingEntry() {
 
 function renderRound2Matchups() {
     const container = document.getElementById('r2-matchups-list');
+    if (!container || !matchupData) return;
+
     const r2Data = matchupData.rounds.r2.matchups;
     
     container.innerHTML = Object.entries(r2Data).map(([id, match]) => `
-        <div class="matchup-box">
-            <div class="matchup-label">${match.label}</div>
-            <label><input type="radio" name="${id}" value="${match.teams[0]}"> ${match.teams[0]}</label>
-            <label><input type="radio" name="${id}" value="${match.teams[1]}"> ${match.teams[1]}</label>
+        <div class="matchup-box" style="margin-bottom: 10px; padding: 8px; border: 1px solid #eee; border-radius: 4px;">
+            <div class="matchup-label" style="font-size: 0.75rem; font-weight: bold; color: #444; margin-bottom: 5px;">
+                ${match.label}
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <label style="font-size: 0.8rem; cursor: pointer;">
+                    <input type="radio" name="${id}" value="${match.teams[0]}" onclick="updateBracket('${id}', '${match.teams[0]}')"> 
+                    ${match.teams[0]}
+                </label>
+                <label style="font-size: 0.8rem; cursor: pointer;">
+                    <input type="radio" name="${id}" value="${match.teams[1]}" onclick="updateBracket('${id}', '${match.teams[1]}')"> 
+                    ${match.teams[1]}
+                </label>
+            </div>
         </div>
     `).join('');
 }
