@@ -14,7 +14,15 @@
         "r1e4": { "teams": ["PIT", "PHI"], "winner": "PHI", "label": "PIT vs PHI" }
       }
     },
-    "r2": { "points_per_pick": 20, "matchups": {} },
+    "r2": {
+      "points_per_pick": 20,
+	"matchups": {
+        "r1w1": { "teams": ["COL", "MIN"], "winner": null, "label": "COL vs LAK" },
+        "r1w2": { "teams": ["VGK/UTA", "ANA"], "winner": null, "label": "VGK/UTA vs ANA" },
+        "r1e1": { "teams": ["CAR", "PHI"], "winner": null, "label": "CAR vs PHI" },
+        "r1e2": { "teams": ["BUF/BOS", "TBL/MTL"], "winner": null, "label": "BUF/BOS vs TBL/MTL" }
+      }
+    },
     "r3": { "points_per_pick": 40, "matchups": {} },
     "r4": { "points_per_pick": 80, "matchups": {} }
   }
