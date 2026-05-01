@@ -57,7 +57,7 @@ function enterRound2Mode(data) {
     if (r2Section) r2Section.style.display = 'block';
 
     // 2. Build the matchups
-    renderRound2Matchups();
+    renderRoundMatchups();
 
     // 3. Set existing IDs for validation
     data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
@@ -149,9 +149,19 @@ async function initData() {
 
         renderTable();
         
-        if (isRound2) {
-            renderRound2Matchups();
-        }        
+        const currentRound = matchupData.current_round;
+        const acceptingNew = matchupData.accepting_new_entries;
+
+        if (currentRound > 1) {
+            // If not accepting new entries, show the lookup box and hide the empty form
+            if (!acceptingNew) {
+                document.getElementById('lookup-section').style.display = 'block';
+                // Hide the main table until an email is found to prevent "ghost" entries
+                document.querySelector('.main-content').style.opacity = '0.3';
+                document.querySelector('.main-content').style.pointerEvents = 'none';
+            }
+            renderRoundMatchups(currentRound);
+        }   
     } catch (err) {
         console.error("Initialization failed:", err);
     }
@@ -239,6 +249,7 @@ function renderTable() {
     const nameEl = document.getElementById('name-filter');
     const tbody = document.getElementById('players-body');
     const thead = document.getElementById('players-head');
+    const teamFilter = document.getElementById('team-filter').value;
 
     if (!tbody || !thead || !posEl) return;
 
@@ -266,18 +277,27 @@ function renderTable() {
             <th data-sort="FPG">FP/G</th>
         </tr>`;
 
+    const playoffData = playoffStatsMap[p.full_name] || { total: 0 };
+    row.innerHTML = `
+        ...
+        <td>${s.FPG || '0.00'}</td>
+        <td style="font-weight:bold; background: #fffdf5;">${playoffData.total.toFixed(1)}</td>
+        <td>${s.GP || 0}</td>
+        ...
+    `;
     bindHeaderSortEvents();
 
     let filtered = allPlayers.filter(p => {
         const s = statsMap[p.player_id] || {};
         const gp = parseFloat(s.GP) || 0;
         const matchesName = p.full_name.toLowerCase().includes(nameFilter);
+        const matchesTeam = !teamFilter ? true : p.team_abbr === teamFilter;
         const matchesPos = !posFilter ? true : (
             posFilter === 'F' 
             ? (p.position.includes('C') || p.position.includes('LW') || p.position.includes('RW')) 
             : p.position.includes(posFilter)
         );
-        return matchesName && matchesPos && gp >= minGP;
+        return matchesName && matchesPos && matchesTeam;
     });
 
     filtered.sort((a, b) => {
@@ -450,11 +470,10 @@ async function loadExistingEntry() {
     }
 }
 
-function renderRound2Matchups() {
-    const container = document.getElementById('r2-matchups-list');
-    if (!container || !matchupData) return;
-
-    const r2Data = matchupData.rounds.r2.matchups;
+function renderRoundMatchups(roundNum) {
+    const container = document.getElementById(`r${roundNum}-matchups-list`);
+    const roundKey = `r${roundNum}`;
+    const roundData = matchupData.rounds[roundKey].matchups;
     
     container.innerHTML = Object.entries(r2Data).map(([id, match]) => `
         <div class="matchup-box" style="margin-bottom: 10px; padding: 8px; border: 1px solid #eee; border-radius: 4px;">
