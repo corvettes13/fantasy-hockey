@@ -82,11 +82,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function initData() {
     try {
-        const [playersRes, teamsRes, skaterRes, goalieRes] = await Promise.all([
+        const [playersRes, teamsRes, skaterRes, goalieRes, matchupRes] = await Promise.all([
             fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
             fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_skater_stats.json').then(res => res.json()),
-            fetch('/fantasy-hockey/data/2026_goalie_stats.json').then(res => res.json())
+            fetch('/fantasy-hockey/data/2026_goalie_stats.json').then(res => res.json()),
+            fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json()) // ADD THIS
         ]);
 
         teamMap = Object.fromEntries(teamsRes.map(t => [t.team_abbreviation, t.logo_url]));
@@ -298,8 +299,21 @@ function updateCounts() {
         if (el) el.innerText = myEntry.roster[c].length;
     });
     const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
+    
     const saveBtn = document.getElementById('save-entry');
-    if (saveBtn) saveBtn.disabled = (total !== 20);
+    if (saveBtn) {
+        if (isRound2 && existingRoster) {
+            saveBtn.setAttribute('onclick', 'saveSupplement()');
+            saveBtn.innerText = "Save Round 2 Additions";
+            
+            // Logic for 2 skaters or 1 goalie
+            const newCount = (myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length) - 20;
+            // Add your validation logic here to enable/disable button
+            saveBtn.disabled = false; 
+        } else {
+            saveBtn.disabled = (total !== 20);
+        }
+    }
 }
 
 function isAlreadyInRoster(id) {
@@ -350,17 +364,21 @@ async function loadExistingEntry() {
     if (!email) return;
 
     try {
-        // We pass the email as a query parameter to the worker
         const res = await fetch(`/playoff-get?email=${encodeURIComponent(email)}`);
         const data = await res.json();
         
         if (data && data.roster) {
             myEntry = data;
+            existingRoster = data;
             
             // Populate UI fields
             if (myEntry.managerName) document.getElementById('manager-name').value = myEntry.managerName;
             if (myEntry.email) document.getElementById('user-email').value = myEntry.email;
             if (myEntry.cupWinner) document.getElementById('cup-winner').value = myEntry.cupWinner;
+            
+            if (isRound2) {
+                enterRound2Mode(data);
+            }
             
             // Re-check radio buttons for the bracket
             if (myEntry.bracket) {
@@ -396,7 +414,22 @@ function renderRound2Matchups() {
 async function saveSupplement() {
     const email = document.getElementById('user-email').value.toLowerCase();
     const leaguePass = document.getElementById('league-pass').value;
+    
+    // Flatten all current IDs in the UI roster
+    const currentRosterIds = [...myEntry.roster.F, ...myEntry.roster.D, ...myEntry.roster.G];
+    
+    // Flatten all IDs from the ORIGINAL Round 1 roster
+    const oldRosterIds = [...existingRoster.roster.F, ...existingRoster.roster.D, ...existingRoster.roster.G];
 
+    // Find players that are in current but weren't in old
+    const newPlayers = [];
+    ['F', 'D', 'G'].forEach(pos => {
+        myEntry.roster[pos].forEach(id => {
+            if (!existingRoster.roster[pos].includes(id)) {
+                newPlayers.push({ id: id, pos: pos });
+            }
+        });
+    });
     // Filter out players the user ALREADY had in Round 1
     const newPlayers = selectedPlayers
         .filter(p => !existingRoster.allIds.includes(p.id))
@@ -417,7 +450,7 @@ async function saveSupplement() {
         newMatchups
     };
 
-    const res = await fetch('/submit-supplement', {
+    const res = await fetch('/submit-supplement', { // Ensure this matches your Worker route
         method: 'POST',
         body: JSON.stringify(payload)
     });
