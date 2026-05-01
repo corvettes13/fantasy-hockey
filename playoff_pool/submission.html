@@ -93,6 +93,15 @@
         </div>
 
         <aside class="roster-sidebar">
+            <div id="lookup-section" style="background: #eaf0f6; padding: 10px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #0055a5;">
+                <h2 style="font-size: 0.9rem; margin-bottom: 8px;">Existing Manager?</h2>
+                <label class="info-label">Enter Email to Add Players</label>
+                <div style="display: flex; gap: 5px;">
+                    <input type="email" id="lookup-email" placeholder="email@example.com" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                    <button type="button" onclick="checkExistingUser(document.getElementById('lookup-email').value)" style="background: #0055a5; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Find</button>
+                </div>
+            </div>
+
             <h2>Your Entry</h2>
 
             <div class="manager-section" style="margin-bottom: 15px;">

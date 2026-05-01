@@ -46,15 +46,37 @@ async function checkExistingUser(email) {
 }
 
 function enterRound2Mode(data) {
-    data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+    // Helper to safely disable elements
+    const safeDisable = (id) => {
+        const el = document.getElementById(id);
+        if (el) el.disabled = true;
+    };
 
+    // 1. Show the R2 section
     const r2Section = document.getElementById('round-2-bracket');
     if (r2Section) r2Section.style.display = 'block';
 
-    // 2. Build the matchups from JSON
+    // 2. Build the matchups
     renderRound2Matchups();
 
-    // 3. If the user ALREADY submitted Round 2 picks previously, check those boxes
+    // 3. Set existing IDs for validation
+    data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+
+    // 4. Lock original picks safely
+    if (document.getElementById('manager-name')) {
+        document.getElementById('manager-name').value = data.managerName || "";
+    }
+    safeDisable('manager-name');
+    
+    if (document.getElementById('cup-winner')) {
+        document.getElementById('cup-winner').value = data.cupWinner || "";
+    }
+    safeDisable('cup-winner');
+
+    // 5. Disable Round 1 radio buttons
+    document.querySelectorAll('#round-1-bracket input').forEach(el => el.disabled = true);
+    
+    // 6. Handle previous R2 picks
     if (data.bracket) {
         Object.keys(data.bracket).forEach(key => {
             if (key.startsWith('r2')) {
@@ -64,11 +86,6 @@ function enterRound2Mode(data) {
             }
         });
     }
-
-    // 4. Lock the rest of the UI as discussed before
-    document.getElementById('manager-name').disabled = true;
-    document.getElementById('cup-winner').disabled = true;
-    document.querySelectorAll('#round-1-bracket input').forEach(el => el.disabled = true);
 }
 
 function validateRound2() {
