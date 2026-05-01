@@ -430,10 +430,6 @@ async function saveSupplement() {
             }
         });
     });
-    // Filter out players the user ALREADY had in Round 1
-    const newPlayers = selectedPlayers
-        .filter(p => !existingRoster.allIds.includes(p.id))
-        .map(p => ({ id: p.id, pos: p.pos }));
 
     // Grab only the Round 2 bracket picks
     const newMatchups = {};
