@@ -450,9 +450,11 @@ async function saveSupplement() {
     });
 
     // Grab only the Round 2 bracket picks
+    // Inside saveSupplement
     const newMatchups = {};
-    const r2Matchups = matchupData.rounds.r2.matchups; // From playoff_matchups.json
-    Object.keys(r2Matchups).forEach(key => {
+    const r2Keys = Object.keys(matchupData.rounds.r2.matchups); // Now returns ['r2w1', 'r2w2'...]
+
+    r2Keys.forEach(key => {
         const selected = document.querySelector(`input[name="${key}"]:checked`);
         if (selected) newMatchups[key] = selected.value;
     });
