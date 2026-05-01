@@ -25,12 +25,22 @@ let isRound2 = true; // Manual toggle for now
 let existingRoster = null;
 
 async function checkExistingUser(email) {
+    if (!email) return alert("Please enter your email first.");
+    
+    // Change /get-entry to /playoff-get to match worker.js
     const res = await fetch(`/playoff-get?email=${encodeURIComponent(email)}`);
+    
     if (res.ok) {
-        existingRoster = await res.json();
-        // Check if the data returned is actually a roster and not just "{}"
-        if (existingRoster.roster) {
-            enterRound2Mode(existingRoster);
+        const data = await res.json();
+        if (data && data.roster) {
+            existingRoster = data;
+            myEntry = JSON.parse(JSON.stringify(data)); // Deep copy to current state
+            enterRound2Mode(data);
+            updateCounts();
+            renderTable();
+            alert("Roster found! You can now add 2 skaters or 1 goalie.");
+        } else {
+            alert("No existing roster found for this email. If this is your first entry, ignore this.");
         }
     }
 }
@@ -95,15 +105,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 });
 
+let matchupData = null;
+
 async function initData() {
-    try {
+      try {
+        console.log("Fetching all data files...");
         const [playersRes, teamsRes, skaterRes, goalieRes, matchupRes] = await Promise.all([
             fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
             fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_skater_stats.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_goalie_stats.json').then(res => res.json()),
-            fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json()) // ADD THIS
+            fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json())
         ]);
+
+        matchupData = matchupRes; 
+        console.log("Matchup Data loaded:", matchupData);
 
         teamMap = Object.fromEntries(teamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         skaterStatsMap = buildStatsMap(skaterRes.players, "skater");
@@ -115,6 +131,10 @@ async function initData() {
         allPlayers = playersRes.players.filter(p => PLAYOFF_TEAMS.includes(p.team_abbr));
 
         renderTable();
+        
+        if (isRound2) {
+            renderRound2Matchups();
+        }        
     } catch (err) {
         console.error("Initialization failed:", err);
     }

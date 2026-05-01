@@ -96,13 +96,13 @@
             <h2>Your Entry</h2>
 
             <div class="manager-section" style="margin-bottom: 15px;">
-                <label class="info-label">Manager Name</label>
-                <input type="text" id="manager-name" placeholder="Nickname..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-            </div>
-
-            <div class="manager-section" style="margin-bottom: 15px;">
                 <label class="info-label">Email Address</label>
-                <input type="email" id="user-email" placeholder="Required for leaderboard..." style="width: 100%; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                <div style="display: flex; gap: 5px;">
+                    <input type="email" id="user-email" placeholder="Required..." style="flex: 1; padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                    <button type="button" onclick="checkExistingUser(document.getElementById('user-email').value)" style="padding: 5px 10px; background: #0055a5; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
+                        Find Me
+                    </button>
+                </div>
             </div>
 
             <div class="manager-section" style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eaf0f6;">
