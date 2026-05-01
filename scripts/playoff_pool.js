@@ -123,34 +123,57 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 let matchupData = null;
+let playoffStatsMap = {}; 
 
 async function initData() {
-      try {
-        console.log("Fetching all data files...");
-        const [playersRes, teamsRes, skaterRes, goalieRes, matchupRes] = await Promise.all([
+    try {
+        const [playersRes, teamsRes, skaterRes, goalieRes, matchupRes, pSkaterRes, pGoalieRes] = await Promise.all([
             fetch('/fantasy-hockey/data/players.json').then(res => res.json()),
             fetch('/fantasy-hockey/teams/nhl_teams.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_skater_stats.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_goalie_stats.json').then(res => res.json()),
-            fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json())
+            fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json()),
+            // NEW: Fetch playoff-specific stats
+            fetch('/fantasy-hockey/data/2026_playoff_skater_stats.json').then(res => res.json()),
+            fetch('/fantasy-hockey/data/2026_playoff_goalie_stats.json').then(res => res.json())
         ]);
 
-        matchupData = matchupRes; 
-        console.log("Matchup Data loaded:", matchupData);
-
+        matchupData = matchupRes;
         teamMap = Object.fromEntries(teamsRes.map(t => [t.team_abbreviation, t.logo_url]));
+        
+        // Regular Season Maps
         skaterStatsMap = buildStatsMap(skaterRes.players, "skater");
         goalieStatsMap = buildStatsMap(goalieRes.players, "goalie");
+        
+        // --- NEW: Build the Playoff Stats Map ---
+        // Your playoff JSON is a flat array, so we map by 'Player' name (normalized)
+        playoffStatsMap = {};
+        [...pSkaterRes, ...pGoalieRes].forEach(p => {
+            // We use the player name as the key for the playoff stats
+            playoffStatsMap[p.Player] = p.fantasy_points; 
+        });
 
         calculateFantasyPoints(skaterStatsMap, playersRes.players, "skater");
         calculateFantasyPoints(goalieStatsMap, playersRes.players, "goalie");
 
         allPlayers = playersRes.players.filter(p => PLAYOFF_TEAMS.includes(p.team_abbr));
-
-        renderTable();
         
         const currentRound = matchupData.current_round;
         const acceptingNew = matchupData.accepting_new_entries;
+        
+        const teamFilter = document.getElementById('team-filter');
+        if (teamFilter) {
+            // Fill the dropdown with active teams from our Master JSON
+            const activeTeams = matchupData.active_teams || [];
+            activeTeams.sort().forEach(abbr => {
+                const opt = document.createElement('option');
+                opt.value = opt.textContent = abbr;
+                teamFilter.appendChild(opt);
+            });
+            teamFilter.addEventListener('change', renderTable);
+        }        
+        
+        renderTable();        
 
         if (currentRound > 1) {
             // If not accepting new entries, show the lookup box and hide the empty form
@@ -313,6 +336,8 @@ function renderTable() {
         const s = statsMap[p.player_id] || {};
         const isSelected = isAlreadyInRoster(p.player_id);
         const row = document.createElement('tr');
+        const cleanName = normalizeName(p.full_name);
+        const pStats = playoffStatsMap[cleanName] || { total: 0 };        
         if (isSelected) row.className = 'selected-row';
 
         row.innerHTML = `
@@ -331,7 +356,11 @@ function renderTable() {
                 <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
                 <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
             `}
-            <td>${s.FP || '0.0'}</td>
+            <td>${s.FPG || '0.00'}</td>
+            <td style="font-weight:bold; background: #fffdf5; color: #d9534f;">
+              ${parseFloat(pStats.total || 0).toFixed(1)}
+            </td>
+            <td>${s.GP || 0}</td>
             <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
         `;
         tbody.appendChild(row);
