@@ -1,5 +1,5 @@
 {
-  "active_teams": ["COL","MIN","VGK","UTA","EDM","ANA","CAR","BUF","BOS","TBL","MTL","PHI"],
+  "active_teams": ["COL","MIN","VGK","UTA","ANA","CAR","BUF","BOS","TBL","MTL","PHI"],
   "rounds": {
     "r1": {
       "points_per_pick": 10,
@@ -7,7 +7,7 @@
         "r1w1": { "teams": ["COL", "LAK"], "winner": "COL", "label": "COL vs LAK" },
         "r1w2": { "teams": ["DAL", "MIN"], "winner": "MIN", "label": "DAL vs MIN" },
         "r1w3": { "teams": ["VGK", "UTA"], "winner": null, "label": "VGK vs UTA" },
-        "r1w4": { "teams": ["EDM", "ANA"], "winner": null, "label": "EDM vs ANA" },
+        "r1w4": { "teams": ["EDM", "ANA"], "winner": "ANA", "label": "EDM vs ANA" },
         "r1e1": { "teams": ["CAR", "OTT"], "winner": "CAR", "label": "CAR vs OTT" },
         "r1e2": { "teams": ["BUF", "BOS"], "winner": null, "label": "BUF vs BOS" },
         "r1e3": { "teams": ["TBL", "MTL"], "winner": null, "label": "TBL vs MTL" },
