@@ -559,3 +559,10 @@ async function saveSupplement() {
         alert("Error: " + msg);
     }
 }
+
+function normalizeName(name) {
+    if (!name) return "";
+    // This splits accented characters into their base letter + accent, 
+    // then removes the accent marks (diacritics).
+    return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
