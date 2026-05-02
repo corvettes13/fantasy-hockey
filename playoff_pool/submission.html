@@ -51,6 +51,17 @@
     
     /* Highlight for selected players in the table */
     .selected-row { background-color: #f0f8ff !important; }
+    
+    button:disabled {
+        background: #eee !important;
+        color: #999 !important;
+        cursor: not-allowed;
+        border: 1px solid #ddd;
+    }
+
+    .selected-row td {
+        background-color: #f0f8ff; /* Light blue for new picks */
+    }    
   </style>
 </head>
 <body class="players-page">

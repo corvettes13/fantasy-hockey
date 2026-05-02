@@ -338,20 +338,25 @@ function renderTable() {
         const s = statsMap[p.player_id] || {};
         const isSelected = isAlreadyInRoster(p.player_id);
         
-        // --- PLAYOFF POINTS LOOKUP ---
-        const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
-        // Special check: If it's a goalie, we use the G_TEAM key. 
-        // For skaters, normalizeName handles accents like 'Leon Draisaitl' -> 'Leon Draisaitl'
-        const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
-        
+        // Check if this player was already on the roster from Round 1
+        const isLegacy = existingRoster && 
+                         (existingRoster.roster.F.includes(p.player_id) || 
+                          existingRoster.roster.D.includes(p.player_id) || 
+                          existingRoster.roster.G.includes(p.player_id));
+
         const row = document.createElement('tr');
         if (isSelected) row.className = 'selected-row';
+        if (isLegacy) row.style.opacity = '0.7'; // Visual cue for locked players
 
         row.innerHTML = `
-            <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
+            <td>
+                <button onclick="togglePlayer(${p.player_id})" ${isLegacy ? 'disabled' : ''}>
+                    ${isLegacy ? '🔒' : (isSelected ? 'Remove' : 'Add')}
+                </button>
+            </td>
             <td class="player-cell">
-                <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px; vertical-align:middle;">
-                <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
+                <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px;">
+                <a href="${p.url || '#'}" target="_blank" style="${isLegacy ? 'color: #666;' : ''}">${p.full_name}</a>
                 <span class="team-abbr">${p.team_abbr}</span>
             </td>
             <td>${p.position}</td>
@@ -389,13 +394,20 @@ window.updateCupWinner = function(team) {
 window.togglePlayer = function(id) {
     const p = allPlayers.find(x => x.player_id == id);
     if (!p) return;
+    
     const cat = p.position === 'G' ? 'G' : (p.position === 'D' ? 'D' : 'F');
+    
     if (isAlreadyInRoster(id)) {
+        // Double check: Never allow removal of a legacy player
+        const isLegacy = existingRoster && 
+                         (existingRoster.roster.F.includes(id) || 
+                          existingRoster.roster.D.includes(id) || 
+                          existingRoster.roster.G.includes(id));
+        if (isLegacy) return; 
+
         myEntry.roster[cat] = myEntry.roster[cat].filter(x => x != id);
     } else {
-        if (cat === 'F' && myEntry.roster.F.length >= 12) return alert("12 Forwards Max");
-        if (cat === 'D' && myEntry.roster.D.length >= 5) return alert("5 Defense Max");
-        if (cat === 'G' && myEntry.roster.G.length >= 3) return alert("3 Goalies Max");
+        // Skip the 12/5/3 checks entirely if isRound2 is active
         myEntry.roster[cat].push(id);
     }
     updateCounts();
@@ -403,25 +415,37 @@ window.togglePlayer = function(id) {
 };
 
 function updateCounts() {
+    // Update the UI counters for visual feedback
     ['F', 'D', 'G'].forEach(c => {
         const el = document.getElementById(`count-${c}`);
         if (el) el.innerText = myEntry.roster[c].length;
     });
-    const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
-    
+
     const saveBtn = document.getElementById('save-entry');
-    if (saveBtn) {
-        if (isRound2 && existingRoster) {
-            saveBtn.setAttribute('onclick', 'saveSupplement()');
-            saveBtn.innerText = "Save Round 2 Additions";
-            
-            // Logic for 2 skaters or 1 goalie
-            const newCount = (myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length) - 20;
-            // Add your validation logic here to enable/disable button
-            saveBtn.disabled = false; 
-        } else {
-            saveBtn.disabled = (total !== 20);
-        }
+    if (!saveBtn) return;
+
+    if (isRound2 && existingRoster) {
+        // Calculate the difference between current selections and original roster
+        const newSkaters = [
+            ...myEntry.roster.F.filter(id => !existingRoster.roster.F.includes(id)),
+            ...myEntry.roster.D.filter(id => !existingRoster.roster.D.includes(id))
+        ];
+        const newGoalies = myEntry.roster.G.filter(id => !existingRoster.roster.G.includes(id));
+
+        const skaterCount = newSkaters.length;
+        const goalieCount = newGoalies.length;
+
+        // Rule: Exactly 2 new skaters AND 0 goalies OR Exactly 1 new goalie AND 0 skaters
+        const isValid = (skaterCount === 2 && goalieCount === 0) || 
+                        (skaterCount === 0 && goalieCount === 1);
+
+        saveBtn.disabled = !isValid;
+        saveBtn.innerText = isValid ? "Submit Round 2 Changes" : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
+        saveBtn.setAttribute('onclick', 'saveSupplement()');
+    } else {
+        // Round 1 Logic
+        const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
+        saveBtn.disabled = (total !== 20);
     }
 }
 
