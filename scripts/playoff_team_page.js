@@ -52,6 +52,11 @@ async function init() {
 }
 
 function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
+    document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
+    document.getElementById('display-manager').textContent = data.managerName;
+    document.getElementById('display-id').textContent = data.entryId;
+    document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
+    
     let rosterTotal = 0;
     let bracketTotal = 0;
     
