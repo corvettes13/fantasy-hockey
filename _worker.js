@@ -95,19 +95,19 @@ export default {
 
             let entry = JSON.parse(existingData);
 
-            // 3. Perform the Merge
-            // Add new players to the existing roster arrays
+            // Initialize the supplemental object if it doesn't exist
+            if (!entry.supplemental) entry.supplemental = {};
+            if (!entry.supplemental.r2) entry.supplemental.r2 = [];
+
             if (supplement.newPlayers && supplement.newPlayers.length > 0) {
                 supplement.newPlayers.forEach(p => {
-                    // p = { id: 123, pos: 'F' }
-                    if (!entry.roster[p.pos].includes(p.id)) {
-                        entry.roster[p.pos].push(p.id);
+                    // Track them in r2 specifically so scoring knows when they started
+                    if (!entry.supplemental.r2.includes(p.id)) {
+                        entry.supplemental.r2.push(p.id);
                     }
                 });
             }
 
-            // Add Round 2 matchups to the bracket object
-            // This merges r2m1, r2m2, etc., into the existing r1w1, r1w2...
             entry.bracket = { ...entry.bracket, ...supplement.newMatchups };
 
             // 4. Update Metadata

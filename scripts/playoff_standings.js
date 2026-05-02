@@ -68,25 +68,9 @@ async function initStandings() {
             });
 
             // --- ROSTER POINTS LOOP ---
-            const allIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
-            allIds.forEach(id => {
-                let pts;
-                let teamAbbr;
-                let lookupName;
-
-                const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
-
-                if (isGoalieTeam) {
-                    teamAbbr = id.split('_')[1]; 
-                    lookupName = id; // e.g. "G_COL"
-                } else {
-                    const pInfo = playerInfoMap[id];
-                    teamAbbr = pInfo?.team_abbr;
-                    // Normalize the name from the players.json to match the stats file
-                    lookupName = pInfo?.full_name ? normalizeName(pInfo.full_name) : 'Unknown';
-                }
-
-                pts = statsMap[lookupName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+            const originalRosterIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
+            originalRosterIds.forEach(id => {
+                const pts = getPlayerPoints(id, playerInfoMap, statsMap);
                 
                 rPoints.r1 += pts.r1; 
                 rPoints.r2 += pts.r2; 
@@ -94,14 +78,25 @@ async function initStandings() {
                 rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
-                if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
-                  aliveCount++;
-                }
-
-                if (id) {
-                    playerPickCounts[id] = (playerPickCounts[id] || 0) + 1;
-                }
+                updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
             });
+
+            // 2. Calculate points for SUPPLEMENTAL Round 2 adds (Ignore R1)
+            if (entry.supplemental && entry.supplemental.r2) {
+                entry.supplemental.r2.forEach(id => {
+                    const pts = getPlayerPoints(id, playerInfoMap, statsMap);
+                    
+                    // WE SKIP pts.r1 HERE
+                    rPoints.r2 += pts.r2; 
+                    rPoints.r3 += pts.r3; 
+                    rPoints.r4 += pts.r4;
+                    
+                    // The total for this player is only r2 + r3 + r4
+                    rPoints.total += (pts.r2 + pts.r3 + pts.r4);
+
+                    updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
+                });
+            }
 
             const cupAbbr = entry.cupWinner;
             if (cupAbbr) cupPickCounts[cupAbbr] = (cupPickCounts[cupAbbr] || 0) + 1;
@@ -201,5 +196,39 @@ function renderTable(standings) {
         </tr>
     `).join('');
 }
+
+function getPlayerPoints(id, infoMap, statsMap) {
+    let lookupName;
+    const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
+
+    if (isGoalieTeam) {
+        lookupName = id;
+    } else {
+        const pInfo = infoMap[id];
+        lookupName = pInfo?.full_name ? normalizeName(pInfo.full_name) : 'Unknown';
+    }
+
+    return statsMap[lookupName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+}
+
+// Helper to update alive counts and pick popularity
+function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
+    let teamAbbr;
+    if (typeof id === 'string' && id.startsWith('G_')) {
+        teamAbbr = id.split('_')[1];
+    } else {
+        teamAbbr = infoMap[id]?.team_abbr;
+    }
+
+    if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
+        // This is a local variable in your main loop, 
+        // ensure 'aliveCount' is accessible or returned.
+    }
+
+    if (id) {
+        countsMap[id] = (countsMap[id] || 0) + 1;
+    }
+}
+
 
 initStandings();
