@@ -56,7 +56,16 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
     document.getElementById('display-manager').textContent = data.managerName;
     document.getElementById('display-id').textContent = data.entryId;
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
-    
+    const activeSuppRound = data.supplemental_round;
+
+    const cupWinnerAbbr = data.cupWinner;
+    const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
+    document.getElementById('display-cup').textContent = cupWinnerAbbr;
+    if (cupLogoUrl) {
+        document.getElementById('cup-logo-container').innerHTML = `
+            <img src="${cupLogoUrl}" alt="${cupWinnerAbbr}" style="width: 60px; height: auto; display: block; margin: 0 auto;">
+        `;
+    }
     let rosterTotal = 0;
     let bracketTotal = 0;
     
