@@ -168,16 +168,19 @@ async function initData() {
         
         renderTable();        
 
-        if (currentRound > 1) {
-            // If not accepting new entries, show the lookup box and hide the empty form
-            if (!acceptingNew) {
-                document.getElementById('lookup-section').style.display = 'block';
-                // Hide the main table until an email is found to prevent "ghost" entries
-                document.querySelector('.main-content').style.opacity = '0.3';
-                document.querySelector('.main-content').style.pointerEvents = 'none';
-            }
-            renderRoundMatchups(currentRound);
-        }   
+      if (currentRound > 1) {
+          if (!acceptingNew) {
+              const lookup = document.getElementById('lookup-section');
+              if (lookup) lookup.style.display = 'block';
+
+              const main = document.querySelector('.main-content');
+              if (main) {
+                  main.style.opacity = '0.3';
+                  main.style.pointerEvents = 'none';
+              }
+          }
+          renderRoundMatchups(currentRound);
+      }
     } catch (err) {
         console.error("Initialization failed:", err);
     }
@@ -243,11 +246,24 @@ function sortBy(key) {
         sortDirection = -1;
         currentSortKey = key;
     }
+
     allPlayers.sort((a, b) => {
-        const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
-        const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
-        let aVal = parseFloat(aS[currentSortKey]) || 0;
-        let bVal = parseFloat(bS[currentSortKey]) || 0;
+        let aVal, bVal;
+
+        if (key === 'playoffTotal') {
+            // Lookup playoff points for sorting
+            const aKey = (a.position === 'G') ? `G_${a.team_abbr}` : normalizeName(a.full_name);
+            const bKey = (b.position === 'G') ? `G_${b.team_abbr}` : normalizeName(b.full_name);
+            aVal = playoffStatsMap[aKey]?.total || 0;
+            bVal = playoffStatsMap[bKey]?.total || 0;
+        } else {
+            // Standard regular season sorting
+            const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
+            const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
+            aVal = parseFloat(aS[currentSortKey]) || 0;
+            bVal = parseFloat(bS[currentSortKey]) || 0;
+        }
+
         return (aVal - bVal) * sortDirection;
     });
     renderTable();
@@ -281,7 +297,7 @@ function renderTable() {
             <th>Action</th>
             <th style="text-align: left;">Player</th>
             <th>Pos</th>
-            <th style="background-color: #fff3cd; color: #d9534f;">Playoff Pts</th> <th data-sort="GP">Reg GP</th>
+            <th data-sort="playoffTotal">Playoff Pts</th> <th data-sort="GP">Reg GP</th>
             ${isG ? `
                 <th data-sort="W">W</th><th data-sort="L">L</th><th data-sort="GAA">GAA</th>
                 <th data-sort="SV%">SV%</th><th data-sort="SHO">SO</th>
@@ -337,11 +353,7 @@ function renderTable() {
                 <span class="team-abbr">${p.team_abbr}</span>
             </td>
             <td>${p.position}</td>
-            
-            <td style="font-weight:bold; background-color: #fffdf5; color: #d9534f; font-size: 1rem;">
-                ${parseFloat(pStats.total || 0).toFixed(1)}
-            </td>
-
+            <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
             <td>${s.GP || 0}</td>
             ${p.position === 'G' ? `
                 <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
