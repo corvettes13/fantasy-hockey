@@ -55,25 +55,23 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
     let rosterTotal = 0;
     let bracketTotal = 0;
     
-    document.getElementById('page-title').textContent = `${data.managerName}'s Picks`;
-    document.getElementById('display-manager').textContent = data.managerName;
-    document.getElementById('display-id').textContent = data.entryId;
-    document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
-    const activeSuppRound = data.supplemental_round;
-
-    const cupWinnerAbbr = data.cupWinner;
-    const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
-    document.getElementById('display-cup').textContent = cupWinnerAbbr;
-    if (cupLogoUrl) {
-        document.getElementById('cup-logo-container').innerHTML = `
-            <img src="${cupLogoUrl}" alt="${cupWinnerAbbr}" style="width: 60px; height: auto; display: block; margin: 0 auto;">
-        `;
-    }
+    // Check if this entry has supplemental picks for specific rounds
+    const suppPicksR2 = data.supplemental?.r2 || [];
+    const suppPicksR3 = data.supplemental?.r3 || [];
+    const suppPicksR4 = data.supplemental?.r4 || [];
 
     const rosterBody = document.getElementById('roster-body');
     rosterBody.innerHTML = ''; 
     
-    const allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G]; 
+    // Combine base roster with ALL supplemental picks
+    const allIds = [
+        ...data.roster.F, 
+        ...data.roster.D, 
+        ...data.roster.G,
+        ...suppPicksR2,
+        ...suppPicksR3,
+        ...suppPicksR4
+    ]; 
      
     allIds.forEach(id => {
         const p = playerMap[id];
@@ -82,6 +80,10 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
         const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
         const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
         const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+
+        // --- SUPPLEMENTAL LOGIC ---
+        // If the player ID exists in the r2 supplemental list, they get 0 for R1.
+        // If they are in the r3 list, they get 0 for R1 and R2.
         
         let effectiveR1 = pts.r1;
         let effectiveR2 = pts.r2;
@@ -91,24 +93,24 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
         let styleR2 = "";
         let styleR3 = "";
 
-        if (activeSuppRound === "r2") {
+        if (suppPicksR2.includes(id)) {
             effectiveR1 = 0;
-            styleR1 = 'style="color: #ccc;"'; // Gray out R1
-        } else if (activeSuppRound === "r3") {
+            styleR1 = 'style="color: #ccc; background-color: #fdfdfd;"';
+        } 
+        
+        if (suppPicksR3.includes(id)) {
             effectiveR1 = 0;
             effectiveR2 = 0;
-            styleR1 = 'style="color: #ccc;"';
-            styleR2 = 'style="color: #ccc;"';
-        } else if (activeSuppRound === "r4") {
+            styleR1 = styleR2 = 'style="color: #ccc; background-color: #fdfdfd;"';
+        }
+
+        if (suppPicksR4.includes(id)) {
             effectiveR1 = 0;
             effectiveR2 = 0;
             effectiveR3 = 0;
-            styleR1 = 'style="color: #ccc;"';
-            styleR2 = 'style="color: #ccc;"';
-            styleR3 = 'style="color: #ccc;"';
+            styleR1 = styleR2 = styleR3 = 'style="color: #ccc; background-color: #fdfdfd;"';
         }
 
-        // Calculate total based only on allowed rounds
         const playerTotal = effectiveR1 + effectiveR2 + effectiveR3 + pts.r4;
         rosterTotal += playerTotal;
 
