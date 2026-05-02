@@ -37,6 +37,10 @@ export default {
             if (formData.password !== "Broomball2026") {
                 return new Response("Unauthorized", { status: 401 });
             }
+            
+            if (supplement.leaguePass !== "Broomball2026") { 
+                return new Response("Invalid League Password", { status: 401 });
+            }            
 
             const emailKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
             
