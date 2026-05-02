@@ -334,50 +334,56 @@ function renderTable() {
     });
 
     tbody.innerHTML = '';
-    filtered.forEach(p => {
-        const s = statsMap[p.player_id] || {};
-        const isSelected = isAlreadyInRoster(p.player_id);
-        
-        // Check if this player was already on the roster from Round 1
-        const isLegacy = existingRoster && 
-                         (existingRoster.roster.F.includes(p.player_id) || 
-                          existingRoster.roster.D.includes(p.player_id) || 
-                          existingRoster.roster.G.includes(p.player_id));
-
-        const row = document.createElement('tr');
-        if (isSelected) row.className = 'selected-row';
-        if (isLegacy) row.style.opacity = '0.7'; // Visual cue for locked players
-
-        row.innerHTML = `
-            <td>
-                <button onclick="togglePlayer(${p.player_id})" ${isLegacy ? 'disabled' : ''}>
-                    ${isLegacy ? '🔒' : (isSelected ? 'Remove' : 'Add')}
-                </button>
-            </td>
-            <td class="player-cell">
-                <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px;">
-                <a href="${p.url || '#'}" target="_blank" style="${isLegacy ? 'color: #666;' : ''}">${p.full_name}</a>
-                <span class="team-abbr">${p.team_abbr}</span>
-            </td>
-            <td>${p.position}</td>
+        filtered.forEach(p => {
+            const s = statsMap[p.player_id] || {};
+            const isSelected = isAlreadyInRoster(p.player_id);
             
-            <td style="font-weight:bold; color: #d9534f;">
-                ${parseFloat(pStats.total || 0).toFixed(1)}
-            </td>
+            // 1. Identify if player is from the Round 1 Roster (Legacy)
+            const isLegacy = existingRoster && (
+                existingRoster.roster.F.includes(p.player_id) || 
+                existingRoster.roster.D.includes(p.player_id) || 
+                existingRoster.roster.G.includes(p.player_id)
+            );
 
-            <td>${s.GP || 0}</td>
-            ${p.position === 'G' ? `
-                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
-                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
-            ` : `
-                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
-                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
-            `}
-            
-            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
-        `;
-        tbody.appendChild(row);
-    });
+            // 2. Playoff Points Lookup
+            const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
+            const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
+
+            const row = document.createElement('tr');
+            if (isSelected) row.className = 'selected-row';
+            if (isLegacy) row.style.opacity = '0.7'; // Visual indicator for locked players
+
+            // 3. Build the Row
+            row.innerHTML = `
+                <td>
+                    <button onclick="togglePlayer(${p.player_id})" ${isLegacy ? 'disabled' : ''}>
+                        ${isLegacy ? '🔒' : (isSelected ? 'Remove' : 'Add')}
+                    </button>
+                </td>
+                <td class="player-cell">
+                    <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px; vertical-align:middle;">
+                    <a href="${p.url || '#'}" target="_blank" style="${isLegacy ? 'color: #666; text-decoration: none;' : ''}">
+                        ${p.full_name}
+                    </a>
+                    <span class="team-abbr">${p.team_abbr}</span>
+                </td>
+                <td>${p.position}</td>
+                
+                <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
+
+                <td>${s.GP || 0}</td>
+                ${p.position === 'G' ? `
+                    <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
+                    <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
+                ` : `
+                    <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
+                    <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
+                `}
+                
+                <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
+            `;
+            tbody.appendChild(row);
+        });
 }
 
 // 6. BRACKET & CUP LOGIC
