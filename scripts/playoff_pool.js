@@ -623,7 +623,7 @@ async function saveSupplement() {
 
     if (res.ok) {
         alert("Round 2 additions saved successfully!");
-        window.location.href = `/entry.html?id=${existingRoster.entryId}`;
+        window.location.href = `/playoff_pool/entry.html?id=${existingRoster.entryId}`;
     } else {
         const msg = await res.text();
         alert("Error: " + msg);

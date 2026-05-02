@@ -59,6 +59,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
     document.getElementById('display-manager').textContent = data.managerName;
     document.getElementById('display-id').textContent = data.entryId;
     document.getElementById('display-date').textContent = new Date(data.submittedAt).toLocaleDateString();
+    const activeSuppRound = data.supplemental_round;
 
     const cupWinnerAbbr = data.cupWinner;
     const cupLogoUrl = nhlTeamMap[cupWinnerAbbr];
@@ -77,19 +78,41 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
     allIds.forEach(id => {
         const p = playerMap[id];
         const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
-        
         const cleanPlayerName = p?.full_name ? normalizeName(p.full_name) : 'Unknown';
         const displayName = isGoalieTeam ? `${id.split('_')[1]} Goalies` : cleanPlayerName;
-        const displayLink = isGoalieTeam ? '#' : (p?.url || '#');
         const teamAbbr = isGoalieTeam ? id.split('_')[1] : (p?.team_abbr || '---');
-        
         const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+        
+        let effectiveR1 = pts.r1;
+        let effectiveR2 = pts.r2;
+        let effectiveR3 = pts.r3;
 
-        rosterTotal += pts.total;
+        let styleR1 = "";
+        let styleR2 = "";
+        let styleR3 = "";
+
+        if (activeSuppRound === "r2") {
+            effectiveR1 = 0;
+            styleR1 = 'style="color: #ccc;"'; // Gray out R1
+        } else if (activeSuppRound === "r3") {
+            effectiveR1 = 0;
+            effectiveR2 = 0;
+            styleR1 = 'style="color: #ccc;"';
+            styleR2 = 'style="color: #ccc;"';
+        } else if (activeSuppRound === "r4") {
+            effectiveR1 = 0;
+            effectiveR2 = 0;
+            effectiveR3 = 0;
+            styleR1 = 'style="color: #ccc;"';
+            styleR2 = 'style="color: #ccc;"';
+            styleR3 = 'style="color: #ccc;"';
+        }
+
+        // Calculate total based only on allowed rounds
+        const playerTotal = effectiveR1 + effectiveR2 + effectiveR3 + pts.r4;
+        rosterTotal += playerTotal;
+
         const logo = nhlTeamMap[teamAbbr] || '';
-
-        // --- ELIMINATION LOGIC ---
-        // Check if the teamAbbr is in the active_teams list
         const isEliminated = !matchupData.active_teams.includes(teamAbbr);
         const rowClass = isEliminated ? 'class="contract-red"' : '';
         
@@ -98,18 +121,18 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
               <td class="player-cell">
                   <img src="${logo}" alt="logo" style="width:28px; height:28px;" />
                   <div style="display:flex; flex-direction:column; text-align:left; line-height:1.1;">
-                      <a href="${displayLink}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
+                      <a href="${isGoalieTeam ? '#' : (p?.url || '#')}" target="_blank" style="font-weight:bold; text-decoration:none; color:#0055a5; font-size:0.85rem;">
                           ${displayName}
                       </a>
                       <span style="font-size:0.7rem; color:#666;">${teamAbbr} | ${isGoalieTeam ? 'G' : (p?.position || '---')}</span>
                   </div>
               </td>
-              <td>${pts.r1.toFixed(1)}</td>
-              <td>${pts.r2.toFixed(1)}</td>
-              <td>${pts.r3.toFixed(1)}</td>
+              <td ${styleR1}>${pts.r1.toFixed(1)}</td>
+              <td ${styleR2}>${pts.r2.toFixed(1)}</td>
+              <td ${styleR3}>${pts.r3.toFixed(1)}</td>
               <td>${pts.r4.toFixed(1)}</td>
               <td style="color: #999;">—</td> 
-              <td><strong>${pts.total.toFixed(1)}</strong></td>
+              <td><strong>${playerTotal.toFixed(1)}</strong></td>
             </tr>`;
         rosterBody.insertAdjacentHTML('beforeend', row);
     });
