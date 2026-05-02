@@ -569,16 +569,20 @@ function renderRoundMatchups(roundNum) {
 
 async function saveSupplement() {
     // 1. Check if elements exist before grabbing values
-    const emailEl = document.getElementById('user-email');
-    const passEl = document.getElementById('league-pass'); // Matches id="league-pass"
+    const emailEl = document.getElementById('user-email'); 
+    const passEl = document.getElementById('league-pass'); 
 
     if (!emailEl || !passEl) {
-        console.error("Missing input fields in HTML");
+        console.error("Missing input fields in HTML. Found emailEl:", !!emailEl, "Found passEl:", !!passEl);
+        alert("Technical Error: Input fields not found.");
         return;
     }
 
-    const email = emailEl.value.toLowerCase();
-    const leaguePass = passEl.value;
+    const email = emailEl.value.trim().toLowerCase();
+    const leaguePass = passEl.value.trim();
+
+    if (!email) return alert("Email is missing.");
+    if (!leaguePass) return alert("Please enter the League Password.");
 
     if (!leaguePass) {
         return alert("Please enter the League Password to save changes.");
