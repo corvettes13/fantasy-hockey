@@ -142,9 +142,8 @@ async function initData() {
         // --- NEW: Build the Playoff Stats Map ---
         // Your playoff JSON is a flat array, so we map by 'Player' name (normalized)
         playoffStatsMap = {};
-        [...pSkaterRes, ...pGoalieRes].forEach(p => {
-            // We use the player name as the key for the playoff stats
-            playoffStatsMap[p.Player] = p.fantasy_points; 
+        [...pSkaterRes, ...pGoalieRes].forEach(entry => {
+            playoffStatsMap[entry.Player] = entry.fantasy_points;
         });
 
         calculateFantasyPoints(skaterStatsMap, playersRes.players, "skater");
@@ -282,7 +281,7 @@ function renderTable() {
             <th>Action</th>
             <th style="text-align: left;">Player</th>
             <th>Pos</th>
-            <th data-sort="GP">GP</th>
+            <th style="background-color: #fff3cd; color: #d9534f;">Playoff Pts</th> <th data-sort="GP">Reg GP</th>
             ${isG ? `
                 <th data-sort="W">W</th><th data-sort="L">L</th><th data-sort="GAA">GAA</th>
                 <th data-sort="SV%">SV%</th><th data-sort="SHO">SO</th>
@@ -290,8 +289,7 @@ function renderTable() {
                 <th data-sort="G">G</th><th data-sort="A">A</th><th data-sort="PTS">PTS</th>
                 <th data-sort="PIM">PIM</th><th data-sort="SOG">SOG</th><th data-sort="HIT">HIT</th><th data-sort="BLK">BLK</th>
             `}
-            <th data-sort="FP">FP</th>
-            <th data-sort="FPG">FP/G</th>
+            <th data-sort="FPG">Reg FP/G</th>
         </tr>`;
 
     bindHeaderSortEvents();
@@ -318,33 +316,44 @@ function renderTable() {
     });
 
     tbody.innerHTML = '';
-        filtered.forEach(p => { // 'p' is defined here!
-            const s = statsMap[p.player_id] || {};
-            const isSelected = isAlreadyInRoster(p.player_id);
-            const row = document.createElement('tr');
-            
-            // Add the normalization and lookup HERE
-            const cleanName = normalizeName(p.full_name);
-            const pStats = playoffStatsMap[cleanName] || { total: 0 }; 
-            
-            if (isSelected) row.className = 'selected-row';
+    filtered.forEach(p => {
+        const s = statsMap[p.player_id] || {};
+        const isSelected = isAlreadyInRoster(p.player_id);
+        
+        // --- PLAYOFF POINTS LOOKUP ---
+        // If it's a goalie, the ID in our stats file is "G_TEAM" (e.g., G_ANA)
+        // If it's a skater, it's the normalized Full Name.
+        const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
+        const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
+        
+        const row = document.createElement('tr');
+        if (isSelected) row.className = 'selected-row';
 
-            row.innerHTML = `
-                <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
-                <td class="player-cell">
-                    <img src="${teamMap[p.team_abbr] || ''}" alt="logo">
-                    <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
-                    <span class="team-abbr">${p.team_abbr}</span>
-                </td>
-                <td>${p.position}</td>
-                <td style="font-weight:bold; background: #fffdf5; color: #d9534f;">
-                    ${parseFloat(pStats.total || 0).toFixed(1)}
-                </td>
-                <td>${s.GP || 0}</td>
-                <td>${s.FPG || '0.00'}</td>
-                `;
-            tbody.appendChild(row);
-        });
+        row.innerHTML = `
+            <td><button onclick="togglePlayer(${p.player_id})">${isSelected ? 'Remove' : 'Add'}</button></td>
+            <td class="player-cell">
+                <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px; vertical-align:middle;">
+                <a href="${p.url || '#'}" target="_blank">${p.full_name}</a>
+                <span class="team-abbr">${p.team_abbr}</span>
+            </td>
+            <td>${p.position}</td>
+            
+            <td style="font-weight:bold; background-color: #fffdf5; color: #d9534f; font-size: 1rem;">
+                ${parseFloat(pStats.total || 0).toFixed(1)}
+            </td>
+
+            <td>${s.GP || 0}</td>
+            ${p.position === 'G' ? `
+                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
+                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
+            ` : `
+                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
+                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
+            `}
+            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
 // 6. BRACKET & CUP LOGIC
