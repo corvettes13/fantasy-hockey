@@ -6,8 +6,8 @@
   <title>Playoff Pool Entry</title>
   <link rel="stylesheet" href="/fantasy-hockey/css/header.css" />
   <link rel="stylesheet" href="/fantasy-hockey/css/players.css" />
-  <style>
-    /* Side-by-side layout within your existing container */
+<style>
+    /* Side-by-side layout for desktop */
     .pool-wrapper {
       display: flex;
       gap: 20px;
@@ -17,7 +17,19 @@
     
     .main-content {
       flex: 1;
-      min-width: 0; /* Prevents flex items from overflowing */
+      min-width: 0;
+    }
+
+    .table-wrapper {
+      overflow-x: auto; /* Allows horizontal scroll on mobile */
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid #eee;
+    }
+
+    #players-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 800px; /* Forces table to keep its shape, triggers the scroll */
     }
 
     .roster-sidebar {
@@ -31,7 +43,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
-    /* Keep the sidebar text crisp and matching your 0.8rem table font */
     .roster-sidebar h2 { font-size: 1.1rem; color: #0055a5; margin-top: 0; }
     .roster-sidebar h3 { font-size: 0.9rem; margin: 15px 0 5px; border-bottom: 1px solid #eee; }
     .pos-count { font-size: 0.85rem; font-weight: bold; margin: 5px 0; }
@@ -49,7 +60,6 @@
     }
     .save-btn:disabled { background: #ccc; cursor: not-allowed; }
     
-    /* Highlight for selected players in the table */
     .selected-row { background-color: #f0f8ff !important; }
     
     button:disabled {
@@ -59,9 +69,36 @@
         border: 1px solid #ddd;
     }
 
-    .selected-row td {
-        background-color: #f0f8ff; /* Light blue for new picks */
-    }    
+    /* --- MOBILE RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+      .pool-wrapper {
+        flex-direction: column-reverse; /* Puts Sidebar at the TOP, Table below */
+      }
+
+      .roster-sidebar {
+        flex: none;
+        width: 100%;
+        position: static; /* Removes sticky behavior on mobile */
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+      .main-content {
+        width: 100%;
+      }
+
+      h1 { font-size: 1.5rem; }
+      
+      .filters {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .filters input, .filters select {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body class="players-page">
