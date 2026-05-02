@@ -38,10 +38,6 @@ export default {
                 return new Response("Unauthorized", { status: 401 });
             }
             
-            if (supplement.leaguePass !== "Broomball2026") { 
-                return new Response("Invalid League Password", { status: 401 });
-            }            
-
             const emailKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
             
             // 2. ID Generation Logic
@@ -87,9 +83,9 @@ export default {
             const email = supplement.email.toLowerCase();
 
             // 1. Password Check
-            if (supplement.leaguePass !== env.LEAGUE_PASSWORD) {
+            if (supplement.leaguePass !== "Broomball2026") { 
                 return new Response("Invalid League Password", { status: 401 });
-            }
+            }     
 
             // 2. Fetch existing entry
             const existingData = await env.PLAYOFF_DATA.get(email);
