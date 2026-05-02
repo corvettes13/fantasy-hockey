@@ -77,7 +77,7 @@ export default {
     }
     
         // Route: /submit-supplement
-    if (request.method === 'POST' && pathname === '/submit-supplement') {
+    if (request.method === 'POST' && internalPath === '/submit-supplement') {
         try {
             const supplement = await request.json(); // { email, leaguePass, newPlayers, newMatchups }
             const email = supplement.email.toLowerCase();
