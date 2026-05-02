@@ -1,5 +1,5 @@
 // 1. CONFIGURATION & STATE
-const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'BOS', 'CAR', 'PHI', 'COL', 'MIN', 'UTA', 'VEG', 'ANA'];
+const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'CAR', 'PHI', 'COL', 'MIN', 'UTA', 'VEG', 'ANA'];
 
 const skaterStatIdMap = {
     0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
@@ -175,8 +175,10 @@ async function initData() {
 
               const main = document.querySelector('.main-content');
               if (main) {
-                  main.style.opacity = '0.3';
-                  main.style.pointerEvents = 'none';
+                  // Keep the opacity if you want a "locked" look, 
+                  // but remove pointerEvents so they can still scroll/browse.
+                  main.style.opacity = '1.0'; 
+                  main.style.pointerEvents = 'auto'; 
               }
           }
           renderRoundMatchups(currentRound);
@@ -337,9 +339,9 @@ function renderTable() {
         const isSelected = isAlreadyInRoster(p.player_id);
         
         // --- PLAYOFF POINTS LOOKUP ---
-        // If it's a goalie, the ID in our stats file is "G_TEAM" (e.g., G_ANA)
-        // If it's a skater, it's the normalized Full Name.
         const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
+        // Special check: If it's a goalie, we use the G_TEAM key. 
+        // For skaters, normalizeName handles accents like 'Leon Draisaitl' -> 'Leon Draisaitl'
         const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
         
         const row = document.createElement('tr');
@@ -353,7 +355,11 @@ function renderTable() {
                 <span class="team-abbr">${p.team_abbr}</span>
             </td>
             <td>${p.position}</td>
-            <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
+            
+            <td style="font-weight:bold; color: #d9534f;">
+                ${parseFloat(pStats.total || 0).toFixed(1)}
+            </td>
+
             <td>${s.GP || 0}</td>
             ${p.position === 'G' ? `
                 <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
@@ -362,6 +368,7 @@ function renderTable() {
                 <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
                 <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
             `}
+            
             <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
         `;
         tbody.appendChild(row);
