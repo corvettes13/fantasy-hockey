@@ -568,38 +568,46 @@ function renderRoundMatchups(roundNum) {
 }
 
 async function saveSupplement() {
-    const email = document.getElementById('user-email').value.toLowerCase();
-    const leaguePass = document.getElementById('league-pass').value;
-    
-    // Flatten all current IDs in the UI roster
-    const currentRosterIds = [...myEntry.roster.F, ...myEntry.roster.D, ...myEntry.roster.G];
-    
-    // Flatten all IDs from the ORIGINAL Round 1 roster
-    const oldRosterIds = [...existingRoster.roster.F, ...existingRoster.roster.D, ...existingRoster.roster.G];
+    // 1. Check if elements exist before grabbing values
+    const emailEl = document.getElementById('user-email');
+    const passEl = document.getElementById('league-pass'); // Matches id="league-pass"
 
-    // Find players that are in current but weren't in old
+    if (!emailEl || !passEl) {
+        console.error("Missing input fields in HTML");
+        return;
+    }
+
+    const email = emailEl.value.toLowerCase();
+    const leaguePass = passEl.value;
+
+    if (!leaguePass) {
+        return alert("Please enter the League Password to save changes.");
+    }
+
+    // 2. Identify newly added players
     const newPlayers = [];
     ['F', 'D', 'G'].forEach(pos => {
         myEntry.roster[pos].forEach(id => {
+            // Check against the ORIGINAL roster we loaded at the start
             if (!existingRoster.roster[pos].includes(id)) {
                 newPlayers.push({ id: id, pos: pos });
             }
         });
     });
 
-    // Grab only the Round 2 bracket picks
-    // Inside saveSupplement
+    // 3. Grab Round 2 bracket picks
     const newMatchups = {};
-    const r2Keys = Object.keys(matchupData.rounds.r2.matchups); // Now returns ['r2w1', 'r2w2'...]
-
-    r2Keys.forEach(key => {
+    const currentRound = matchupData.current_round;
+    const rMatchups = matchupData.rounds[`r${currentRound}`].matchups;
+    
+    Object.keys(rMatchups).forEach(key => {
         const selected = document.querySelector(`input[name="${key}"]:checked`);
         if (selected) newMatchups[key] = selected.value;
     });
 
     const payload = {
         email,
-        leaguePass,
+        leaguePass, // This is supplement.leaguePass in your Worker
         newPlayers,
         newMatchups
     };
