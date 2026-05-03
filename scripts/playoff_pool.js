@@ -1,5 +1,5 @@
 // 1. CONFIGURATION & STATE
-const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'CAR', 'PHI', 'COL', 'MIN', 'VEG', 'ANA'];
+const PLAYOFF_TEAMS = ['BUF', 'MTL', 'TBL', 'CAR', 'PHI', 'COL', 'MIN', 'VGK', 'ANA'];
 
 const skaterStatIdMap = {
     0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
@@ -19,6 +19,10 @@ let myEntry = {
     roster: { F: [], D: [], G: [] }, 
     bracket: {}, 
     cupWinner: "" 
+};
+
+const TEAM_MAP = {
+    'VEG': 'VGK'
 };
 
 let isRound2 = true; // Manual toggle for now
