@@ -211,20 +211,25 @@ function getPlayerPoints(id, infoMap, statsMap) {
 // Helper to update alive counts and pick popularity
 function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
     let teamAbbr;
+    let isAlive = 0; // Default to 0
+
     if (typeof id === 'string' && id.startsWith('G_')) {
         teamAbbr = id.split('_')[1];
     } else {
         teamAbbr = infoMap[id]?.team_abbr;
     }
 
+    // Check if team is still active
     if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
-        // This is a local variable in your main loop, 
-        // ensure 'aliveCount' is accessible or returned.
+        isAlive = 1; 
     }
 
+    // Update popularity map
     if (id) {
         countsMap[id] = (countsMap[id] || 0) + 1;
     }
+
+    return isAlive; // Return 1 or 0
 }
 
 
