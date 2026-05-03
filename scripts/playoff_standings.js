@@ -67,7 +67,6 @@ async function initStandings() {
                 });
             });
 
-            // --- ROSTER POINTS LOOP ---
             const originalRosterIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             originalRosterIds.forEach(id => {
                 const pts = getPlayerPoints(id, playerInfoMap, statsMap);
@@ -78,23 +77,21 @@ async function initStandings() {
                 rPoints.r4 += pts.r4;
                 rPoints.total += pts.total;
 
-                updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
+                // ADD THE RETURN VALUE TO aliveCount
+                aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
             });
 
-            // 2. Calculate points for SUPPLEMENTAL Round 2 adds (Ignore R1)
+            // 2. Calculate points for SUPPLEMENTAL Round 2 adds
             if (entry.supplemental && entry.supplemental.r2) {
                 entry.supplemental.r2.forEach(id => {
                     const pts = getPlayerPoints(id, playerInfoMap, statsMap);
-                    
-                    // WE SKIP pts.r1 HERE
                     rPoints.r2 += pts.r2; 
                     rPoints.r3 += pts.r3; 
                     rPoints.r4 += pts.r4;
-                    
-                    // The total for this player is only r2 + r3 + r4
                     rPoints.total += (pts.r2 + pts.r3 + pts.r4);
 
-                    updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
+                    // ADD THE RETURN VALUE TO aliveCount
+                    aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
                 });
             }
 
