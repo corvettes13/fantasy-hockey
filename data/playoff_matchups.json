@@ -1,18 +1,18 @@
 {
   "current_round": 2,
   "accepting_new_entries": false,
-  "active_teams": ["COL","MIN","VGK","ANA","CAR","BUF","TBL","MTL","PHI"],
+  "active_teams": ["COL","MIN","VGK","ANA","CAR","BUF","MTL","PHI"],
   "rounds": {
     "r1": {
       "points_per_pick": 10,
 	"matchups": {
         "r1w1": { "teams": ["COL", "LAK"], "winner": "COL", "label": "COL vs LAK" },
         "r1w2": { "teams": ["DAL", "MIN"], "winner": "MIN", "label": "DAL vs MIN" },
-        "r1w3": { "teams": ["VGK", "UTA"], "winner": "VEG", "label": "VGK vs UTA" },
+        "r1w3": { "teams": ["VGK", "UTA"], "winner": "VGK", "label": "VGK vs UTA" },
         "r1w4": { "teams": ["EDM", "ANA"], "winner": "ANA", "label": "EDM vs ANA" },
         "r1e1": { "teams": ["CAR", "OTT"], "winner": "CAR", "label": "CAR vs OTT" },
         "r1e2": { "teams": ["BUF", "BOS"], "winner": "BUF", "label": "BUF vs BOS" },
-        "r1e3": { "teams": ["TBL", "MTL"], "winner": null, "label": "TBL vs MTL" },
+        "r1e3": { "teams": ["TBL", "MTL"], "winner": "MTL", "label": "TBL vs MTL" },
         "r1e4": { "teams": ["PIT", "PHI"], "winner": "PHI", "label": "PIT vs PHI" }
       }
     },
@@ -22,7 +22,7 @@
         "r2w1": { "teams": ["COL", "MIN"], "winner": null, "label": "COL vs MIN" },
         "r2w2": { "teams": ["VGK", "ANA"], "winner": null, "label": "VGK vs ANA" },
         "r2e1": { "teams": ["CAR", "PHI"], "winner": null, "label": "CAR vs PHI" },
-        "r2e2": { "teams": ["BUF", "TBL/MTL"], "winner": null, "label": "BUF vs TBL/MTL" }
+        "r2e2": { "teams": ["BUF", "MTL"], "winner": null, "label": "BUF vs MTL" }
       }
     },
     "r3": { "points_per_pick": 40, "matchups": {} },
