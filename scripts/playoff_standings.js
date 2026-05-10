@@ -179,19 +179,29 @@ function renderTable(standings) {
     const tbody = document.getElementById('standings-body');
     if (!tbody) return;
 
-    tbody.innerHTML = standings.map((s, i) => `
-        <tr>
-            <td class="pos-rank">${i + 1}</td>
-            <td style="text-align: left;"><a href="entry.html?id=${s.id}" class="manager-link">${s.manager}</a></td>
-            <td><strong>${s.grandTotal.toFixed(1)}</strong></td>
-            <td>${s.active}</td>
-            <td>${s.r1.toFixed(1)}</td>
-            <td>${s.r2.toFixed(1)}</td>
-            <td>${s.r3.toFixed(1)}</td>
-            <td>${s.r4.toFixed(1)}</td>
-            <td>${s.bracketPoints}</td> <td style="text-align: left;">${s.cupWinnerStr}</td>
-        </tr>
-    `).join('');
+    tbody.innerHTML = '';
+    standings.forEach((s, index) => {
+        const row = `
+            <tr>
+                <td class="pos-rank">${index + 1}</td>
+                <td style="text-align: left;">
+                    <a href="entry.html?id=${s.id}" class="manager-link">${s.manager}</a>
+                </td>
+                <td style="font-weight: bold;">${s.grandTotal.toFixed(1)}</td>
+                <td>${s.active}</td>
+                <td>${s.r1.toFixed(1)}</td>
+                <td>${s.r2.toFixed(1)}</td>
+                <td>${s.r3.toFixed(1)}</td>
+                <td>${s.r4.toFixed(1)}</td>
+                <td>${s.pickPoints}</td>
+                <td style="text-align: left;">${s.cupWinnerStr}</td>
+            </tr>
+        `;
+        tbody.insertAdjacentHTML('beforeend', row);
+    });
+
+    // Re-bind sorting events after every render
+    bindSortingEvents();
 }
 
 function getPlayerPoints(id, infoMap, statsMap) {
@@ -230,6 +240,43 @@ function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
     }
 
     return isAlive; // Return 1 or 0
+}
+
+function bindSortingEvents() {
+    const headers = document.querySelectorAll('#standings-table th');
+    headers.forEach((header, index) => {
+        // Skip the "Place" column as it is re-calculated on every render
+        if (header.classList.contains('pos-rank')) return;
+
+        header.addEventListener('click', () => {
+            const table = document.getElementById('standings-table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const isAscending = header.classList.contains('sort-asc');
+
+            // Reset headers
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+
+            rows.sort((a, b) => {
+                let cellA = a.children[index].textContent.trim();
+                let cellB = b.children[index].textContent.trim();
+
+                // Remove commas and convert to numbers for point columns
+                const valA = isNaN(cellA.replace(/,/g, '')) ? cellA.toLowerCase() : parseFloat(cellA.replace(/,/g, ''));
+                const valB = isNaN(cellB.replace(/,/g, '')) ? cellB.toLowerCase() : parseFloat(cellB.replace(/,/g, ''));
+
+                if (valA < valB) return isAscending ? 1 : -1;
+                if (valA > valB) return isAscending ? -1 : 1;
+                return 0;
+            });
+
+            // Update header state
+            header.classList.add(isAscending ? 'sort-desc' : 'sort-asc');
+
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        });
+    });
 }
 
 
