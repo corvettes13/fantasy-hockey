@@ -193,7 +193,7 @@ function renderTable(standings) {
                 <td>${s.r2.toFixed(1)}</td>
                 <td>${s.r3.toFixed(1)}</td>
                 <td>${s.r4.toFixed(1)}</td>
-                <td>${s.pickPoints}</td>
+                <td>${s.bracketPoints}</td> 
                 <td style="text-align: left;">${s.cupWinnerStr}</td>
             </tr>
         `;
@@ -221,7 +221,7 @@ function getPlayerPoints(id, infoMap, statsMap) {
 // Helper to update alive counts and pick popularity
 function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
     let teamAbbr;
-    let isAlive = 0; // Default to 0
+    let isAlive = 0;
 
     if (typeof id === 'string' && id.startsWith('G_')) {
         teamAbbr = id.split('_')[1];
@@ -229,17 +229,19 @@ function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
         teamAbbr = infoMap[id]?.team_abbr;
     }
 
+    // Standardize Vegas abbreviation
+    if (teamAbbr === "VEG") teamAbbr = "VGK";
+
     // Check if team is still active
     if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
         isAlive = 1; 
     }
 
-    // Update popularity map
     if (id) {
         countsMap[id] = (countsMap[id] || 0) + 1;
     }
 
-    return isAlive; // Return 1 or 0
+    return isAlive;
 }
 
 function bindSortingEvents() {
