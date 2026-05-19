@@ -1,5 +1,5 @@
 // 1. CONFIGURATION & STATE
-const PLAYOFF_TEAMS = ['BUF', 'MTL', 'CAR', 'PHI', 'COL', 'MIN', 'VGK', 'ANA'];
+const PLAYOFF_TEAMS = ['MTL', 'CAR', 'COL', 'VGK'];
 
 const skaterStatIdMap = {
     0: 'GP', 1: 'G', 2: 'A', 3: 'PTS', 4: 'PlusMinus', 5: 'PIM',
