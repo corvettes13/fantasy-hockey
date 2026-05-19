@@ -25,13 +25,13 @@ const TEAM_MAP = {
     'VEG': 'VGK'
 };
 
-let isRound2 = true; // Manual toggle for now
+// Dynamic State tracking derived from matchupData
+let currentRound = 1; 
 let existingRoster = null;
 
 async function checkExistingUser(email) {
     if (!email) return alert("Please enter your email first.");
     
-    // Change /get-entry to /playoff-get to match worker.js
     const res = await fetch(`/playoff-get?email=${encodeURIComponent(email)}`);
     
     if (res.ok) {
@@ -39,27 +39,33 @@ async function checkExistingUser(email) {
         if (data && data.roster) {
             existingRoster = data;
             myEntry = JSON.parse(JSON.stringify(data)); // Deep copy to current state
-            enterRound2Mode(data);
+            enterSupplementalMode(data);
             updateCounts();
             renderTable();
-            alert("Roster found! You can now add 2 skaters or 1 goalie.");
+            alert(`Roster found! You can now add your Round ${currentRound} supplemental changes.`);
         } else {
             alert("No existing roster found for this email. If this is your first entry, ignore this.");
         }
     }
 }
 
-function enterRound2Mode(data) {
-    // Helper to safely disable elements
+function enterSupplementalMode(data) {
     const safeDisable = (id) => {
         const el = document.getElementById(id);
         if (el) el.disabled = true;
     };
 
-    const currentRound = matchupData ? matchupData.current_round : 2;
-    renderRoundMatchups(currentRound);
-
-    data.allIds = [...data.roster.F, ...data.roster.D, ...data.roster.G];
+    // Safely combine existing base roster and any historical supplemental updates
+    data.allIds = [
+        ...data.roster.F, ...data.roster.D, ...data.roster.G
+    ];
+    if (data.supplemental) {
+        Object.keys(data.supplemental).forEach(roundKey => {
+            if (Array.isArray(data.supplemental[roundKey])) {
+                data.allIds.push(...data.supplemental[roundKey]);
+            }
+        });
+    }
 
     if (document.getElementById('manager-name')) {
         document.getElementById('manager-name').value = data.managerName || "";
@@ -71,29 +77,25 @@ function enterRound2Mode(data) {
     }
     safeDisable('cup-winner');
 
-    // 5. Disable Round 1 radio buttons
-    document.querySelectorAll('#round-1-bracket input').forEach(el => el.disabled = true);
+    // 1. Unhide the specific container for this round's bracket selections
+    const currentBracketSection = document.getElementById(`round-${currentRound}-bracket`);
+    if (currentBracketSection) currentBracketSection.style.display = 'block';
+
+    // 2. Disable historical bracket radio elements from prior rounds
+    for (let r = 1; r < currentRound; r++) {
+        document.querySelectorAll(`#round-${r}-bracket input`).forEach(el => el.disabled = true);
+    }
     
-    // 6. Handle previous R2 picks
+    // 3. Pre-populate UI selections for the active round's bracket picks
     if (data.bracket) {
         Object.keys(data.bracket).forEach(key => {
-            if (key.startsWith('r2')) {
+            if (key.startsWith(`r${currentRound}`)) {
                 const val = data.bracket[key];
                 const radio = document.querySelector(`input[name="${key}"][value="${val}"]`);
                 if (radio) radio.checked = true;
             }
         });
     }
-}
-
-function validateRound2() {
-    const newSkaters = selectedSkaters.filter(id => !existingRoster.allIds.includes(id));
-    const newGoalies = selectedGoalies.filter(id => !existingRoster.G.includes(id));
-    
-    const isValid = (newSkaters.length === 2 && newGoalies.length === 0) || 
-                    (newSkaters.length === 0 && newGoalies.length === 1);
-                    
-    document.getElementById('save-entry').disabled = !isValid;
 }
 
 
@@ -103,11 +105,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const header = document.querySelector('.site-header');
         if (header) header.innerHTML = html;
     });
-    
-    if (isRound2) {
-        const r2Section = document.getElementById('round-2-bracket');
-        if (r2Section) r2Section.style.display = 'block';
-    }
 
     await initData();    
     await loadExistingEntry();
@@ -117,7 +114,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (posFilter) posFilter.addEventListener('change', renderTable);
     if (nameFilter) nameFilter.addEventListener('input', renderTable);
-
 });
 
 let matchupData = null;
@@ -131,20 +127,17 @@ async function initData() {
             fetch('/fantasy-hockey/data/2026_skater_stats.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_goalie_stats.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/playoff_matchups.json').then(res => res.json()),
-            // NEW: Fetch playoff-specific stats
             fetch('/fantasy-hockey/data/2026_playoff_skater_stats.json').then(res => res.json()),
             fetch('/fantasy-hockey/data/2026_playoff_goalie_stats.json').then(res => res.json())
         ]);
 
         matchupData = matchupRes;
+        currentRound = matchupData.current_round || 1; // Assign global active round dynamically
         teamMap = Object.fromEntries(teamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         
-        // Regular Season Maps
         skaterStatsMap = buildStatsMap(skaterRes.players, "skater");
         goalieStatsMap = buildStatsMap(goalieRes.players, "goalie");
         
-        // --- NEW: Build the Playoff Stats Map ---
-        // Your playoff JSON is a flat array, so we map by 'Player' name (normalized)
         playoffStatsMap = {};
         [...pSkaterRes, ...pGoalieRes].forEach(entry => {
             playoffStatsMap[entry.Player] = entry.fantasy_points;
@@ -155,12 +148,10 @@ async function initData() {
 
         allPlayers = playersRes.players.filter(p => PLAYOFF_TEAMS.includes(p.team_abbr));
         
-        const currentRound = matchupData.current_round;
         const acceptingNew = matchupData.accepting_new_entries;
         
         const teamFilter = document.getElementById('team-filter');
         if (teamFilter) {
-            // Fill the dropdown with active teams from our Master JSON
             const activeTeams = matchupData.active_teams || [];
             activeTeams.sort().forEach(abbr => {
                 const opt = document.createElement('option');
@@ -170,23 +161,25 @@ async function initData() {
             teamFilter.addEventListener('change', renderTable);
         }        
         
+        // Show active round UI segment wrapper automatically
+        const roundSection = document.getElementById(`round-${currentRound}-bracket`);
+        if (roundSection) roundSection.style.display = 'block';
+
         renderTable();        
 
-      if (currentRound > 1) {
-          if (!acceptingNew) {
-              const lookup = document.getElementById('lookup-section');
-              if (lookup) lookup.style.display = 'block';
+        if (currentRound > 1) {
+            if (!acceptingNew) {
+                const lookup = document.getElementById('lookup-section');
+                if (lookup) lookup.style.display = 'block';
 
-              const main = document.querySelector('.main-content');
-              if (main) {
-                  // Keep the opacity if you want a "locked" look, 
-                  // but remove pointerEvents so they can still scroll/browse.
-                  main.style.opacity = '1.0'; 
-                  main.style.pointerEvents = 'auto'; 
-              }
-          }
-          renderRoundMatchups(currentRound);
-      }
+                const main = document.querySelector('.main-content');
+                if (main) {
+                    main.style.opacity = '1.0'; 
+                    main.style.pointerEvents = 'auto'; 
+                }
+            }
+            renderRoundMatchups(currentRound);
+        }
     } catch (err) {
         console.error("Initialization failed:", err);
     }
@@ -257,13 +250,11 @@ function sortBy(key) {
         let aVal, bVal;
 
         if (key === 'playoffTotal') {
-            // Lookup playoff points for sorting
             const aKey = (a.position === 'G') ? `G_${a.team_abbr}` : normalizeName(a.full_name);
             const bKey = (b.position === 'G') ? `G_${b.team_abbr}` : normalizeName(b.full_name);
             aVal = playoffStatsMap[aKey]?.total || 0;
             bVal = playoffStatsMap[bKey]?.total || 0;
         } else {
-            // Standard regular season sorting
             const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
             const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
             aVal = parseFloat(aS[currentSortKey]) || 0;
@@ -294,9 +285,6 @@ function renderTable() {
     const posFilter = posEl.value;
     const nameFilter = (nameEl ? nameEl.value.toLowerCase() : "");
     const isG = posFilter === 'G';
-    const minGP = 10;
-
-    statsMap = isG ? goalieStatsMap : skaterStatsMap;
 
     thead.innerHTML = `
         <tr>
@@ -338,56 +326,59 @@ function renderTable() {
     });
 
     tbody.innerHTML = '';
-        filtered.forEach(p => {
-            const s = statsMap[p.player_id] || {};
-            const isSelected = isAlreadyInRoster(p.player_id);
+    filtered.forEach(p => {
+        const s = statsMap[p.player_id] || {};
+        const isSelected = isAlreadyInRoster(p.player_id);
+        
+        // Dynamic Check: Is this a historically locked player from a baseline/previous configuration round?
+        const isLegacy = existingRoster && (
+            existingRoster.roster.F.includes(p.player_id) || 
+            existingRoster.roster.D.includes(p.player_id) || 
+            existingRoster.roster.G.includes(p.player_id) ||
+            (existingRoster.supplemental && Object.keys(existingRoster.supplemental).some(roundKey => {
+                // Lock out additions from previous rounds (e.g. if we are in Round 3, lock r2 adds)
+                const rNum = parseInt(roundKey.replace('r', ''));
+                return rNum < currentRound && existingRoster.supplemental[roundKey].includes(p.player_id);
+            }))
+        );
+
+        const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
+        const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
+
+        const row = document.createElement('tr');
+        if (isSelected) row.className = 'selected-row';
+        if (isLegacy) row.style.opacity = '0.7'; 
+
+        row.innerHTML = `
+            <td>
+                <button onclick="togglePlayer(${p.player_id})" ${isLegacy ? 'disabled' : ''}>
+                    ${isLegacy ? '🔒' : (isSelected ? 'Remove' : 'Add')}
+                </button>
+            </td>
+            <td class="player-cell">
+                <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px; vertical-align:middle;">
+                <a href="${p.url || '#'}" target="_blank" style="${isLegacy ? 'color: #666; text-decoration: none;' : ''}">
+                    ${p.full_name}
+                </a>
+                <span class="team-abbr">${p.team_abbr}</span>
+            </td>
+            <td>${p.position}</td>
             
-            // 1. Identify if player is from the Round 1 Roster (Legacy)
-            const isLegacy = existingRoster && (
-                existingRoster.roster.F.includes(p.player_id) || 
-                existingRoster.roster.D.includes(p.player_id) || 
-                existingRoster.roster.G.includes(p.player_id)
-            );
+            <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
 
-            // 2. Playoff Points Lookup
-            const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
-            const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
-
-            const row = document.createElement('tr');
-            if (isSelected) row.className = 'selected-row';
-            if (isLegacy) row.style.opacity = '0.7'; // Visual indicator for locked players
-
-            // 3. Build the Row
-            row.innerHTML = `
-                <td>
-                    <button onclick="togglePlayer(${p.player_id})" ${isLegacy ? 'disabled' : ''}>
-                        ${isLegacy ? '🔒' : (isSelected ? 'Remove' : 'Add')}
-                    </button>
-                </td>
-                <td class="player-cell">
-                    <img src="${teamMap[p.team_abbr] || ''}" alt="logo" style="width:20px; height:20px; vertical-align:middle;">
-                    <a href="${p.url || '#'}" target="_blank" style="${isLegacy ? 'color: #666; text-decoration: none;' : ''}">
-                        ${p.full_name}
-                    </a>
-                    <span class="team-abbr">${p.team_abbr}</span>
-                </td>
-                <td>${p.position}</td>
-                
-                <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
-
-                <td>${s.GP || 0}</td>
-                ${p.position === 'G' ? `
-                    <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
-                    <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
-                ` : `
-                    <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
-                    <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
-                `}
-                
-                <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
-            `;
-            tbody.appendChild(row);
-        });
+            <td>${s.GP || 0}</td>
+            ${p.position === 'G' ? `
+                <td>${s.W || 0}</td><td>${s.L || 0}</td><td>${parseFloat(s.GAA || 0).toFixed(2)}</td>
+                <td>${typeof s['SV%'] === 'number' ? (s['SV%'] * 100).toFixed(1) + '%' : (s['SV%'] || '0%')}</td><td>${s.SHO || 0}</td>
+            ` : `
+                <td>${s.G || 0}</td><td>${s.A || 0}</td><td>${s.PTS || 0}</td>
+                <td>${s.PIM || 0}</td><td>${s.SOG || 0}</td><td>${s.HIT || 0}</td><td>${s.BLK || 0}</td>
+            `}
+            
+            <td style="font-weight:bold; color: #0055a5;">${s.FPG || '0.00'}</td>
+        `;
+        tbody.appendChild(row);
+    });
 }
 
 // 6. BRACKET & CUP LOGIC
@@ -408,16 +399,20 @@ window.togglePlayer = function(id) {
     const cat = p.position === 'G' ? 'G' : (p.position === 'D' ? 'D' : 'F');
     
     if (isAlreadyInRoster(id)) {
-        // Double check: Never allow removal of a legacy player
-        const isLegacy = existingRoster && 
-                         (existingRoster.roster.F.includes(id) || 
-                          existingRoster.roster.D.includes(id) || 
-                          existingRoster.roster.G.includes(id));
+        // Confirm it's not a historical legacy player item before removal processing
+        const isLegacy = existingRoster && (
+            existingRoster.roster.F.includes(id) || 
+            existingRoster.roster.D.includes(id) || 
+            existingRoster.roster.G.includes(id) ||
+            (existingRoster.supplemental && Object.keys(existingRoster.supplemental).some(roundKey => {
+                const rNum = parseInt(roundKey.replace('r', ''));
+                return rNum < currentRound && existingRoster.supplemental[roundKey].includes(id);
+            }))
+        );
         if (isLegacy) return; 
 
         myEntry.roster[cat] = myEntry.roster[cat].filter(x => x != id);
     } else {
-        // Skip the 12/5/3 checks entirely if isRound2 is active
         myEntry.roster[cat].push(id);
     }
     updateCounts();
@@ -425,7 +420,6 @@ window.togglePlayer = function(id) {
 };
 
 function updateCounts() {
-    // Update the UI counters for visual feedback
     ['F', 'D', 'G'].forEach(c => {
         const el = document.getElementById(`count-${c}`);
         if (el) el.innerText = myEntry.roster[c].length;
@@ -434,26 +428,42 @@ function updateCounts() {
     const saveBtn = document.getElementById('save-entry');
     if (!saveBtn) return;
 
-    if (isRound2 && existingRoster) {
-        // Calculate the difference between current selections and original roster
-        const newSkaters = [
-            ...myEntry.roster.F.filter(id => !existingRoster.roster.F.includes(id)),
-            ...myEntry.roster.D.filter(id => !existingRoster.roster.D.includes(id))
-        ];
-        const newGoalies = myEntry.roster.G.filter(id => !existingRoster.roster.G.includes(id));
+    if (currentRound > 1 && existingRoster) {
+        // Establish base lists excluding previously chosen baseline components 
+        const originalF = existingRoster.roster.F;
+        const originalD = existingRoster.roster.D;
+        const originalG = existingRoster.roster.G;
 
-        const skaterCount = newSkaters.length;
-        const goalieCount = newGoalies.length;
+        // Collect all previous additions from ALL prior supplemental round layers
+        const priorSupplementalIds = [];
+        if (existingRoster.supplemental) {
+            Object.keys(existingRoster.supplemental).forEach(roundKey => {
+                const rNum = parseInt(roundKey.replace('r', ''));
+                if (rNum < currentRound) {
+                    priorSupplementalIds.push(...existingRoster.supplemental[roundKey]);
+                }
+            });
+        }
+
+        // Identify players added SPECIFICALLY in the current active round
+        const currentRoundNewSkaters = [
+            ...myEntry.roster.F.filter(id => !originalF.includes(id) && !priorSupplementalIds.includes(id)),
+            ...myEntry.roster.D.filter(id => !originalD.includes(id) && !priorSupplementalIds.includes(id))
+        ];
+        const currentRoundNewGoalies = myEntry.roster.G.filter(id => !originalG.includes(id) && !priorSupplementalIds.includes(id));
+
+        const skaterCount = currentRoundNewSkaters.length;
+        const goalieCount = currentRoundNewGoalies.length;
 
         // Rule: Exactly 2 new skaters AND 0 goalies OR Exactly 1 new goalie AND 0 skaters
         const isValid = (skaterCount === 2 && goalieCount === 0) || 
                         (skaterCount === 0 && goalieCount === 1);
 
         saveBtn.disabled = !isValid;
-        saveBtn.innerText = isValid ? "Submit Round 2 Changes" : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
+        saveBtn.innerText = isValid ? `Submit Round ${currentRound} Changes` : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
         saveBtn.setAttribute('onclick', 'saveSupplement()');
     } else {
-        // Round 1 Logic
+        // Round 1 Baseline Rule check
         const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
         saveBtn.disabled = (total !== 20);
     }
@@ -489,9 +499,7 @@ window.saveEntry = async function() {
 
         if (res.ok) {
             const result = await res.json();
-            // Store email locally so the page remembers them
             localStorage.setItem('savedEmail', myEntry.email);
-            
             alert(`Entry Saved! Your unique Entry ID is: ${result.entryId}`);
         } else {
             alert("Save failed.");
@@ -500,10 +508,7 @@ window.saveEntry = async function() {
 };
 
 async function loadExistingEntry() {
-    // 1. Check if we have a "remembered" email
     let email = localStorage.getItem('savedEmail');
-
-    // 2. If no email in storage, don't try to fetch (keeps page clean for new users)
     if (!email) return;
 
     try {
@@ -514,16 +519,14 @@ async function loadExistingEntry() {
             myEntry = data;
             existingRoster = data;
             
-            // Populate UI fields
             if (myEntry.managerName) document.getElementById('manager-name').value = myEntry.managerName;
             if (myEntry.email) document.getElementById('user-email').value = myEntry.email;
             if (myEntry.cupWinner) document.getElementById('cup-winner').value = myEntry.cupWinner;
             
-            if (isRound2) {
-                enterRound2Mode(data);
+            if (currentRound > 1) {
+                enterSupplementalMode(data);
             }
             
-            // Re-check radio buttons for the bracket
             if (myEntry.bracket) {
                 Object.keys(myEntry.bracket).forEach(seriesId => {
                     const winner = myEntry.bracket[seriesId];
@@ -548,10 +551,8 @@ function renderRoundMatchups(roundNum) {
     const roundKey = `r${roundNum}`;
     const roundInfo = matchupData.rounds[roundKey];
     
-    // Safety check: if the round doesn't exist in JSON yet, exit
-    if (!roundInfo || !roundInfo.matchups) return; 
+    if (!container || !roundInfo || !roundInfo.matchups) return; 
 
-    // Use roundInfo.matchups instead of r2Data
     container.innerHTML = Object.entries(roundInfo.matchups).map(([id, match]) => `
         <div class="matchup-box" style="margin-bottom: 10px; padding: 8px; border: 1px solid #eee; border-radius: 4px;">
             <div class="matchup-label" style="font-size: 0.75rem; font-weight: bold; color: #444; margin-bottom: 5px;">
@@ -572,12 +573,10 @@ function renderRoundMatchups(roundNum) {
 }
 
 async function saveSupplement() {
-    // 1. Check if elements exist before grabbing values
     const emailEl = document.getElementById('user-email'); 
     const passEl = document.getElementById('league-pass'); 
 
     if (!emailEl || !passEl) {
-        console.error("Missing input fields in HTML. Found emailEl:", !!emailEl, "Found passEl:", !!passEl);
         alert("Technical Error: Input fields not found.");
         return;
     }
@@ -588,24 +587,32 @@ async function saveSupplement() {
     if (!email) return alert("Email is missing.");
     if (!leaguePass) return alert("Please enter the League Password.");
 
-    if (!leaguePass) {
-        return alert("Please enter the League Password to save changes.");
+    // Identify current target round new selections
+    const originalF = existingRoster.roster.F;
+    const originalD = existingRoster.roster.D;
+    const originalG = existingRoster.roster.G;
+
+    const priorSupplementalIds = [];
+    if (existingRoster.supplemental) {
+        Object.keys(existingRoster.supplemental).forEach(roundKey => {
+            const rNum = parseInt(roundKey.replace('r', ''));
+            if (rNum < currentRound) {
+                priorSupplementalIds.push(...existingRoster.supplemental[roundKey]);
+            }
+        });
     }
 
-    // 2. Identify newly added players
     const newPlayers = [];
     ['F', 'D', 'G'].forEach(pos => {
         myEntry.roster[pos].forEach(id => {
-            // Check against the ORIGINAL roster we loaded at the start
-            if (!existingRoster.roster[pos].includes(id)) {
+            const baseList = pos === 'F' ? originalF : (pos === 'D' ? originalD : originalG);
+            if (!baseList.includes(id) && !priorSupplementalIds.includes(id)) {
                 newPlayers.push({ id: id, pos: pos });
             }
         });
     });
 
-    // 3. Grab Round 2 bracket picks
     const newMatchups = {};
-    const currentRound = matchupData.current_round;
     const rMatchups = matchupData.rounds[`r${currentRound}`].matchups;
     
     Object.keys(rMatchups).forEach(key => {
@@ -615,18 +622,19 @@ async function saveSupplement() {
 
     const payload = {
         email,
-        leaguePass, // This is supplement.leaguePass in your Worker
+        leaguePass, 
+        round: currentRound, // Send round contextual information to the backend worker
         newPlayers,
         newMatchups
     };
 
-    const res = await fetch('/submit-supplement', { // Ensure this matches your Worker route
+    const res = await fetch('/submit-supplement', { 
         method: 'POST',
         body: JSON.stringify(payload)
     });
 
     if (res.ok) {
-        alert("Round 2 additions saved successfully!");
+        alert(`Round ${currentRound} additions saved successfully!`);
         window.location.href = `/playoff_pool/entry.html?id=${existingRoster.entryId}`;
     } else {
         const msg = await res.text();
@@ -636,7 +644,5 @@ async function saveSupplement() {
 
 function normalizeName(name) {
     if (!name) return "";
-    // This splits accented characters into their base letter + accent, 
-    // then removes the accent marks (diacritics).
     return name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
