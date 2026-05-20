@@ -15,7 +15,6 @@ export default {
     // 2. DATA ROUTES (KV)
     // GET Route for Playoff Pool
     if (internalPath === "/playoff-get") {
-        // 1. Check Query Param first (sent by your JS), then fallback to Header
         const urlParams = new URL(request.url).searchParams;
         const emailQuery = urlParams.get("email");
         const targetEmail = (emailQuery || userEmailHeader).toLowerCase();
@@ -41,7 +40,6 @@ export default {
             const emailKey = formData.email.toLowerCase().replace(/[^a-z0-9@._-]/gi, '');
             
             // 2. ID Generation Logic
-            // Check if this email already has a saved entry
             let existing = await env.PLAYOFF_DATA.get(emailKey);
             let entryId;
 
@@ -49,7 +47,6 @@ export default {
                 const parsed = JSON.parse(existing);
                 entryId = parsed.entryId; // Reuse their existing ID
             } else {
-                // Generate a random 5-digit string
                 entryId = Math.floor(10000 + Math.random() * 90000).toString();
             }
 
@@ -60,7 +57,6 @@ export default {
             const jsonString = JSON.stringify(formData);
 
             // 3. Dual-Storage
-            // Store by email for the "Manager" to load/edit
             await env.PLAYOFF_DATA.put(emailKey, jsonString);
             await env.PLAYOFF_DATA.put(`id_${entryId}`, jsonString);
 
@@ -76,11 +72,12 @@ export default {
         }
     }
     
-        // Route: /submit-supplement
+    // Route: /submit-supplement (DYNAMICS UPDATED FOR ROUND 3 & 4)
     if (request.method === 'POST' && internalPath === '/submit-supplement') {
         try {
-            const supplement = await request.json(); // { email, leaguePass, newPlayers, newMatchups }
+            const supplement = await request.json(); // Reads: { email, leaguePass, round, newPlayers, newMatchups }
             const email = supplement.email.toLowerCase();
+            const targetRound = supplement.round || 2; // Dynamic round parameter fallback to 2
 
             // 1. Password Check
             if (supplement.leaguePass !== "Broomball2026") { 
@@ -95,26 +92,30 @@ export default {
 
             let entry = JSON.parse(existingData);
 
-            // Initialize the supplemental object if it doesn't exist
+            // Initialize the base supplemental nesting object safely
             if (!entry.supplemental) entry.supplemental = {};
-            if (!entry.supplemental.r2) entry.supplemental.r2 = [];
+            
+            // DYNAMIC FIX: Initialize the key dynamically using the target round (e.g., entry.supplemental.r3)
+            const roundKey = `r${targetRound}`;
+            if (!entry.supplemental[roundKey]) entry.supplemental[roundKey] = [];
 
             if (supplement.newPlayers && supplement.newPlayers.length > 0) {
                 supplement.newPlayers.forEach(p => {
-                    // Track them in r2 specifically so scoring knows when they started
-                    if (!entry.supplemental.r2.includes(p.id)) {
-                        entry.supplemental.r2.push(p.id);
+                    // Track them directly inside their dynamic context array layer
+                    if (!entry.supplemental[roundKey].includes(p.id)) {
+                        entry.supplemental[roundKey].push(p.id);
                     }
                 });
             }
 
+            // Sync structural matchups updates
             entry.bracket = { ...entry.bracket, ...supplement.newMatchups };
 
-            // 4. Update Metadata
+            // 4. Update Metadata and Dynamic Submission Key Indicators
             entry.updatedAt = new Date().toISOString();
-            entry.round2Submitted = true;
+            entry[`round${targetRound}Submitted`] = true; // Sets entry.round3Submitted = true automatically!
 
-            // 5. Atomic Write (Double-write for Email and ID)
+            // 5. Atomic Write (Double-write for Email and ID tracking entries)
             const updatedJson = JSON.stringify(entry);
             await env.PLAYOFF_DATA.put(email, updatedJson);
             await env.PLAYOFF_DATA.put(`id_${entry.entryId}`, updatedJson);
@@ -159,14 +160,8 @@ export default {
     // Inside your Worker's fetch handler
     if (internalPath === '/list-entries') {
       try {
-        // 1. Get all keys in your KV namespace
         const list = await env.PLAYOFF_DATA.list();
-        
-        // 2. Filter to ONLY include keys starting with 'id_' 
-        // This avoids duplicates from the email-based keys
         const idKeys = list.keys.filter(k => k.name.startsWith('id_'));
-        
-        // 3. Fetch the actual data for each filtered key
         const entries = await Promise.all(
           idKeys.map(async (key) => {
             const data = await env.PLAYOFF_DATA.get(key.name);
@@ -174,11 +169,10 @@ export default {
           })
         );
 
-        // 4. Return the array to your standings page
         return new Response(JSON.stringify(entries), {
           headers: { 
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*' // Crucial for your GitHub Pages fetch
+            'Access-Control-Allow-Origin': '*'
           }
         });
       } catch (err) {
@@ -189,45 +183,26 @@ export default {
       }
     }
 
-    // NEW: Public viewing route
+    // NEW: Public viewing route (Cleaned up duplicate blocks)
     if (internalPath === "/view-entry") {
         const id = url.searchParams.get("id");
         if (!id) return new Response("Missing ID", { status: 400 });
 
         const data = await env.PLAYOFF_DATA.get(`id_${id}`);
-        if (!data) return new Response("Entry not found", { status: 404 });
-
-        return new Response(data, {
-            headers: { "Content-Type": "application/json" }
-        });
-    }
-
-    if (internalPath === "/view-entry") {
-        const id = url.searchParams.get("id");
-        if (!id) return new Response("Missing ID", { status: 400 });
-
-        // Fetching the 'id_XXXXX' key you created in dual-storage
-        const data = await env.PLAYOFF_DATA.get(`id_${id}`);
-        
         if (!data) return new Response("Entry not found", { status: 404 });
 
         return new Response(data, {
             headers: { 
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*" // Allows the JS fetch to work
+                "Access-Control-Allow-Origin": "*" 
             }
         });
     }
 
     // 5. ASSET DELIVERY
-    // Ensure that requests to /playoff_pool/ are routed to the static files
-    // If you are using a single entry.html template, we need to make sure 
-    // Cloudflare doesn't try to find a folder named '84831'
-    
     const newUrl = new URL(url.origin);
     newUrl.pathname = internalPath;
     newUrl.search = url.search;
     return env.ASSETS.fetch(new Request(newUrl, request));
   }
 };
-

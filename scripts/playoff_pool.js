@@ -11,7 +11,7 @@ const goalieStatIdMap = {
 };
 
 let allPlayers = [], skaterStatsMap = {}, goalieStatsMap = {}, teamMap = {};
-let currentSortKey = "FPG", sortDirection = -1, statsMap = {};
+let currentSortKey = "FPG", sortDirection = -1;
 
 // Initial state object
 let myEntry = { 
@@ -132,7 +132,7 @@ async function initData() {
         ]);
 
         matchupData = matchupRes;
-        currentRound = matchupData.current_round || 1; // Assign global active round dynamically
+        currentRound = matchupData.current_round || 1; 
         teamMap = Object.fromEntries(teamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         
         skaterStatsMap = buildStatsMap(skaterRes.players, "skater");
@@ -161,8 +161,7 @@ async function initData() {
             teamFilter.addEventListener('change', renderTable);
         }        
         
-        // Show active round UI segment wrapper automatically
-        const roundSection = document.getElementById(`round-${currentRound}-bracket`);
+        const roundSection = document.getElementById('round-' + currentRound + '-bracket');
         if (roundSection) roundSection.style.display = 'block';
 
         renderTable();        
@@ -252,13 +251,22 @@ function sortBy(key) {
         if (key === 'playoffTotal') {
             const aKey = (a.position === 'G') ? `G_${a.team_abbr}` : normalizeName(a.full_name);
             const bKey = (b.position === 'G') ? `G_${b.team_abbr}` : normalizeName(b.full_name);
-            aVal = playoffStatsMap[aKey]?.total || 0;
-            bVal = playoffStatsMap[bKey]?.total || 0;
+            const aStats = playoffStatsMap[aKey] || { total: 0 };
+            const bStats = playoffStatsMap[bKey] || { total: 0 };
+            aVal = parseFloat(aStats.total || 0);
+            bVal = parseFloat(bStats.total || 0);
         } else {
+            // FIX: Pull sorting context values dynamically matching position profile maps
             const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
             const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
-            aVal = parseFloat(aS[currentSortKey]) || 0;
-            bVal = parseFloat(bS[currentSortKey]) || 0;
+            
+            if (currentSortKey === 'ATOI') {
+                aVal = atoiToSeconds(aS.ATOI);
+                bVal = atoiToSeconds(bS.ATOI);
+            } else {
+                aVal = parseFloat(aS[currentSortKey]) || 0;
+                bVal = parseFloat(bS[currentSortKey]) || 0;
+            }
         }
 
         return (aVal - bVal) * sortDirection;
@@ -305,8 +313,6 @@ function renderTable() {
     bindHeaderSortEvents();
 
     let filtered = allPlayers.filter(p => {
-        const s = statsMap[p.player_id] || {};
-        const gp = parseFloat(s.GP) || 0;
         const matchesName = p.full_name.toLowerCase().includes(nameFilter);
         const matchesTeam = !teamFilter ? true : p.team_abbr === teamFilter;
         const matchesPos = !posFilter ? true : (
@@ -317,26 +323,17 @@ function renderTable() {
         return matchesName && matchesPos && matchesTeam;
     });
 
-    filtered.sort((a, b) => {
-        const aS = statsMap[a.player_id] || {};
-        const bS = statsMap[b.player_id] || {};
-        let aVal = (currentSortKey === 'ATOI') ? atoiToSeconds(aS.ATOI) : parseFloat(aS[currentSortKey] || 0);
-        let bVal = (currentSortKey === 'ATOI') ? atoiToSeconds(bS.ATOI) : parseFloat(bS[currentSortKey] || 0);
-        return (aVal - bVal) * sortDirection;
-    });
-
     tbody.innerHTML = '';
     filtered.forEach(p => {
-        const s = statsMap[p.player_id] || {};
+        // FIX: Extract regular season metrics directly using your mapped data pools
+        const s = (p.position === 'G' ? goalieStatsMap[p.player_id] : skaterStatsMap[p.player_id]) || {};
         const isSelected = isAlreadyInRoster(p.player_id);
         
-        // Dynamic Check: Is this a historically locked player from a baseline/previous configuration round?
         const isLegacy = existingRoster && (
             existingRoster.roster.F.includes(p.player_id) || 
             existingRoster.roster.D.includes(p.player_id) || 
             existingRoster.roster.G.includes(p.player_id) ||
             (existingRoster.supplemental && Object.keys(existingRoster.supplemental).some(roundKey => {
-                // Lock out additions from previous rounds (e.g. if we are in Round 3, lock r2 adds)
                 const rNum = parseInt(roundKey.replace('r', ''));
                 return rNum < currentRound && existingRoster.supplemental[roundKey].includes(p.player_id);
             }))
@@ -399,7 +396,6 @@ window.togglePlayer = function(id) {
     const cat = p.position === 'G' ? 'G' : (p.position === 'D' ? 'D' : 'F');
     
     if (isAlreadyInRoster(id)) {
-        // Confirm it's not a historical legacy player item before removal processing
         const isLegacy = existingRoster && (
             existingRoster.roster.F.includes(id) || 
             existingRoster.roster.D.includes(id) || 
@@ -429,12 +425,10 @@ function updateCounts() {
     if (!saveBtn) return;
 
     if (currentRound > 1 && existingRoster) {
-        // Establish base lists excluding previously chosen baseline components 
         const originalF = existingRoster.roster.F;
         const originalD = existingRoster.roster.D;
         const originalG = existingRoster.roster.G;
 
-        // Collect all previous additions from ALL prior supplemental round layers
         const priorSupplementalIds = [];
         if (existingRoster.supplemental) {
             Object.keys(existingRoster.supplemental).forEach(roundKey => {
@@ -445,7 +439,6 @@ function updateCounts() {
             });
         }
 
-        // Identify players added SPECIFICALLY in the current active round
         const currentRoundNewSkaters = [
             ...myEntry.roster.F.filter(id => !originalF.includes(id) && !priorSupplementalIds.includes(id)),
             ...myEntry.roster.D.filter(id => !originalD.includes(id) && !priorSupplementalIds.includes(id))
@@ -455,7 +448,6 @@ function updateCounts() {
         const skaterCount = currentRoundNewSkaters.length;
         const goalieCount = currentRoundNewGoalies.length;
 
-        // Rule: Exactly 2 new skaters AND 0 goalies OR Exactly 1 new goalie AND 0 skaters
         const isValid = (skaterCount === 2 && goalieCount === 0) || 
                         (skaterCount === 0 && goalieCount === 1);
 
@@ -463,7 +455,6 @@ function updateCounts() {
         saveBtn.innerText = isValid ? `Submit Round ${currentRound} Changes` : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
         saveBtn.setAttribute('onclick', 'saveSupplement()');
     } else {
-        // Round 1 Baseline Rule check
         const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
         saveBtn.disabled = (total !== 20);
     }
@@ -587,7 +578,6 @@ async function saveSupplement() {
     if (!email) return alert("Email is missing.");
     if (!leaguePass) return alert("Please enter the League Password.");
 
-    // Identify current target round new selections
     const originalF = existingRoster.roster.F;
     const originalD = existingRoster.roster.D;
     const originalG = existingRoster.roster.G;
@@ -623,7 +613,7 @@ async function saveSupplement() {
     const payload = {
         email,
         leaguePass, 
-        round: currentRound, // Send round contextual information to the backend worker
+        round: currentRound, 
         newPlayers,
         newMatchups
     };
