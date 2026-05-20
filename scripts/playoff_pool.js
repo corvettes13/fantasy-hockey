@@ -29,6 +29,33 @@ const TEAM_MAP = {
 let currentRound = 1; 
 let existingRoster = null;
 
+// Helper function to get player specific active round score only
+function getEffectivePlayoffPoints(player, rawStatsMap, rosterContext) {
+    const lookupKey = (player.position === 'G') ? `G_${player.team_abbr}` : normalizeName(player.full_name);
+    const pStats = rawStatsMap[lookupKey];
+    
+    if (!pStats) return 0;
+    
+    // Default: player belongs to the initial baseline team lineup
+    let assignedRound = 1;
+
+    // Detect if this player was added in any supplemental window historical layers
+    if (rosterContext && rosterContext.supplemental) {
+        Object.keys(rosterContext.supplemental).forEach(roundKey => {
+            if (rosterContext.supplemental[roundKey].includes(player.player_id)) {
+                assignedRound = parseInt(roundKey.replace('r', '')) || 1;
+            }
+        });
+    }
+
+    // Accumulate scores starting ONLY from their active entry round
+    let dynamicScore = 0;
+    for (let r = assignedRound; r <= 4; r++) {
+        dynamicScore += parseFloat(pStats[`r${r}`] || 0);
+    }
+    return dynamicScore;
+}
+
 async function checkExistingUser(email) {
     if (!email) return alert("Please enter your email first.");
     
@@ -139,8 +166,9 @@ async function initData() {
         goalieStatsMap = buildStatsMap(goalieRes.players, "goalie");
         
         playoffStatsMap = {};
+        // Make sure stats maps store the flat object elements containing round-by-round points r1, r2, r3, r4
         [...pSkaterRes, ...pGoalieRes].forEach(entry => {
-            playoffStatsMap[entry.Player] = entry.fantasy_points;
+            playoffStatsMap[entry.Player] = entry; 
         });
 
         calculateFantasyPoints(skaterStatsMap, playersRes.players, "skater");
@@ -250,10 +278,9 @@ function sortBy(key) {
         let aVal, bVal;
 
         if (key === 'playoffTotal') {
-            const aKey = (a.position === 'G') ? `G_${a.team_abbr}` : normalizeName(a.full_name);
-            const bKey = (b.position === 'G') ? `G_${b.team_abbr}` : normalizeName(b.full_name);
-            aVal = playoffStatsMap[aKey]?.total || 0;
-            bVal = playoffStatsMap[bKey]?.total || 0;
+            // Updated to sort dynamically by context-aware cumulative round scores
+            aVal = getEffectivePlayoffPoints(a, playoffStatsMap, existingRoster);
+            bVal = getEffectivePlayoffPoints(b, playoffStatsMap, existingRoster);
         } else {
             const aS = (a.position === 'G' ? goalieStatsMap[a.player_id] : skaterStatsMap[a.player_id]) || {};
             const bS = (b.position === 'G' ? goalieStatsMap[b.player_id] : skaterStatsMap[b.player_id]) || {};
@@ -336,14 +363,14 @@ function renderTable() {
             existingRoster.roster.D.includes(p.player_id) || 
             existingRoster.roster.G.includes(p.player_id) ||
             (existingRoster.supplemental && Object.keys(existingRoster.supplemental).some(roundKey => {
-                // Lock out additions from previous rounds (e.g. if we are in Round 3, lock r2 adds)
+                // Lock out additions from previous rounds (e.g. if we are in Round 3, lock r2 adds) 
                 const rNum = parseInt(roundKey.replace('r', ''));
                 return rNum < currentRound && existingRoster.supplemental[roundKey].includes(p.player_id);
             }))
         );
 
-        const playoffLookupKey = (p.position === 'G') ? `G_${p.team_abbr}` : normalizeName(p.full_name);
-        const pStats = playoffStatsMap[playoffLookupKey] || { total: 0 };
+        // Updated points calculation context to exclude non-eligible forward round points
+        const calculatedPoints = getEffectivePlayoffPoints(p, playoffStatsMap, existingRoster);
 
         const row = document.createElement('tr');
         if (isSelected) row.className = 'selected-row';
@@ -364,7 +391,7 @@ function renderTable() {
             </td>
             <td>${p.position}</td>
             
-            <td style="font-weight:bold;">${parseFloat(pStats.total || 0).toFixed(1)}</td>
+            <td style="font-weight:bold;">${calculatedPoints.toFixed(1)}</td>
 
             <td>${s.GP || 0}</td>
             ${p.position === 'G' ? `
@@ -434,7 +461,7 @@ function updateCounts() {
         const originalD = existingRoster.roster.D;
         const originalG = existingRoster.roster.G;
 
-        // Collect all previous additions from ALL prior supplemental round layers
+        // Collect all previous additions from ALL prior supplemental round layers 
         const priorSupplementalIds = [];
         if (existingRoster.supplemental) {
             Object.keys(existingRoster.supplemental).forEach(roundKey => {
@@ -445,7 +472,7 @@ function updateCounts() {
             });
         }
 
-        // Identify players added SPECIFICALLY in the current active round
+        // Identify players added SPECIFICALLY in the current active round 
         const currentRoundNewSkaters = [
             ...myEntry.roster.F.filter(id => !originalF.includes(id) && !priorSupplementalIds.includes(id)),
             ...myEntry.roster.D.filter(id => !originalD.includes(id) && !priorSupplementalIds.includes(id))
@@ -455,7 +482,7 @@ function updateCounts() {
         const skaterCount = currentRoundNewSkaters.length;
         const goalieCount = currentRoundNewGoalies.length;
 
-        // Rule: Exactly 2 new skaters AND 0 goalies OR Exactly 1 new goalie AND 0 skaters
+        // Rule: Exactly 2 new skaters AND 0 goalies OR Exactly 1 new goalie AND 0 skaters [cite: 176, 177]
         const isValid = (skaterCount === 2 && goalieCount === 0) || 
                         (skaterCount === 0 && goalieCount === 1);
 
@@ -463,7 +490,7 @@ function updateCounts() {
         saveBtn.innerText = isValid ? `Submit Round ${currentRound} Changes` : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
         saveBtn.setAttribute('onclick', 'saveSupplement()');
     } else {
-        // Round 1 Baseline Rule check
+        // Round 1 Baseline Rule check [cite: 179, 180]
         const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
         saveBtn.disabled = (total !== 20);
     }
@@ -623,7 +650,7 @@ async function saveSupplement() {
     const payload = {
         email,
         leaguePass, 
-        round: currentRound, // Send round contextual information to the backend worker
+        round: currentRound, // Send round contextual information to the backend worker [cite: 222]
         newPlayers,
         newMatchups
     };

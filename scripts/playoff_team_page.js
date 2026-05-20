@@ -3,7 +3,7 @@ const PLAYERS_JSON = '/fantasy-hockey/data/players.json';
 const TEAMS_JSON = '/fantasy-hockey/teams/nhl_teams.json';
 const SKATER_STATS_JSON = '/fantasy-hockey/data/2026_playoff_skater_stats.json';
 const GOALIE_STATS_JSON = '/fantasy-hockey/data/2026_playoff_goalie_stats.json';
-const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json'; // New source
+const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json';
 
 function normalizeName(name) {
     if (!name) return "";
