@@ -82,16 +82,36 @@ async function initStandings() {
             });
 
             // 2. Calculate points for SUPPLEMENTAL Round 2 adds
-            if (entry.supplemental && entry.supplemental.r2) {
-                entry.supplemental.r2.forEach(id => {
-                    const pts = getPlayerPoints(id, playerInfoMap, statsMap);
-                    rPoints.r2 += pts.r2; 
-                    rPoints.r3 += pts.r3; 
-                    rPoints.r4 += pts.r4;
-                    rPoints.total += (pts.r2 + pts.r3 + pts.r4);
+            if (entry.supplemental) {
+                // Loop through each round inside supplemental (e.g., 'r2', 'r3', 'r4')
+                Object.keys(entry.supplemental).forEach(roundKey => {
+                    // Extract the round number from the key (e.g., 'r2' becomes 2)
+                    const pickedInRound = parseInt(roundKey.replace('r', ''), 10);
+                    
+                    if (entry.supplemental[roundKey] && Array.isArray(entry.supplemental[roundKey])) {
+                        entry.supplemental[roundKey].forEach(id => {
+                            const pts = getPlayerPoints(id, playerInfoMap, statsMap);
+                            
+                            // 1. Dynamic Multi-Round Scoring Accumulator
+                            // A player added in R2 scores for R2, R3, R4.
+                            // A player added in R3 scores ONLY for R3, R4.
+                            if (pickedInRound <= 2 && pts.r2) rPoints.r2 += pts.r2;
+                            if (pickedInRound <= 3 && pts.r3) rPoints.r3 += pts.r3;
+                            if (pickedInRound <= 4 && pts.r4) rPoints.r4 += pts.r4;
+                            
+                            // 2. Dynamic Total Points Calculation
+                            // Only sum up the round scores that the manager is eligible to receive
+                            let validSupplementalTotal = 0;
+                            if (pickedInRound <= 2) validSupplementalTotal += (pts.r2 || 0);
+                            if (pickedInRound <= 3) validSupplementalTotal += (pts.r3 || 0);
+                            if (pickedInRound <= 4) validSupplementalTotal += (pts.r4 || 0);
+                            
+                            rPoints.total += validSupplementalTotal;
 
-                    // ADD THE RETURN VALUE TO aliveCount
-                    aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
+                            // 3. Alive Counter & Pick Trackers
+                            aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
+                        });
+                    }
                 });
             }
 
