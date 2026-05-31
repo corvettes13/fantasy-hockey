@@ -378,7 +378,6 @@ function renderTable() {
     });
 }
 
-// 6. BRACKET & CUP LOGIC
 window.updateBracket = function(seriesId, winner) {
     if (!myEntry.bracket) myEntry.bracket = {};
     myEntry.bracket[seriesId] = winner;
@@ -388,7 +387,6 @@ window.updateCupWinner = function(team) {
     myEntry.cupWinner = team;
 };
 
-// 7. UTILITIES
 window.togglePlayer = function(id) {
     const p = allPlayers.find(x => x.player_id == id);
     if (!p) return;
@@ -448,11 +446,40 @@ function updateCounts() {
         const skaterCount = currentRoundNewSkaters.length;
         const goalieCount = currentRoundNewGoalies.length;
 
-        const isValid = (skaterCount === 2 && goalieCount === 0) || 
-                        (skaterCount === 0 && goalieCount === 1);
+        let isValid = false;
+        
+        if (currentRound === 4) {
+            // Rule: Exactly 2 skaters AND 0 goalies
+            isValid = (skaterCount === 2 && goalieCount === 0);
+            saveBtn.disabled = !isValid;
+            
+            if (isValid) {
+                saveBtn.innerText = `Submit Round ${currentRound} Changes`;
+            } else if (goalieCount > 0) {
+                saveBtn.innerText = "Goalies cannot be added in Round 4";
+            } else if (skaterCount > 2) {
+                saveBtn.innerText = "Too many Skaters selected (Max 2)";
+            } else {
+                saveBtn.innerText = `Add ${2 - skaterCount} more Skater${2 - skaterCount === 1 ? '' : 's'}`;
+            }
+        } 
+        else {
+            // Rule: Exactly 2 skaters AND 0 goalies OR Exactly 0 skaters AND 1 goalie
+            isValid = (skaterCount === 2 && goalieCount === 0) || 
+                      (skaterCount === 0 && goalieCount === 1);
+            saveBtn.disabled = !isValid;
+            
+            if (isValid) {
+                saveBtn.innerText = `Submit Round ${currentRound} Changes`;
+            } else if (skaterCount > 2 || goalieCount > 1 || (skaterCount > 0 && goalieCount > 0)) {
+                saveBtn.innerText = "Invalid Combination selected";
+            } else if (goalieCount === 1) {
+                saveBtn.innerText = `Remove ${skaterCount} Skater${skaterCount === 1 ? '' : 's'}`;
+            } else {
+                saveBtn.innerText = `Add ${2 - skaterCount} Skater${2 - skaterCount === 1 ? '' : 's'} OR 1 Goalie`;
+            }
+        }
 
-        saveBtn.disabled = !isValid;
-        saveBtn.innerText = isValid ? `Submit Round ${currentRound} Changes` : `Add ${2 - skaterCount} Skaters OR 1 Goalie`;
         saveBtn.setAttribute('onclick', 'saveSupplement()');
     } else {
         const total = myEntry.roster.F.length + myEntry.roster.D.length + myEntry.roster.G.length;
