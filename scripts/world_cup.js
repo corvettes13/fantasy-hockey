@@ -1,3 +1,15 @@
+// ---------------------------------------------------------
+// LEADERBOARD CONFIGURATION
+// Define which types to score and the max number of winners to show.
+// Only keys with a limit greater than 0 will build/display a section.
+// ---------------------------------------------------------
+const LEADERBOARD_CONFIG = {
+  "horizontal": 3,   // Track up to 5 horizontal winners
+  "vertical": 3,     // Track up to 5 vertical winners
+  "cross": 2,        // Track up to 2 cross (X) winners
+  "blackout": 1      // Track up to 1 blackout winner
+};
+
 async function loadAllCards() {
   const res = await fetch("/fantasy-hockey/data/fifa_world_cup_bingo_cards.json");
   const data = await res.json();
@@ -8,7 +20,6 @@ function formatTimestamp(ts) {
   if (!ts) return null;
 
   const date = new Date(ts);
-
   const options = {
     year: "numeric",
     month: "long",
@@ -26,26 +37,22 @@ function renderSingleCard(cardNum, card, container) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("card", "bingo-card");
 
-  // Winner status (new JSON structure)
-  const isWinner = card.winner?.is_winner;
-  let winnerText = "Winner: false";
-
-  // Winner status (new JSON structure)
   let winnerHTML = "";
 
   if (card.winner?.is_winner) {
     const parts = [];
 
-    if (card.winner.regular)
-      parts.push(`Regular — ${formatTimestamp(card.winner.regular)}`);
+    // Dynamically display all valid winning types matching our config keys
+    Object.keys(LEADERBOARD_CONFIG).forEach(type => {
+      if (card.winner[type]) {
+        const titleCased = type.charAt(0).toUpperCase() + type.slice(1);
+        parts.push(`${titleCased} — ${formatTimestamp(card.winner[type])}`);
+      }
+    });
 
-    if (card.winner.x)
-      parts.push(`X — ${formatTimestamp(card.winner.x)}`);
-
-    if (card.winner.box)
-      parts.push(`Box — ${formatTimestamp(card.winner.box)}`);
-
-    winnerHTML = `<p class="winner-status">BINGO!<br>${parts.join("<br>")}</p>`;
+    if (parts.length > 0) {
+      winnerHTML = `<p class="winner-status">BINGO!<br>${parts.join("<br>")}</p>`;
+    }
   }
 
   wrapper.innerHTML = `
@@ -53,7 +60,7 @@ function renderSingleCard(cardNum, card, container) {
     <h3>Card #${cardNum}</h3>
     ${winnerHTML}
     <div class="bingo-grid"></div>
-  `
+  `;
 
   const grid = wrapper.querySelector(".bingo-grid");
 
@@ -64,12 +71,12 @@ function renderSingleCard(cardNum, card, container) {
 
       if (event === "FREE") {
         cell.classList.add("free");
-        cell.textContent = ""; // no text needed, image will show
+        cell.textContent = ""; 
       } else {
         cell.textContent = event;
       }
 
-      if (card.events[event].validated) {
+      if (card.events[event] && card.events[event].validated) {
         cell.classList.add("validated");
       }
 
@@ -95,76 +102,54 @@ function buildLeaderboard(cards) {
   const leaderboard = document.getElementById("leaderboard");
   leaderboard.innerHTML = "";
 
-  // Extract winners
-  const winners = Object.entries(cards)
-    .map(([num, card]) => ({ num, ...card }))
-    .filter(c => c.winner?.is_winner);
+  // Extract all cards into a flatter array for easier filtering
+  const allCards = Object.entries(cards).map(([num, card]) => ({ num, ...card }));
 
-  if (winners.length === 0) {
-    leaderboard.innerHTML = "<p>No bingos yet.</p>";
-    return;
-  }
+  // Helper function to safely sort cards chronologically by a specific bingo type timestamp
+  const sortByTimestamp = (arr, type) => {
+    return arr.sort((a, b) => new Date(a.winner[type]) - new Date(b.winner[type]));
+  };
 
-  const sortBy = (arr, field) =>
-    arr.sort((a, b) => new Date(a.winner[field]) - new Date(b.winner[field]));
+  let totalVisibleSections = 0;
 
-  // Helper: sort by timestamp
-  const sortByTime = arr =>
-    arr.sort((a, b) => new Date(a.winner.earliest) - new Date(b.winner.earliest));
+  // Process each bingo type dynamically based on the configuration layout
+  Object.entries(LEADERBOARD_CONFIG).forEach(([type, maxWinners]) => {
+    // Skip entirely if it's set to 0 or negative
+    if (maxWinners <= 0) return;
 
-  // Filter by type
-  const regular = sortBy(
-    winners.filter(c => c.winner.regular),
-    "regular"
-  ).slice(0, 5);
+    totalVisibleSections++;
 
-  const xbingos = sortBy(
-    winners.filter(c => c.winner.x),
-    "x"
-  ).slice(0, 2);
+    // A card qualifies if its winner block has a non-null string timestamp for this specific type
+    const typedWinners = allCards.filter(c => c.winner && typeof c.winner[type] === "string");
+    
+    // Sort chronologically (earliest timestamp wins) and slice to the customized limit
+    const sortedLeaderboard = sortByTimestamp(typedWinners, type).slice(0, maxWinners);
 
-  const box = sortBy(
-    winners.filter(c => c.winner.box),
-    "box"
-  ).slice(0, 1);
-
-
-  // Render a section
-  const renderSection = (title, list) => {
+    // Create the dashboard view element
     const section = document.createElement("div");
     section.classList.add("leaderboard-section");
 
-    section.innerHTML = `<h3>${title}</h3>`;
+    const capitalizedTitle = type.charAt(0).toUpperCase() + type.slice(1);
+    section.innerHTML = `<h3>Fastest ${capitalizedTitle} Bingos</h3>`;
 
-    if (list.length === 0) {
-      section.innerHTML += `<p>No ${title.toLowerCase()} yet.</p>`;
+    if (sortedLeaderboard.length === 0) {
+      section.innerHTML += `<p>No ${type} bingos yet.</p>`;
     } else {
-    list.forEach(c => {
-      let ts = null;
-
-      if (title.includes("Regular"))
-        ts = c.winner.regular;
-
-      else if (title.includes("X"))
-        ts = c.winner.x;
-
-      else if (title.includes("Box"))
-        ts = c.winner.box;
-
-      const formatted = formatTimestamp(ts);
-
-      const div = document.createElement("div");
+      sortedLeaderboard.forEach(c => {
+        const formatted = formatTimestamp(c.winner[type]);
+        const div = document.createElement("div");
         div.classList.add("leaderboard-entry");
         div.textContent = `${c.name} — Card #${c.num} — ${formatted}`;
         section.appendChild(div);
       });
     }
-    leaderboard.appendChild(section);
-  };
 
-  renderSection("Fastest Regular Bingos", regular);
-  renderSection("Fastest X Bingos", xbingos);
-  renderSection("Fastest Box Bingo", box);
+    leaderboard.appendChild(section);
+  });
+
+  if (totalVisibleSections === 0) {
+    leaderboard.innerHTML = "<p>Leaderboard tracking is completely disabled.</p>";
+  }
 }
 
 async function init() {
