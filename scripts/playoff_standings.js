@@ -28,7 +28,6 @@ const CUP_VALUES = {
     "LAK": { name: "Los Angeles", pts: 825 }
 };
 
-// 1. UPDATE: Define Carolina as the official champion
 const CHAMPION_DETERMINED = "CAR"; 
 const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json';
 
@@ -47,8 +46,7 @@ async function initStandings() {
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         const statsMap = {};
         
-        // Map the multi-round stats object rather than just flat fantasy_points number 
-        // to make sure s.r1, s.r2, etc. read cleanly in your layout calculations
+        // Map the full raw JSON elements cleanly indexed by key name
         [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p; });
 
         const cupPickCounts = {};
@@ -69,20 +67,21 @@ async function initStandings() {
                 });
             });
 
+            // 1. Calculate points for BASELINE lineup players
             const originalRosterIds = [...entry.roster.F, ...entry.roster.D, ...entry.roster.G];
             originalRosterIds.forEach(id => {
                 const pts = getPlayerPoints(id, playerInfoMap, statsMap);
                 
-                rPoints.r1 += (pts.r1 || 0); 
-                rPoints.r2 += (pts.r2 || 0); 
-                rPoints.r3 += (pts.r3 || 0); 
-                rPoints.r4 += (pts.r4 || 0);
-                rPoints.total += (pts.total || 0);
+                rPoints.r1 += pts.r1; 
+                rPoints.r2 += pts.r2; 
+                rPoints.r3 += pts.r3; 
+                rPoints.r4 += pts.r4;
+                rPoints.total += pts.total;
 
                 aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
             });
 
-            // Calculate points for SUPPLEMENTAL round changes
+            // 2. Calculate points for SUPPLEMENTAL mid-round changes
             if (entry.supplemental) {
                 Object.keys(entry.supplemental).forEach(roundKey => {
                     const pickedInRound = parseInt(roundKey.replace('r', ''), 10);
@@ -91,14 +90,14 @@ async function initStandings() {
                         entry.supplemental[roundKey].forEach(id => {
                             const pts = getPlayerPoints(id, playerInfoMap, statsMap);
                             
-                            if (pickedInRound <= 2 && pts.r2) rPoints.r2 += pts.r2;
-                            if (pickedInRound <= 3 && pts.r3) rPoints.r3 += pts.r3;
-                            if (pickedInRound <= 4 && pts.r4) rPoints.r4 += pts.r4;
+                            if (pickedInRound <= 2) rPoints.r2 += pts.r2;
+                            if (pickedInRound <= 3) rPoints.r3 += pts.r3;
+                            if (pickedInRound <= 4) rPoints.r4 += pts.r4;
                             
                             let validSupplementalTotal = 0;
-                            if (pickedInRound <= 2) validSupplementalTotal += (pts.r2 || 0);
-                            if (pickedInRound <= 3) validSupplementalTotal += (pts.r3 || 0);
-                            if (pickedInRound <= 4) validSupplementalTotal += (pts.r4 || 0);
+                            if (pickedInRound <= 2) validSupplementalTotal += pts.r2;
+                            if (pickedInRound <= 3) validSupplementalTotal += pts.r3;
+                            if (pickedInRound <= 4) validSupplementalTotal += pts.r4;
                             
                             rPoints.total += validSupplementalTotal;
 
@@ -110,14 +109,12 @@ async function initStandings() {
 
             const cupAbbr = entry.cupWinner ? entry.cupWinner.trim().toUpperCase() : "";
             if (cupAbbr) {
-                // Handle spelling string variance fallback to CAR
                 const trackingKey = (cupAbbr === "CAROLINA") ? "CAR" : cupAbbr;
                 cupPickCounts[trackingKey] = (cupPickCounts[trackingKey] || 0) + 1;
             }
 
             const cupData = CUP_VALUES[cupAbbr] || CUP_VALUES[cupAbbr === "CAROLINA" ? "CAR" : ""] || { name: cupAbbr, pts: 0 };
             
-            // 2. UPDATE: Add points dynamically from your JSON setup values if they chose right
             let cupBonus = 0;
             const officialWinner = matchupData.stanley_cup_winner;
             if (officialWinner && (cupAbbr === officialWinner.toUpperCase() || cupAbbr === "CAROLINA")) {
@@ -131,7 +128,7 @@ async function initStandings() {
                 bracketPoints: bracketPoints, 
                 active: aliveCount,
                 r1: rPoints.r1, r2: rPoints.r2, r3: rPoints.r3, r4: rPoints.r4,
-                cupWinnerStr: `${cupData.name} (${cupBonus > 0 ? '+' : ''}${cupBonus} pts)`
+                cupWinnerStr: `${cupData.name} (+${cupBonus} pts)`
             };
         });
 
@@ -224,6 +221,7 @@ function renderTable(standings) {
     bindSortingEvents();
 }
 
+// FIX: Pulls score blocks properly using the nested .fantasy_points layer from your JSON
 function getPlayerPoints(id, infoMap, statsMap) {
     let lookupName;
     const isGoalieTeam = typeof id === 'string' && id.startsWith('G_');
@@ -235,7 +233,22 @@ function getPlayerPoints(id, infoMap, statsMap) {
         lookupName = pInfo?.full_name ? normalizeName(pInfo.full_name) : 'Unknown';
     }
 
-    return statsMap[lookupName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+    const rawPlayerCard = statsMap[lookupName];
+    
+    // Fallback block if the stats mapping for this lookupName is unrecorded or missing
+    if (!rawPlayerCard || !rawPlayerCard.fantasy_points) {
+        return { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
+    }
+
+    // Extract the points securely from the inner fantasy_points structure
+    const fp = rawPlayerCard.fantasy_points;
+    return {
+        r1: parseFloat(fp.r1 || 0),
+        r2: parseFloat(fp.r2 || 0),
+        r3: parseFloat(fp.r3 || 0),
+        r4: parseFloat(fp.r4 || 0),
+        total: parseFloat(fp.total || 0)
+    };
 }
 
 function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
