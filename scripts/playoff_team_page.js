@@ -194,17 +194,16 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
             </tr>`;
     rosterBody.insertAdjacentHTML('beforeend', matchupRow);
 
-    // --- NEW: CALCULATE AND DISPLAY STANLEY CUP WINNER BONUS ---
     let cupBonusPoints = 0;
-    const officialWinner = matchupData.stanley_cup_winner;
+    const officialWinner = matchupData.stanley_cup_winner; // e.g., "CAR"
     const bonusValue = matchupData.stanley_cup_points || 0;
 
     if (officialWinner && data.cupWinner) {
-        const cleanManagerPick = data.cupWinner.trim().toUpperCase();
-        const cleanOfficialWinner = officialWinner.trim().toUpperCase();
+        const cleanManagerPick = data.cupWinner.trim().toUpperCase();       // e.g., "CAR"
+        const cleanOfficialWinner = officialWinner.trim().toUpperCase();   // e.g., "CAR"
 
-        // Safely evaluate both abbreviation matches or spelled-out "CAROLINA" string entries
-        if (cleanManagerPick === cleanOfficialWinner || cleanManagerPick === "CAROLINA") {
+        // Direct exact match comparison
+        if (cleanManagerPick === cleanOfficialWinner) {
             cupBonusPoints = bonusValue;
         }
     }
@@ -219,7 +218,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
             </tr>`;
     rosterBody.insertAdjacentHTML('beforeend', cupBonusRow);
 
-    // --- 5. Update Sidebar Grand Total (Now incorporating cup bonus points!) ---
+    // Update Sidebar Grand Total incorporating cup bonus points
     const grandTotal = (rosterTotal + bracketTotal + cupBonusPoints).toFixed(1);
     const totalEl = document.getElementById('display-total');
     if (totalEl) {
