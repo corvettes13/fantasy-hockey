@@ -1,7 +1,7 @@
 {
   "current_round": 4,
   "accepting_new_entries": false,
-  "active_teams": ["VGK","CAR"],
+  "active_teams": ["CAR"],
   "rounds": {
     "r1": {
       "points_per_pick": 10,
@@ -35,7 +35,7 @@
     "r4": {
       "points_per_pick": 80,
 	"matchups": {
-        "r4w1": { "teams": ["CAR", "VGK"], "winner": null, "label": "CAR vs VGK" }
+        "r4w1": { "teams": ["CAR", "VGK"], "winner": "CAR", "label": "CAR vs VGK" }
       }
     }
   }
