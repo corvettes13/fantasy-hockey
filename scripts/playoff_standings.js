@@ -28,7 +28,8 @@ const CUP_VALUES = {
     "LAK": { name: "Los Angeles", pts: 825 }
 };
 
-const CHAMPION_DETERMINED = null; 
+// 1. UPDATE: Define Carolina as the official champion
+const CHAMPION_DETERMINED = "CAR"; 
 const MATCHUPS_JSON = '/fantasy-hockey/data/playoff_matchups.json';
 
 async function initStandings() {
@@ -42,12 +43,14 @@ async function initStandings() {
             fetch(MATCHUPS_JSON).then(res => res.json())
         ]);
 
-        // --- ADD THESE THREE LINES ---
         const playerInfoMap = Object.fromEntries(playersRes.players.map(p => [p.player_id, p]));
         const nhlTeamMap = Object.fromEntries(nhlTeamsRes.map(t => [t.team_abbreviation, t.logo_url]));
         const statsMap = {};
-        [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p.fantasy_points; });
-        // -----------------------------
+        
+        // Map the multi-round stats object rather than just flat fantasy_points number 
+        // to make sure s.r1, s.r2, etc. read cleanly in your layout calculations
+        [...skatersRes, ...goaliesRes].forEach(p => { statsMap[p.Player] = p; });
+
         const cupPickCounts = {};
         const playerPickCounts = {};
         const eliminatedTeams = Object.keys(CUP_VALUES).filter(team => !matchupData.active_teams.includes(team));
@@ -60,7 +63,6 @@ async function initStandings() {
             // --- CALCULATE BRACKET POINTS ---
             Object.entries(matchupData.rounds).forEach(([roundKey, roundData]) => {
                 Object.entries(roundData.matchups).forEach(([matchupId, status]) => {
-                    // Check if the user's pick for this matchup matches the winner
                     if (status.winner && entry.bracket[matchupId] === status.winner) {
                         bracketPoints += roundData.points_per_pick;
                     }
@@ -71,36 +73,28 @@ async function initStandings() {
             originalRosterIds.forEach(id => {
                 const pts = getPlayerPoints(id, playerInfoMap, statsMap);
                 
-                rPoints.r1 += pts.r1; 
-                rPoints.r2 += pts.r2; 
-                rPoints.r3 += pts.r3; 
-                rPoints.r4 += pts.r4;
-                rPoints.total += pts.total;
+                rPoints.r1 += (pts.r1 || 0); 
+                rPoints.r2 += (pts.r2 || 0); 
+                rPoints.r3 += (pts.r3 || 0); 
+                rPoints.r4 += (pts.r4 || 0);
+                rPoints.total += (pts.total || 0);
 
-                // ADD THE RETURN VALUE TO aliveCount
                 aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
             });
 
-            // 2. Calculate points for SUPPLEMENTAL Round 2 adds
+            // Calculate points for SUPPLEMENTAL round changes
             if (entry.supplemental) {
-                // Loop through each round inside supplemental (e.g., 'r2', 'r3', 'r4')
                 Object.keys(entry.supplemental).forEach(roundKey => {
-                    // Extract the round number from the key (e.g., 'r2' becomes 2)
                     const pickedInRound = parseInt(roundKey.replace('r', ''), 10);
                     
                     if (entry.supplemental[roundKey] && Array.isArray(entry.supplemental[roundKey])) {
                         entry.supplemental[roundKey].forEach(id => {
                             const pts = getPlayerPoints(id, playerInfoMap, statsMap);
                             
-                            // 1. Dynamic Multi-Round Scoring Accumulator
-                            // A player added in R2 scores for R2, R3, R4.
-                            // A player added in R3 scores ONLY for R3, R4.
                             if (pickedInRound <= 2 && pts.r2) rPoints.r2 += pts.r2;
                             if (pickedInRound <= 3 && pts.r3) rPoints.r3 += pts.r3;
                             if (pickedInRound <= 4 && pts.r4) rPoints.r4 += pts.r4;
                             
-                            // 2. Dynamic Total Points Calculation
-                            // Only sum up the round scores that the manager is eligible to receive
                             let validSupplementalTotal = 0;
                             if (pickedInRound <= 2) validSupplementalTotal += (pts.r2 || 0);
                             if (pickedInRound <= 3) validSupplementalTotal += (pts.r3 || 0);
@@ -108,27 +102,36 @@ async function initStandings() {
                             
                             rPoints.total += validSupplementalTotal;
 
-                            // 3. Alive Counter & Pick Trackers
                             aliveCount += updateCounts(id, playerInfoMap, eliminatedTeams, playerPickCounts);
                         });
                     }
                 });
             }
 
-            const cupAbbr = entry.cupWinner;
-            if (cupAbbr) cupPickCounts[cupAbbr] = (cupPickCounts[cupAbbr] || 0) + 1;
+            const cupAbbr = entry.cupWinner ? entry.cupWinner.trim().toUpperCase() : "";
+            if (cupAbbr) {
+                // Handle spelling string variance fallback to CAR
+                const trackingKey = (cupAbbr === "CAROLINA") ? "CAR" : cupAbbr;
+                cupPickCounts[trackingKey] = (cupPickCounts[trackingKey] || 0) + 1;
+            }
 
-            const cupData = CUP_VALUES[cupAbbr] || { name: cupAbbr, pts: 0 };
-            let cupBonus = (CHAMPION_DETERMINED === cupAbbr) ? cupData.pts : 0;
+            const cupData = CUP_VALUES[cupAbbr] || CUP_VALUES[cupAbbr === "CAROLINA" ? "CAR" : ""] || { name: cupAbbr, pts: 0 };
+            
+            // 2. UPDATE: Add points dynamically from your JSON setup values if they chose right
+            let cupBonus = 0;
+            const officialWinner = matchupData.stanley_cup_winner;
+            if (officialWinner && (cupAbbr === officialWinner.toUpperCase() || cupAbbr === "CAROLINA")) {
+                cupBonus = matchupData.stanley_cup_points || cupData.pts;
+            }
 
             return {
                 manager: entry.managerName,
                 id: entry.entryId,
                 grandTotal: rPoints.total + bracketPoints + cupBonus,
-                bracketPoints: bracketPoints, // Save this for the table
+                bracketPoints: bracketPoints, 
                 active: aliveCount,
                 r1: rPoints.r1, r2: rPoints.r2, r3: rPoints.r3, r4: rPoints.r4,
-                cupWinnerStr: `${cupData.name} (${cupData.pts} pts)`
+                cupWinnerStr: `${cupData.name} (${cupBonus > 0 ? '+' : ''}${cupBonus} pts)`
             };
         });
 
@@ -143,7 +146,6 @@ async function initStandings() {
     }
 }
 
-// Ensure normalizeName is also used in the grid display
 function renderPopularPlayers(counts, infoMap, logoMap) {
     const grid = document.getElementById('popular-players-grid');
     if (!grid) return;
@@ -154,7 +156,6 @@ function renderPopularPlayers(counts, infoMap, logoMap) {
         const isGoalieTeam = id.startsWith('G_');
         const p = infoMap[id];
         
-        // Use normalized name for display as well so it looks consistent
         const displayName = isGoalieTeam ? `${id.replace('G_', '')} Goalies` : normalizeName(p?.full_name || 'Unknown');
         const teamAbbr = isGoalieTeam ? id.replace('G_', '') : (p?.team_abbr || '');
         const teamLogo = logoMap[teamAbbr] || '';
@@ -220,7 +221,6 @@ function renderTable(standings) {
         tbody.insertAdjacentHTML('beforeend', row);
     });
 
-    // Re-bind sorting events after every render
     bindSortingEvents();
 }
 
@@ -238,7 +238,6 @@ function getPlayerPoints(id, infoMap, statsMap) {
     return statsMap[lookupName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
 }
 
-// Helper to update alive counts and pick popularity
 function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
     let teamAbbr;
     let isAlive = 0;
@@ -249,10 +248,8 @@ function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
         teamAbbr = infoMap[id]?.team_abbr;
     }
 
-    // Standardize Vegas abbreviation
     if (teamAbbr === "VEG") teamAbbr = "VGK";
 
-    // Check if team is still active
     if (teamAbbr && !eliminatedTeams.includes(teamAbbr)) {
         isAlive = 1; 
     }
@@ -267,7 +264,6 @@ function updateCounts(id, infoMap, eliminatedTeams, countsMap) {
 function bindSortingEvents() {
     const headers = document.querySelectorAll('#standings-table th');
     headers.forEach((header, index) => {
-        // Skip the "Place" column as it is re-calculated on every render
         if (header.classList.contains('pos-rank')) return;
 
         header.addEventListener('click', () => {
@@ -276,14 +272,12 @@ function bindSortingEvents() {
             const rows = Array.from(tbody.querySelectorAll('tr'));
             const isAscending = header.classList.contains('sort-asc');
 
-            // Reset headers
             headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
 
             rows.sort((a, b) => {
                 let cellA = a.children[index].textContent.trim();
                 let cellB = b.children[index].textContent.trim();
 
-                // Remove commas and convert to numbers for point columns
                 const valA = isNaN(cellA.replace(/,/g, '')) ? cellA.toLowerCase() : parseFloat(cellA.replace(/,/g, ''));
                 const valB = isNaN(cellB.replace(/,/g, '')) ? cellB.toLowerCase() : parseFloat(cellB.replace(/,/g, ''));
 
@@ -292,14 +286,10 @@ function bindSortingEvents() {
                 return 0;
             });
 
-            // Update header state
             header.classList.add(isAscending ? 'sort-desc' : 'sort-asc');
-
-            // Re-append sorted rows
             rows.forEach(row => tbody.appendChild(row));
         });
     });
 }
-
 
 initStandings();

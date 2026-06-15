@@ -96,9 +96,6 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
         const pts = statsMap[isGoalieTeam ? id : cleanPlayerName] || { r1: 0, r2: 0, r3: 0, r4: 0, total: 0 };
 
         // --- SUPPLEMENTAL LOGIC ---
-        // If the player ID exists in the r2 supplemental list, they get 0 for R1.
-        // If they are in the r3 list, they get 0 for R1 and R2.
-        
         let effectiveR1 = pts.r1;
         let effectiveR2 = pts.r2;
         let effectiveR3 = pts.r3;
@@ -160,7 +157,7 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
         Object.entries(roundData.matchups).forEach(([matchupId, status]) => {
             const userPick = data.bracket[matchupId];
             const winner = status.winner;
-            const matchupLabel = status.label || matchupId; // Falls back to key if label is missing
+            const matchupLabel = status.label || matchupId; 
             const ptsWorth = roundData.points_per_pick;
             
             let statusClass = '';
@@ -197,8 +194,33 @@ function renderEntry(data, playerMap, nhlTeamMap, statsMap, matchupData) {
             </tr>`;
     rosterBody.insertAdjacentHTML('beforeend', matchupRow);
 
-    // --- 5. Update Sidebar Grand Total ---
-    const grandTotal = (rosterTotal + bracketTotal).toFixed(1);
+    // --- NEW: CALCULATE AND DISPLAY STANLEY CUP WINNER BONUS ---
+    let cupBonusPoints = 0;
+    const officialWinner = matchupData.stanley_cup_winner;
+    const bonusValue = matchupData.stanley_cup_points || 0;
+
+    if (officialWinner && data.cupWinner) {
+        const cleanManagerPick = data.cupWinner.trim().toUpperCase();
+        const cleanOfficialWinner = officialWinner.trim().toUpperCase();
+
+        // Safely evaluate both abbreviation matches or spelled-out "CAROLINA" string entries
+        if (cleanManagerPick === cleanOfficialWinner || cleanManagerPick === "CAROLINA") {
+            cupBonusPoints = bonusValue;
+        }
+    }
+
+    // Add the summary row to show the champion bonus in the grid
+    const cupBonusRow = `
+            <tr style="background-color: #fff9e6; border-top: 1px dashed #ffcc00;">
+                <td style="text-align: left; padding-left: 10px; font-weight: bold; color: #b38600;">🏆 Stanley Cup Pick Bonus</td>
+                <td>-</td><td>-</td><td>-</td><td>-</td>
+                <td style="font-weight: bold; color: #b38600;">+${cupBonusPoints}</td> 
+                <td style="background-color: #fff2cc; color: #b38600;"><strong>${cupBonusPoints}</strong></td>
+            </tr>`;
+    rosterBody.insertAdjacentHTML('beforeend', cupBonusRow);
+
+    // --- 5. Update Sidebar Grand Total (Now incorporating cup bonus points!) ---
+    const grandTotal = (rosterTotal + bracketTotal + cupBonusPoints).toFixed(1);
     const totalEl = document.getElementById('display-total');
     if (totalEl) {
       totalEl.textContent = grandTotal;
