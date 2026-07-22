@@ -5,7 +5,7 @@
 // ---------------------------------------------------------
 const LEADERBOARD_CONFIG = {
   "horizontal": 4,   // Track up to 4 horizontal winners
-  "vertical": 3,     // Track up to 3 vertical winners
+  "vertical": 10,     // Track up to 3 vertical winners
   "diagonal": 2,     // Track up to 2 diagonal winners
   "cross": 2,        // Track up to 2 cross (X) winners
   "blackout": 1      // Track up to 1 blackout winner
