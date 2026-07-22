@@ -4,8 +4,9 @@
 // Only keys with a limit greater than 0 will build/display a section.
 // ---------------------------------------------------------
 const LEADERBOARD_CONFIG = {
-  "horizontal": 3,   // Track up to 5 horizontal winners
-  "vertical": 3,     // Track up to 5 vertical winners
+  "horizontal": 4,   // Track up to 4 horizontal winners
+  "vertical": 3,     // Track up to 3 vertical winners
+  "diagonal": 2,     // Track up to 2 diagonal winners
   "cross": 2,        // Track up to 2 cross (X) winners
   "blackout": 1      // Track up to 1 blackout winner
 };
@@ -152,11 +153,61 @@ function buildLeaderboard(cards) {
   }
 }
 
+function renderMostMarkedLeaderboard(cards) {
+  // Target either a dedicated container OR append to main leaderboard
+  const container = document.getElementById("most-marked-leaderboard") || document.getElementById("leaderboard");
+  if (!container) return;
+
+  // 1. Extract all cards with max_marked data
+  const cardList = Object.entries(cards)
+    .map(([num, card]) => ({
+      num,
+      name: card.name,
+      maxMarked: card.winner?.max_marked || { count: 0, timestamp: null }
+    }))
+    .filter(c => c.maxMarked.count > 0);
+
+  if (cardList.length === 0) {
+    return;
+  }
+
+  // 2. Find the highest count across all cards
+  const highestCount = Math.max(...cardList.map(c => c.maxMarked.count));
+
+  // 3. Filter cards that tied for the highest count
+  const topCards = cardList.filter(c => c.maxMarked.count === highestCount);
+
+  // 4. Sort ties by who reached that count fastest (earliest timestamp)
+  topCards.sort((a, b) => new Date(a.maxMarked.timestamp) - new Date(b.maxMarked.timestamp));
+
+  // 5. Render section
+  const section = document.createElement("div");
+  section.classList.add("leaderboard-section");
+  
+  const title = document.createElement("h3");
+  title.textContent = `Most Squares Marked (${highestCount} Squares)`;
+  section.appendChild(title);
+
+  topCards.forEach(c => {
+    const formatted = formatTimestamp(c.maxMarked.timestamp);
+    const div = document.createElement("div");
+    div.classList.add("leaderboard-entry");
+    div.textContent = `${c.name} — Card #${c.num} — Reached on ${formatted}`;
+    section.appendChild(div);
+  });
+
+  container.appendChild(section);
+}
+
 async function init() {
   const cards = await loadAllCards();
   const select = document.getElementById("card-select");
 
+  // Build configured bingo type sections
   buildLeaderboard(cards);
+
+  // Build the most marked squares section
+  renderMostMarkedLeaderboard(cards);
 
   // Populate dropdown
   Object.keys(cards).forEach(cardNum => {
