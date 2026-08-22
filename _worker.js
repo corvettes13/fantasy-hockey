@@ -150,12 +150,12 @@ export default {
     }
 
     // 4. THE GATEKEEPER (Security for team pages)
-    if (internalPath.includes("/teams/team.html")) {
-      const requestedTeam = url.searchParams.get("team");
-      if (userEmailHeader !== "pfajman1@gmail.com" && requestedTeam && parseInt(requestedTeam) !== userTeamNumber) {
-        return new Response("Access Denied: You can only manage your own team.", { status: 403 });
-      }
-    }
+    //if (internalPath.includes("/teams/team.html")) {
+    //  const requestedTeam = url.searchParams.get("team");
+    //  if (userEmailHeader !== "pfajman1@gmail.com" && requestedTeam && parseInt(requestedTeam) !== userTeamNumber) {
+    //    return new Response("Access Denied: You can only manage your own team.", { status: 403 });
+    //  }
+    //}
     
     // Inside your Worker's fetch handler
     if (internalPath === '/list-entries') {
