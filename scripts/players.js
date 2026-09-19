@@ -373,9 +373,9 @@ function loadSeasonStats(seasonKey) {
       skater: "/fantasy-hockey/data/2026_skater_stats.json",
       goalie: "/fantasy-hockey/data/2026_goalie_stats.json"
     },
-    "2025_projections": {
-      skater: "/fantasy-hockey/data/2025_skater_proj.json",
-      goalie: "/fantasy-hockey/data/2025_goalie_proj.json"
+    "2026_projections": {
+      skater: "/fantasy-hockey/data/2026_skater_proj.json",
+      goalie: "/fantasy-hockey/data/2026_goalie_proj.json"
     }
   };
 
