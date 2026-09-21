@@ -220,7 +220,7 @@ function renderTable(data, statsMap) {
       <td>${index + 1}</td>
       <td class="player-cell">
         <img src="${logo}" alt="${player.team_abbr} logo" />
-        <a href="${player.url}" target="_blank">${player.full_name}</a>
+        <a href="https://sports.yahoo.com/nhl/players/${player.player_id}" target="_blank">${player.full_name}</a>
         <span class="team-abbr">${player.team_abbr}</span>
       </td>
       <td class="position-cell">${player.position}</td>

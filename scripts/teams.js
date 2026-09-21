@@ -154,9 +154,9 @@ function loadSeasonStats(seasonKey) {
       skaterFile = '../data/2025_skater_stats.json';
       goalieFile = '../data/2025_goalie_stats.json';
       break;
-    case '2025_projections':
-      skaterFile = '../data/2025_skater_proj.json';
-      goalieFile = '../data/2025_goalie_proj.json';
+    case '2026_projections':
+      skaterFile = '../data/2026_skater_proj.json';
+      goalieFile = '../data/2026_goalie_proj.json';
       break;
     case '2026_team_log':
       loadTeamLogSeason();

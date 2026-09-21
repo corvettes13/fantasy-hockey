@@ -255,11 +255,6 @@ Promise.all([
                     <h3 style="margin: 5px 0 0 0;">${loser.name}</h3>
                     <p style="margin: 0;">${loseScore.toFixed(2)} pts</p>
                 </div>
-
-                <div class="custom-celebration-image">
-                    <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
-                    <img src="images/hype_machine_wins.png" alt="Champion Image" style="max-width: 90%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
-                </div>
             </div>
         `;
         }
