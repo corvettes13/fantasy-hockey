@@ -164,6 +164,7 @@ function renderTableHeader() {
       <th>Player</th>
       <th>Pos</th>
       <th>Owner</th>
+      <th data-sort="SAL">$</th>
       <th data-sort="GP">GP</th>
       ${isGoalieView ? `
         <th data-sort="GS">GS</th>
@@ -229,7 +230,8 @@ function renderTable(data, statsMap) {
           ? `<a href="${team_url}" target="_blank">${owner}</a>`
           : `${owner}`}
       </td>
-      <td>${stats.GP ?? '0'}</td>
+      <td>${player.cost ?? '0'}</td> 
+      <td>${stats.GP ?? '0'}</td>     
       ${isGoalieView ? `
         <td>${stats.GS ?? '0'}</td>
         <td>${stats.W ?? '0'}</td>
