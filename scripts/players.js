@@ -121,7 +121,7 @@ function applyFilters() {
 }
 
 function buildStatsMap(playersStatsObj, type = "skater") {
-  if (!playersStatsObj || typeof playersStatsObj !== 'object') {
+  if (!playersStatsObj) {
     console.error('playersStatsObj is invalid:', playersStatsObj);
     return {};
   }
@@ -129,13 +129,14 @@ function buildStatsMap(playersStatsObj, type = "skater") {
   const map = {};
   const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
 
-  // Handle both Array formats or Dictionary formats gracefully
+  // Gracefully handles both Arrays and Object Dictionaries
   const entries = Array.isArray(playersStatsObj) 
     ? playersStatsObj.map(p => [p.player_key, p]) 
     : Object.entries(playersStatsObj);
 
   for (const [yahooPlayerKey, playerData] of entries) {
-    // Extract the numeric ID from the player_key (e.g., "465.p.5980" -> 5980)
+    if (!playerData) continue;
+    
     const keyString = playerData.player_key || yahooPlayerKey;
     const id = parseInt(keyString.split('.').pop(), 10);
 
@@ -379,33 +380,41 @@ function loadSeasonStats(seasonKey) {
   const fileMap = {
     "2025_stats": {
       skater: "/fantasy-hockey/data/nhl_stats_20242025.json",
-      goalie: "/fantasy-hockey/data/nhl_stats_20242025.json" // using unified file structure
+      goalie: "/fantasy-hockey/data/nhl_stats_20242025.json" // unified file
     },
     "2026_stats": {
       skater: "/fantasy-hockey/data/nhl_stats_20252026.json",
-      goalie: "/fantasy-hockey/data/nhl_stats_20252026.json"
+      goalie: "/fantasy-hockey/data/nhl_stats_20252026.json" // unified file
     },
     "2026_projections": {
       skater: "/fantasy-hockey/data/2026_skater_proj.json",
-      goalie: "/fantasy-hockey/data/2026_goalie_proj.json"
+      goalie: "/fantasy-hockey/data/2026_goalie_proj.json"   // separate file
     }
   };
 
   const targets = fileMap[seasonKey];
   if (!targets) return;
 
-  // Handle cases where projections might be separate files or unified
   const fetchPromises = targets.skater === targets.goalie ?
     [fetch(targets.skater).then(res => res.json())] :
     [fetch(targets.skater).then(res => res.json()), fetch(targets.goalie).then(res => res.json())];
 
   Promise.all(fetchPromises)
     .then(results => {
-      const statsPayload = results[0].players;
+      let skaterPayload, goaliePayload;
+
+      // If unified file (results.length === 1), use it for both. 
+      // If separate files (results.length === 2), map index 0 to skater and index 1 to goalie.
+      if (results.length === 1) {
+        skaterPayload = results[0].players;
+        goaliePayload = results[0].players;
+      } else {
+        skaterPayload = results[0].players;
+        goaliePayload = results[1].players;
+      }
       
-      // Build maps using the optimized dictionary keys
-      skaterStatsMap = buildStatsMap(statsPayload, "skater");
-      goalieStatsMap = buildStatsMap(statsPayload, "goalie");
+      skaterStatsMap = buildStatsMap(skaterPayload, "skater");
+      goalieStatsMap = buildStatsMap(goaliePayload, "goalie");
 
       fantasyPoints(skaterStatsMap, playersData.players, "skater");
       fantasyPoints(goalieStatsMap, playersData.players, "goalie");
