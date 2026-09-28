@@ -15,7 +15,6 @@ let seasonSelect;
 let skaterStatsMap = {};
 let goalieStatsMap = {};
 
-
 document.addEventListener('DOMContentLoaded', () => {
   positionSelect = document.getElementById('position-filter');
   nameInput = document.getElementById('name-filter');
@@ -85,7 +84,9 @@ function applyFilters() {
   const filtered = allPlayers.filter(p => {
     if (!p.position || typeof p.position !== 'string') return false;
 
-    const stats = statsMap[p.player_id];
+    // Use player_id or fallback to parsing the player_key suffix
+    const lookupId = p.player_id || p.player_key?.split('.').pop();
+    const stats = statsMap[lookupId];
     const ownerKey = p.owner_team_key?.toLowerCase() ?? '';
 
     const matchesTeam =
@@ -104,10 +105,11 @@ function applyFilters() {
     return matchesName && matchesPosition && matchesTeam && gp >= minGP;
   });
 
-
   filtered.sort((a, b) => {
-    const aFP = statsMap[a.player_id]?.FP ?? 0;
-    const bFP = statsMap[b.player_id]?.FP ?? 0;
+    const aId = a.player_id || a.player_key?.split('.').pop();
+    const bId = b.player_id || b.player_key?.split('.').pop();
+    const aFP = statsMap[aId]?.FP ?? 0;
+    const bFP = statsMap[bId]?.FP ?? 0;
 
     return bFP - aFP;
   });
@@ -118,29 +120,37 @@ function applyFilters() {
   renderTable(filtered, statsMap);
 }
 
-function buildStatsMap(statsArray, type = "skater") {
-
-  if (!Array.isArray(statsArray)) {
-    console.error('statsArray is not an array:', statsArray);
+function buildStatsMap(playersStatsObj, type = "skater") {
+  if (!playersStatsObj || typeof playersStatsObj !== 'object') {
+    console.error('playersStatsObj is invalid:', playersStatsObj);
     return {};
   }
 
   const map = {};
-  for (const stat of statsArray) {
-    const id = parseInt(stat.player_key.split('.').pop(), 10);
+  const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
 
-    if (!id) {
-      console.warn('Missing player_id in stat:', stat);
+  // Handle both Array formats or Dictionary formats gracefully
+  const entries = Array.isArray(playersStatsObj) 
+    ? playersStatsObj.map(p => [p.player_key, p]) 
+    : Object.entries(playersStatsObj);
+
+  for (const [yahooPlayerKey, playerData] of entries) {
+    // Extract the numeric ID from the player_key (e.g., "465.p.5980" -> 5980)
+    const keyString = playerData.player_key || yahooPlayerKey;
+    const id = parseInt(keyString.split('.').pop(), 10);
+
+    if (!id || isNaN(id)) {
+      console.warn('Missing identifier for record:', playerData);
       continue;
     }
 
     const statObj = {};
-    const statMap = type === "goalie" ? goalieStatIdMap : skaterStatIdMap;
+    const statsArray = playerData.stats || [];
 
-    stat.stats.forEach(s => {
-      const statId = s._extracted_data?.stat_id ?? s.stat_id;
+    statsArray.forEach(s => {
+      const statId = s.stat_id;
       const statKey = statMap[statId];
-      let value = s._extracted_data?.value ?? s.value;
+      let value = s.value;
 
       if (value === '-' || value === '–' || value === undefined || value === null) value = 0;
       if (statKey) {
@@ -205,12 +215,13 @@ function renderTable(data, statsMap) {
   const isGoalieView = positionSelect.value === 'G';
 
   data.slice(0, 250).forEach((player, index) => {
-    const stats = statsMap[player.player_id];
+    const lookupId = player.player_id || player.player_key?.split('.').pop();
+    const stats = statsMap[lookupId] || {};
 
     const logo = teamMap[player.team_abbr] || '';
     const owner = player.owner_team_name || 'Free Agent';
     let team_url = '';
-    if (owner !== 'Free Agent') {
+    if (owner !== 'Free Agent' && player.owner_team_key) {
       const parts = player.owner_team_key.split('.');
       const team_num = parts[parts.length - 1];
       team_url = "/fantasy-hockey/teams/team.html?team=" + team_num;
@@ -221,7 +232,7 @@ function renderTable(data, statsMap) {
       <td>${index + 1}</td>
       <td class="player-cell">
         <img src="${logo}" alt="${player.team_abbr} logo" />
-        <a href="https://sports.yahoo.com/nhl/players/${player.player_id}" target="_blank">${player.full_name}</a>
+        <a href="https://sports.yahoo.com/nhl/players/${lookupId}" target="_blank">${player.full_name}</a>
         <span class="team-abbr">${player.team_abbr}</span>
       </td>
       <td class="position-cell">${player.position}</td>
@@ -237,7 +248,7 @@ function renderTable(data, statsMap) {
         <td>${stats.W ?? '0'}</td>
         <td>${stats.L ?? '0'}</td>
         <td>${stats.GA ?? '0'}</td>
-        <td>${stats.GAA.toFixed(2) ?? '0.00'}</td>
+        <td>${typeof stats.GAA === 'number' ? stats.GAA.toFixed(2) : '0.00'}</td>
         <td>${stats.SA ?? '0'}</td>
         <td>${stats.SV ?? '0'}</td>
         <td>${typeof stats['SV%'] === 'number' ? (stats['SV%'] * 100).toFixed(1) + '%' : '0'}</td>
@@ -259,7 +270,7 @@ function renderTable(data, statsMap) {
         <td>${stats.BLK ?? '0'}</td>
         <td>${stats.ATOI ?? '00:00'}</td>
       `}
-      <td>${stats.FP.toFixed(1) ?? '0'}</td>
+      <td>${typeof stats.FP === 'number' ? stats.FP.toFixed(1) : '0.0'}</td>
       <td>${stats.FPG ?? '0.0'}</td>
     `;
     tbody.appendChild(row);
@@ -296,17 +307,17 @@ function sortBy(key) {
   }
 
   players.sort((a, b) => {
+    const aId = a.player_id || a.player_key?.split('.').pop();
+    const bId = b.player_id || b.player_key?.split('.').pop();
     let aStat, bStat;
 
     if (key === 'ATOI') {
-      aStat = atoiToSeconds(statsMap[a.player_id]?.ATOI ?? '00:00');
-      bStat = atoiToSeconds(statsMap[b.player_id]?.ATOI ?? '00:00');
+      aStat = atoiToSeconds(statsMap[aId]?.ATOI ?? '00:00');
+      bStat = atoiToSeconds(statsMap[bId]?.ATOI ?? '00:00');
     } else {
-      // Try statsMap first, fallback to player object
-      aStat = statsMap[a.player_id]?.[key] ?? a[key];
-      bStat = statsMap[b.player_id]?.[key] ?? b[key];
+      aStat = statsMap[aId]?.[key] ?? a[key];
+      bStat = statsMap[bId]?.[key] ?? b[key];
 
-      // Default to numeric comparison unless both are strings
       const bothStrings = typeof aStat === 'string' && typeof bStat === 'string';
       if (!bothStrings) {
         aStat = parseFloat(aStat ?? 0);
@@ -316,10 +327,9 @@ function sortBy(key) {
 
     let result = aStat - bStat;
 
-    // Fallback sort by FP descending
     if (result === 0) {
-      const aFP = statsMap[a.player_id]?.FP ?? 0;
-      const bFP = statsMap[b.player_id]?.FP ?? 0;
+      const aFP = statsMap[aId]?.FP ?? 0;
+      const bFP = statsMap[bId]?.FP ?? 0;
       result = bFP - aFP;
     }
 
@@ -329,10 +339,10 @@ function sortBy(key) {
   renderTable(players, statsMap);
 }
 
-
 function fantasyPoints(statsMap, players, type) {
   players.forEach(p => {
-    const statObj = statsMap[p.player_id];
+    const lookupId = p.player_id || p.player_key?.split('.').pop();
+    const statObj = statsMap[lookupId];
     if (!statObj) return;
 
     const gp = parseFloat(statObj.GP) || 0;
@@ -343,7 +353,7 @@ function fantasyPoints(statsMap, players, type) {
         (parseFloat(statObj.GS) || 0) * 1 +
         (parseFloat(statObj.W) || 0) * 3 +
         (parseFloat(statObj.L) || 0) * -1 +
-        (parseFloat(statObj.SV) || 0) * .2 +
+        (parseFloat(statObj.SV) || 0) * 0.2 +
         (parseFloat(statObj.GA) || 0) * -1 +
         (parseFloat(statObj.SHO) || 0) * 5
       );
@@ -354,9 +364,9 @@ function fantasyPoints(statsMap, players, type) {
         (parseFloat(statObj.PIM) || 0) * 0.2 +
         (parseFloat(statObj.SHG) || 0) * 2 +
         (parseFloat(statObj.GWG) || 0) * 0.5 +
-        (parseFloat(statObj.SOG) || 0) * .2 +
-        (parseFloat(statObj.HIT) || 0) * .1 +
-        (parseFloat(statObj.BLK) || 0) * .3
+        (parseFloat(statObj.SOG) || 0) * 0.2 +
+        (parseFloat(statObj.HIT) || 0) * 0.1 +
+        (parseFloat(statObj.BLK) || 0) * 0.3
       );
     }
 
@@ -368,12 +378,12 @@ function fantasyPoints(statsMap, players, type) {
 function loadSeasonStats(seasonKey) {
   const fileMap = {
     "2025_stats": {
-      skater: "/fantasy-hockey/data/2025_skater_stats.json",
-      goalie: "/fantasy-hockey/data/2025_goalie_stats.json"
+      skater: "/fantasy-hockey/data/nhl_stats_20242025.json",
+      goalie: "/fantasy-hockey/data/nhl_stats_20242025.json" // using unified file structure
     },
     "2026_stats": {
-      skater: "/fantasy-hockey/data/2026_skater_stats.json",
-      goalie: "/fantasy-hockey/data/2026_goalie_stats.json"
+      skater: "/fantasy-hockey/data/nhl_stats_20252026.json",
+      goalie: "/fantasy-hockey/data/nhl_stats_20252026.json"
     },
     "2026_projections": {
       skater: "/fantasy-hockey/data/2026_skater_proj.json",
@@ -381,23 +391,26 @@ function loadSeasonStats(seasonKey) {
     }
   };
 
-  const { skater, goalie } = fileMap[seasonKey];
+  const targets = fileMap[seasonKey];
+  if (!targets) return;
 
-  Promise.all([
-    fetch(skater).then(res => res.json()),
-    fetch(goalie).then(res => res.json())
-  ])
-  .then(([skaterStatsRaw, goalieStatsRaw]) => {
-    skaterStatsData = skaterStatsRaw.players;
-    goalieStatsData = goalieStatsRaw.players;
+  // Handle cases where projections might be separate files or unified
+  const fetchPromises = targets.skater === targets.goalie ?
+    [fetch(targets.skater).then(res => res.json())] :
+    [fetch(targets.skater).then(res => res.json()), fetch(targets.goalie).then(res => res.json())];
 
-    skaterStatsMap = buildStatsMap(skaterStatsData, "skater");
-    goalieStatsMap = buildStatsMap(goalieStatsData, "goalie");
+  Promise.all(fetchPromises)
+    .then(results => {
+      const statsPayload = results[0].players;
+      
+      // Build maps using the optimized dictionary keys
+      skaterStatsMap = buildStatsMap(statsPayload, "skater");
+      goalieStatsMap = buildStatsMap(statsPayload, "goalie");
 
-    fantasyPoints(skaterStatsMap, playersData.players, "skater");
-    fantasyPoints(goalieStatsMap, playersData.players, "goalie");
+      fantasyPoints(skaterStatsMap, playersData.players, "skater");
+      fantasyPoints(goalieStatsMap, playersData.players, "goalie");
 
-    applyFilters(); // refresh view
-  })
-  .catch(err => console.error("Failed to load season stats:", err));
+      applyFilters(); // refresh view
+    })
+    .catch(err => console.error("Failed to load season stats:", err));
 }

@@ -46,12 +46,12 @@ Promise.all([
     // If we are at week 23 or beyond, add the finale to the dropdown and make it the default
     if (Number(currentWeek) >= 23) {
         const finaleOption = document.createElement('option');
-        finaleOption.value = "finale"; 
+        finaleOption.value = "24"; 
         finaleOption.textContent = "🏆 Season Finale";
         weekSelect.appendChild(finaleOption);
         
         // This ensures the page loads the Finale summary immediately
-        defaultWeek = "finale";
+        defaultWeek = "24";
     }
 
     // Helper functions for Top Scorers
@@ -110,7 +110,7 @@ Promise.all([
         const isSeasonOver = Number(currentWeek) >= 23; 
         // Or use a specific flag if you prefer
 
-        if (weekNumber === "finale") {
+        if (weekNumber === "24") {
           renderChampionshipSummary();
           return; // Exit here so it doesn't try to render standard matchups
         }
@@ -268,7 +268,7 @@ Promise.all([
         const index = weeks.indexOf(weekSelect.value);
         // If we are at the last week (23), and the Finale option exists, go to Finale
         if (index === weeks.length - 1 && Number(weeks[index]) === 23) {
-            weekSelect.value = "finale";
+            weekSelect.value = "24";
             renderWeek("finale");
         } else if (index < weeks.length - 1) {
             weekSelect.value = weeks[index + 1];
