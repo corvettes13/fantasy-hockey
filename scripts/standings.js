@@ -96,18 +96,26 @@ function renderTable(data, tbodyId) {
 
 function sortDivision(data, key, direction) {
   return [...data].sort((a, b) => {
-    let valA = a[key];
-    let valB = b[key];
+    let valA, valB;
 
-    if (key === 'faab_balance') {
-      valA = Number(valA);
-      valB = Number(valB);
+    if (key === 'difference') {
+      valA = (a["points for"] || a.points_for || 0) - (a["points against"] || a.points_against || 0);
+      valB = (b["points for"] || b.points_for || 0) - (b["points against"] || b.points_against || 0);
+    } else {
+      valA = a[key];
+      valB = b[key];
     }
 
-    if (typeof valA === 'string') {
+    // Ensure numeric sorting for financial/count fields
+    if (key === 'waiver_budget' || key === 'faab_balance' || key === 'transactions' || key === 'number_of_moves') {
+      valA = Number(valA || 0);
+      valB = Number(valB || 0);
+    }
+
+    if (typeof valA === 'string' && typeof valB === 'string') {
       return valA.localeCompare(valB) * direction;
     }
 
-    return (valA - valB) * direction;
+    return (Number(valA || 0) - Number(valB || 0)) * direction;
   });
 }
