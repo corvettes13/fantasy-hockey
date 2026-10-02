@@ -1,19 +1,27 @@
-const standingsUrl = 'data/2024_standings.json';
-
 let standingsData = [];
 let currentSortKey = null;
 let sortDirection = 1;
 
-const select = document.getElementById('standings-select');
-
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('standings-select');
 
-  function loadStandings(file) {
-    fetch(`data/${file}`)
+  function loadStandings(seasonValue) {
+    // Map dropdown value (e.g., "2025_standings.json" or "2025") to a season string
+    const season = seasonValue.includes('2025') ? '2025' : '2026';
+
+    fetch(`/api/standings?season=${season}`)
       .then(res => res.json())
       .then(data => {
-        standingsData = data.teams;
+        // Map D1 database column names to match your frontend property expectations
+        standingsData = (data.teams || []).map(t => ({
+          ...t,
+          name: t.team_name,
+          percentage: t.win_percentage,
+          "points for": t.points_for,
+          "points against": t.points_against,
+          faab_balance: t.waiver_budget,
+          number_of_moves: t.transactions
+        }));
 
         const bruhs = standingsData.filter(t => t.division_id === 1);
         const bros = standingsData.filter(t => t.division_id === 2);
@@ -21,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTable(bruhs, 'bruhs-body');
         renderTable(bros, 'bros-body');
       })
-      .catch(err => console.error('Error loading standings:', err));
+      .catch(err => console.error('Error loading standings from database:', err));
   }
 
-  // Initial load
+  // Initial load based on dropdown's default value
   loadStandings(select.value);
 
   // Reload when dropdown changes
@@ -62,12 +70,6 @@ function renderTable(data, tbodyId) {
     const diffClass = PFminusPA > 0 ? 'positive' : PFminusPA < 0 ? 'negative' : '';
     const teamNum = teams.team_key ? teams.team_key.split('.').pop() : teams.team_id || '';
 
-    // Badge HTML
-    const badges = `
-      ${teams.currentChampion ? `<img src="images/champion_2026.png" alt="Champion" class="inline-badge">` : ''}
-      ${teams.presidentTrophy ? `<img src="images/presidentstrophy_2026.png" alt="Presidents' Trophy" class="inline-badge">` : ''}
-    `;
-
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${teams.rank}</td>
@@ -80,9 +82,9 @@ function renderTable(data, tbodyId) {
       </td>
       <td>${teams.wins}</td>
       <td>${teams.losses}</td>
-      <td>${teams.percentage.toFixed(3)}</td>
-      <td>${teams["points for"].toFixed(1)}</td>
-      <td>${teams["points against"].toFixed(1)}</td>
+      <td>${Number(teams.percentage).toFixed(3)}</td>
+      <td>${Number(teams["points for"]).toFixed(1)}</td>
+      <td>${Number(teams["points against"]).toFixed(1)}</td>
       <td class="${diffClass}">${PFminusPA.toFixed(1)}</td>
       <td>$${teams.faab_balance}</td>
       <td>${teams.number_of_moves}</td>
@@ -92,13 +94,11 @@ function renderTable(data, tbodyId) {
   });
 }
 
-
 function sortDivision(data, key, direction) {
   return [...data].sort((a, b) => {
     let valA = a[key];
     let valB = b[key];
 
-    // Ensure numeric sorting for currency fields
     if (key === 'faab_balance') {
       valA = Number(valA);
       valB = Number(valB);
