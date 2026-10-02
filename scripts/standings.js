@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
           transactions: t.transactions
         }));
 
-        const bruhs = standingsData.filter(t => t.division_id === 1);
-        const bros = standingsData.filter(t => t.division_id === 2);
+
+        const bruhs = standingsData.filter(t => Number(t.division_id) === 1);
+        const bros = standingsData.filter(t => Number(t.division_id) === 2);
 
         renderTable(bruhs, 'bruhs-body');
         renderTable(bros, 'bros-body');
