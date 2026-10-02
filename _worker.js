@@ -26,6 +26,34 @@ export default {
             headers: { "Content-Type": "application/json" }
         });
     }
+    
+    // ==========================================
+    // 3. NEW: DATA ROUTES (D1 Database - League Data)
+    // ==========================================
+    // ROUTE: Get Standings from D1 Database
+    if (internalPath === "/api/standings") {
+      try {
+        const urlParams = new URL(request.url).searchParams;
+        const season = urlParams.get("season") || "2025"; // fallback season
+
+        const { results } = await env.DB.prepare(
+          "SELECT * FROM standings WHERE season = ? ORDER BY rank ASC"
+        ).bind(season).all();
+
+        return new Response(JSON.stringify({ teams: results }), {
+          status: 200,
+          headers: { 
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*" 
+          }
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { 
+          status: 500,
+          headers: { "Content-Type": "application/json" } 
+        });
+      }
+    }
 
     // Inside the /playoff-submit POST block in _worker.js
     if (internalPath === "/playoff-submit" && request.method === "POST") {
@@ -179,33 +207,6 @@ export default {
         return new Response(JSON.stringify({ error: err.message }), { 
           status: 500, 
           headers: { 'Content-Type': 'application/json' } 
-        });
-      }
-    }
-    
-    // ==========================================
-    // 3. NEW: DATA ROUTES (D1 Database - League Data)
-    // ==========================================
-    if (internalPath === "/api/standings") {
-      try {
-        const urlParams = new URL(request.url).searchParams;
-        const season = urlParams.get("season") || "2025"; // fallback season
-
-        const { results } = await env.DB.prepare(
-          "SELECT * FROM standings WHERE season = ? ORDER BY rank ASC"
-        ).bind(season).all();
-
-        return new Response(JSON.stringify({ teams: results }), {
-          status: 200,
-          headers: { 
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*" 
-          }
-        });
-      } catch (err) {
-        return new Response(JSON.stringify({ error: err.message }), { 
-          status: 500,
-          headers: { "Content-Type": "application/json" } 
         });
       }
     }
