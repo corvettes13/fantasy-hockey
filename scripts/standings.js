@@ -4,23 +4,26 @@ let sortDirection = 1;
 
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('standings-select');
+  
+  if (!select) {
+    console.error("Could not find element with ID 'standings-select'");
+    return;
+  }
 
   function loadStandings(seasonValue) {
-    // Map dropdown value (e.g., "2025_standings.json" or "2025") to a season string
-    const season = seasonValue.includes('2025') ? '2025' : '2026';
-
-    fetch(`/api/standings?season=${season}`)
+    // Call your Cloudflare Worker D1 API endpoint
+    fetch(`/api/standings?season=${seasonValue}`)
       .then(res => res.json())
       .then(data => {
-        // Map D1 database column names to match your frontend property expectations
+        // data.teams comes directly from your worker's JSON response
         standingsData = (data.teams || []).map(t => ({
           ...t,
           name: t.team_name,
           percentage: t.win_percentage,
           "points for": t.points_for,
           "points against": t.points_against,
-          faab_balance: t.waiver_budget,
-          number_of_moves: t.transactions
+          waiver_budget: t.waiver_budget,
+          transactions: t.transactions
         }));
 
         const bruhs = standingsData.filter(t => t.division_id === 1);
@@ -29,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTable(bruhs, 'bruhs-body');
         renderTable(bros, 'bros-body');
       })
-      .catch(err => console.error('Error loading standings from database:', err));
+      .catch(err => console.error('Error loading standings from D1:', err));
   }
 
-  // Initial load based on dropdown's default value
+  // Initial load using the default selected option in your dropdown
   loadStandings(select.value);
 
-  // Reload when dropdown changes
+  // Reload when the dropdown changes
   select.addEventListener('change', () => {
     loadStandings(select.value);
   });
 
-  // Sorting logic
+  // Sorting logic for table column headers
   document.querySelectorAll('th button').forEach(button => {
     button.addEventListener('click', () => {
       const key = button.getAttribute('data-sort');
@@ -63,10 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderTable(data, tbodyId) {
   const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
   tbody.innerHTML = '';
 
   data.forEach(teams => {
-    const PFminusPA = teams["points for"] - teams["points against"];
+    const PFminusPA = (teams["points for"] || 0) - (teams["points against"] || 0);
     const diffClass = PFminusPA > 0 ? 'positive' : PFminusPA < 0 ? 'negative' : '';
     const teamNum = teams.team_key ? teams.team_key.split('.').pop() : teams.team_id || '';
 
@@ -82,13 +86,13 @@ function renderTable(data, tbodyId) {
       </td>
       <td>${teams.wins}</td>
       <td>${teams.losses}</td>
-      <td>${Number(teams.percentage).toFixed(3)}</td>
-      <td>${Number(teams["points for"]).toFixed(1)}</td>
-      <td>${Number(teams["points against"]).toFixed(1)}</td>
+      <td>${Number(teams.percentage || 0).toFixed(3)}</td>
+      <td>${Number(teams["points for"] || 0).toFixed(1)}</td>
+      <td>${Number(teams["points against"] || 0).toFixed(1)}</td>
       <td class="${diffClass}">${PFminusPA.toFixed(1)}</td>
-      <td>$${teams.faab_balance}</td>
-      <td>${teams.number_of_moves}</td>
-      <td>${teams.weekly_high_score}</td>
+      <td>$${teams.waiver_budget || 0}</td>
+      <td>${teams.transactions || 0}</td>
+      <td>${teams.weekly_high_score || 0}</td>
     `;
     tbody.appendChild(row);
   });
@@ -99,15 +103,14 @@ function sortDivision(data, key, direction) {
     let valA, valB;
 
     if (key === 'difference') {
-      valA = (a["points for"] || a.points_for || 0) - (a["points against"] || a.points_against || 0);
-      valB = (b["points for"] || b.points_for || 0) - (b["points against"] || b.points_against || 0);
+      valA = (a["points for"] || 0) - (a["points against"] || 0);
+      valB = (b["points for"] || 0) - (b["points against"] || 0);
     } else {
       valA = a[key];
       valB = b[key];
     }
 
-    // Ensure numeric sorting for financial/count fields
-    if (key === 'waiver_budget' || key === 'faab_balance' || key === 'transactions' || key === 'number_of_moves') {
+    if (key === 'waiver_budget' || key === 'transactions') {
       valA = Number(valA || 0);
       valB = Number(valB || 0);
     }
