@@ -378,9 +378,9 @@ function fantasyPoints(statsMap, players, type) {
 
 function loadSeasonStats(seasonKey) {
   const fileMap = {
-    "2025_stats": {
-      skater: "/fantasy-hockey/data/nhl_stats_20242025.json",
-      goalie: "/fantasy-hockey/data/nhl_stats_20242025.json" // unified file
+    "2027_stats": {
+      skater: "/fantasy-hockey/data/nhl_stats_20262027.json",
+      goalie: "/fantasy-hockey/data/nhl_stats_20262027.json" // unified file
     },
     "2026_stats": {
       skater: "/fantasy-hockey/data/nhl_stats_20252026.json",
